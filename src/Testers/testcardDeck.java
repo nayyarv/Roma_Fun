@@ -12,9 +12,9 @@ import Roma.Cards.*;
 public class TestCardDeck {
     static CardManager test = new CardManager();
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
 
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             //test.insertCard(new Card(i));
         }//Dummy fill function
         testDisplay();
@@ -29,14 +29,14 @@ public class TestCardDeck {
         test.shuffle();
         testDisplay();
 
-        for(int i = 0 ; i < 15 ; i++){
+        for (int i = 0; i < 15; i++) {
             System.out.println();
             test.discard(test.drawCard());
             testDisplay();
         }
     }
 
-    public static void testDisplay(){
+    public static void testDisplay() {
         //System.out.println("Size of is: " + test.getSize());
         System.out.println(test.toString());
     }

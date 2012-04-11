@@ -18,7 +18,7 @@ public class TestCardDeck {
             //test.insertCard(new Card(i));
         }//Dummy fill function
         testDisplay();
-        Card tmp = test.drawCard();
+        Card tmp = test.drawACard();
         System.out.println("Drawing a Card. It is: " + tmp);
         testDisplay();
         System.out.println("Putting a card back. It is 100");
@@ -31,7 +31,7 @@ public class TestCardDeck {
 
         for(int i = 0 ; i < 15 ; i++){
             System.out.println();
-            test.discard(test.drawCard());
+            test.discard(test.drawACard());
             testDisplay();
         }
     }

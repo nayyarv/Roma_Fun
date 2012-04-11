@@ -49,7 +49,7 @@ public class VictoryTokens {
 	public void playerToPlayer(int fromPlayer, int toPlayer, int amount){
 		playerTokens[fromPlayer] -= amount;
 		playerTokens[toPlayer] += amount;
-		if(playerTokens[fromPlayer] < END_GAME_VALUE){
+		if(playerTokens[fromPlayer] <= END_GAME_VALUE){
 			game.endGame();
 		}
 	}
@@ -60,5 +60,10 @@ public class VictoryTokens {
 	
 	public int getPoolTokens(){
 		return tokenPool;
+	}
+
+    public String toString(){
+        return "Player One has: " + playerTokens[Roma.PLAYER_ONE] + " tokens, and Player Two has: "+
+                playerTokens[Roma.PLAYER_TWO] + " Tokens";
 	}
 }

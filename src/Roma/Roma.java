@@ -11,7 +11,7 @@ public class Roma {
 	}
 
 	public void endGame(){
-		gameOver = true;;
+        gameOver = true;
 	}
 
 	public boolean getGameOver(){

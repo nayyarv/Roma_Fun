@@ -93,7 +93,7 @@ public class DiceHolder {
 	}
 	
 	private class Dice{
-		private int value = 0;
+		private int value = 10;
 		
 		private Dice(){
 			if(DEBUG){

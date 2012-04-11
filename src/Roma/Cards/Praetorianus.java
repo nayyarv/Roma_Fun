@@ -10,15 +10,15 @@ import Roma.*;
  */
 public class Praetorianus extends Card {
 
-    private final static String NAME = "Pra";
+    private final static String NAME = "Praetorianus";
     private final static String TYPE = "Character";
-    private final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
-            "The destroyed card and Nero are both discarded.";
+    private final static String DESCRIPTION = "Any of the 8 opponent's dice 3 disc can be block" +
+            "ed for one go.";
     private final static int COST = 8;
     private final static int DEFENCE = 9;
 
 
-    public Nero(PlayArea playArea){
+    public Praetorianus(PlayArea playArea){
         super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
 
     }

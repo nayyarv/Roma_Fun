@@ -1,10 +1,6 @@
 package Roma;
 
 public class PlayArea {
-	public final static int MAX_PLAYERS = 2;
-	public final static int PLAYER_ONE = 0;
-	public final static int PLAYER_TWO = 1;
-	
 	private CardManager cardManager;
 	private DiceHolder diceHolder;
 	private MoneyManager moneyManager;
@@ -18,9 +14,9 @@ public class PlayArea {
 		moneyManager = new MoneyManager();
 		victoryTokens = new VictoryTokens(newGame);
 		diceDiscs = new DiceDiscs(this);
-		players = new Player[MAX_PLAYERS];
+		players = new Player[Roma.MAX_PLAYERS];
 		
-		for(int i = 0; i < MAX_PLAYERS; i++){
+		for(int i = 0; i < Roma.MAX_PLAYERS; i++){
 			players[i] = new Player(i, this);
 		}
 	}

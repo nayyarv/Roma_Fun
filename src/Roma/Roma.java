@@ -5,16 +5,16 @@ public class Roma {
     public final static int PLAYER_ONE = 0;
     public final static int PLAYER_TWO = 1;
 
-    private boolean gameOver = false;
+	private boolean gameOver = false;
 
-    public Roma() {
-    }
+	public Roma(){
+	}
 
-    public void endGame() {
-        gameOver = true;
-    }
+	public void endGame(){
+		gameOver = true;;
+	}
 
-    public boolean getGameOver() {
-        return gameOver;
-    }
+	public boolean getGameOver(){
+		return gameOver;
+	}
 }

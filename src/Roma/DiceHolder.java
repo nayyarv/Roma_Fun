@@ -7,28 +7,24 @@
 
 package Roma;
 
-import java.util.Random;
+import java.util.*;
 
 public class DiceHolder {
+	private final static boolean DEBUG = false;
 	static final public int DICE_PER_PLAYER = 3;
 	static final public int MAX_BATTLE_DICE = 1;
-	static final public int DICE_SIZE = 6;
-	private final static boolean DEBUG = false;
-	
-	Random generator = new Random();
 	
 	private Dice[][] playerDice;
-	private boolean[][] usedDice;
 	private Dice[] battleDice;
-	
+
 	public DiceHolder(){
 		if(DEBUG){
 			System.out.println("Constructing DiceHolder: ");
 		}
-		playerDice = new Dice[PlayArea.MAX_PLAYERS][DICE_PER_PLAYER];
+		playerDice = new Dice[Roma.MAX_PLAYERS][DICE_PER_PLAYER];
 		battleDice = new Dice[MAX_BATTLE_DICE];
 		
-		for(int i = 0; i < PlayArea.MAX_PLAYERS; i++){
+		for(int i = 0; i < Roma.MAX_PLAYERS; i++){
 			for(int j = 0; j < DICE_PER_PLAYER; j++){
 				playerDice[i][j] = new Dice();
 				if(DEBUG){
@@ -38,48 +34,32 @@ public class DiceHolder {
 		}
 		
 		for(int i = 0; i < MAX_BATTLE_DICE; i++){
-			battleDice[i] = new Dice(); 
+			battleDice[i] = new Dice();
 			if(DEBUG){
 				System.out.println("Dice constructed");
 			}
 		}
-		
-		cleanUsedDice();
 		
 		if(DEBUG){
 			System.out.println("DiceHolder constructed");
 		}
 	}
 	
-	public void cleanUsedDice(){
-		for(int i = 0; i < PlayArea.MAX_PLAYERS; i++){
-			for(int j = 0; j < DICE_PER_PLAYER; j++){
-				// Testing
-				//usedDice[i][j] = false;
-			}
-		}
-	}
-	
-	public void rollPlayerDice(int player){
+	public List<Dice> rollPlayerDice(int player){
+		List<Dice> diceList = new ArrayList<Dice>();
+		
 		for(int i = 0; i < DICE_PER_PLAYER; i++){
 			playerDice[player][i].roll();
+			diceList.add(playerDice[player][i]);
 		}
+		
+		return diceList;
 	}
 	
 	public void rollBattleDice(){
 		for(int i = 0; i < MAX_BATTLE_DICE; i++){
 			battleDice[i].roll();
 		}
-	}
-	
-	public int[] getPlayerValue(int player){
-		int[] diceValues = new int[DICE_PER_PLAYER];
-		
-		for(int i = 0; i < DICE_PER_PLAYER; i++){
-			diceValues[i] = playerDice[player][i].getValue();
-		}
-		
-		return diceValues;
 	}
 	
 	public int[] getBattleValue(){
@@ -91,24 +71,15 @@ public class DiceHolder {
 		
 		return diceValues;
 	}
-	
-	private class Dice{
-		private int value = 10;
-		
-		private Dice(){
-			if(DEBUG){
-				System.out.println("Constructing Dice: ");
-			}
-			roll();
-		}
-		
-		private void roll(){
-			value = generator.nextInt(DICE_SIZE);
-			value++;
-		}
-		
-		private int getValue(){
-			return value;
-		}
-	}
+
+
+    public int[] getPlayerValue(int player) {
+        int[] diceValues = new int[DICE_PER_PLAYER];
+
+        for(int i = 0; i < DICE_PER_PLAYER; i++){
+            diceValues[i] = playerDice[player][i].getValue();
+        }
+
+        return diceValues;
+    }
 }

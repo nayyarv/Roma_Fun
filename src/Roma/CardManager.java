@@ -23,8 +23,22 @@ public class CardManager {
     public void shuffle(){
         Collections.shuffle(playingDeck);
     }
+    
+    public Card drawCard(int value){
+    	List<Card> tempHand = new ArrayList<Card>();
+    	int playerChoice = 0;
+    	
+    	for(int i = 0; i < value; i++){
+    		tempHand.add(drawACard());
+    	}
+    	
+    	//player input
+    	playerChoice = 0;
+    	
+    	return tempHand.get(playerChoice);
+    }
 
-    public Card drawCard(){
+    public Card drawACard(){
         Card temp = playingDeck.remove(0);
         if(playingDeck.isEmpty()){
             playingDeck.addAll(discardPile);
@@ -47,10 +61,7 @@ public class CardManager {
     }
 
     public int getDiscardSize(){
-        //System.err.println("lol");
         return discardPile.size();
-
-
     }
     
     public String toString(){

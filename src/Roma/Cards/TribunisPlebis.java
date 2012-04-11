@@ -27,10 +27,10 @@ public class TribunisPlebis extends Card{
     }
 
     private int otherPlayer(int player){
-        if(player==PlayArea.PLAYER_ONE){
-            return PlayArea.PLAYER_TWO;
+        if(player==Roma.PLAYER_ONE){
+            return Roma.PLAYER_TWO;
         } else {
-            return PlayArea.PLAYER_ONE;
+            return Roma.PLAYER_ONE;
         }
     }
 }

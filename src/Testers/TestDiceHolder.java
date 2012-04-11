@@ -1,6 +1,7 @@
 package Testers;
 
-import Roma.*;
+import Roma.Dice;
+import Roma.DiceHolder;
 
 public class TestDiceHolder {
 	static final public int MAX_PLAYERS = 2;

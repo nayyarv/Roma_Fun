@@ -1,7 +1,5 @@
 package Roma;
 
-//import testingVictoryTokens.Roma;
-
 public class MoneyManager {
 	public final static int STARTING_MONEY = 0;
 	
@@ -28,7 +26,7 @@ public class MoneyManager {
 	
 	public boolean transferMoney(int from, int to, int amount){
         boolean enoughMoney = true;
-        if(amount > playerMoney[from]){
+		if(amount > playerMoney[from]){
 			System.out.println("Not enough money!");
             enoughMoney  = false;
 		} else {
@@ -43,7 +41,7 @@ public class MoneyManager {
 	}
 
     public String toString(){
-        return "Player One has: $" + playerMoney[PlayArea.PLAYER_ONE] + ", and Player Two has: $"+
-                playerMoney[PlayArea.PLAYER_TWO];
-    }
+        return "Player One has: $" + playerMoney[Roma.PLAYER_ONE] + ", and Player Two has: $"+
+                playerMoney[Roma.PLAYER_TWO];
+	}
 }

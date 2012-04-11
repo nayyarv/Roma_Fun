@@ -38,12 +38,12 @@ public class ClientInterface {
 
             status= input.nextInt(); //very poor error handling :(
 
-            while(status<=0||status>4){
+            while(status <= 0||status > 4){
                 System.out.println("Horrid Input Bro - Enter Choice again: ");
                 status= input.nextInt();
             }
 
-            if (status == 1||status==2) {
+            if (status == 1||status == 2) {
                 //New Game
                 boolean back = false;
                 while (!back){

@@ -1,6 +1,6 @@
 package Roma.Cards;
 
-import Roma.PlayArea;
+import Roma.*;
 
 /**
  * File NAME:

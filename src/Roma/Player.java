@@ -72,6 +72,6 @@ public class Player {
 	}
 
     public void cry(){
-
+        System.out.println("Waaaaaah~~~~!");
     }
 }

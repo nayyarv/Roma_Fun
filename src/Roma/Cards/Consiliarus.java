@@ -19,7 +19,7 @@ public class Consiliarus extends Card {
 
 
 
-    public Sicarius(PlayArea playArea){
+    public Consiliarus(PlayArea playArea){
         super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
 
     }

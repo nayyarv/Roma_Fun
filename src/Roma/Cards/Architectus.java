@@ -19,7 +19,7 @@ public class Architectus extends Card {
 
 
 
-    public Sicarius(PlayArea playArea){
+    public Architectus(PlayArea playArea){
         super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
 
     }

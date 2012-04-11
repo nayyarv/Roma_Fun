@@ -66,4 +66,8 @@ public class VictoryTokens {
         return "Player One has: " + playerTokens[Roma.PLAYER_ONE] + " tokens, and Player Two has: "+
                 playerTokens[Roma.PLAYER_TWO] + " Tokens";
 	}
+
+    public void cry(){
+        System.out.println("wtf");
+    }
 }

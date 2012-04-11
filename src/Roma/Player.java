@@ -70,8 +70,4 @@ public class Player {
 		
 		return confirm;
 	}
-
-    public void cry(){
-        System.out.println("Waaaaaah~~~~!");
-    }
 }

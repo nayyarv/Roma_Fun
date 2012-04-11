@@ -1,4 +1,6 @@
-package Roma; /**
+package Roma;
+
+/**
  * Created by IntelliJ IDEA.
  * User: Varun Nayyar
  * Date: 10/03/12
@@ -12,9 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class clientInterface {
+public class ClientInterface {
 
-    public clientInterface(){
+    public ClientInterface(){
 
     }
 
@@ -70,9 +72,9 @@ public class clientInterface {
                 stop=true;
                 //System.exit(0);
             } else if (status == 4) {
-                // Roma.devPage class for code testing - It would be nice for later on
+                // Roma.DevPage class for code testing - It would be nice for later on
                 //System.out.println("If you were a dev, you wouldn't need this page");
-                devPage dev = new devPage();
+                DevPage dev = new DevPage();
                 dev.welcomeDev();
             }
         }

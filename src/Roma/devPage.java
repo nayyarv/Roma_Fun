@@ -9,10 +9,10 @@ import java.util.Scanner;
  * Time: 11:18 PM
  * description: Developers page
  */
-public class devPage {
-    //We use this to Testers.testcardDeck our individual modules
+public class DevPage {
+    //We use this to Testers.TestCardDeck our individual modules
 
-    public devPage(){
+    public DevPage(){
         //??
     }
 
@@ -22,7 +22,7 @@ public class devPage {
         while(!stop){
             //Roma.cleanScreen();
             System.out.println("Welcome to The Developers Page");
-            System.out.println("Would you like to Testers.testcardDeck:");
+            System.out.println("Would you like to Testers.TestCardDeck:");
             System.out.println("1: The dice?");
             System.out.println("2: Card Deck");
             System.out.println("2: Back");

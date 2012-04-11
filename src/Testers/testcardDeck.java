@@ -9,7 +9,7 @@ import Roma.Cards.*;
  * Date: 19/03/12
  * Desc:
  */
-public class testcardDeck {
+public class TestCardDeck {
     static CardManager test = new CardManager();
 
     public static void main (String[] args){

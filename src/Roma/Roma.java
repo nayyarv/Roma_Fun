@@ -1,4 +1,4 @@
-package Roma.Cards;
+package Roma;
 
 public class Roma {
     public static final int MAX_PLAYERS = 2;

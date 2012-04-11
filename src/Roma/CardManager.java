@@ -6,8 +6,7 @@ package Roma;
  * Desc:
  */
 
-import Roma.Cards.Card;
-
+import Roma.Cards.*;
 import java.util.*;
 
 public class CardManager {

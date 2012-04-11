@@ -1,9 +1,7 @@
 package Testers;
 
 
-import Roma.Cards.Card;
-import Roma.Cards.Mercator;
-import Roma.Cards.Roma;
+import Roma.Cards.*;
 import Roma.*;
 
 /**

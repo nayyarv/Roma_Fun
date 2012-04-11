@@ -1,7 +1,5 @@
 package Roma;
 
-import Roma.Cards.Roma;
-
 public class PlayArea {
 	public final static int MAX_PLAYERS = 2;
 	public final static int PLAYER_ONE = 0;

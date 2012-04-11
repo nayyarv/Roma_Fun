@@ -1,5 +1,4 @@
 package Roma.Cards;
-
 import Roma.*;
 
 public abstract class Card {

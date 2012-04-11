@@ -17,10 +17,5 @@ public class TestCard {
         PlayArea haha = new PlayArea(game);
         Card sic = new Sicarius(haha);
         System.out.println(sic.toString());
-
-
-
-
-
     }
 }

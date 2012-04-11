@@ -2,8 +2,6 @@ package Roma;
 
 //import testingVictoryTokens.Roma;
 
-import Roma.Cards.Roma;
-
 public class MoneyManager {
 	public final static int STARTING_MONEY = 0;
 	

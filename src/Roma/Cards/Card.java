@@ -9,6 +9,7 @@ public abstract class Card {
 	private final int cost;
 	private final int defence;
 	private final PlayArea playArea;
+    private boolean playable = false;
 	
 	public Card(String name, String type, String description, int cost, int defense, PlayArea playArea){
 		this.name = name;
@@ -59,7 +60,13 @@ public abstract class Card {
 
     }
 
+    public boolean isPlayable() {
+        return playable;
+    }
 
+    public void setPlayable(boolean playable) {
+        this.playable = playable;
+    }
 
 	public abstract void activate(int player);
 }

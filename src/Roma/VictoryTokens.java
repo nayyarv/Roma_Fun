@@ -64,6 +64,6 @@ public class VictoryTokens {
 
     public String toString(){
         return "Player One has: " + playerTokens[Roma.PLAYER_ONE] + " tokens, and Player Two has: "+
-                playerTokens[Roma.PLAYER_TWO] + " Tokens";
+                playerTokens[Roma.PLAYER_TWO] + " Tokens" + "Hi";
 	}
 }

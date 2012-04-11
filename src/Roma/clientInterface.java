@@ -1,4 +1,4 @@
-package testingPlayArea; /**
+package Roma; /**
  * Created by IntelliJ IDEA.
  * User: Varun Nayyar
  * Date: 10/03/12
@@ -70,7 +70,7 @@ public class clientInterface {
                 stop=true;
                 //System.exit(0);
             } else if (status == 4) {
-                // testingPlayArea.devPage class for code testing - It would be nice for later on
+                // Roma.devPage class for code testing - It would be nice for later on
                 //System.out.println("If you were a dev, you wouldn't need this page");
                 devPage dev = new devPage();
                 dev.welcomeDev();

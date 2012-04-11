@@ -5,7 +5,7 @@
  * Desc: the class that will handle the dice in Roma
  */
 
-package testingPlayArea;
+package Roma;
 
 import java.util.Random;
 

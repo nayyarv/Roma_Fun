@@ -1,7 +1,10 @@
 package Testers;
 
 
-import testingPlayArea.*;
+import Roma.Cards.Card;
+import Roma.Cards.Mercator;
+import Roma.Cards.Roma;
+import Roma.*;
 
 /**
  * File Name:

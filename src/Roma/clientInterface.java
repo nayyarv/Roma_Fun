@@ -9,7 +9,6 @@ package Roma;
  */
 
 //For opening pdf and reading in data
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +16,16 @@ import java.util.Scanner;
 
 public class ClientInterface {
 
-    public ClientInterface() {
+    public ClientInterface(){
 
     }
 
-    public void welcome() {
-        Scanner input = new Scanner(System.in);
+    public void welcome(){
+        Scanner input = new Scanner( System.in );
         int status;
-        boolean stop = false;
+        boolean stop=false;
 
-        while (!stop) {
+        while (!stop){
             //Roma.cleanScreen();
             System.out.println("Welcome to Roma :)\n" +
                     "This port developed by Andrew Lem and Varun Nayyar\n" +
@@ -37,17 +36,17 @@ public class ClientInterface {
                     "4: Dev Team ONLY\n" +
                     "Enter Choice: ");
 
-            status = input.nextInt(); //very poor error handling :(
+            status= input.nextInt(); //very poor error handling :(
 
-            while (status <= 0 || status > 4) {
+            while(status<=0||status>4){
                 System.out.println("Horrid Input Bro - Enter Choice again: ");
-                status = input.nextInt();
+                status= input.nextInt();
             }
 
-            if (status == 1 || status == 2) {
+            if (status == 1||status==2) {
                 //New Game
                 boolean back = false;
-                while (!back) {
+                while (!back){
                     System.out.println("Under Construction");
                     System.out.println("Would you like to go back [Y/N]? ");
                     //back = Roma.yesNo();
@@ -70,7 +69,7 @@ public class ClientInterface {
                 //Exit
                 //Might have an "Are you sure" as well :P
                 System.out.println("Quitting");
-                stop = true;
+                stop=true;
                 //System.exit(0);
             } else if (status == 4) {
                 // Roma.DevPage class for code testing - It would be nice for later on

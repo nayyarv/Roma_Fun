@@ -71,7 +71,7 @@ public class Player {
 		return confirm;
 	}
 
-    public void cry(){
-
+    public void testing(){
+        System.out.println("Testing 1 2 3");
     }
 }

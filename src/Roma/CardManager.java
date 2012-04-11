@@ -7,7 +7,10 @@ package Roma;
  */
 
 import Roma.Cards.*;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CardManager {
     private final List<Card> playingDeck = new ArrayList<Card>();

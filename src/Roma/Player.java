@@ -70,4 +70,8 @@ public class Player {
 		
 		return confirm;
 	}
+
+    public int chooseDiceDisc(){
+        return 0;
+    }
 }

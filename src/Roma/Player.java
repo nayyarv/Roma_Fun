@@ -1,21 +1,38 @@
 package Roma;
 
 import Roma.Cards.Card;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Player {
+    private PlayArea playArea;
+    private List<Card> hand = new ArrayList<Card>();
+    private List<Dice> freeDice;
+
+
 	private int playerID;
-	private List<Card> hand = new ArrayList<Card>();
-	private PlayArea playArea;
-	private List<Dice> freeDice;
+    private boolean autoRoll;
 	
 	public Player(int playerID, PlayArea playArea){
 		this.playArea = playArea;
 		this.playerID = playerID;
 	}
-	
+
+    public boolean takeAction(Scanner input) {
+        //choose an action
+        return false;
+    }
+
+    //choose from list
+    //input: ArrayList (of dice or of cards)
+    //return int
+
+    //choose a dice disc
+    //return int
+
+    //input value
+
+
+
 	public void rollActionDice(){
 		freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
 	}
@@ -70,4 +87,12 @@ public class Player {
 		
 		return confirm;
 	}
+
+    public boolean getAutoRoll() {
+        return autoRoll;
+    }
+
+    public void setAutoRoll(boolean autoRoll) {
+        this.autoRoll = autoRoll;
+    }
 }

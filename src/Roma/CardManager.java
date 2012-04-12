@@ -13,8 +13,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class CardManager {
+    //Objects
     private final List<Card> playingDeck = new ArrayList<Card>();
     private final List<Card> discardPile = new ArrayList<Card>();
+
+    //Variabls
+    private boolean noMoreCards = false;
 
     public CardManager(){
         //Will insert all cards, and shuffle
@@ -40,10 +44,12 @@ public class CardManager {
 
     public Card drawACard(){
         Card temp = playingDeck.remove(0);
-        if(playingDeck.isEmpty()){
+        if(playingDeck.isEmpty() && !discardPile.isEmpty()){
             playingDeck.addAll(discardPile);
             discardPile.clear();
             shuffle();
+        } else if(playingDeck.isEmpty() && discardPile.isEmpty()){
+            noMoreCards = true;
         }
         return temp;
     }
@@ -54,6 +60,12 @@ public class CardManager {
 
     public void discard(Card theCard){
         discardPile.add(0, theCard);
+        if(noMoreCards){
+            playingDeck.addAll(discardPile);
+            discardPile.clear();
+            shuffle();
+            noMoreCards = false;
+        }
     }
 
     public int getPlayingSize(){

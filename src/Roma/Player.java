@@ -30,8 +30,10 @@ public class Player {
     //return int
 
     //input value
+    //
 
-
+    //Or maybe just have a function that requests a number from the player?
+    //With "autoResponse" values when in testing mode?
 
 	public void rollActionDice(){
 		freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);

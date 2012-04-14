@@ -1,6 +1,6 @@
 package Roma;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class PlayArea {
     //Object pointers
@@ -11,12 +11,11 @@ public class PlayArea {
     private VictoryTokens victoryTokens;
     private DiceDiscs diceDiscs;
     private Player players[];
-    private Scanner input;
 
     //Variables
     private int turn = 0;
 
-    public PlayArea(Roma mainProgram, Scanner input) {
+    public PlayArea(Roma mainProgram) {
         cardManager = new CardManager();
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
@@ -24,7 +23,6 @@ public class PlayArea {
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
         this.mainProgram = mainProgram;
-        this.input = input;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             players[i] = new Player(i, this);
@@ -79,8 +77,12 @@ public class PlayArea {
             }
         }
         while (!mainProgram.getGameOver() && !endTurn) {
-            endTurn = players[turn].takeAction(input);
+            endTurn = players[turn].takeAction();
         }
         turn++;
+    }
+
+    public Scanner getInput(){
+        return mainProgram.getInput();
     }
 }

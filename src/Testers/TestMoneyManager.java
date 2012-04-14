@@ -22,7 +22,7 @@ public class TestMoneyManager {
 
     private static boolean Test01() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame, null);
+        PlayArea playArea = new PlayArea(newGame);
         MoneyManager moneyManager = new MoneyManager();
         boolean pass = true;
 
@@ -75,7 +75,7 @@ public class TestMoneyManager {
 
     private static boolean Test02() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame, null);
+        PlayArea playArea = new PlayArea(newGame);
         MoneyManager moneyManager = new MoneyManager();
         boolean pass = true;
 

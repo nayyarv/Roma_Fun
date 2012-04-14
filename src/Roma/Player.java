@@ -8,7 +8,7 @@ public class Player {
     private PlayArea playArea;
     private List<Card> hand = new ArrayList<Card>();
     private List<Dice> freeDice;
-
+    private Scanner input;
 
     private int playerID;
     private boolean autoRoll;
@@ -16,9 +16,10 @@ public class Player {
     public Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
+        this.input = playArea.getInput();
     }
 
-    public boolean takeAction(Scanner input) {
+    public boolean takeAction() {
         //choose an action
         return false;
     }

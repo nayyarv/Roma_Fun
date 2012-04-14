@@ -53,7 +53,7 @@ public class Roma {
 
             if (choice == 1) { // new play area and game
                 gameOver = false;
-                game = new PlayArea(this, input);
+                game = new PlayArea(this);
                 game.runGame();
 
             } else if (choice == 2) {  // open pdf of rules
@@ -115,5 +115,9 @@ public class Roma {
         } else {
             System.out.println("Testing modes DISABLED. Game will run normally.");
         }
+    }
+
+    public Scanner getInput() {
+        return input;
     }
 }

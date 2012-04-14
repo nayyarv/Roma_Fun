@@ -17,12 +17,12 @@ public class Velites extends Card {
     private final static int DEFENCE = 3;
 
 
-    public Velites(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Velites(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 }

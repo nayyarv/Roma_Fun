@@ -18,20 +18,20 @@ public class Roma {
     //Variables
     private boolean autoTesting;
     private boolean manualTesting;
-	private boolean gameOver = false;
+    private boolean gameOver = false;
     private boolean exit = false;
     private int choice;
 
-	public Roma(){
+    public Roma() {
         this.autoTesting = false;
-	}
+    }
 
-    public Roma(boolean autoTesting){
+    public Roma(boolean autoTesting) {
         this.autoTesting = autoTesting;
         printTesting();
     }
 
-    public void runRoma(){
+    public void runRoma() {
 
         //Welcome message
         System.out.printf("Welcome to Roma :)\n" +
@@ -43,22 +43,20 @@ public class Roma {
         }
 
         //Program running loop
-        while(!exit){
+        while (!exit) {
             System.out.printf("1: New Game\n" +
-                              "2: Rules\n" +
-                              "3: Quit\n" +
-                              "Enter Choice (1~3): ");
+                    "2: Rules\n" +
+                    "3: Quit\n" +
+                    "Enter Choice (1~3): ");
 
             choice = input.nextInt();
 
-            if(choice == 1){ // new play area and game
+            if (choice == 1) { // new play area and game
                 gameOver = false;
                 game = new PlayArea(this, input);
-                while(!gameOver){
-                    game.runGame();
-                }
+                game.runGame();
 
-            } else if(choice == 2){  // open pdf of rules
+            } else if (choice == 2) {  // open pdf of rules
                 //Code found online: http://stackoverflow.com/questions/2546968/open-pdf-file-on-fly-from-java-application
                 //Opens the pdf of Roma lol
                 //Currently illegal - but I dont want to waste time on copying instructions across
@@ -71,16 +69,16 @@ public class Roma {
                         System.out.println("Roma.pdf not found!");
                     }
                 }
-            } else if(choice == 3){  // quit game
+            } else if (choice == 3) {  // quit game
                 exit = true;
                 System.out.println("Quitting Roma.\n" +
-                                   "Good Bye~");
+                        "Good Bye~");
                 try {
                     Thread.sleep(PAUSE_DURATION);
                 } catch (InterruptedException e) {
                     // blank
                 }
-            } else if(choice == 4){  // debug choice
+            } else if (choice == 4) {  // debug choice
                 manualTesting = !manualTesting;
                 printTesting();
             } else {
@@ -89,17 +87,17 @@ public class Roma {
         }
     }
 
-    public void newGame(){
+    public void newGame() {
         gameOver = false;
     }
 
-	public void endGame(){
+    public void endGame() {
         gameOver = true;
-	}
+    }
 
-	public boolean getGameOver(){
-		return gameOver;
-	}
+    public boolean getGameOver() {
+        return gameOver;
+    }
 
     public boolean isAutoTesting() {
         return autoTesting;
@@ -109,10 +107,10 @@ public class Roma {
         return manualTesting;
     }
 
-    public void printTesting(){
-        if(autoTesting){
+    public void printTesting() {
+        if (autoTesting) {
             System.out.println("Auto testing mode ENABLED. Print statements suppressed.");
-        } else if(manualTesting){
+        } else if (manualTesting) {
             System.out.println("Manual testing mode ENABLED. Extra debug statements ENABLED.");
         } else {
             System.out.println("Testing modes DISABLED. Game will run normally.");

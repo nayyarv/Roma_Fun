@@ -8,7 +8,7 @@ import Roma.*;
  * Date: 11/04/12
  * Desc:
  */
-public class Legat extends Card{
+public class Legat extends Card {
 
     private final static String NAME = "Legat";
     private final static String TYPE = "Character";
@@ -18,14 +18,12 @@ public class Legat extends Card{
     private final static int DEFENCE = 2;
 
 
-
-
-    public Legat(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Legat(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 }

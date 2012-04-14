@@ -20,12 +20,12 @@ public class Templum extends Card {
     private final static int DEFENCE = 2;
 
 
-    public Templum(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Templum(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 

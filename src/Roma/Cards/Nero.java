@@ -17,12 +17,12 @@ public class Nero extends Card {
     private final static int DEFENCE = 9;
 
 
-    public Nero(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Nero(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 

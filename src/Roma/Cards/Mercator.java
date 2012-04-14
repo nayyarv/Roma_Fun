@@ -6,11 +6,12 @@ package Roma.Cards;
  * Date: 30/03/12
  * Desc:
  */
+
 import Roma.*;
 
 import java.util.Scanner;
 
-public class Mercator extends Card{
+public class Mercator extends Card {
     private final static String NAME = "Mercator";
     private final static String TYPE = "Character";
     private final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
@@ -19,11 +20,11 @@ public class Mercator extends Card{
     private final static int COST = 7;
     private final static int DEFENCE = 2;
 
-    public Mercator(PlayArea playArea){
-        super(NAME, TYPE, DESCRIPTION, COST,DEFENCE,playArea);
+    public Mercator(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }
-    
-    public void activate(int player){
+
+    public void activate(int player) {
         PlayArea playArea = super.getPlayArea();
         //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
         int numTokensReqd;
@@ -32,14 +33,14 @@ public class Mercator extends Card{
         System.out.println(prompt);
         Scanner input = new Scanner(System.in);
         numTokensReqd = input.nextInt();
-        if(playArea.getMoneyManager().transferMoney(player, otherPlayer(player), 2*numTokensReqd)){
-            playArea.getVictoryTokens().playerToPlayer(otherPlayer(player),player, numTokensReqd);
+        if (playArea.getMoneyManager().transferMoney(player, otherPlayer(player), 2 * numTokensReqd)) {
+            playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, numTokensReqd);
         }
 
     }
-    
-    private int otherPlayer(int player){
-        if(player==Roma.PLAYER_ONE){
+
+    private int otherPlayer(int player) {
+        if (player == Roma.PLAYER_ONE) {
             return Roma.PLAYER_TWO;
         } else {
             return Roma.PLAYER_ONE;

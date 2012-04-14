@@ -16,12 +16,12 @@ public class Essedum extends Card {
     private final static int DEFENCE = 3;
 
 
-    public Essedum(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Essedum(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 }

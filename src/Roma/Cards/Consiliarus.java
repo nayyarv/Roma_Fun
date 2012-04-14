@@ -17,14 +17,12 @@ public class Consiliarus extends Card {
     private final static int DEFENCE = 4;
 
 
-
-
-    public Consiliarus(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Consiliarus(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 }

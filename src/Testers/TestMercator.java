@@ -12,9 +12,9 @@ import Roma.*;
  */
 public class TestMercator {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Roma game = new Roma();
-        PlayArea haha = new PlayArea(game);
+        PlayArea haha = new PlayArea(game, null);
         Card merc = new Mercator(haha);
         haha.getMoneyManager().gainMoney(Roma.PLAYER_ONE, 10);
         haha.getMoneyManager().gainMoney(Roma.PLAYER_TWO, 10);

@@ -17,12 +17,12 @@ public class Aesculapinum extends Card {
     private final static int DEFENCE = 2;
 
 
-    public Aesculapinum(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Aesculapinum(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 

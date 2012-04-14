@@ -17,12 +17,12 @@ public class Scaenicus extends Card {
     private final static int DEFENCE = 3;
 
 
-    public Scaenicus(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Scaenicus(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 

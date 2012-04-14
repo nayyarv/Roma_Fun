@@ -1,8 +1,10 @@
 package Testers;
 
 
-import Roma.*;
 import Roma.Cards.*;
+import Roma.*;
+
+import java.util.Scanner;
 
 /**
  * File Name:
@@ -12,9 +14,10 @@ import Roma.Cards.*;
  */
 public class TestCard {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         Roma game = new Roma();
-        PlayArea haha = new PlayArea(game);
+        PlayArea haha = new PlayArea(game, input);
         Card sic = new Sicarius(haha);
         System.out.println(sic.toString());
     }

@@ -17,12 +17,12 @@ public class Legionarius extends Card {
     private final static int DEFENCE = 5;
 
 
-    public Legionarius(PlayArea playArea){
-        super(NAME, TYPE , DESCRIPTION,COST, DEFENCE, playArea);
+    public Legionarius(PlayArea playArea) {
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 
     }
 
-    public void activate(int player){
+    public void activate(int player) {
 
     }
 }

@@ -20,47 +20,48 @@ public class CardManager {
     //Variabls
     private boolean noMoreCards = false;
 
-    public CardManager(){
+    public CardManager() {
         //Will insert all cards, and shuffle
     }
-    
-    public void shuffle(){
+
+    public void shuffle() {
         Collections.shuffle(playingDeck);
     }
-    
-    public Card drawCard(int value){
-    	List<Card> tempHand = new ArrayList<Card>();
-    	int playerChoice = 0;
-    	
-    	for(int i = 0; i < value; i++){
-    		tempHand.add(drawACard());
-    	}
-    	
-    	//player input
-    	playerChoice = 0;
-    	
-    	return tempHand.get(playerChoice);
+
+    public Card drawCard(int value) {
+        List<Card> tempHand = new ArrayList<Card>();
+        int playerChoice = 0;
+
+        for (int i = 0; i < value; i++) {
+            tempHand.add(drawACard());
+        }
+
+        //player input
+        playerChoice = 0;
+
+        return tempHand.get(playerChoice);
     }
 
-    public Card drawACard(){
+    public Card drawACard() {
         Card temp = playingDeck.remove(0);
-        if(playingDeck.isEmpty() && !discardPile.isEmpty()){
+        if (playingDeck.isEmpty() && !discardPile.isEmpty()) {
             playingDeck.addAll(discardPile);
             discardPile.clear();
             shuffle();
-        } else if(playingDeck.isEmpty() && discardPile.isEmpty()){
+        } else if (playingDeck.isEmpty() && discardPile.isEmpty()) {
             noMoreCards = true;
         }
         return temp;
     }
+
     //
-    public void insertCard(Card theCard){
+    public void insertCard(Card theCard) {
         playingDeck.add(0, theCard);
     }
 
-    public void discard(Card theCard){
+    public void discard(Card theCard) {
         discardPile.add(0, theCard);
-        if(noMoreCards){
+        if (noMoreCards) {
             playingDeck.addAll(discardPile);
             discardPile.clear();
             shuffle();
@@ -68,15 +69,15 @@ public class CardManager {
         }
     }
 
-    public int getPlayingSize(){
+    public int getPlayingSize() {
         return playingDeck.size();
     }
 
-    public int getDiscardSize(){
+    public int getDiscardSize() {
         return discardPile.size();
     }
-    
-    public String toString(){
+
+    public String toString() {
         return "Playing deck is: " + playingDeck.toString() + "\nAnd Discard Pile is: " + discardPile.toString();
 
     }

@@ -5,11 +5,13 @@ import Roma.Cards.Card;
 import java.util.*;
 
 public class Player {
+    private final String name;
     private PlayArea playArea;
     private List<Card> hand = new ArrayList<Card>();
     private List<Dice> freeDice;
     private Scanner input;
 
+    private boolean testing;
     private int playerID;
     private boolean autoRoll;
 
@@ -17,10 +19,34 @@ public class Player {
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = playArea.getInput();
+        System.out.println("Name of player" + playerID + ": ");
+        this.name = input.nextLine();
+    }
+
+    public Player(int playerID, PlayArea playArea, boolean testing){
+        this.playArea = playArea;
+        this.playerID = playerID;
+        this.input = null;
+        this.name = "dummyPlayer" + playerID;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean takeAction() {
+        int option = 0;
+
         //choose an action
+        System.out.println("Select option:\n" +
+                           "1) Show game stats\n" +
+                           "2) Free dice available\n" );
+        option = input.nextInt();
+
+        if(option == 1){
+            playArea.printStats();
+        }
+
         return false;
     }
 

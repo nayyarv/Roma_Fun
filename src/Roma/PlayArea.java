@@ -64,6 +64,8 @@ public class PlayArea {
         boolean endTurn = false;
         char roll = 'b';
 
+        System.out.println("It's " + player.getName() + " turn");
+
         if (player.getAutoRoll()) {
             player.rollActionDice();
         } else {

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Player {
     private final static int CANCEL = -1;
-    private final String name;
+    private String name;
     private PlayArea playArea;
     private List<Card> hand = new ArrayList<Card>();
     private List<Dice> freeDice;
@@ -19,8 +19,8 @@ public class Player {
     public Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = playArea.getInput();
-        System.out.println("Name of player" + playerID + ": ");
+        this.input = new Scanner(System.in);
+        System.out.print("Name of player" + (playerID + 1) + ": ");
         this.name = input.nextLine();
     }
 
@@ -35,34 +35,51 @@ public class Player {
         return name;
     }
 
+    //TODO: Fill out player actions
+    //Main method that allows players to perform an action
     public boolean takeAction() {
         int option = 0;
 
         //choose an action
         System.out.println("Select option:\n" +
-                           "1) Show game stats\n" +
-                           "2) Free dice available\n" );
+                           "1) Use action die\n" +
+                           "2) Lay cards\n" +
+                           "3) Check hand\n" +
+                           "4) Show game stats\n" +
+                           "5) Free dice available");
         option = input.nextInt();
 
         if(option == 1){
+
+        } else if(option == 2){
+
+        } else if(option == 3){
+
+        } else if(option == 4){
             playArea.printStats();
+        } else if(option == 5){
+
+        } else {
+
         }
 
         return false;
     }
 
     public void printCardList(List<Card> cardList){
+        int i = 1;
         System.out.println("-------------------------------------");
-        for(int i = 0; i < cardList.size(); i++){
-            System.out.println((i + 1) + ") " + cardList.get(i).getName());
+        for(Card card: cardList){
+            System.out.println(i + ") " + card.getName());
+            i++;
         }
     }
 
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
-    public int chooseCard(List<Card> cardList){
-        int choice = CANCEL;
+    public Card chooseCard(List<Card> cardList){
+        Card choice = null;
         int action = 0;
         boolean validChoice = false;
 
@@ -80,7 +97,7 @@ public class Player {
 
             if(action == 1){
                 System.out.print("Card number: ");
-                choice = input.nextInt();
+                choice = cardList.remove(input.nextInt() - 1);
                 validChoice = true;
             } else if(action == 2){
                 System.out.print("Check which card number: ");
@@ -89,7 +106,7 @@ public class Player {
             } else if(action == 3){
                 printCardList(cardList);
             } else if(action == 4){
-                choice = CANCEL;
+                choice = null;
                 validChoice = true;
             } else {
                 System.out.println("Please choose a valid action");
@@ -101,9 +118,13 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public int chooseDice(){
-        int choice = CANCEL;
+    public Dice chooseDice(List<Dice> diceList){
+        Dice choice = null;
         return choice;
+    }
+
+    public List<Dice> getFreeDice() {
+        return freeDice;
     }
 
     //input value
@@ -113,7 +134,16 @@ public class Player {
     //With "autoResponse" values when in testing mode?
 
     public void rollActionDice() {
+        boolean reroll = false;
+
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+
+        if(playArea.getDiceHolder().checkTriple(playerID)){
+            //TODO: ask player if want to reroll
+            if(reroll){
+                rollActionDice();
+            }
+        }
     }
 
     public void drawCard() {

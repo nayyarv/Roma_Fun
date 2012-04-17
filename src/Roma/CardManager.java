@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//TODO: Deck creation
+
 public class CardManager {
     //Objects
     private final List<Card> playingDeck = new ArrayList<Card>();

@@ -17,6 +17,8 @@ public class Forum extends Card {
     private final static int COST = 5;
     private final static int DEFENCE = 5;
 
+    //activate utility
+    Dice tempDice = null;
 
     public Forum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
@@ -24,7 +26,9 @@ public class Forum extends Card {
     }
 
     public void activate(int player) {
-
+        playerID = player;
+        cardActivated = true;
+        getPlayArea().getPlayer(playerID).getFreeDice().size();
     }
 
 }

@@ -31,6 +31,11 @@ public class Roma {
         printTesting();
     }
 
+    public static void main(String[] arg){
+        Roma game = new Roma();
+        game.runRoma();
+    }
+
     public void runRoma() {
 
         //Welcome message

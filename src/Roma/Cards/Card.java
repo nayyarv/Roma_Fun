@@ -1,7 +1,7 @@
 package Roma.Cards;
 
-import Roma.*;
-
+import Roma.Dice;
+import Roma.PlayArea;
 import java.util.List;
 
 public abstract class Card {
@@ -13,6 +13,11 @@ public abstract class Card {
     private final PlayArea playArea;
     private boolean playable = false;
     private List<Integer> playerActions;
+
+    //activated values
+    protected boolean cardActivated = false;
+    protected int playerID = -1;
+    protected Dice activatingDice = null;
 
     public Card(String name, String type, String description, int cost, int defense, PlayArea playArea) {
         this.name = name;
@@ -26,6 +31,7 @@ public abstract class Card {
     public String getName() {
         return name;
     }
+
 
     public String getType() {
         return type;
@@ -59,6 +65,13 @@ public abstract class Card {
 
     public void setPlayable(boolean playable) {
         this.playable = playable;
+    }
+
+    public void cancelActivate(){
+        if(cardActivated){
+            playArea.getPlayer(playerID).getFreeDice().add(activatingDice);
+            cardActivated = false;
+        }
     }
 
     public abstract void activate(int player);

@@ -2,6 +2,8 @@ package Roma;
 
 import Roma.Cards.Card;
 
+//TODO: Review dice disc class
+
 public class DiceDiscs {
     private boolean[][][] discs = new boolean[Roma.MAX_PLAYERS][Dice.DICE_SIZE][DiceHolder.DICE_PER_PLAYER];
     private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][Dice.DICE_SIZE];

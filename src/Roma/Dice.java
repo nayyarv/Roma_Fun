@@ -3,17 +3,20 @@ package Roma;
 import java.util.Random;
 
 public class Dice {
-    private final static boolean DEBUG = false;
     static final public int DICE_SIZE = 6;
+    private final static boolean DEBUG = false;
+    private final int playerID;
 
     Random generator = new Random();
 
     private int value = 0;
 
-    public Dice() {
+    public Dice(int playerID) {
         if (DEBUG) {
             System.out.println("Constructing Dice: ");
         }
+
+        this.playerID = playerID;
         roll();
     }
 

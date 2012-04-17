@@ -25,7 +25,7 @@ public class DiceHolder {
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             for (int j = 0; j < DICE_PER_PLAYER; j++) {
-                playerDice[i][j] = new Dice();
+                playerDice[i][j] = new Dice(i);
                 if (DEBUG) {
                     System.out.println("Dice constructed");
                 }
@@ -33,7 +33,7 @@ public class DiceHolder {
         }
 
         for (int i = 0; i < MAX_BATTLE_DICE; i++) {
-            battleDice[i] = new Dice();
+            battleDice[i] = new Dice(-1);
             if (DEBUG) {
                 System.out.println("Dice constructed");
             }
@@ -53,6 +53,18 @@ public class DiceHolder {
         }
 
         return diceList;
+    }
+
+    public boolean checkTriple(int player){
+        boolean triple = true;
+
+        for(int i = 0; triple && (i < DICE_PER_PLAYER - 1); i++){
+            if(playerDice[player][i].getValue() != playerDice[player][i + 1].getValue()){
+                triple = false;
+            }
+        }
+
+        return triple;
     }
 
     public void rollBattleDice() {

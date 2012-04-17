@@ -102,6 +102,10 @@ public class Player {
 
     //choose a dice disc
     //return int
+    public int chooseDice(){
+        int choice = CANCEL;
+        return choice;
+    }
 
     //input value
     //

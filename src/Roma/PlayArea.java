@@ -87,4 +87,8 @@ public class PlayArea {
     public Scanner getInput(){
         return mainProgram.getInput();
     }
+
+    public void printStats() {
+        //printout game state stats
+    }
 }

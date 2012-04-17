@@ -1,6 +1,8 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.PlayArea;
+
+import java.util.List;
 
 public abstract class Card {
     private final String name;
@@ -10,6 +12,7 @@ public abstract class Card {
     private final int defence;
     private final PlayArea playArea;
     private boolean playable = false;
+    private List<Integer> playerActions;
 
     public Card(String name, String type, String description, int cost, int defense, PlayArea playArea) {
         this.name = name;

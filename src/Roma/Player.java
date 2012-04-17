@@ -5,6 +5,7 @@ import Roma.Cards.Card;
 import java.util.*;
 
 public class Player {
+    private final static int CANCEL = -1;
     private final String name;
     private PlayArea playArea;
     private List<Card> hand = new ArrayList<Card>();
@@ -50,9 +51,53 @@ public class Player {
         return false;
     }
 
+    public void printCardList(List<Card> cardList){
+        System.out.println("-------------------------------------");
+        for(int i = 0; i < cardList.size(); i++){
+            System.out.println((i + 1) + ") " + cardList.get(i).getName());
+        }
+    }
+
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
+    public int chooseCard(List<Card> cardList){
+        int choice = CANCEL;
+        int action = 0;
+        boolean validChoice = false;
+
+        printCardList(cardList);
+
+        while(!validChoice){
+            System.out.println("-------------------------------------");
+            System.out.print("Actions:\n" +
+                    "1) Choose card\n" +
+                    "2) Check description\n" +
+                    "3) Print card list\n" +
+                    "4) Cancel\n");
+
+            action = input.nextInt();
+
+            if(action == 1){
+                System.out.print("Card number: ");
+                choice = input.nextInt();
+                validChoice = true;
+            } else if(action == 2){
+                System.out.print("Check which card number: ");
+                action = input.nextInt();
+                cardList.get(action).toString();
+            } else if(action == 3){
+                printCardList(cardList);
+            } else if(action == 4){
+                choice = CANCEL;
+                validChoice = true;
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+
+        return choice;
+    }
 
     //choose a dice disc
     //return int

@@ -23,7 +23,7 @@ public class Player {
         this.name = input.nextLine();
     }
 
-    public Player(int playerID, PlayArea playArea, boolean testing){
+    public Player(int playerID, PlayArea playArea, boolean testing) {
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = null;
@@ -39,11 +39,11 @@ public class Player {
 
         //choose an action
         System.out.println("Select option:\n" +
-                           "1) Show game stats\n" +
-                           "2) Free dice available\n" );
+                "1) Show game stats\n" +
+                "2) Free dice available\n");
         option = input.nextInt();
 
-        if(option == 1){
+        if (option == 1) {
             //playArea.printStats();
         }
 
@@ -94,18 +94,18 @@ public class Player {
 
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
-        for (Card card: hand) {
+        for (Card card : hand) {
             if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
                 card.setPlayable(true);
             }
         }
     }
 
-    public void VarunprintCardList(List<Card> cardList){
+    public void VarunprintCardList(List<Card> cardList) {
         System.out.println("----_---__--__");
-        int i=1;
-        for(Card c: cardList){
-            System.out.println(i+")"+c.getName());
+        int i = 1;
+        for (Card c : cardList) {
+            System.out.println(i + ")" + c.getName());
             i++;
         }
     }

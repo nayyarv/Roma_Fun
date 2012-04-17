@@ -119,7 +119,6 @@ public class Player {
         if (confirm) {
 
         }
-
         return confirm;
     }
 

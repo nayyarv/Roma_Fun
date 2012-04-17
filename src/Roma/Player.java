@@ -44,7 +44,7 @@ public class Player {
         option = input.nextInt();
 
         if(option == 1){
-            playArea.printStats();
+            //playArea.printStats();
         }
 
         return false;
@@ -94,13 +94,19 @@ public class Player {
 
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
-        Card card;
-
-        for (int i = 0; i < hand.size(); i++) {
-            card = hand.get(i);
+        for (Card card: hand) {
             if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
                 card.setPlayable(true);
             }
+        }
+    }
+
+    public void VarunprintCardList(List<Card> cardList){
+        System.out.println("----_---__--__");
+        int i=1;
+        for(Card c: cardList){
+            System.out.println(i+")"+c.getName());
+            i++;
         }
     }
 

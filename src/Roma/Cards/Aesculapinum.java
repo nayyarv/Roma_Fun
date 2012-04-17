@@ -23,7 +23,7 @@ public class Aesculapinum extends Card {
     }
 
     public void activate(int player) {
-
+        //TODO : Start actually implementing stuff!!
     }
 
 }

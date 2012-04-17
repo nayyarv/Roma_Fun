@@ -24,7 +24,7 @@ public class Player {
         this.name = input.nextLine();
     }
 
-    public Player(int playerID, PlayArea playArea, boolean testing){
+    public Player(int playerID, PlayArea playArea, boolean testing) {
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = null;
@@ -160,7 +160,6 @@ public class Player {
         if (confirm) {
 
         }
-
         return confirm;
     }
 

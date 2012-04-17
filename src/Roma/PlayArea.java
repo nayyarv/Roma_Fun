@@ -72,7 +72,7 @@ public class PlayArea {
             System.out.println("Press space to roll action dice." +
                     "Press 'a' for automated dice roll for the rest of the game.");
             while (!(roll == ' ' || roll == 'a')) {
-
+                roll = ' ';
             }
             if (roll == 'a') {
                 player.setAutoRoll(true);
@@ -84,7 +84,7 @@ public class PlayArea {
         turn++;
     }
 
-    public Scanner getInput(){
+    public Scanner getInput() {
         return mainProgram.getInput();
     }
 

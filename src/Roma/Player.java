@@ -34,6 +34,7 @@ public class Player {
         return name;
     }
 
+    //TODO: Complete player takeAction() function
     public boolean takeAction() {
         int option = 0;
 
@@ -50,6 +51,7 @@ public class Player {
         return false;
     }
 
+    //TODO: Complete player input functions
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int

@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.*;
 import java.awt.*;
 
+//TODO: change most constructors to have a static construction method
+
 public class Roma {
     //Constants
     public final static int MAX_PLAYERS = 2;

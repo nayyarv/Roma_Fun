@@ -5,6 +5,7 @@ import java.util.Random;
 public class Dice {
     static final public int DICE_SIZE = 6;
     private final static boolean DEBUG = false;
+    //TODO: Review a playerID value in dice
     private final int playerID;
 
     Random generator = new Random();

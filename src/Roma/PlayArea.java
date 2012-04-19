@@ -64,20 +64,25 @@ public class PlayArea {
         boolean endTurn = false;
         char roll = 'b';
 
-        System.out.println("It's " + player.getName() + " turn");
+        System.out.println("It's " + player.getName() + "'s turn");
 
-        if (player.getAutoRoll()) {
-            player.rollActionDice();
-        } else {
-            System.out.println("Press space to roll action dice." +
-                    "Press 'a' for automated dice roll for the rest of the game.");
-            while (!(roll == ' ' || roll == 'a')) {
+        player.rollActionDice();
 
-            }
-            if (roll == 'a') {
-                player.setAutoRoll(true);
-            }
-        }
+        //TODO: set up auto roll option
+//        if (player.getAutoRoll()) {
+//            player.rollActionDice();
+//        } else {
+//            System.out.println("Press space to roll action dice." +
+//                    "Press 'a' for automated dice roll for the rest of the game.");
+//            while (!(roll == ' ' || roll == 'a')) {
+//                roll = mainProgram.getInput().nextChar
+//            }
+//            if (roll == 'a') {
+//                player.setAutoRoll(true);
+//            }
+//        }
+
+
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn].takeAction();
         }
@@ -86,5 +91,9 @@ public class PlayArea {
 
     public Scanner getInput(){
         return mainProgram.getInput();
+    }
+
+    public void printStats() {
+        //printout game state stats
     }
 }

@@ -5,7 +5,8 @@ import Roma.Cards.Card;
 import java.util.*;
 
 public class Player {
-    private final String name;
+    private final static int CANCEL = -1;
+    private String name;
     private PlayArea playArea;
     private List<Card> hand = new ArrayList<Card>();
     private List<Dice> freeDice;
@@ -18,8 +19,8 @@ public class Player {
     public Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = playArea.getInput();
-        System.out.println("Name of player" + playerID + ": ");
+        this.input = new Scanner(System.in);
+        System.out.print("Name of player" + (playerID + 1) + ": ");
         this.name = input.nextLine();
     }
 
@@ -34,30 +35,97 @@ public class Player {
         return name;
     }
 
-    //TODO: Complete player takeAction() function
+    //TODO: Fill out player actions
+    //Main method that allows players to perform an action
     public boolean takeAction() {
         int option = 0;
 
         //choose an action
         System.out.println("Select option:\n" +
-                           "1) Show game stats\n" +
-                           "2) Free dice available\n" );
+                           "1) Use action die\n" +
+                           "2) Lay cards\n" +
+                           "3) Check hand\n" +
+                           "4) Show game stats\n" +
+                           "5) Free dice available");
         option = input.nextInt();
 
         if(option == 1){
-            //playArea.printStats();
+
+        } else if(option == 2){
+
+        } else if(option == 3){
+
+        } else if(option == 4){
+            playArea.printStats();
+        } else if(option == 5){
+
+        } else {
+
         }
 
         return false;
     }
 
-    //TODO: Complete player input functions
+    public void printCardList(List<Card> cardList){
+        int i = 1;
+        System.out.println("-------------------------------------");
+        for(Card card: cardList){
+            System.out.println(i + ") " + card.getName());
+            i++;
+        }
+    }
+
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
+    public Card chooseCard(List<Card> cardList){
+        Card choice = null;
+        int action = 0;
+        boolean validChoice = false;
+
+        printCardList(cardList);
+
+        while(!validChoice){
+            System.out.println("-------------------------------------");
+            System.out.print("Actions:\n" +
+                    "1) Choose card\n" +
+                    "2) Check description\n" +
+                    "3) Print card list\n" +
+                    "4) Cancel\n");
+
+            action = input.nextInt();
+
+            if(action == 1){
+                System.out.print("Card number: ");
+                choice = cardList.remove(input.nextInt() - 1);
+                validChoice = true;
+            } else if(action == 2){
+                System.out.print("Check which card number: ");
+                action = input.nextInt();
+                cardList.get(action).toString();
+            } else if(action == 3){
+                printCardList(cardList);
+            } else if(action == 4){
+                choice = null;
+                validChoice = true;
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+
+        return choice;
+    }
 
     //choose a dice disc
     //return int
+    public Dice chooseDice(List<Dice> diceList){
+        Dice choice = null;
+        return choice;
+    }
+
+    public List<Dice> getFreeDice() {
+        return freeDice;
+    }
 
     //input value
     //
@@ -66,7 +134,16 @@ public class Player {
     //With "autoResponse" values when in testing mode?
 
     public void rollActionDice() {
+        boolean reroll = false;
+
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+
+        if(playArea.getDiceHolder().checkTriple(playerID)){
+            //TODO: ask player if want to reroll
+            if(reroll){
+                rollActionDice();
+            }
+        }
     }
 
     public void drawCard() {

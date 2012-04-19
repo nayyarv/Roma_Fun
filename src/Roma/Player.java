@@ -34,6 +34,7 @@ public class Player {
         return name;
     }
 
+    //TODO: Complete player takeAction() function
     public boolean takeAction() {
         int option = 0;
 
@@ -44,12 +45,13 @@ public class Player {
         option = input.nextInt();
 
         if(option == 1){
-            playArea.printStats();
+            //playArea.printStats();
         }
 
         return false;
     }
 
+    //TODO: Complete player input functions
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
@@ -94,10 +96,7 @@ public class Player {
 
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
-        Card card;
-
-        for (int i = 0; i < hand.size(); i++) {
-            card = hand.get(i);
+        for (Card card : hand) {
             if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
                 card.setPlayable(true);
             }

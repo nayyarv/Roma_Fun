@@ -14,6 +14,9 @@ public abstract class Card {
     private boolean playable = false;
     private List<Integer> playerActions;
 
+    //TODO: needs a "canBeActivated" boolean value for passive cards
+    // for the card that blocks dice disc activation, have an "environment effect: cantBeActivated" or something
+
     //activated values
     protected boolean cardActivated = false;
     protected int playerID = -1;

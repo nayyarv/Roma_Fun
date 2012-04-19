@@ -6,6 +6,9 @@ import Roma.Cards.Card;
 //maybe create a separate dice disc class within dice discs
 //maybe create moneyDisc and cardDisc within CardManager and MoneyManager and have a method that passes the object
 
+//TODO: Create either a separate battle class or a private battle class within dice disc
+// needs to handle environment effects and battle calculations
+// or make it an activate card object that does all the logic check for cards
 
 public class DiceDiscs {
     private boolean[][][] discs = new boolean[Roma.MAX_PLAYERS][Dice.DICE_SIZE][DiceHolder.DICE_PER_PLAYER];

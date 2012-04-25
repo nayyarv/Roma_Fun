@@ -29,4 +29,8 @@ public class Dice {
     public int getValue() {
         return value;
     }
+
+    public int getPlayerID() {
+        return playerID;
+    }
 }

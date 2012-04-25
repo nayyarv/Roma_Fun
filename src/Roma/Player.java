@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.Card;
+import com.sun.xml.internal.bind.util.Which;
 
 import java.util.*;
 
@@ -125,6 +126,16 @@ public class Player {
     //return int
     public Dice chooseDice(List<Dice> diceList){
         Dice choice = null;
+
+        System.out.println("Which die do you want to use?");
+        int i = 0;
+        for(Dice die : diceList){
+            i++;
+            System.out.println(i + ") " + die.getValue());
+        }
+
+        choice = diceList.get(input.nextInt() - 1);
+
         return choice;
     }
 

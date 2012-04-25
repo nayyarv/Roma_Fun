@@ -25,6 +25,9 @@ public class DiceDiscs {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
             activeCards.add(new Card[Roma.MAX_PLAYERS]);
+                for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+                    activeCards.get(i)[j] = null;
+                }
             discs.add(new ArrayList<Dice>());
         }
     }
@@ -43,5 +46,17 @@ public class DiceDiscs {
 
     public void activateCard(int player, int position) {
         activeCards.get(position)[player].activate(player);
+    }
+
+    public String getCardName(int player, int position){
+        String cardName = null;
+
+        if(activeCards.get(position)[player] != null){
+            cardName = activeCards.get(position)[player].getName();
+        } else {
+            cardName = "";
+        }
+
+        return cardName;
     }
 }

@@ -204,4 +204,8 @@ public class Player {
     public void setAutoRoll(boolean autoRoll) {
         this.autoRoll = autoRoll;
     }
+
+    public int handSize() {
+        return hand.size();
+    }
 }

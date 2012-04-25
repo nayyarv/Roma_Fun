@@ -16,7 +16,7 @@ public class DiceDiscs {
     public static final int CARD_POSITIONS = 7;
     private final PlayArea playArea;
 
-    private ArrayList<Card[]> activeCards = new ArrayList<Card[]>();
+    private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
@@ -24,9 +24,8 @@ public class DiceDiscs {
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
-            activeCards.add(new Card[Roma.MAX_PLAYERS]);
                 for(int j = 0; j < Roma.MAX_PLAYERS; j++){
-                    activeCards.get(i)[j] = null;
+                    activeCards[j][i] = null;
                 }
             discs.add(new ArrayList<Dice>());
         }
@@ -41,18 +40,18 @@ public class DiceDiscs {
     }
 
     public void layCard(int player, int position, Card newCard) {
-        activeCards.get(position)[player] = newCard;
+        activeCards[player][position] = newCard;
     }
 
     public void activateCard(int player, int position) {
-        activeCards.get(position)[player].activate(player);
+        activeCards[player][position].activate(player);
     }
 
     public String getCardName(int player, int position){
         String cardName = null;
 
-        if(activeCards.get(position)[player] != null){
-            cardName = activeCards.get(position)[player].getName();
+        if(activeCards[player][position] != null){
+            cardName = activeCards[player][position].getName();
         } else {
             cardName = "";
         }

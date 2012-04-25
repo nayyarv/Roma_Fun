@@ -102,7 +102,12 @@ public class PlayArea {
             System.out.println("Cards in hand: " + players[player].handSize());
             System.out.println("Cards in play: ");
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
-                System.out.println(position + ") " + diceDiscs.getCardName(player, position));
+                System.out.print(position + ") " + diceDiscs.getCardName(player, position) +
+                        " : Dice on disc: ");
+                for(Dice die : diceDiscs.checkForDice(player, position)){
+                    System.out.print(die.getValue() + " ");
+                }
+                System.out.println();
             }
         }
     }

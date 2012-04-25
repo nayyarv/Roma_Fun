@@ -59,4 +59,19 @@ public class DiceDiscs {
 
         return cardName;
     }
+
+    public ArrayList<Dice> checkForDice(int playerID, int position){
+        ArrayList<Dice> dicePresent = new ArrayList<Dice>();
+        ArrayList<Dice> disc = discs.get(position);
+
+        if(!disc.isEmpty()){
+            for(Dice die : disc){
+                if(die.getPlayerID() == playerID){
+                    dicePresent.add(die);
+                }
+            }
+        }
+
+        return dicePresent;
+    }
 }

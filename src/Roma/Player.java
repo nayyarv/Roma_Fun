@@ -16,7 +16,15 @@ public class Player {
     private int playerID;
     private boolean autoRoll;
 
-    public Player(int playerID, PlayArea playArea) {
+    public static Player makeRealPlayer(int playerID, PlayArea playArea){
+        return new Player(playerID, playArea);
+    }
+
+    public static Player makeDummyPlayer(int playerID, PlayArea playArea, boolean testing){
+        return new Player(playerID, playArea, testing);
+    }
+
+    private Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = new Scanner(System.in);
@@ -24,7 +32,7 @@ public class Player {
         this.name = input.nextLine();
     }
 
-    public Player(int playerID, PlayArea playArea, boolean testing){
+    private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = null;

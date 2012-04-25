@@ -25,7 +25,7 @@ public class PlayArea {
         this.mainProgram = mainProgram;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
-            players[i] = new Player(i, this);
+            players[i] = Player.makeRealPlayer(i, this);
         }
     }
 

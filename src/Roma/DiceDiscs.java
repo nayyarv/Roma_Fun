@@ -2,6 +2,8 @@ package Roma;
 
 import Roma.Cards.Card;
 
+import java.util.ArrayList;
+
 //TODO: Review dice disc class
 //maybe create a separate dice disc class within dice discs
 //maybe create moneyDisc and cardDisc within CardManager and MoneyManager and have a method that passes the object
@@ -11,37 +13,35 @@ import Roma.Cards.Card;
 // or make it an activate card object that does all the logic check for cards
 
 public class DiceDiscs {
-    private boolean[][][] discs = new boolean[Roma.MAX_PLAYERS][Dice.DICE_SIZE][DiceHolder.DICE_PER_PLAYER];
-    private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][Dice.DICE_SIZE];
-    private PlayArea playArea;
-    private int[] moneyDisc = new int[DiceHolder.DICE_PER_PLAYER];
-    private int[] cardDisc = new int[DiceHolder.DICE_PER_PLAYER];
+    public static final int CARD_POSITIONS = 7;
+    private final PlayArea playArea;
+
+    private ArrayList<Card[]> activeCards = new ArrayList<Card[]>();
+    private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
+    private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
+    private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
-        cleanDiscs();
+        for(int i = 0; i < CARD_POSITIONS; i++){
+            activeCards.add(new Card[Roma.MAX_PLAYERS]);
+            discs.add(new ArrayList<Dice>());
+        }
     }
 
-    public void cleanDiscs() {
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
-            for (int j = 0; j < Dice.DICE_SIZE; j++) {
-                for (int k = 0; k < DiceHolder.DICE_PER_PLAYER; k++) {
-                    discs[i][j][k] = false;
-                    moneyDisc[k] = 0;
-                    cardDisc[k] = 0;
-                }
-            }
+    public void clearDice() {
+        for(ArrayList<Dice> disc : discs){
+            disc.clear();
         }
+        moneyDisc.clear();
+        cardDisc.clear();
     }
 
     public void layCard(int player, int position, Card newCard) {
-        if (activeCards[player][position] != null) {
-            playArea.getCardManager().discard(activeCards[player][position]);
-        }
-        activeCards[player][position] = newCard;
+        activeCards.get(position)[player] = newCard;
     }
 
     public void activateCard(int player, int position) {
-        activeCards[player][position].activate(player);
+        activeCards.get(position)[player].activate(player);
     }
 }

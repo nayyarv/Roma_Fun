@@ -20,8 +20,8 @@ public class Player {
         return new Player(playerID, playArea);
     }
 
-    public static Player makeDummyPlayer(int playerID, PlayArea playArea, boolean testing){
-        return new Player(playerID, playArea, testing);
+    public static Player makeDummyPlayer(int playerID, PlayArea playArea){
+        return new Player(playerID, playArea, true);
     }
 
     private Player(int playerID, PlayArea playArea) {

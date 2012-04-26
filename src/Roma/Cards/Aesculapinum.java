@@ -16,6 +16,7 @@ public class Aesculapinum extends Card {
     private final static int COST = 5;
     private final static int DEFENCE = 2;
 
+    public final static int OCCURENCES = 2;
 
     public Aesculapinum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

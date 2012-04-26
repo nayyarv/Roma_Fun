@@ -17,6 +17,8 @@ public class Scaenicus extends Card {
     private final static int DEFENCE = 3;
 
 
+    public final static int OCCURENCES = 2;
+
     public Scaenicus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 

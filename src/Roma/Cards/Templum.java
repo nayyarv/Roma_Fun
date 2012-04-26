@@ -21,6 +21,8 @@ public class Templum extends Card {
     private final static int DEFENCE = 2;
 
 
+    public final static int OCCURENCES = 2;
+
     public Templum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 

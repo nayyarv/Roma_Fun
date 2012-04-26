@@ -17,6 +17,8 @@ public class Turris extends Card {
     private final static int COST = 6;
     private final static int DEFENCE = 6;
 
+    public final static int OCCURENCES = 2;
+
 
     public Turris(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

@@ -22,14 +22,26 @@ public class CardManager {
     //Variabls
     private boolean noMoreCards = false;
 
-    public CardManager() {
+    public CardManager(PlayArea playArea) {
         //Will insert all cards, and shuffle
+        addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
+        addNumberOf(new Architectus(playArea), 2);
+        addNumberOf(new Aesculapinum(playArea), 1);
+
+
+
+
     }
 
     public void shuffle() {
         Collections.shuffle(playingDeck);
     }
 
+    public void addNumberOf(Card card, int num){
+        for (int i=0;i<num;i++){
+            playingDeck.add(card);
+        }
+    }
     public Card drawCard(int value) {
         List<Card> tempHand = new ArrayList<Card>();
         int playerChoice = 0;

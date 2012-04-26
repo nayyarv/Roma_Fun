@@ -30,7 +30,7 @@ public class Forum extends Card {
     public void activate(int player) {
         playerID = player;
         cardActivated = true;
-        getPlayArea().getPlayer(playerID).getFreeDice().size();
+        //getPlayArea().getPlayer(playerID).getFreeDice().size();
     }
 
 }

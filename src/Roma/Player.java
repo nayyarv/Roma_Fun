@@ -1,7 +1,6 @@
 package Roma;
 
 import Roma.Cards.Card;
-import com.sun.xml.internal.bind.util.Which;
 
 import java.util.*;
 
@@ -48,6 +47,11 @@ public class Player {
     //Main method that allows players to perform an action
     public boolean takeAction() {
         int option = 0;
+        Card chosenCard = null;
+        Dice chosenDie = null;
+
+        printDiceList(freeDice);
+        printCardList(hand);
 
         //choose an action
         System.out.println("Select option:\n" +
@@ -56,14 +60,16 @@ public class Player {
         option = input.nextInt();
 
         if(option == 1){
-
+            chosenDie = chooseDie(freeDice);
         } else if(option == 2){
-
+            chosenCard = chooseCard(hand);
         } else if(option == 3){
-
-        } else if(option == 4){
             playArea.printStats();
+        } else if(option == 4){
+
         } else if(option == 5){
+
+        } else if(option == 6){
 
         } else {
 
@@ -71,7 +77,16 @@ public class Player {
 
         return false;
     }
-    
+
+    private void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
+    }
+
     public void printCardList(List<Card> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
@@ -93,7 +108,7 @@ public class Player {
 
         while(!validChoice){
             System.out.println("-------------------------------------");
-            System.out.print("Actions:\n" +
+            System.out.print("Possible actions:\n" +
                     "1) Choose card\n" +
                     "2) Check description\n" +
                     "3) Print card list\n" +
@@ -124,17 +139,27 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public Dice chooseDice(List<Dice> diceList){
+    public Dice chooseDie(List<Dice> diceList){
         Dice choice = null;
+        int number = -1;
+        boolean validChoice = false;
 
-        System.out.println("Which die do you want to use?");
-        int i = 0;
-        for(Dice die : diceList){
-            i++;
-            System.out.println(i + ") " + die.getValue());
+        while(!validChoice){
+            System.out.println("Which die do you want to use?");
+            int i = 0;
+            for(Dice die : diceList){
+                i++;
+                System.out.println(i + ") " + die.getValue());
+            }
+            number = input.nextInt();
+            if(number < 1 || number > diceList.size()){
+                System.out.println("Please choose a valid die");
+            } else {
+                validChoice = true;
+            }
         }
 
-        choice = diceList.get(input.nextInt() - 1);
+        choice = diceList.get(number - 1);
 
         return choice;
     }

@@ -44,8 +44,8 @@ public class DiceHolder {
         }
     }
 
-    public List<Dice> rollPlayerDice(int player) {
-        List<Dice> diceList = new ArrayList<Dice>();
+    public ArrayList<Dice> rollPlayerDice(int player) {
+        ArrayList<Dice> diceList = new ArrayList<Dice>();
 
         for (int i = 0; i < DICE_PER_PLAYER; i++) {
             playerDice[player][i].roll();

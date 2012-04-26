@@ -17,6 +17,8 @@ public class Nero extends Card {
     private final static int DEFENCE = 9;
 
 
+    public final static int OCCURENCES = 1;
+
     public Nero(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
 

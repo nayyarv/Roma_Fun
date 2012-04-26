@@ -16,6 +16,7 @@ public class Sicarius extends Card {
     private final static int COST = 9;
     private final static int DEFENCE = 2;
 
+    public final static int OCCURENCES = 1;
 
     public Sicarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

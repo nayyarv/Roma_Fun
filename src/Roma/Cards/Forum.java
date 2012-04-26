@@ -17,6 +17,8 @@ public class Forum extends Card {
     private final static int COST = 5;
     private final static int DEFENCE = 5;
 
+    public final static int OCCURENCES = 6;
+
     //activate utility
     Dice tempDice = null;
 

@@ -16,7 +16,7 @@ public class PlayArea {
     private int turn = 0;
 
     public PlayArea(Roma mainProgram) {
-        cardManager = new CardManager();
+        cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(mainProgram);

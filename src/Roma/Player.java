@@ -142,6 +142,30 @@ public class Player {
 
     //choose a dice disc
     //return int
+    public Dice chooseDie(List<Dice> diceList){
+        Dice choice = null;
+        int number = -1;
+        boolean validChoice = false;
+
+        while(!validChoice){
+            System.out.println("Which die do you want to use?");
+            int i = 0;
+            for(Dice die : diceList){
+                i++;
+                System.out.println(i + ") " + die.getValue());
+            }
+            number = input.nextInt();
+            if(number < 1 || number > diceList.size()){
+                System.out.println("Please choose a valid die");
+            } else {
+                validChoice = true;
+            }
+        }
+
+        choice = diceList.get(number - 1);
+
+        return choice;
+    }
 
     //input value
     //

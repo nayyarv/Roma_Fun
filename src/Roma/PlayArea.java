@@ -98,7 +98,7 @@ public class PlayArea {
             System.out.println("-------------------------------------");
             System.out.println("Player: " + players[player].getName());
             System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                                "\tSestertii: " + moneyManager.getPlayerMoney(player));
+                                "  \tMoney: " + moneyManager.getPlayerMoney(player));
             System.out.println("Cards in hand: " + players[player].handSize());
             System.out.println("Cards in play: ");
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){

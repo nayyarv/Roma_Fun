@@ -83,5 +83,4 @@ public class CardManager {
         return "Playing deck is: " + playingDeck.toString() + "\nAnd Discard Pile is: " + discardPile.toString();
 
     }
-
 }

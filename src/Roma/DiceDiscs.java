@@ -13,6 +13,7 @@ import java.util.ArrayList;
 // or make it an activate card object that does all the logic check for cards
 
 public class DiceDiscs {
+    public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;
     private final PlayArea playArea;
 
@@ -20,6 +21,7 @@ public class DiceDiscs {
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
+    private ArrayList<Dice> briberyDisc = new ArrayList<Dice>();
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
@@ -40,11 +42,20 @@ public class DiceDiscs {
     }
 
     public void layCard(int player, int position, Card newCard) {
+        position--;
+        playArea.getCardManager().discard(activeCards[player][position]);
         activeCards[player][position] = newCard;
     }
 
-    public void activateCard(int player, int position) {
+    public void activateCard(int player, int position, Dice die) {
+        position--;
+        discs.get(position).add(die);
         activeCards[player][position].activate(player);
+    }
+
+    public void useBriberyDisc(int player, Dice die){
+        int position = BRIBERY_POSITION;
+        activateCard(player, position, die);
     }
 
     public String getCardName(int player, int position){

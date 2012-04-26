@@ -25,7 +25,7 @@ public class PlayArea {
         this.mainProgram = mainProgram;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
-            players[i] = new Player(i, this);
+            players[i] = Player.makeRealPlayer(i, this);
         }
     }
 
@@ -64,20 +64,25 @@ public class PlayArea {
         boolean endTurn = false;
         char roll = 'b';
 
-        System.out.println("It's " + player.getName() + " turn");
+        System.out.println("It's " + player.getName() + "'s turn");
 
-        if (player.getAutoRoll()) {
-            player.rollActionDice();
-        } else {
-            System.out.println("Press space to roll action dice." +
-                    "Press 'a' for automated dice roll for the rest of the game.");
-            while (!(roll == ' ' || roll == 'a')) {
-                roll = ' ';
-            }
-            if (roll == 'a') {
-                player.setAutoRoll(true);
-            }
-        }
+        player.rollActionDice();
+
+        //TODO: set up auto roll option
+//        if (player.getAutoRoll()) {
+//            player.rollActionDice();
+//        } else {
+//            System.out.println("Press space to roll action dice." +
+//                    "Press 'a' for automated dice roll for the rest of the game.");
+//            while (!(roll == ' ' || roll == 'a')) {
+//                roll = mainProgram.getInput().nextChar
+//            }
+//            if (roll == 'a') {
+//                player.setAutoRoll(true);
+//            }
+//        }
+
+
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn].takeAction();
         }
@@ -86,5 +91,24 @@ public class PlayArea {
 
     public Scanner getInput() {
         return mainProgram.getInput();
+    }
+
+    public void printStats() {
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            System.out.println("-------------------------------------");
+            System.out.println("Player: " + players[player].getName());
+            System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                                "\tSestertii: " + moneyManager.getPlayerMoney(player));
+            System.out.println("Cards in hand: " + players[player].handSize());
+            System.out.println("Cards in play: ");
+            for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
+                System.out.print(position + ") " + diceDiscs.getCardName(player, position) +
+                        " : Dice on disc: ");
+                for(Dice die : diceDiscs.checkForDice(player, position)){
+                    System.out.print(die.getValue() + " ");
+                }
+                System.out.println();
+            }
+        }
     }
 }

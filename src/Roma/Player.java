@@ -5,25 +5,34 @@ import Roma.Cards.Card;
 import java.util.*;
 
 public class Player {
-    private final String name;
+    private final static int CANCEL = -1;
+    private String name;
     private PlayArea playArea;
-    private List<Card> hand = new ArrayList<Card>();
-    private List<Dice> freeDice;
+    private ArrayList<Card> hand = new ArrayList<Card>();
+    private ArrayList<Dice> freeDice;
     private Scanner input;
 
     private boolean testing;
     private int playerID;
     private boolean autoRoll;
 
-    public Player(int playerID, PlayArea playArea) {
+    public static Player makeRealPlayer(int playerID, PlayArea playArea){
+        return new Player(playerID, playArea);
+    }
+
+    public static Player makeDummyPlayer(int playerID, PlayArea playArea){
+        return new Player(playerID, playArea, true);
+    }
+
+    private Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = playArea.getInput();
-        System.out.println("Name of player" + playerID + ": ");
+        this.input = new Scanner(System.in);
+        System.out.print("Name of player" + (playerID + 1) + ": ");
         this.name = input.nextLine();
     }
 
-    public Player(int playerID, PlayArea playArea, boolean testing) {
+    private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
         this.input = null;
@@ -34,25 +43,102 @@ public class Player {
         return name;
     }
 
+    //TODO: Fill out player actions
+    //Main method that allows players to perform an action
     public boolean takeAction() {
         int option = 0;
+        Card chosenCard = null;
+        Dice chosenDie = null;
+
+        printDiceList(freeDice);
+        printCardList(hand);
 
         //choose an action
         System.out.println("Select option:\n" +
-                "1) Show game stats\n" +
-                "2) Free dice available\n");
+                           "1) View action dice\n" +
+                           "2) View hand\n" +
+                           "3) Show game stats\n" +
+                           "4) Free dice available\n" +
+                           "5) End turn");
         option = input.nextInt();
 
-        if (option == 1) {
-            //playArea.printStats();
+        if(option == 1){
+            chosenDie = chooseDie(freeDice);
+        } else if(option == 2){
+            chosenCard = chooseCard(hand);
+        } else if(option == 3){
+            playArea.printStats();
+        } else if(option == 4){
+
+        } else if(option == 5){
+
+        } else if(option == 6){
+
+        } else {
+
         }
 
         return false;
     }
 
+    private void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
+    }
+
+    public void printCardList(List<Card> cardList){
+        int i = 1;
+        System.out.println("-------------------------------------");
+        for(Card card: cardList){
+            System.out.println(i + ") " + card.getName());
+            i++;
+        }
+    }
+
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
+    public Card chooseCard(List<Card> cardList){
+        Card choice = null;
+        int action = 0;
+        boolean validChoice = false;
+
+        printCardList(cardList);
+
+        while(!validChoice){
+            System.out.println("-------------------------------------");
+            System.out.print("Possible actions:\n" +
+                    "1) Choose card\n" +
+                    "2) Check description\n" +
+                    "3) Print card list\n" +
+                    "4) Cancel\n");
+
+            action = input.nextInt();
+
+            if(action == 1){
+                System.out.print("Card number: ");
+                choice = cardList.remove(input.nextInt() - 1);
+                validChoice = true;
+            } else if(action == 2){
+                System.out.print("Check which card number: ");
+                action = input.nextInt();
+                cardList.get(action).toString();
+            } else if(action == 3){
+                printCardList(cardList);
+            } else if(action == 4){
+                choice = null;
+                validChoice = true;
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+
+        return choice;
+    }
 
     //choose a dice disc
     //return int
@@ -101,15 +187,6 @@ public class Player {
         }
     }
 
-    public void VarunprintCardList(List<Card> cardList) {
-        System.out.println("----_---__--__");
-        int i = 1;
-        for (Card c : cardList) {
-            System.out.println(i + ")" + c.getName());
-            i++;
-        }
-    }
-
     public boolean commit() {
         boolean confirm = true;
 
@@ -128,5 +205,9 @@ public class Player {
 
     public void setAutoRoll(boolean autoRoll) {
         this.autoRoll = autoRoll;
+    }
+
+    public int handSize() {
+        return hand.size();
     }
 }

@@ -21,7 +21,6 @@ public class DiceDiscs {
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
-    private ArrayList<Dice> briberyDisc = new ArrayList<Dice>();
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
@@ -83,5 +82,16 @@ public class DiceDiscs {
         }
 
         return dicePresent;
+    }
+
+    public void useMoneyDisc(int playerID, Dice chosenDie) {
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        moneyDisc.add(chosenDie);
+        moneyManager.gainMoney(playerID, chosenDie.getValue());
+    }
+
+    public void useDrawDisc(int playerID, Dice chosenDie) {
+        cardDisc.add(chosenDie);
     }
 }

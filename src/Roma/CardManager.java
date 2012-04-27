@@ -66,19 +66,6 @@ public class CardManager {
             playingDeck.add(card);
         }
     }
-    public Card drawCard(int value) {
-        List<Card> tempHand = new ArrayList<Card>();
-        int playerChoice = 0;
-
-        for (int i = 0; i < value; i++) {
-            tempHand.add(drawACard());
-        }
-        //TODO: Would like to actually implement input
-        //player input
-        playerChoice = 0;
-
-        return tempHand.get(playerChoice);
-    }
 
     public Card drawACard() {
         Card temp = playingDeck.remove(0);

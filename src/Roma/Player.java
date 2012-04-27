@@ -63,7 +63,9 @@ public class Player {
         int option = 0;
         Card chosenCard = null;
         Dice chosenDie = null;
+        int chosenPosition = -1;
         boolean endTurn = false;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         printDiceList(freeDice);
         printCardList(hand);
@@ -85,6 +87,10 @@ public class Player {
             }
         } else if(option == VIEW_HAND){
             chosenCard = chooseCard(hand);
+            if(chosenCard != null){
+                chosenPosition = chooseCardDisc();
+                diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+            }
         } else if(option == SHOW_GAME_STATS){
             playArea.printStats();
         } else if(option == END_TURN){
@@ -96,9 +102,43 @@ public class Player {
         return endTurn;
     }
 
-    private Dice useActionDie(Dice chosenDie) {
-        int option;
+    private int chooseCardDisc() {
+        final int CANCEL_OPTION = 8;
+
+        int option = -1;
         int discTarget;
+        boolean validChoice = false;
+
+        while(!validChoice){
+            option = playerInterface.readInput("Which disc?",
+                    "Dice Disc 1",
+                    "Dice Disc 2",
+                    "Dice Disc 3",
+                    "Dice Disc 4",
+                    "Dice Disc 5",
+                    "Dice Disc 6",
+                    "Bribery Disc",
+                    "Cancel");
+            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
+                validChoice = true;
+            } else if (option == CANCEL_OPTION) {
+                option = CANCEL;
+                validChoice = true;
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+        return option;
+    }
+
+    private Dice useActionDie(Dice chosenDie) {
+        final int ACTIVATE_CARD = 1;
+        final int BRIBERY = 2;
+        final int MONEY = 3;
+        final int DRAW_CARD = 4;
+        final int CANCEL_OPTION = 5;
+
+        int option = CANCEL;
         boolean validChoice = false;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
@@ -109,17 +149,24 @@ public class Player {
                     "Money Disc",
                     "Card Disc",
                     "Cancel");
-            if(option == 1){
-                //TODO - Failing atm
+            if(option == ACTIVATE_CARD){
                 diceDiscs.activateCard(playerID, chosenDie.getValue(), chosenDie);
                 chosenDie = null;
-            } else if(option == 2){
+                validChoice = true;
+            } else if(option == BRIBERY){
+                diceDiscs.useBriberyDisc(playerID, chosenDie);
                 chosenDie = null;
-            } else if(option == 3){
+                validChoice = true;
+            } else if(option == MONEY){
+                diceDiscs.useMoneyDisc(playerID, chosenDie);
                 chosenDie = null;
-            } else if(option == 4){
+                validChoice = true;
+            } else if(option == DRAW_CARD){
+                diceDiscs.useDrawDisc(playerID, chosenDie);
+                drawCards(chosenDie.getValue());
                 chosenDie = null;
-            } else if(option == 5){
+                validChoice = true;
+            } else if(option == CANCEL_OPTION){
                 validChoice = true;
             } else {
                 System.out.println("Please choose a valid action");
@@ -243,13 +290,16 @@ public class Player {
         }
     }
 
-    public void drawCard() {
-        int diceChoice = 0;
+    public void drawCards(int value) {
+        ArrayList<Card> tempHand = new ArrayList<Card>();
+        CardManager cardManager = playArea.getCardManager();
 
-        //player chooses which dice to use
-        diceChoice = 0;
+        System.out.println("Drawing " + value + " cards...");
 
-        hand.add(playArea.getCardManager().drawCard(freeDice.remove(diceChoice).getValue()));
+        for (int i = 0; i < value; i++) {
+            tempHand.add(cardManager.drawACard());
+        }
+        hand.add(chooseCard(tempHand));
     }
 
     public void layCard() {

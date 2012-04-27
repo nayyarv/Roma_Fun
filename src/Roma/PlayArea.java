@@ -89,7 +89,7 @@ public class PlayArea {
         turn++;
     }
 
-    public Scanner getInput() {
+    public Scanner getInput(){
         return mainProgram.getInput();
     }
 

@@ -18,7 +18,7 @@ public class CardManager {
     //Objects
     private final List<Card> playingDeck = new ArrayList<Card>();
     private final List<Card> discardPile = new ArrayList<Card>();
-//as
+
     //Variabls
     private boolean noMoreCards = false;
 

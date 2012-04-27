@@ -2,7 +2,9 @@ package Roma;
 
 import Roma.Cards.Card;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private final static int CANCEL = -1;
@@ -59,23 +61,43 @@ public class Player {
                            "1) View action dice\n" +
                            "2) View hand\n" +
                            "3) Show game stats\n" +
-                           "4) Free dice available\n" +
-                           "5) End turn");
+                           "4) End turn");
         option = input.nextInt();
 
         if(option == 1){
             chosenDie = chooseDie(freeDice);
+            if(chosenDie != null){
+                chosenDie = useActionDie(chosenDie);
+                if(chosenDie != null){
+                    freeDice.add(chosenDie);
+                }
+            }
         } else if(option == 2){
             chosenCard = chooseCard(hand);
         } else if(option == 3){
             playArea.printStats();
         } else if(option == 4){
-
-        } else if(option == 5){
-
-        } else if(option == 6){
-
+            endTurn = true;
         } else {
+            System.out.println("Please choose a valid option.");
+        }
+
+        return endTurn;
+    }
+
+    private Dice useActionDie(Dice chosenDie) {
+        int option;
+        int discTarget;
+        boolean validChoice = false;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        while(!validChoice){
+            System.out.println("Use on:\n" +
+                    "1) Activate card\n" +
+                    "2) Bribery Disc\n" +
+                    "3) Money Disc\n" +
+                    "4) Card Disc\n" +
+                    "5) Cancel");
 
         }
 
@@ -155,15 +177,18 @@ public class Player {
                 i++;
                 System.out.println(i + ") " + die.getValue());
             }
+            i++;
+            System.out.println(i + ") Cancel");
             number = input.nextInt();
-            if(number < 1 || number > diceList.size()){
+            if(number < 1 || number > diceList.size() + 1){
                 System.out.println("Please choose a valid die");
             } else {
                 validChoice = true;
+                if(number <= diceList.size()){
+                    choice = diceList.remove(number - 1);
+                }
             }
         }
-
-        choice = diceList.get(number - 1);
 
         return choice;
     }

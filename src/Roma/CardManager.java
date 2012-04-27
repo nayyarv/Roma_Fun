@@ -28,6 +28,7 @@ public class CardManager {
         addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
         addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
         addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);
+
         addNumberOf(new Consiliarus(playArea), Consiliarus.OCCURENCES);
         addNumberOf(new Consul(playArea), Consul.OCCURENCES);
         addNumberOf(new Essedum(playArea), Essedum.OCCURENCES);
@@ -36,6 +37,7 @@ public class CardManager {
         addNumberOf(new Gladiator(playArea), Gladiator.OCCURENCES);
         addNumberOf(new Haruspex(playArea), Legat.OCCURENCES);
         addNumberOf(new Legionarius(playArea), Machina.OCCURENCES);
+
         addNumberOf(new Mercator(playArea), Mercator.OCCURENCES);
         addNumberOf(new Mercatus(playArea), Mercatus.OCCURENCES);
         addNumberOf(new Nero(playArea), Nero.OCCURENCES);
@@ -44,6 +46,7 @@ public class CardManager {
         addNumberOf(new Praetorianus(playArea), Praetorianus.OCCURENCES);
         addNumberOf(new Scaenicus(playArea), Scaenicus.OCCURENCES);
         addNumberOf(new Senator(playArea), Senator.OCCURENCES);
+
         addNumberOf(new Sicarius(playArea), Sicarius.OCCURENCES);
         addNumberOf(new Templum(playArea), TribunisPlebis.OCCURENCES);
         addNumberOf(new TribunisPlebis(playArea), TribunisPlebis.OCCURENCES);
@@ -58,7 +61,7 @@ public class CardManager {
         Collections.shuffle(playingDeck);
     }
 
-    public void addNumberOf(Card card, int num){
+    private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
         }

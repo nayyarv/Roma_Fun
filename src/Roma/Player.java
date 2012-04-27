@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Player {
     private final static int CANCEL = -1;
-    private String name;
+    private final String name;
     private PlayArea playArea;
     private ArrayList<Card> hand = new ArrayList<Card>();
     private ArrayList<Dice> freeDice;
@@ -209,6 +209,10 @@ public class Player {
         return choice;
     }
 
+    public List<Dice> getFreeDice() {
+        return freeDice;
+    }
+
     //input value
     //
 
@@ -216,7 +220,16 @@ public class Player {
     //With "autoResponse" values when in testing mode?
 
     public void rollActionDice() {
+        boolean reroll = false;
+
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+
+        if(playArea.getDiceHolder().checkTriple(playerID)){
+            //TODO: ask player if want to reroll
+            if(reroll){
+                rollActionDice();
+            }
+        }
     }
 
     public void drawCard() {

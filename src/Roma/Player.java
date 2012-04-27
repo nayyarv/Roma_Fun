@@ -51,7 +51,6 @@ public class Player {
         return name;
     }
 
-    //TODO: Fill out player actions
     //Main method that allows players to perform an action
     public boolean takeAction() {
         //internal #defines
@@ -278,12 +277,31 @@ public class Player {
     //With "autoResponse" values when in testing mode?
 
     public void rollActionDice() {
+        final int YES = 1;
+        final int NO = 2;
+
         boolean reroll = false;
+        boolean validChoice = false;
+        int option = CANCEL;
 
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+        printDiceList(freeDice);
 
         if(playArea.getDiceHolder().checkTriple(playerID)){
-            //TODO: ask player if want to reroll
+            while(!validChoice){
+                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
+                        "Yes",
+                        "No");
+                if(option == YES){
+                    reroll = true;
+                    validChoice = true;
+                } else if (option == NO){
+                    reroll = false;
+                    validChoice = true;
+                } else {
+                    System.out.println("Please choose either yes or no.");
+                }
+            }
             if(reroll){
                 rollActionDice();
             }

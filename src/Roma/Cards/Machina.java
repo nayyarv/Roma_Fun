@@ -11,7 +11,7 @@ import Roma.*;
 public class Machina extends Card {
 
     private final static String NAME = "Machina";
-    private final static String TYPE = "Building";
+    private final static String TYPE = Card.BUILDING;
     private final static String DESCRIPTION = "The player picks up their building cards and lays " +
             "them again on any dice discs. Character cards can be covered.";
     private final static int COST = 4;

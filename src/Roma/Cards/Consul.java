@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Consul extends Card {
     private final static String NAME = "Gladiator";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "The score on an action die which has not yet been " +
             "used can be " +
             "increased or decreased by 1 point.";

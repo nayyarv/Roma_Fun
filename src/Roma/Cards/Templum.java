@@ -11,7 +11,7 @@ import Roma.*;
 public class Templum extends Card {
 
     private final static String NAME = "Templum";
-    private final static String TYPE = "Building";
+    private final static String TYPE = Card.BUILDING;
     private final static String DESCRIPTION =
             "If a Forum is activated (it must lie directly next to the Templum), the third action die can be \n" +
                     "used to determine the number of additional victory points which the player gets from the general \n" +

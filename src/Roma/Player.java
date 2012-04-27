@@ -188,7 +188,7 @@ public class Player {
         printCardList(hand);
     }
 
-    public void printCardList(List<Card> cardList){
+    public void printCardList(ArrayList<Card> cardList){
         int i = 1;
         System.out.println("-------------------------------------\n" +
                 "Cards: ");
@@ -266,7 +266,7 @@ public class Player {
         return choice;
     }
 
-    public List<Dice> getFreeDice() {
+    public ArrayList<Dice> getFreeDice() {
         return freeDice;
     }
 

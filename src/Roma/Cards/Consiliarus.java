@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Consiliarus extends Card {
     private final static String NAME = "Consiliarus";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "The player picks up their character cards and can then lay them again " +
             "on any dice disc. Buildings can be covered.";
     private final static int COST = 4;

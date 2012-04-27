@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Mercator extends Card {
     private final static String NAME = "Mercator";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
             " from their opponent as long as there are money and victory points left!" +
             "The opponent gets the money.";

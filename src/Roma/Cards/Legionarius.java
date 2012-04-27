@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Legionarius extends Card {
     private final static String NAME = "Legionarius";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Attacks the opponent's card which is directly opposite, " +
             "whether it is a character or a building card.";
     private final static int COST = 4;

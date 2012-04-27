@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Scaenicus extends Card {
     private final static String NAME = "Scaenicus";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "He performs no action of his own but can copy the action of any of " +
             "the player's own face-up character cards, and the next time round that of another.";
     private final static int COST = 8;

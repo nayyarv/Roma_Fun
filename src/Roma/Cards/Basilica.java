@@ -11,7 +11,7 @@ import Roma.*;
 public class Basilica extends Card {
 
     private final static String NAME = "Basilica";
-    private final static String TYPE = "Building";
+    private final static String TYPE = Card.BUILDING;
     private final static String DESCRIPTION = "If a Forum is activated (it must lie directly next to the basilica)," +
             " the player gets 2 more victory points. The Basilica itself is not activiated.";
     private final static int COST = 5;

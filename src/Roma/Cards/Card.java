@@ -2,17 +2,20 @@ package Roma.Cards;
 
 import Roma.*;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Card {
+    public final static String CHARACTER = "Character";
+    public final static String BUILDING = "Building";
+
     private final String name;
     private final String type;
     private final String description;
     private final int cost;
     private final int defence;
-    private final PlayArea playArea;
+    final PlayArea playArea;
     private boolean playable = false;
-    private List<Integer> playerActions;
+    private ArrayList<Integer> playerActions;
 
     //activated values
     protected boolean cardActivated = false;

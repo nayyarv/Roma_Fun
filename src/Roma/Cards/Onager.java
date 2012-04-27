@@ -11,7 +11,7 @@ import Roma.*;
 public class Onager extends Card {
 
     private final static String NAME = "Onager";
-    private final static String TYPE = "Building";
+    private final static String TYPE = Card.BUILDING;
     private final static String DESCRIPTION = "This Roman catapult attacks any opposing building. " +
             "The battle die is thrown once.";
     private final static int COST = 5;

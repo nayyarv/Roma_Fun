@@ -11,7 +11,7 @@ import Roma.*;
 public class Forum extends Card {
 
     private final static String NAME = "Forum";
-    private final static String TYPE = "Building";
+    private final static String TYPE = Card.BUILDING;
     private final static String DESCRIPTION = "Requires 2 action dice: one to activate the Forum and the other to " +
             "determine how many victory points the player receives";
     private final static int COST = 5;

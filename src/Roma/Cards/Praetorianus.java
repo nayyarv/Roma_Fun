@@ -11,7 +11,7 @@ import Roma.*;
 public class Praetorianus extends Card {
 
     private final static String NAME = "Praetorianus";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Any of the 8 opponent's dice 3 disc can be block" +
             "ed for one go.";
     private final static int COST = 8;

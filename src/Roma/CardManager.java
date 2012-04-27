@@ -10,12 +10,11 @@ import Roma.Cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class CardManager {
     //Objects
-    private final List<Card> playingDeck = new ArrayList<Card>();
-    private final List<Card> discardPile = new ArrayList<Card>();
+    private final ArrayList<Card> playingDeck = new ArrayList<Card>();
+    private final ArrayList<Card> discardPile = new ArrayList<Card>();
 
     //Variabls
     private boolean noMoreCards = false;
@@ -119,5 +118,9 @@ public class CardManager {
     public String toString() {
         return "Playing deck is: " + playingDeck.toString() + "\nAnd Discard Pile is: " + discardPile.toString();
 
+    }
+
+    public ArrayList<Card> getDiscardPile() {
+        return discardPile;
     }
 }

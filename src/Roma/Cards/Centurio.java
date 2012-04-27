@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Centurio extends Card {
     private final static String NAME = "Centurio";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "attacks the card directly opposite, whether it is a character " +
             "or building card." +
             " The value of an unused action die can be added to the value of the battle die (the action die is " +

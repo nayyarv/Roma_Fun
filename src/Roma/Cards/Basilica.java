@@ -25,8 +25,8 @@ public class Basilica extends Card {
 
     }
 
-    public void activate(int player) {
-
+    @Override
+    public void activate(Player player, int position) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
-
 }

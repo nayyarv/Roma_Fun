@@ -56,6 +56,12 @@ public class Player {
     //TODO: Fill out player actions
     //Main method that allows players to perform an action
     public boolean takeAction() {
+        //internal #defines
+        final int VIEW_ACTION_DIE = 1;
+        final int VIEW_HAND = 2;
+        final int SHOW_GAME_STATS = 3;
+        final int END_TURN = 4;
+
         int option = 0;
         Card chosenCard = null;
         Dice chosenDie = null;
@@ -65,21 +71,13 @@ public class Player {
         printCardList(hand);
 
         //choose an action
-        playerInterface.readInput("Select Option",
+        option = playerInterface.readInput("Select Option",
                         "View action dice",
                         "View Hand",
                         "Show game stats",
                         "End turn");
 
-        System.out.println("-------------------------------------");
-        System.out.println("Select option:\n" +
-                           "1) View action dice\n" +
-                           "2) View hand\n" +
-                           "3) Show game stats\n" +
-                           "4) End turn");
-        option = input.nextInt();
-
-        if(option == 1){
+        if(option == VIEW_ACTION_DIE){
             chosenDie = chooseDie(freeDice);
             if(chosenDie != null){
                 chosenDie = useActionDie(chosenDie);
@@ -87,11 +85,11 @@ public class Player {
                     freeDice.add(chosenDie);
                 }
             }
-        } else if(option == 2){
+        } else if(option == VIEW_HAND){
             chosenCard = chooseCard(hand);
-        } else if(option == 3){
+        } else if(option == SHOW_GAME_STATS){
             playArea.printStats();
-        } else if(option == 4){
+        } else if(option == END_TURN){
             endTurn = true;
         } else {
             System.out.println("Please choose a valid option.");
@@ -107,14 +105,12 @@ public class Player {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         while(!validChoice){
-            System.out.println("Use on:\n" +
-                    "1) Activate card\n" +
-                    "2) Bribery Disc\n" +
-                    "3) Money Disc\n" +
-                    "4) Card Disc\n" +
-                    "5) Cancel");
-
-            option = input.nextInt();
+            option = playerInterface.readInput("Use on:",
+                    "Activate card",
+                    "Bribery Disc",
+                    "Money Disc",
+                    "Card Disc",
+                    "Cancel");
             if(option == 1){
                 //TODO - Failing atm
                 diceDiscs.activateCard(playerID, chosenDie.getValue(), chosenDie);
@@ -169,14 +165,11 @@ public class Player {
         printCardList(cardList);
 
         while(!validChoice){
-            System.out.println("-------------------------------------");
-            System.out.print("Possible actions:\n" +
-                    "1) Choose card\n" +
-                    "2) Check description\n" +
-                    "3) Print card list\n" +
-                    "4) Cancel\n");
-
-            action = input.nextInt();
+            action = playerInterface.readInput("Possible actions:",
+                    "Choose card",
+                    "Check description",
+                    "Print card list",
+                    "Cancel");
 
             if(action == 1){
                 System.out.print("Card number: ");

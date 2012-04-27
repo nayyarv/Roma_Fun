@@ -73,7 +73,7 @@ public class CardManager {
         for (int i = 0; i < value; i++) {
             tempHand.add(drawACard());
         }
-
+        //TODO: Would like to actually implement input
         //player input
         playerChoice = 0;
 
@@ -106,6 +106,22 @@ public class CardManager {
             noMoreCards = false;
         }
     }
+
+    public void discard(ArrayList<Card> cardList) {
+
+        /** TODO - check discard order here
+          * TODO - choose the top card discarded
+          */
+        discardPile.addAll(0, cardList);
+        if (noMoreCards) {
+            playingDeck.addAll(discardPile);
+            discardPile.clear();
+            shuffle();
+            noMoreCards = false;
+        }
+    }
+
+
 
     public int getPlayingSize() {
         return playingDeck.size();

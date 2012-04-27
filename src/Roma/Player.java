@@ -9,10 +9,12 @@ import java.util.Scanner;
 public class Player {
     private final static int CANCEL = -1;
     private final String name;
+
     private PlayArea playArea;
     private ArrayList<Card> hand = new ArrayList<Card>();
     private ArrayList<Dice> freeDice;
     private Scanner input;
+
 
     private boolean testing;
     private int playerID;
@@ -32,6 +34,7 @@ public class Player {
         this.input = new Scanner(System.in);
         System.out.print("Name of player" + (playerID + 1) + ": ");
         this.name = input.nextLine();
+
     }
 
     private Player(int playerID, PlayArea playArea, boolean testing){
@@ -39,7 +42,10 @@ public class Player {
         this.playerID = playerID;
         this.input = null;
         this.name = "dummyPlayer" + playerID;
+
     }
+
+
 
     public String getName() {
         return name;
@@ -100,8 +106,8 @@ public class Player {
                     "5) Cancel");
 
             option = input.nextInt();
-
             if(option == 1){
+                //TODO - Failing atm
                 diceDiscs.activateCard(playerID, chosenDie.getValue(), chosenDie);
                 chosenDie = null;
             } else if(option == 2){
@@ -111,7 +117,7 @@ public class Player {
             } else if(option == 4){
                 chosenDie = null;
             } else if(option == 5){
-
+                validChoice = true;
             } else {
                 System.out.println("Please choose a valid action");
             }
@@ -129,6 +135,10 @@ public class Player {
         }
     }
 
+    public void printHand(){
+        printCardList(hand);
+    }
+
     public void printCardList(List<Card> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
@@ -141,7 +151,7 @@ public class Player {
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
-    public Card chooseCard(List<Card> cardList){
+    public Card chooseCard(ArrayList<Card> cardList){
         Card choice = null;
         int action = 0;
         boolean validChoice = false;
@@ -181,7 +191,7 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public Dice chooseDie(List<Dice> diceList){
+    public Dice chooseDie(ArrayList<Dice> diceList){
         Dice choice = null;
         int number = -1;
         boolean validChoice = false;
@@ -288,5 +298,13 @@ public class Player {
 
     public int handSize() {
         return hand.size();
+    }
+
+    public void addCardToHand(Card c){
+        if(c!=null) hand.add(c);
+    }
+
+    public void addCardListToHand(ArrayList<Card> cardList){
+        hand.addAll(cardList);
     }
 }

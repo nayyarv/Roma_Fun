@@ -25,7 +25,7 @@ public class Aesculapinum extends Card {
 
     }
 
-    public void activate(int player) {
+    public void activate(Player player, int position) {
         CardManager cardManager = playArea.getCardManager();
         ArrayList<Card> discardPile = cardManager.getDiscardPile();
         ArrayList<Card> tempHand = new ArrayList<Card>();
@@ -33,10 +33,13 @@ public class Aesculapinum extends Card {
         for(Card card : discardPile){
             if(card.getType() == Card.CHARACTER){
                 tempHand.add(card);
+                discardPile.remove(card);
             }
         }
 
+        player.addCardToHand(player.chooseCard(tempHand));
 
+        discardPile.addAll(tempHand);
     }
 
 }

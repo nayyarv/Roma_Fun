@@ -149,11 +149,11 @@ public class Player {
                     "Card Disc",
                     "Cancel");
             if(option == ACTIVATE_CARD){
-                diceDiscs.activateCard(playerID, chosenDie.getValue(), chosenDie);
+                diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie);
                 chosenDie = null;
                 validChoice = true;
             } else if(option == BRIBERY){
-                diceDiscs.useBriberyDisc(playerID, chosenDie);
+                diceDiscs.useBriberyDisc(this, chosenDie);
                 chosenDie = null;
                 validChoice = true;
             } else if(option == MONEY){
@@ -375,5 +375,9 @@ public class Player {
 
     public void addCardListToHand(ArrayList<Card> cardList){
         hand.addAll(cardList);
+    }
+
+    public int getPlayerID() {
+        return playerID;
     }
 }

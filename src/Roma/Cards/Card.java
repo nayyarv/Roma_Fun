@@ -81,5 +81,5 @@ public abstract class Card {
         }
     }
 
-    public abstract void activate(int player);
+    public abstract void activate(Player player, int position);
 }

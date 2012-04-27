@@ -38,13 +38,13 @@ public class DiceDiscs {
         activeCards[player][position] = newCard;
     }
 
-    public void activateCard(int player, int position, Dice die) {
+    public void activateCard(Player player, int position, Dice die) {
         position--;
         discs.get(position).add(die);
-        activeCards[player][position].activate(player);
+        activeCards[player.getPlayerID()][position].activate(player, position);
     }
 
-    public void useBriberyDisc(int player, Dice die){
+    public void useBriberyDisc(Player player, Dice die){
         int position = BRIBERY_POSITION;
         activateCard(player, position, die);
     }

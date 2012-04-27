@@ -53,6 +53,8 @@ public class PlayArea {
             //System.out.println("NEXT Player");
             players[i].addCardToHand(choice1);
             players[i].addCardToHand(choice2);
+            choice1 = null;
+            choice2=null;
             //add prev choices
             ArrayList<Card> individualHand = new ArrayList<Card>();
             individualHand.addAll(newHand.subList((i * NUM_INIT_CARDS), (i + 1) * NUM_INIT_CARDS));
@@ -60,9 +62,16 @@ public class PlayArea {
                     ", these are the 4 cards dealt to you.\n" +
                     "You must choose 2 to give to your opponent.\n" +
                     "Choose the first Card");
-            choice1 = players[i].chooseCard(individualHand);
+
+            while (choice1==null){
+                choice1 = players[i].chooseCard(individualHand);
+                if(choice1==null) System.out.println("You must choose a card: ");
+            }
             System.out.println("Choose the second card:");
-            choice2 = players[i].chooseCard(individualHand);
+            while(choice2==null){
+                choice2 = players[i].chooseCard(individualHand);
+                if(choice2==null) System.out.println("You must choose a card: ");
+            }
 
             players[i].addCardListToHand(individualHand);
         }

@@ -14,6 +14,7 @@ public class Player {
     private ArrayList<Card> hand = new ArrayList<Card>();
     private ArrayList<Dice> freeDice;
     private Scanner input;
+    private PlayerInterface playerInterface;
 
 
     private boolean testing;
@@ -34,6 +35,7 @@ public class Player {
         this.input = new Scanner(System.in);
         System.out.print("Name of player" + (playerID + 1) + ": ");
         this.name = input.nextLine();
+        playerInterface = new PlayerInterface();
 
     }
 
@@ -63,6 +65,13 @@ public class Player {
         printCardList(hand);
 
         //choose an action
+        playerInterface.readInput("Select Option",
+                        "View action dice",
+                        "View Hand",
+                        "Show game stats",
+                        "End turn");
+
+        System.out.println("-------------------------------------");
         System.out.println("Select option:\n" +
                            "1) View action dice\n" +
                            "2) View hand\n" +
@@ -141,7 +150,8 @@ public class Player {
 
     public void printCardList(List<Card> cardList){
         int i = 1;
-        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------\n" +
+                "Cards: ");
         for(Card card: cardList){
             System.out.println(i + ") " + card.getName());
             i++;
@@ -175,7 +185,7 @@ public class Player {
             } else if(action == 2){
                 System.out.print("Check which card number: ");
                 action = input.nextInt();
-                cardList.get(action).toString();
+                System.out.println(cardList.get(action - 1).toString());
             } else if(action == 3){
                 printCardList(cardList);
             } else if(action == 4){

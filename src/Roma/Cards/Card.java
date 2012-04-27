@@ -1,8 +1,6 @@
 package Roma.Cards;
 
-import Roma.Dice;
-import Roma.PlayArea;
-import java.util.List;
+import Roma.*;
 
 public abstract class Card {
     private final String name;

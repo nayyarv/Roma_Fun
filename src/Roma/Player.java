@@ -8,8 +8,8 @@ public class Player {
     private final static int CANCEL = -1;
     private final String name;
     private PlayArea playArea;
-    private List<Card> hand = new ArrayList<Card>();
-    private List<Dice> freeDice;
+    private ArrayList<Card> hand = new ArrayList<Card>();
+    private ArrayList<Dice> freeDice;
     private Scanner input;
 
     private boolean testing;
@@ -56,64 +56,30 @@ public class Player {
 
         //choose an action
         System.out.println("Select option:\n" +
-                "1) Show game stats\n" +
-                "2) Free dice available\n");
+                           "1) View action dice\n" +
+                           "2) View hand\n" +
+                           "3) Show game stats\n" +
+                           "4) Free dice available\n" +
+                           "5) End turn");
         option = input.nextInt();
 
         if(option == 1){
             chosenDie = chooseDie(freeDice);
-            if(chosenDie != null){
-                chosenDie = useActionDie(chosenDie);
-                if(chosenDie != null){
-                    freeDice.add(chosenDie);
-                }
-            }
         } else if(option == 2){
             chosenCard = chooseCard(hand);
         } else if(option == 3){
             playArea.printStats();
         } else if(option == 4){
-            endTurn = true;
+
+        } else if(option == 5){
+
+        } else if(option == 6){
+
         } else {
-            System.out.println("Please choose a valid option.");
+
         }
 
         return endTurn;
-    }
-
-    private Dice useActionDie(Dice chosenDie) {
-        int option;
-        int discTarget;
-        boolean validChoice = false;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-
-        while(!validChoice){
-            System.out.println("Use on:\n" +
-                    "1) Activate card\n" +
-                    "2) Bribery Disc\n" +
-                    "3) Money Disc\n" +
-                    "4) Card Disc\n" +
-                    "5) Cancel");
-
-            option = input.nextInt();
-
-            if(option == 1){
-                diceDiscs.activateCard(playerID, chosenDie.getValue(), chosenDie);
-                chosenDie = null;
-            } else if(option == 2){
-                chosenDie = null;
-            } else if(option == 3){
-                chosenDie = null;
-            } else if(option == 4){
-                chosenDie = null;
-            } else if(option == 5){
-
-            } else {
-                System.out.println("Please choose a valid action");
-            }
-        }
-
-        return chosenDie;
     }
 
     private void printDiceList(ArrayList<Dice> diceList) {
@@ -133,7 +99,7 @@ public class Player {
             i++;
         }
     }
-    //TODO: Complete player input functions
+
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
@@ -189,18 +155,15 @@ public class Player {
                 i++;
                 System.out.println(i + ") " + die.getValue());
             }
-            i++;
-            System.out.println(i + ") Cancel");
             number = input.nextInt();
-            if(number < 1 || number > diceList.size() + 1){
+            if(number < 1 || number > diceList.size()){
                 System.out.println("Please choose a valid die");
             } else {
                 validChoice = true;
-                if(number <= diceList.size()){
-                    choice = diceList.remove(number - 1);
-                }
             }
         }
+
+        choice = diceList.get(number - 1);
 
         return choice;
     }

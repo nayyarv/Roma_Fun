@@ -40,7 +40,6 @@ public class PlayArea {
     }
 
     public void getAndSwapCards(){
-        //TODO - swap cards
         ArrayList<Card> newHand = new ArrayList<Card>();
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
             newHand.addAll(0, getFirstHand());

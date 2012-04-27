@@ -4,14 +4,6 @@ import Roma.Cards.Card;
 
 import java.util.ArrayList;
 
-//TODO: Review dice disc class
-//maybe create a separate dice disc class within dice discs
-//maybe create moneyDisc and cardDisc within CardManager and MoneyManager and have a method that passes the object
-
-//TODO: Create either a separate battle class or a private battle class within dice disc
-// needs to handle environment effects and battle calculations
-// or make it an activate card object that does all the logic check for cards
-
 public class DiceDiscs {
     public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;

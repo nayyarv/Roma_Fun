@@ -17,6 +17,7 @@ public class Consul extends Card {
     private final static int COST = 3;
     private final static int DEFENCE = 3;
 
+    public final static int OCCURENCES = 2;
 
     public Consul(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

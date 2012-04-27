@@ -16,6 +16,7 @@ public class Consiliarus extends Card {
     private final static int COST = 4;
     private final static int DEFENCE = 4;
 
+    public final static int OCCURENCES = 2;
 
     public Consiliarus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

@@ -16,6 +16,8 @@ public class Architectus extends Card {
     private final static int COST = 3;
     private final static int DEFENCE = 4;
 
+    public final static int OCCURENCES = 2;
+
 
     public Architectus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

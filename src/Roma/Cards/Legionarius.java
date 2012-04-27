@@ -1,7 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
-
+import java.util.ArrayList;
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -16,6 +16,7 @@ public class Legionarius extends Card {
     private final static int COST = 4;
     private final static int DEFENCE = 5;
 
+    public final static int OCCURENCES = 3;
 
     public Legionarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

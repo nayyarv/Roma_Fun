@@ -20,6 +20,8 @@ public class Mercator extends Card {
     private final static int COST = 7;
     private final static int DEFENCE = 2;
 
+    public final static int OCCURENCES = 1;
+
     public Mercator(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }

@@ -1,7 +1,8 @@
 package Roma.Cards;
 
-import Roma.Dice;
-import Roma.PlayArea;
+import Roma.*;
+
+import java.util.List;
 
 public abstract class Card {
     private final String name;
@@ -11,6 +12,7 @@ public abstract class Card {
     private final int defence;
     private final PlayArea playArea;
     private boolean playable = false;
+    private List<Integer> playerActions;
 
     //TODO: needs a "canBeActivated" boolean value for passive cards
     // for the card that blocks dice disc activation, have an "environment effect: cantBeActivated" or something

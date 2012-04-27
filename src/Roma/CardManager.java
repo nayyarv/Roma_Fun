@@ -22,14 +22,50 @@ public class CardManager {
     //Variabls
     private boolean noMoreCards = false;
 
-    public CardManager() {
+    public CardManager(PlayArea playArea) {
         //Will insert all cards, and shuffle
+        addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
+        addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
+        addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
+        addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);
+
+        addNumberOf(new Consiliarus(playArea), Consiliarus.OCCURENCES);
+        addNumberOf(new Consul(playArea), Consul.OCCURENCES);
+        addNumberOf(new Essedum(playArea), Essedum.OCCURENCES);
+        addNumberOf(new Forum(playArea), Forum.OCCURENCES);
+
+        addNumberOf(new Gladiator(playArea), Gladiator.OCCURENCES);
+        addNumberOf(new Haruspex(playArea), Legat.OCCURENCES);
+        addNumberOf(new Legionarius(playArea), Machina.OCCURENCES);
+
+        addNumberOf(new Mercator(playArea), Mercator.OCCURENCES);
+        addNumberOf(new Mercatus(playArea), Mercatus.OCCURENCES);
+        addNumberOf(new Nero(playArea), Nero.OCCURENCES);
+        addNumberOf(new Onager(playArea), Onager.OCCURENCES);
+
+        addNumberOf(new Praetorianus(playArea), Praetorianus.OCCURENCES);
+        addNumberOf(new Scaenicus(playArea), Scaenicus.OCCURENCES);
+        addNumberOf(new Senator(playArea), Senator.OCCURENCES);
+
+        addNumberOf(new Sicarius(playArea), Sicarius.OCCURENCES);
+        addNumberOf(new Templum(playArea), TribunisPlebis.OCCURENCES);
+        addNumberOf(new TribunisPlebis(playArea), TribunisPlebis.OCCURENCES);
+
+        addNumberOf(new Turris(playArea), Turris.OCCURENCES);
+        addNumberOf(new Velites(playArea), Velites.OCCURENCES);
+
+        shuffle();
     }
 
     public void shuffle() {
         Collections.shuffle(playingDeck);
     }
 
+    private void addNumberOf(Card card, int num){
+        for (int i=0;i<num;i++){
+            playingDeck.add(card);
+        }
+    }
     public Card drawCard(int value) {
         List<Card> tempHand = new ArrayList<Card>();
         int playerChoice = 0;
@@ -37,7 +73,7 @@ public class CardManager {
         for (int i = 0; i < value; i++) {
             tempHand.add(drawACard());
         }
-
+        //TODO: Would like to actually implement input
         //player input
         playerChoice = 0;
 
@@ -70,6 +106,22 @@ public class CardManager {
             noMoreCards = false;
         }
     }
+
+    public void discard(ArrayList<Card> cardList) {
+
+        /** TODO - check discard order here
+          * TODO - choose the top card discarded
+          */
+        discardPile.addAll(0, cardList);
+        if (noMoreCards) {
+            playingDeck.addAll(discardPile);
+            discardPile.clear();
+            shuffle();
+            noMoreCards = false;
+        }
+    }
+
+
 
     public int getPlayingSize() {
         return playingDeck.size();

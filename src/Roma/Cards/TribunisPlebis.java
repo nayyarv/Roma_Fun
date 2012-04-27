@@ -16,6 +16,8 @@ public class TribunisPlebis extends Card {
     private final static int COST = 5;
     private final static int DEFENCE = 5;
 
+    public final static int OCCURENCES = 2;
+
     public TribunisPlebis(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }

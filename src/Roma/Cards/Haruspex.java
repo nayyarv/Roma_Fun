@@ -16,6 +16,8 @@ public class Haruspex extends Card {
     private final static int COST = 4;
     private final static int DEFENCE = 3;
 
+    public final static int OCCURENCES = 2;
+
 
     public Haruspex(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);

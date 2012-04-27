@@ -6,7 +6,6 @@ public class MoneyManager {
     private int[] playerMoney = new int[Roma.MAX_PLAYERS];
 
     public MoneyManager() {
-
     }
 
     public void gainMoney(int player, int amount) {
@@ -21,7 +20,7 @@ public class MoneyManager {
         } else {
             playerMoney[player] -= amount;
         }
-        return false;
+        return enoughMoney;
     }
 
     public boolean transferMoney(int from, int to, int amount) {

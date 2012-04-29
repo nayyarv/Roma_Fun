@@ -3,6 +3,7 @@ package Roma;
 import Roma.Cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PlayArea {
@@ -145,9 +146,6 @@ public class PlayArea {
         turn++;
     }
 
-    public Scanner getInput(){
-        return mainProgram.getInput();
-    }
 
     public void printStats() {
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){

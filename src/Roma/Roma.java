@@ -14,7 +14,7 @@ public class Roma {
     public final static int PAUSE_DURATION = 1500;
 
     //Object pointers
-    Scanner input = new Scanner(System.in);
+    PlayerInterface playerInterface = new PlayerInterface();
     private PlayArea game;
 
     //Variables
@@ -22,7 +22,6 @@ public class Roma {
     private boolean manualTesting;
     private boolean gameOver = false;
     private boolean exit = false;
-    private int choice;
 
     public Roma() {
         this.autoTesting = false;
@@ -43,20 +42,18 @@ public class Roma {
         //Welcome message
         System.out.printf("Welcome to Roma :)\n" +
                 "by Andrew Lem and Varun Nayyar\n");
-        try {
-            Thread.sleep(PAUSE_DURATION);
-        } catch (InterruptedException e) {
-            // blank
-        }
+//        try {
+//          //  Thread.sleep(PAUSE_DURATION);
+//        } catch (InterruptedException e) {
+//            // blank
+//        }
 
         //Program running loop
         while (!exit) {
-            System.out.printf("1: New Game\n" +
-                    "2: Rules\n" +
-                    "3: Quit\n" +
-                    "Enter Choice (1~3): ");
-
-            choice = input.nextInt();
+            int choice = playerInterface.readInput("What would you like: ",
+                    "New Game",
+                    "Rules",
+                    "Quit");
 
             if (choice == 1) { // new play area and game
                 gameOver = false;
@@ -66,7 +63,6 @@ public class Roma {
             } else if (choice == 2) {  // open pdf of rules
                 //Code found online: http://stackoverflow.com/questions/2546968/open-pdf-file-on-fly-from-java-application
                 //Opens the pdf of Roma lol
-                //Currently illegal - but I dont want to waste time on copying instructions across
                 if (Desktop.isDesktopSupported()) {
                     try {
                         File myFile = new File("Roma.pdf");
@@ -122,9 +118,5 @@ public class Roma {
         } else {
             System.out.println("Testing modes DISABLED. Game will run normally.");
         }
-    }
-
-    public Scanner getInput() {
-        return input;
     }
 }

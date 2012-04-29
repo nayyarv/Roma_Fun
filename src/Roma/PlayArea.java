@@ -147,10 +147,6 @@ public class PlayArea {
         turn++;
     }
 
-    public Scanner getInput(){
-        return mainProgram.getInput();
-    }
-
     public void printStats() {
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
             System.out.println("-------------------------------------");

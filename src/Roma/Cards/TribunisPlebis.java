@@ -11,7 +11,7 @@ import Roma.*;
 
 public class TribunisPlebis extends Card {
     private final static String NAME = "Tribunis Plebis";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "The player gets 1 victory point from their opponent.";
     private final static int COST = 5;
     private final static int DEFENCE = 5;
@@ -22,9 +22,10 @@ public class TribunisPlebis extends Card {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }
 
-    public void activate(int player) {
+    public void activate(Player player, int position) {
+        int ID = player.getPlayerID();
         PlayArea playArea = super.getPlayArea();
-        playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, 1);
+        playArea.getVictoryTokens().playerToPlayer(otherPlayer(ID), player.getPlayerID(), 1);
 
     }
 

@@ -4,14 +4,6 @@ import Roma.Cards.Card;
 
 import java.util.ArrayList;
 
-//TODO: Review dice disc class
-//maybe create a separate dice disc class within dice discs
-//maybe create moneyDisc and cardDisc within CardManager and MoneyManager and have a method that passes the object
-
-//TODO: Create either a separate battle class or a private battle class within dice disc
-// needs to handle environment effects and battle calculations
-// or make it an activate card object that does all the logic check for cards
-
 public class DiceDiscs {
     public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;
@@ -21,7 +13,6 @@ public class DiceDiscs {
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
-    private ArrayList<Dice> briberyDisc = new ArrayList<Dice>();
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
@@ -47,13 +38,13 @@ public class DiceDiscs {
         activeCards[player][position] = newCard;
     }
 
-    public void activateCard(int player, int position, Dice die) {
+    public void activateCard(Player player, int position, Dice die) {
         position--;
         discs.get(position).add(die);
-        activeCards[player][position].activate(player);
+        activeCards[player.getPlayerID()][position].activate(player, position);
     }
 
-    public void useBriberyDisc(int player, Dice die){
+    public void useBriberyDisc(Player player, Dice die){
         int position = BRIBERY_POSITION;
         activateCard(player, position, die);
     }
@@ -83,5 +74,16 @@ public class DiceDiscs {
         }
 
         return dicePresent;
+    }
+
+    public void useMoneyDisc(int playerID, Dice chosenDie) {
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        moneyDisc.add(chosenDie);
+        moneyManager.gainMoney(playerID, chosenDie.getValue());
+    }
+
+    public void useDrawDisc(int playerID, Dice chosenDie) {
+        cardDisc.add(chosenDie);
     }
 }

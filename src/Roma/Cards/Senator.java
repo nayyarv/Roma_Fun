@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Senator extends Card {
     private final static String NAME = "Senator";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
             "they wish free of " +
             "charge. The player is allowed to cover any cards.";
@@ -24,7 +24,8 @@ public class Senator extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

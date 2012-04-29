@@ -11,7 +11,7 @@ import Roma.*;
 public class Legat extends Card {
 
     private final static String NAME = "Legat";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "A player gets 1 victory point from the stockpile for" +
             "every dice disc not occupied by the opponent.";
     private final static int COST = 5;
@@ -25,7 +25,8 @@ public class Legat extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

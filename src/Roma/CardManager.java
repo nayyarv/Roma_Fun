@@ -10,14 +10,11 @@ import Roma.Cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
-//TODO: Deck creation
 
 public class CardManager {
     //Objects
-    private final List<Card> playingDeck = new ArrayList<Card>();
-    private final List<Card> discardPile = new ArrayList<Card>();
+    private final ArrayList<Card> playingDeck = new ArrayList<Card>();
+    private final ArrayList<Card> discardPile = new ArrayList<Card>();
 
     //Variabls
     private boolean noMoreCards = false;
@@ -28,6 +25,7 @@ public class CardManager {
         addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
         addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
         addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);
+
         addNumberOf(new Consiliarus(playArea), Consiliarus.OCCURENCES);
         addNumberOf(new Consul(playArea), Consul.OCCURENCES);
         addNumberOf(new Essedum(playArea), Essedum.OCCURENCES);
@@ -36,6 +34,7 @@ public class CardManager {
         addNumberOf(new Gladiator(playArea), Gladiator.OCCURENCES);
         addNumberOf(new Haruspex(playArea), Legat.OCCURENCES);
         addNumberOf(new Legionarius(playArea), Machina.OCCURENCES);
+
         addNumberOf(new Mercator(playArea), Mercator.OCCURENCES);
         addNumberOf(new Mercatus(playArea), Mercatus.OCCURENCES);
         addNumberOf(new Nero(playArea), Nero.OCCURENCES);
@@ -44,6 +43,7 @@ public class CardManager {
         addNumberOf(new Praetorianus(playArea), Praetorianus.OCCURENCES);
         addNumberOf(new Scaenicus(playArea), Scaenicus.OCCURENCES);
         addNumberOf(new Senator(playArea), Senator.OCCURENCES);
+
         addNumberOf(new Sicarius(playArea), Sicarius.OCCURENCES);
         addNumberOf(new Templum(playArea), TribunisPlebis.OCCURENCES);
         addNumberOf(new TribunisPlebis(playArea), TribunisPlebis.OCCURENCES);
@@ -58,23 +58,10 @@ public class CardManager {
         Collections.shuffle(playingDeck);
     }
 
-    public void addNumberOf(Card card, int num){
+    private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
         }
-    }
-    public Card drawCard(int value) {
-        List<Card> tempHand = new ArrayList<Card>();
-        int playerChoice = 0;
-
-        for (int i = 0; i < value; i++) {
-            tempHand.add(drawACard());
-        }
-
-        //player input
-        playerChoice = 0;
-
-        return tempHand.get(playerChoice);
     }
 
     public Card drawACard() {
@@ -104,6 +91,22 @@ public class CardManager {
         }
     }
 
+    public void discard(ArrayList<Card> cardList) {
+
+        /** TODO - check discard order here
+          * TODO - choose the top card discarded
+          */
+        discardPile.addAll(0, cardList);
+        if (noMoreCards) {
+            playingDeck.addAll(discardPile);
+            discardPile.clear();
+            shuffle();
+            noMoreCards = false;
+        }
+    }
+
+
+
     public int getPlayingSize() {
         return playingDeck.size();
     }
@@ -117,4 +120,7 @@ public class CardManager {
 
     }
 
+    public ArrayList<Card> getDiscardPile() {
+        return discardPile;
+    }
 }

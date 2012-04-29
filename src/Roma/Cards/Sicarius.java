@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Sicarius extends Card {
     private final static String NAME = "Sicarius";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Eliminates an opposing, face-up character card." +
             "The opposing card and the Sicarius are both discarded.";
     private final static int COST = 9;
@@ -23,7 +23,8 @@ public class Sicarius extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

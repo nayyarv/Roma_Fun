@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Gladiator extends Card {
     private final static String NAME = "Gladiator";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
             "whose turn it is) must be returned to the opponent's hand.";
     private final static int COST = 6;
@@ -24,7 +24,8 @@ public class Gladiator extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

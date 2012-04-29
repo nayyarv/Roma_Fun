@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Nero extends Card {
     private final static String NAME = "Nero";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
             "The destroyed card and Nero are both discarded.";
     private final static int COST = 8;
@@ -24,8 +24,8 @@ public class Nero extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
-
 }

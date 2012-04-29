@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Architectus extends Card {
     private final static String NAME = "Architectus";
-    private final static String TYPE = "Character";
+    private final static String TYPE = Card.CHARACTER;
     private final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
             "of charge. The player is allowed to cover any cards.";
     private final static int COST = 3;
@@ -24,8 +24,8 @@ public class Architectus extends Card {
 
     }
 
-    public void activate(int player) {
-
+    @Override
+    public void activate(Player player, int position) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
-
 }

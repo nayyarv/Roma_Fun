@@ -23,7 +23,8 @@ public class Essedum extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

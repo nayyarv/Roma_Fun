@@ -24,7 +24,8 @@ public class Gladiator extends Card {
 
     }
 
-    public void activate(int player) {
+
+    public void activate(Player player, int position) {
 
     }
 }

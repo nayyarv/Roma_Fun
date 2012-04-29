@@ -27,8 +27,9 @@ public class Forum extends Card {
 
     }
 
-    public void activate(int player) {
-        playerID = player;
+
+    public void activate(Player player, int position) {
+        playerID = player.getPlayerID();
         cardActivated = true;
         //getPlayArea().getPlayer(playerID).getFreeDice().size();
     }

@@ -22,9 +22,10 @@ public class TribunisPlebis extends Card {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }
 
-    public void activate(int player) {
+    public void activate(Player player, int position) {
+        int ID = player.getPlayerID();
         PlayArea playArea = super.getPlayArea();
-        playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, 1);
+        playArea.getVictoryTokens().playerToPlayer(otherPlayer(ID), player.getPlayerID(), 1);
 
     }
 

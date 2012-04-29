@@ -26,7 +26,7 @@ public class Mercator extends Card {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
     }
 
-    public void activate(int player) {
+    public void activate(Player player, int position) {
         PlayArea playArea = super.getPlayArea();
         //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
         int numTokensReqd;
@@ -35,9 +35,10 @@ public class Mercator extends Card {
         System.out.println(prompt);
         Scanner input = new Scanner(System.in);
         numTokensReqd = input.nextInt();
-        if (playArea.getMoneyManager().transferMoney(player, otherPlayer(player), 2 * numTokensReqd)) {
-            playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, numTokensReqd);
-        }
+        //TODO: Fix this part
+        //if (playArea.getMoneyManager().transferMoney(player, otherPlayer(player), 2 * numTokensReqd)) {
+          //  playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, numTokensReqd);
+        //}
 
     }
 

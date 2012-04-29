@@ -1,6 +1,5 @@
 package Roma;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -30,11 +29,6 @@ public class PlayerInterface {
     }
 
     private int getIntegerInput(){
-//        while(!john.hasNextInt()){
-//            System.out.println("Incorrect input detected, try again");
-//            john.next();
-//        }
-
         if(john.hasNextInt()){
             return john.nextInt();
         } else {

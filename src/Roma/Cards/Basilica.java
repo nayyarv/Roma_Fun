@@ -28,7 +28,7 @@ public class Basilica extends Card {
 
     @Override
     public boolean activate(Player player, int position) {
-        boolean activated = true;
+        boolean activated = false;
 
         return activated;
     }

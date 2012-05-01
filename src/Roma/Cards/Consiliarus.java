@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -21,12 +23,16 @@ public class Consiliarus extends Card {
 
     public Consiliarus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
-
     }
 
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        ArrayList<Card> characterCards = new ArrayList<Card>();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        //diceDiscs.getCardName()
+
+
 
         return activated;
     }

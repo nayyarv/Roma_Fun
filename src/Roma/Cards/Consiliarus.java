@@ -30,8 +30,22 @@ public class Consiliarus extends Card {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Card> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
-        player.printCardList(characterCards);
-        player.chooseCard(characterCards);
+
+        while (!characterCards.isEmpty()){
+            player.printCardList(characterCards);
+            Card card = player.chooseCard(characterCards);
+            if (card==null) { //i.e. cancelled
+                System.out.println("You must choose a card");
+                characterCards.add(card);
+            } else {
+                int choice = player.chooseCardDisc();
+                if (choice!=-1){//I.e not cancel
+                    diceDiscs.layCard(player.getPlayerID(), choice, card);
+                } else {
+                    characterCards.add(card);
+                }
+            }
+        }
 
         return activated;
     }

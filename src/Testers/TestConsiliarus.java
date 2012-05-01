@@ -16,8 +16,5 @@ public class TestConsiliarus {
         Card temp = new Consiliarus(playArea);
         System.err.println("The card is a Consiliarus: " + temp.equals("Consiliarus"));
 
-
-
-
     }
 }

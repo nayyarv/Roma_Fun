@@ -28,8 +28,8 @@ public class DiceDiscs {
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
         ArrayList<Card> set = new ArrayList<Card>();
-        for (int i;i<activeCards[playerID].length;i++){
-            if(activeCards[playerID[i]]!=null){
+        for (int i=0; i<activeCards[playerID].length;i++){
+            if(activeCards[playerID][i]!=null){
                 set.add(activeCards[playerID][i]);
             }
         }

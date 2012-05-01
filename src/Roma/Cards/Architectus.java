@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -26,6 +28,29 @@ public class Architectus extends Card {
 
     @Override
     public void activate(Player player, int position) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<Card> hand = player.getHand();
+        boolean endSelection = false;
+        Card chosenCard = null;
+        int targetPosition;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        for(Card card : hand){
+            if(card.getType() == Card.BUILDING){
+                if(hand.remove(card)){
+                    tempHand.add(card);
+                }
+            }
+        }
+
+        while(!endSelection){
+            chosenCard = player.chooseCard(tempHand);
+            if(chosenCard == null){
+                endSelection = true;
+            } else {
+                targetPosition = player.chooseCardDisc();
+                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+            }
+        }
     }
 }

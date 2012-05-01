@@ -17,6 +17,7 @@ public class PlayArea {
     private VictoryTokens victoryTokens;
     private DiceDiscs diceDiscs;
     private Player players[];
+    private BattleManager battleManager;
 
     //Variables
     private int turn = 0;
@@ -29,6 +30,7 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(mainProgram);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
+        battleManager = new BattleManager();
         this.mainProgram = mainProgram;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
@@ -166,5 +168,9 @@ public class PlayArea {
                 System.out.println();
             }
         }
+    }
+
+    public BattleManager getBattleManager() {
+        return battleManager;
     }
 }

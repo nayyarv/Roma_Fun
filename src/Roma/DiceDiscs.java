@@ -39,12 +39,16 @@ public class DiceDiscs {
     }
 
     public boolean activateCard(Player player, int position, Dice die) {
+        BattleManager battleManager = playArea.getBattleManager();
+
         position--;
         boolean activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
+        activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
+
         if(activateEnabled){
             discs.get(position).add(die);
-            activeCards[player.getPlayerID()][position].activate(player, position);
+            activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
         } else {
             System.out.println("That card can't be activated");
         }

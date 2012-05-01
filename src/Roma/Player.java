@@ -160,9 +160,12 @@ public class Player {
         while(!validChoice){
             option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
             if(option == ACTIVATE_CARD){
-                diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie);
-                chosenDie = null;
-                validChoice = true;
+                if(diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie)){
+                    chosenDie = null;
+                    validChoice = true;
+                } else {
+                    validChoice = false;
+                }
             } else if(option == BRIBERY){
                 diceDiscs.useBriberyDisc(this, chosenDie);
                 chosenDie = null;

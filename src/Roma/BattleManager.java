@@ -12,7 +12,7 @@ package Roma;
 
 public class BattleManager {
     private int[] defenseMod = new int[Roma.MAX_PLAYERS];
-    private boolean blocked[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
 
     public BattleManager(){
         for(int defense : defenseMod){
@@ -20,21 +20,21 @@ public class BattleManager {
         }
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
             for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
-                blocked[i][j] = false;
+                active[i][j] = true;
             }
         }
     }
 
-    public boolean getBlocked(int playerID, int position) {
-        return blocked[playerID][position];
+    public boolean checkBlock(int playerID, int position) {
+        return active[playerID][position];
     }
 
     public void block(int playerID, int position) {
-        blocked[playerID][position] = true;
+        active[playerID][position] = false;
     }
 
     public void unblock(int playerID, int position) {
-        blocked[playerID][position] = false;
+        active[playerID][position] = true;
     }
 
     public int[] getDefenseMod() {

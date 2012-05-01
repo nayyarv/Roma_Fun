@@ -12,6 +12,11 @@ import Roma.Cards.*;
 public class TestConsiliarus {
 
     public static void main(String[] args){
+        PlayArea playArea = new PlayArea();
+        Card temp = new Consiliarus(playArea);
+        System.err.println("The card is a Consiliarus: " + temp.equals("Consiliarus"));
+
+
 
 
     }

@@ -40,16 +40,29 @@ public class PlayArea {
 
     }
 
+    //for testing
+    public PlayArea(){
+        cardManager = new CardManager(this);
+        diceHolder = new DiceHolder();
+        moneyManager = new MoneyManager();
+        victoryTokens = new VictoryTokens(this);
+        diceDiscs = new DiceDiscs(this);
+        players = new Player[Roma.MAX_PLAYERS];
+        battleManager = new BattleManager(this);
+
+        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+            players[i] = Player.makeDummyPlayer(i, this);
+        }
+    }
+
+    public void getCardfromDeckfor(String cardName, int playerID){
+
+    }
+
     public void endGame(){
         mainProgram.endGame();
     }
 
-    public PlayArea(boolean testing, Card card){
-        cardManager = new CardManager(this);
-        diceHolder = new DiceHolder();
-        moneyManager = new MoneyManager();
-
-    }
 
     public void getAndSwapCards(){
         ArrayList<Card> newHand = new ArrayList<Card>();

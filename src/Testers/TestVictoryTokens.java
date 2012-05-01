@@ -7,7 +7,7 @@ public class TestVictoryTokens {
     public static void main(String[] args) {
         boolean pass = true;
 
-        pass &= Test01();
+        pass = Test01();
         pass &= Test02();
         pass &= Test03();
 

@@ -57,7 +57,6 @@ public class VictoryTokens {
         for (int i=0; !shouldGameEnd && (i< Roma.MAX_PLAYERS); i++){
             shouldGameEnd = !(playerTokens[i]<=END_GAME_VALUE);
          } //checks each player isn't bankrupt of victory tokens
-
         if(shouldGameEnd){
             playArea.endGame();
         }

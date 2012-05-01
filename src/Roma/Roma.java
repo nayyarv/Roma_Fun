@@ -96,6 +96,7 @@ public class Roma {
 
     public void endGame() {
         gameOver = true;
+        //TODO: actually implement this
     }
 
     public boolean getGameOver() {

@@ -28,11 +28,10 @@ public class Consiliarus extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
-        ArrayList<Card> characterCards = new ArrayList<Card>();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        //diceDiscs.getCardName()
-
-
+        ArrayList<Card> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
+        player.printCardList(characterCards);
+        player.chooseCard(characterCards);
 
         return activated;
     }

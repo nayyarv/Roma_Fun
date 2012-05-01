@@ -29,8 +29,9 @@ public class DiceDiscs {
         int playerID = player.getPlayerID();
         ArrayList<Card> set = new ArrayList<Card>();
         for (int i=0; i<activeCards[playerID].length;i++){
-            if(activeCards[playerID][i]!=null){
+            if(activeCards[playerID][i]!=null){ //add if not null
                 set.add(activeCards[playerID][i]);
+                activeCards[playerID][i] = null; // remove cards
             }
         }
         return set;

@@ -11,16 +11,15 @@ public class VictoryTokens {
     public final static int MAX_TOKENS = 36;
     public final static int TOKEN_START_VALUE = 10;
 
-    final private Roma game;  // pointer to the main game to activate the endGame() function
+    final private PlayArea playArea;  // pointer to the main game to activate the endGame() function
 
     private int[] playerTokens = new int[Roma.MAX_PLAYERS];
     private int tokenPool;
 
 
-    public VictoryTokens(Roma game) {
+    public VictoryTokens(PlayArea playArea) {
         reset();
-
-        this.game = game;
+        this.playArea = playArea;
     }
 
     public void reset() {
@@ -30,32 +29,42 @@ public class VictoryTokens {
         tokenPool = MAX_TOKENS - (Roma.MAX_PLAYERS * TOKEN_START_VALUE);
     }
 
-    public void playerFromPool(int player, int amount) {
-        playerTokens[player] += amount;
+    public void playerFromPool(int playerID, int amount) {
+        playerTokens[playerID] += amount;
         tokenPool -= amount;
-        if (tokenPool <= END_GAME_VALUE) {
-            game.endGame();
-        }
+        checkEndConditions();
     }
 
-    public void playerToPool(int player, int amount) {
-        playerTokens[player] -= amount;
+    public void playerToPool(int playerID, int amount) {
+        playerTokens[playerID] -= amount;
         tokenPool += amount;
-        if (playerTokens[player] <= END_GAME_VALUE) {
-            game.endGame();
+        checkEndConditions();
+    }
+
+    //Not sure if this should be used?
+    public void playerToPlayer(Player fromPlayer, Player toPlayerID, int amount) {
+        playerToPlayer(fromPlayer.getPlayerID(), toPlayerID.getPlayerID(),amount);
+    }
+
+    public void playerToPlayer(int fromPlayerID, int toPlayerID, int amount) {
+        playerTokens[fromPlayerID] -= amount;
+        playerTokens[toPlayerID] += amount;
+        checkEndConditions();
+    }
+
+    private void checkEndConditions(){
+        boolean shouldGameEnd = (tokenPool<=END_GAME_VALUE);
+        for (int i=0; !shouldGameEnd && (i< Roma.MAX_PLAYERS); i++){
+            shouldGameEnd = !(playerTokens[i]<=END_GAME_VALUE);
+         } //checks each player isn't bankrupt of victory tokens
+
+        if(shouldGameEnd){
+            playArea.endGame();
         }
     }
 
-    public void playerToPlayer(int fromPlayer, int toPlayer, int amount) {
-        playerTokens[fromPlayer] -= amount;
-        playerTokens[toPlayer] += amount;
-        if (playerTokens[fromPlayer] <= END_GAME_VALUE) {
-            game.endGame();
-        }
-    }
-
-    public int getPlayerTokens(int player) {
-        return playerTokens[player];
+    public int getPlayerTokens(int playerID) {
+        return playerTokens[playerID];
     }
 
     public int getPoolTokens() {

@@ -3,7 +3,6 @@ package Roma;
 import Roma.Cards.Card;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class PlayArea {
     //#defines
@@ -28,7 +27,7 @@ public class PlayArea {
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
-        victoryTokens = new VictoryTokens(mainProgram);
+        victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
         battleManager = new BattleManager(this);
@@ -38,6 +37,17 @@ public class PlayArea {
             players[i] = Player.makeRealPlayer(i, this);
         }
         getAndSwapCards();
+
+    }
+
+    public void endGame(){
+        mainProgram.endGame();
+    }
+
+    public PlayArea(boolean testing, Card card){
+        cardManager = new CardManager(this);
+        diceHolder = new DiceHolder();
+        moneyManager = new MoneyManager();
 
     }
 

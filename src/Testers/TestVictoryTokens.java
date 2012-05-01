@@ -25,7 +25,8 @@ public class TestVictoryTokens {
 
     private static boolean Test01() {
         Roma newGame = new Roma();
-        VictoryTokens victoryTokens = new VictoryTokens(newGame);
+        PlayArea playArea = new PlayArea(newGame);
+        VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
         System.out.println("Running Test01: ");
@@ -79,7 +80,8 @@ public class TestVictoryTokens {
 
     private static boolean Test02() {
         Roma newGame = new Roma();
-        VictoryTokens victoryTokens = new VictoryTokens(newGame);
+        PlayArea playArea = new PlayArea(newGame);
+        VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
         System.out.print("Player two taking tokens from player one: ");
@@ -101,7 +103,8 @@ public class TestVictoryTokens {
 
     private static boolean Test03() {
         Roma newGame = new Roma();
-        VictoryTokens victoryTokens = new VictoryTokens(newGame);
+        PlayArea playArea = new PlayArea(newGame);
+        VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
         System.out.print("Player one emptying the pool: ");

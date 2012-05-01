@@ -38,10 +38,18 @@ public class DiceDiscs {
         activeCards[player][position] = newCard;
     }
 
-    public void activateCard(Player player, int position, Dice die) {
+    public boolean activateCard(Player player, int position, Dice die) {
         position--;
-        discs.get(position).add(die);
-        activeCards[player.getPlayerID()][position].activate(player, position);
+        boolean activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
+
+        if(activateEnabled){
+            discs.get(position).add(die);
+            activeCards[player.getPlayerID()][position].activate(player, position);
+        } else {
+            System.out.println("That card can't be activated");
+        }
+
+        return activateEnabled;
     }
 
     public void useBriberyDisc(Player player, Dice die){

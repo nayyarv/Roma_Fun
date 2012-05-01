@@ -15,18 +15,21 @@ public class Scaenicus extends Card {
             "the player's own face-up character cards, and the next time round that of another.";
     private final static int COST = 8;
     private final static int DEFENCE = 3;
+    private final static boolean ACTIVATE_ENABLED = true;
 
 
     public final static int OCCURENCES = 2;
 
     public Scaenicus(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 
 }

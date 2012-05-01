@@ -16,16 +16,19 @@ public class Consul extends Card {
             "increased or decreased by 1 point.";
     private final static int COST = 3;
     private final static int DEFENCE = 3;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
     public Consul(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 }

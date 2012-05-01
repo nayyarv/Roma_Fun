@@ -146,18 +146,19 @@ public class Player {
         final int MONEY = 3;
         final int DRAW_CARD = 4;
         final int CANCEL_OPTION = 5;
+        final String strPrompt = "Use on:";
+        final String strOption1 = "Activate card";
+        final String strOption2 = "Bribery Disc";
+        final String strOption3 = "Money Disc";
+        final String strOption4 = "Card Disc";
+        final String strOption5 = "Cancel";
 
         int option = CANCEL;
         boolean validChoice = false;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         while(!validChoice){
-            option = playerInterface.readInput("Use on:",
-                    "Activate card",
-                    "Bribery Disc",
-                    "Money Disc",
-                    "Card Disc",
-                    "Cancel");
+            option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
             if(option == ACTIVATE_CARD){
                 diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie);
                 chosenDie = null;

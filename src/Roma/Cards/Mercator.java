@@ -19,14 +19,17 @@ public class Mercator extends Card {
             "The opponent gets the money.";
     private final static int COST = 7;
     private final static int DEFENCE = 2;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 1;
 
     public Mercator(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
+
         PlayArea playArea = super.getPlayArea();
         //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
         int numTokensReqd;
@@ -40,6 +43,7 @@ public class Mercator extends Card {
           //  playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, numTokensReqd);
         //}
 
+        return activated;
     }
 
     private int otherPlayer(int player) {

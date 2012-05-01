@@ -17,17 +17,20 @@ public class Architectus extends Card {
             "of charge. The player is allowed to cover any cards.";
     private final static int COST = 3;
     private final static int DEFENCE = 4;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
 
     public Architectus(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
     @Override
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
+
         ArrayList<Card> tempHand = new ArrayList<Card>();
         ArrayList<Card> hand = player.getHand();
         boolean endSelection = false;
@@ -52,5 +55,7 @@ public class Architectus extends Card {
                 diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
             }
         }
+
+        return activated;
     }
 }

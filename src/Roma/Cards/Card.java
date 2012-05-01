@@ -8,6 +8,7 @@ public abstract class Card {
     public final static String CHARACTER = "Character";
     public final static String BUILDING = "Building";
 
+    private final boolean activateEnabled;
     private final String name;
     private final String type;
     private final String description;
@@ -22,13 +23,14 @@ public abstract class Card {
     protected int playerID = -1;
     protected Dice activatingDice = null;
 
-    public Card(String name, String type, String description, int cost, int defense, PlayArea playArea) {
+    public Card(String name, String type, String description, int cost, int defense, PlayArea playArea, boolean activateEnabled) {
         this.name = name;
         this.type = type;
         this.description = description;
         this.cost = cost;
         this.defence = defense;
         this.playArea = playArea;
+        this.activateEnabled = activateEnabled;
     }
 
     public String getName() {
@@ -81,5 +83,9 @@ public abstract class Card {
         }
     }
 
-    public abstract void activate(Player player, int position);
+    public boolean isActivateEnabled() {
+        return activateEnabled;
+    }
+
+    public abstract boolean activate(Player player, int position);
 }

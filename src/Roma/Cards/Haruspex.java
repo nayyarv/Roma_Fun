@@ -15,17 +15,20 @@ public class Haruspex extends Card {
             "and add it to their hand. Afterwards the pile is shuffled.";
     private final static int COST = 4;
     private final static int DEFENCE = 3;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
 
     public Haruspex(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 }

@@ -15,17 +15,20 @@ public class Nero extends Card {
             "The destroyed card and Nero are both discarded.";
     private final static int COST = 8;
     private final static int DEFENCE = 9;
+    private final static boolean ACTIVATE_ENABLED = true;
 
 
     public final static int OCCURENCES = 1;
 
     public Nero(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 }

@@ -24,6 +24,18 @@ public class DiceDiscs {
         }
     }
 
+    public ArrayList<Card> setOfCards(Player player, String type){
+        assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
+        int playerID = player.getPlayerID();
+        ArrayList<Card> set = new ArrayList<Card>();
+        for (int i;i<activeCards[playerID].length;i++){
+            if(activeCards[playerID[i]]!=null){
+                set.add(activeCards[playerID][i]);
+            }
+        }
+        return set;
+    }
+
     public void clearDice() {
         for(ArrayList<Dice> disc : discs){
             disc.clear();

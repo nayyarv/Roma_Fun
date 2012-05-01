@@ -45,6 +45,8 @@ public class DiceDiscs {
         boolean activateEnabled = false;
         position--;
 
+        //TODO: Change position-- to the player interface
+
         if(activeCards[player.getPlayerID()][position] != null){
             activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
@@ -104,5 +106,16 @@ public class DiceDiscs {
 
     public void useDrawDisc(int playerID, Dice chosenDie) {
         cardDisc.add(chosenDie);
+    }
+
+    public Card getTargetCard(int playerID, int position){
+        return activeCards[playerID][position];
+    }
+
+    public void discardTarget(int playerID, int position){
+        CardManager cardManager = playArea.getCardManager();
+
+        cardManager.discard(activeCards[playerID][position]);
+        activeCards[playerID][position] = null;
     }
 }

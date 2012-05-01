@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class PlayArea {
     //#defines
     private final int NUM_INIT_CARDS = 4;
+    private final int PAD_LENGTH = 20;
 
     //Object pointers
     private Roma mainProgram;
@@ -113,7 +114,7 @@ public class PlayArea {
 
     public void runGame() {
         while (!mainProgram.getGameOver()) {
-            Player player = players[turn];
+            Player player = players[turn % Roma.MAX_PLAYERS];
             playerTurn(player);
         }
     }
@@ -143,7 +144,7 @@ public class PlayArea {
 
 
         while (!mainProgram.getGameOver() && !endTurn) {
-            endTurn = players[turn].takeAction();
+            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
         turn++;
     }
@@ -153,6 +154,8 @@ public class PlayArea {
     }
 
     public void printStats() {
+        String cardName;
+
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
             System.out.println("-------------------------------------");
             System.out.println("Player: " + players[player].getName());
@@ -161,8 +164,14 @@ public class PlayArea {
             System.out.println("Cards in hand: " + players[player].handSize());
             System.out.println("Cards in play: ");
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
-                System.out.print(position + ") " + diceDiscs.getCardName(player, position) +
-                        " : Dice on disc: ");
+                cardName = diceDiscs.getCardName(player, position);
+                if(position == 6){
+                    System.out.print("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                } else {
+                    System.out.print("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                }
                 for(Dice die : diceDiscs.checkForDice(player, position)){
                     System.out.print(die.getValue() + " ");
                 }

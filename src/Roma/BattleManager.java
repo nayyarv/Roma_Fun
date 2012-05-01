@@ -14,6 +14,8 @@ public class BattleManager {
     private int[] defenseMod = new int[Roma.MAX_PLAYERS];
     private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
     private final PlayArea playArea;
+    DiceDiscs diceDiscs;
+    DiceHolder diceHolder;
 
     public BattleManager(PlayArea playArea){
         this.playArea = playArea;
@@ -26,6 +28,8 @@ public class BattleManager {
                 active[i][j] = true;
             }
         }
+        this.diceDiscs = playArea.getDiceDiscs();
+        this.diceHolder = playArea.getDiceHolder();
     }
 
     public boolean checkBlock(int playerID, int position) {
@@ -49,8 +53,11 @@ public class BattleManager {
     }
 
     public boolean battle(int targetPlayer, int target){
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         boolean kill = false;
+        int battleValue[];
+
+        diceHolder.rollBattleDice();
+        battleValue = diceHolder.getBattleValue();
 
         return kill;
     }

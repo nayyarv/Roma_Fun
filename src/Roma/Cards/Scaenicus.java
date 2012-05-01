@@ -25,7 +25,7 @@ public class Scaenicus extends Card {
 
     }
 
-
+    //TODO: handle infinite loop selecting self
     public boolean activate(Player player, int position) {
         boolean activated = true;
 

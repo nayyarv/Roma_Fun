@@ -40,7 +40,12 @@ public class Aesculapinum extends Card {
             }
         }
 
-        player.addCardToHand(player.chooseCard(tempHand));
+        if(tempHand.size() != 0){
+            player.addCardToHand(player.chooseCard(tempHand));
+        } else {
+            System.out.println("No character cards in discard pile");
+            activated = false;
+        }
 
         discardPile.addAll(tempHand);
 

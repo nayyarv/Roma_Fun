@@ -34,7 +34,9 @@ public class DiceDiscs {
 
     public void layCard(int player, int position, Card newCard) {
         position--;
-        playArea.getCardManager().discard(activeCards[player][position]);
+        if(activeCards[player][position] !=  null){
+            playArea.getCardManager().discard(activeCards[player][position]);
+        }
         activeCards[player][position] = newCard;
     }
 

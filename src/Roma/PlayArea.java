@@ -30,7 +30,7 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(mainProgram);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
-        battleManager = new BattleManager();
+        battleManager = new BattleManager(this);
         this.mainProgram = mainProgram;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
@@ -123,6 +123,7 @@ public class PlayArea {
         char roll = 'b';
 
         System.out.println("It's " + player.getName() + "'s turn");
+        //TODO: lose victory points equal to empty slots
 
         player.rollActionDice();
 

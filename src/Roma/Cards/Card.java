@@ -14,6 +14,7 @@ public abstract class Card {
     private final String description;
     private final int cost;
     private final int defence;
+
     final PlayArea playArea;
     private boolean playable = false;
     private ArrayList<Integer> playerActions;

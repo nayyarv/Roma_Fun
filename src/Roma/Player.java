@@ -217,7 +217,7 @@ public class Player {
     //return int
     public Card chooseCard(ArrayList<Card> cardList){
         final String strPrompt = "Possible actions:";
-        final String strOption1 = "Lay a card";
+        final String strOption1 = "Choose a card";
         final String strOption2 = "Check description";
         final String strOption3 = "Print card list";
         final String strOption4 = "Cancel/End selection";
@@ -233,7 +233,8 @@ public class Player {
 
             if(action == 1){
                 System.out.print("Card number: ");
-                choice = cardList.remove(input.nextInt() - 1);
+                int cardChoice = playerInterface.getIntegerInput(cardList.size());
+                choice = cardList.remove(cardChoice - 1);
                 validChoice = true;
             } else if(action == 2){
                 System.out.print("Check which card number: ");

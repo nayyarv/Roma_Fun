@@ -13,8 +13,11 @@ package Roma;
 public class BattleManager {
     private int[] defenseMod = new int[Roma.MAX_PLAYERS];
     private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private final PlayArea playArea;
 
-    public BattleManager(){
+    public BattleManager(PlayArea playArea){
+        this.playArea = playArea;
+
         for(int defense : defenseMod){
             defense = 0;
         }
@@ -43,5 +46,12 @@ public class BattleManager {
 
     public void setDefenseMod(int[] defenseMod) {
         this.defenseMod = defenseMod;
+    }
+
+    public boolean battle(int targetPlayer, int target){
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        boolean kill = false;
+
+        return kill;
     }
 }

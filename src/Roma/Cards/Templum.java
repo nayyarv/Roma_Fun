@@ -19,18 +19,20 @@ public class Templum extends Card {
                     "activated separately.";
     private final static int COST = 2;
     private final static int DEFENCE = 2;
+    private final static boolean ACTIVATE_ENABLED = true;
 
 
     public final static int OCCURENCES = 2;
 
     public Templum(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
-
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 
 }

@@ -12,13 +12,53 @@ package Roma;
 
 public class BattleManager {
     private int[] defenseMod = new int[Roma.MAX_PLAYERS];
-    private boolean freeCharacters = false;
-    private boolean freeBuildings = false;
-    private boolean blocked[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private final PlayArea playArea;
+    DiceDiscs diceDiscs;
+    DiceHolder diceHolder;
 
-    public BattleManager(){
+    public BattleManager(PlayArea playArea){
+        this.playArea = playArea;
+
         for(int defense : defenseMod){
             defense = 0;
         }
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
+                active[i][j] = true;
+            }
+        }
+        this.diceDiscs = playArea.getDiceDiscs();
+        this.diceHolder = playArea.getDiceHolder();
+    }
+
+    public boolean checkBlock(int playerID, int position) {
+        return active[playerID][position];
+    }
+
+    public void block(int playerID, int position) {
+        active[playerID][position] = false;
+    }
+
+    public void unblock(int playerID, int position) {
+        active[playerID][position] = true;
+    }
+
+    public int[] getDefenseMod() {
+        return defenseMod;
+    }
+
+    public void setDefenseMod(int[] defenseMod) {
+        this.defenseMod = defenseMod;
+    }
+
+    public boolean battle(int targetPlayer, int target){
+        boolean kill = false;
+        int battleValue[];
+
+        diceHolder.rollBattleDice();
+        battleValue = diceHolder.getBattleValue();
+
+        return kill;
     }
 }

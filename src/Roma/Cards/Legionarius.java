@@ -1,7 +1,7 @@
 package Roma.Cards;
 
-import Roma.*;
-import java.util.ArrayList;
+import Roma.PlayArea;
+import Roma.Player;
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -15,16 +15,19 @@ public class Legionarius extends Card {
             "whether it is a character or a building card.";
     private final static int COST = 4;
     private final static int DEFENCE = 5;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 3;
 
     public Legionarius(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 }

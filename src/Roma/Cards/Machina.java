@@ -16,17 +16,20 @@ public class Machina extends Card {
             "them again on any dice discs. Character cards can be covered.";
     private final static int COST = 4;
     private final static int DEFENCE = 4;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
     public Machina(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
 
+        return activated;
     }
 
 }

@@ -16,17 +16,20 @@ public class Basilica extends Card {
             " the player gets 2 more victory points. The Basilica itself is not activiated.";
     private final static int COST = 5;
     private final static int DEFENCE = 2;
+    private final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;
 
 
     public Basilica(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
     @Override
-    public void activate(Player player, int position) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public boolean activate(Player player, int position) {
+        boolean activated = false;
+
+        return activated;
     }
 }

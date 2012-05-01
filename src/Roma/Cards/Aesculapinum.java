@@ -17,15 +17,18 @@ public class Aesculapinum extends Card {
             "pick up any character card from the discard pile and add it to their hand.";
     private final static int COST = 5;
     private final static int DEFENCE = 2;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
     public Aesculapinum(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
-    public void activate(Player player, int position) {
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
+
         CardManager cardManager = playArea.getCardManager();
         ArrayList<Card> discardPile = cardManager.getDiscardPile();
         ArrayList<Card> tempHand = new ArrayList<Card>();
@@ -37,9 +40,16 @@ public class Aesculapinum extends Card {
             }
         }
 
-        player.addCardToHand(player.chooseCard(tempHand));
+        if(tempHand.size() != 0){
+            player.addCardToHand(player.chooseCard(tempHand));
+        } else {
+            System.out.println("No character cards in discard pile");
+            activated = false;
+        }
 
         discardPile.addAll(tempHand);
+
+        return activated;
     }
 
 }

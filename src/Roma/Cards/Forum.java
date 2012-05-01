@@ -16,6 +16,7 @@ public class Forum extends Card {
             "determine how many victory points the player receives";
     private final static int COST = 5;
     private final static int DEFENCE = 5;
+    private final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 6;
 
@@ -23,15 +24,15 @@ public class Forum extends Card {
     Dice tempDice = null;
 
     public Forum(PlayArea playArea) {
-        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea);
+        super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
 
 
-    public void activate(Player player, int position) {
-        playerID = player.getPlayerID();
-        cardActivated = true;
-        //getPlayArea().getPlayer(playerID).getFreeDice().size();
+    public boolean activate(Player player, int position) {
+        boolean activated = true;
+
+        return activated;
     }
 
 }

@@ -62,17 +62,13 @@ public class Player {
         final int END_TURN = 4;
 
         int option = 0;
-        Card chosenCard = null;
         Dice chosenDie = null;
-        int chosenPosition = -1;
         boolean endTurn = false;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        printDiceList(freeDice);
         printCardList(hand);
 
         //choose an action
-        option = playerInterface.readInput("Select Option",
+        option = playerInterface.readInput("Select Option:",
                         "View action dice",
                         "View Hand",
                         "Show game stats",
@@ -87,11 +83,7 @@ public class Player {
                 }
             }
         } else if(option == VIEW_HAND){
-            chosenCard = chooseCard(hand);
-            if(chosenCard != null){
-                chosenPosition = chooseCardDisc();
-                diceDiscs.layCard(playerID, chosenPosition, chosenCard);
-            }
+            viewHand();
         } else if(option == SHOW_GAME_STATS){
             playArea.printStats();
         } else if(option == END_TURN){
@@ -103,7 +95,24 @@ public class Player {
         return endTurn;
     }
 
-    private int chooseCardDisc() {
+    private void viewHand() {
+        Card chosenCard = null;
+        int chosenPosition = -1;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        chosenCard = chooseCard(hand);
+        if(chosenCard != null){
+            chosenPosition = chooseCardDisc();
+            if(moneyManager.loseMoney(playerID, chosenCard.getCost())){
+                diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+            } else {
+                hand.add(chosenCard);
+            }
+        }
+    }
+
+    public int chooseCardDisc() {
         final int CANCEL_OPTION = 8;
 
         int option = -1;
@@ -138,26 +147,33 @@ public class Player {
         final int MONEY = 3;
         final int DRAW_CARD = 4;
         final int CANCEL_OPTION = 5;
+        final String strPrompt = "Use on:";
+        final String strOption1 = "Activate card";
+        final String strOption2 = "Bribery Disc";
+        final String strOption3 = "Money Disc";
+        final String strOption4 = "Card Disc";
+        final String strOption5 = "Cancel";
 
         int option = CANCEL;
         boolean validChoice = false;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         while(!validChoice){
-            option = playerInterface.readInput("Use on:",
-                    "Activate card",
-                    "Bribery Disc",
-                    "Money Disc",
-                    "Card Disc",
-                    "Cancel");
+            option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
             if(option == ACTIVATE_CARD){
-                diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie);
-                chosenDie = null;
-                validChoice = true;
+                if(diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie)){
+                    chosenDie = null;
+                    validChoice = true;
+                } else {
+                    validChoice = false;
+                }
             } else if(option == BRIBERY){
-                diceDiscs.useBriberyDisc(this, chosenDie);
-                chosenDie = null;
-                validChoice = true;
+                if(diceDiscs.useBriberyDisc(this, chosenDie)){
+                    chosenDie = null;
+                    validChoice = true;
+                } else {
+                    validChoice = false;
+                }
             } else if(option == MONEY){
                 diceDiscs.useMoneyDisc(playerID, chosenDie);
                 chosenDie = null;
@@ -203,34 +219,41 @@ public class Player {
     //input: ArrayList (of dice or of cards)
     //return int
     public Card chooseCard(ArrayList<Card> cardList){
+        final String strPrompt = "Possible actions:";
+        final String strOption1 = "Choose a card";
+        final String strOption2 = "Check description";
+        final String strOption3 = "Print card list";
+        final String strOption4 = "Cancel/End selection";
+
         Card choice = null;
         int action = 0;
         boolean validChoice = false;
 
         printCardList(cardList);
 
-        while(!validChoice){
-            action = playerInterface.readInput("Possible actions:",
-                    "Choose card",
-                    "Check description",
-                    "Print card list",
-                    "Cancel");
+        if(cardList.size() != 0){
+            System.out.println("There are no cards!");
+        } else {
+            while(!validChoice){
+                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
 
-            if(action == 1){
-                System.out.print("Card number: ");
-                choice = cardList.remove(input.nextInt() - 1);
-                validChoice = true;
-            } else if(action == 2){
-                System.out.print("Check which card number: ");
-                action = input.nextInt();
-                System.out.println(cardList.get(action - 1).toString());
-            } else if(action == 3){
-                printCardList(cardList);
-            } else if(action == 4){
-                choice = null;
-                validChoice = true;
-            } else {
-                System.out.println("Please choose a valid action");
+                if(action == 1){
+                    System.out.print("Card number: ");
+                    int cardChoice = playerInterface.getIntegerInput(cardList.size());
+                    choice = cardList.remove(cardChoice - 1);
+                    validChoice = true;
+                } else if(action == 2){
+                    System.out.print("Check which card number: ");
+                    action = input.nextInt();
+                    System.out.println(cardList.get(action - 1).toString());
+                } else if(action == 3){
+                    printCardList(cardList);
+                } else if(action == 4){
+                    choice = null;
+                    validChoice = true;
+                } else {
+                    System.out.println("Please choose a valid action");
+                }
             }
         }
 
@@ -312,13 +335,22 @@ public class Player {
     public void drawCards(int value) {
         ArrayList<Card> tempHand = new ArrayList<Card>();
         CardManager cardManager = playArea.getCardManager();
+        Card chosenCard = null;
 
         System.out.println("Drawing " + value + " cards...");
 
         for (int i = 0; i < value; i++) {
             tempHand.add(cardManager.drawACard());
         }
-        hand.add(chooseCard(tempHand));
+
+        while(chosenCard == null){
+            chosenCard = chooseCard(tempHand);
+            if(chosenCard == null){
+                System.out.println("You have to choose a card to draw.");
+            }
+        }
+
+        hand.add(chosenCard);
     }
 
     public void layCard() {
@@ -380,5 +412,9 @@ public class Player {
 
     public int getPlayerID() {
         return playerID;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
     }
 }

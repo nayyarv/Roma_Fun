@@ -3,12 +3,12 @@ package Roma;
 import Roma.Cards.Card;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class PlayArea {
     //#defines
     private final int NUM_INIT_CARDS = 4;
+    private final int PAD_LENGTH = 20;
 
     //Object pointers
     private Roma mainProgram;
@@ -18,6 +18,7 @@ public class PlayArea {
     private VictoryTokens victoryTokens;
     private DiceDiscs diceDiscs;
     private Player players[];
+    private BattleManager battleManager;
 
     //Variables
     private int turn = 0;
@@ -30,6 +31,7 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(mainProgram);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
+        battleManager = new BattleManager(this);
         this.mainProgram = mainProgram;
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
@@ -112,7 +114,7 @@ public class PlayArea {
 
     public void runGame() {
         while (!mainProgram.getGameOver()) {
-            Player player = players[turn];
+            Player player = players[turn % Roma.MAX_PLAYERS];
             playerTurn(player);
         }
     }
@@ -122,6 +124,7 @@ public class PlayArea {
         char roll = 'b';
 
         System.out.println("It's " + player.getName() + "'s turn");
+        //TODO: lose victory points equal to empty slots
 
         player.rollActionDice();
 
@@ -141,13 +144,15 @@ public class PlayArea {
 
 
         while (!mainProgram.getGameOver() && !endTurn) {
-            endTurn = players[turn].takeAction();
+            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
         turn++;
     }
 
 
     public void printStats() {
+        String cardName;
+
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
             System.out.println("-------------------------------------");
             System.out.println("Player: " + players[player].getName());
@@ -156,13 +161,23 @@ public class PlayArea {
             System.out.println("Cards in hand: " + players[player].handSize());
             System.out.println("Cards in play: ");
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
-                System.out.print(position + ") " + diceDiscs.getCardName(player, position) +
-                        " : Dice on disc: ");
+                cardName = diceDiscs.getCardName(player, position);
+                if(position == 6){
+                    System.out.print("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                } else {
+                    System.out.print("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                }
                 for(Dice die : diceDiscs.checkForDice(player, position)){
                     System.out.print(die.getValue() + " ");
                 }
                 System.out.println();
             }
         }
+    }
+
+    public BattleManager getBattleManager() {
+        return battleManager;
     }
 }

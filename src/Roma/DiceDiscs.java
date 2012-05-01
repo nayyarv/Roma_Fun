@@ -34,19 +34,38 @@ public class DiceDiscs {
 
     public void layCard(int player, int position, Card newCard) {
         position--;
-        playArea.getCardManager().discard(activeCards[player][position]);
+        if(activeCards[player][position] !=  null){
+            playArea.getCardManager().discard(activeCards[player][position]);
+        }
         activeCards[player][position] = newCard;
     }
 
-    public void activateCard(Player player, int position, Dice die) {
+    public boolean activateCard(Player player, int position, Dice die) {
+        BattleManager battleManager = playArea.getBattleManager();
+        boolean activateEnabled = false;
         position--;
-        discs.get(position).add(die);
-        activeCards[player.getPlayerID()][position].activate(player, position);
+
+        if(activeCards[player.getPlayerID()][position] != null){
+            activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
+
+            activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
+
+            if(activateEnabled){
+                discs.get(position).add(die);
+                activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
+            } else {
+                System.out.println("That card can't be activated");
+            }
+        } else {
+            System.out.println("No card there!");
+        }
+
+        return activateEnabled;
     }
 
-    public void useBriberyDisc(Player player, Dice die){
+    public boolean useBriberyDisc(Player player, Dice die){
         int position = BRIBERY_POSITION;
-        activateCard(player, position, die);
+        return activateCard(player, position, die);
     }
 
     public String getCardName(int player, int position){

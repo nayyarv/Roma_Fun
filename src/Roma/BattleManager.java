@@ -1,5 +1,7 @@
 package Roma;
 
+import Roma.Cards.Card;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Andrew
@@ -53,11 +55,21 @@ public class BattleManager {
     }
 
     public boolean battle(int targetPlayer, int target){
+        //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
+        Card targetCard = diceDiscs.getTargetCard(targetPlayer, target);
 
+        //TODO: Allow player to roll
         diceHolder.rollBattleDice();
         battleValue = diceHolder.getBattleValue();
+
+        //TODO: Print battle die value
+
+        if(battleValue[0] >= targetCard.getDefense() + defenseMod[targetPlayer]){
+            diceDiscs.discardTarget(targetPlayer, target);
+            kill = true;
+        }
 
         return kill;
     }

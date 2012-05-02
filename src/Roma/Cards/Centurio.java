@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -29,7 +31,32 @@ public class Centurio extends Card {
     }
 
     public boolean activate(Player player, int position) {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        BattleManager battleManager = playArea.getBattleManager();
+        DiceHolder diceHolder = playArea.getDiceHolder();
+
         boolean activated = true;
+        int targetPlayer = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        boolean battleVictory = false;
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        Dice chosenDie = null;
+        Card targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+
+        if(targetCard == null){
+            activated = false;
+        } else {
+            battleVictory = battleManager.battle(targetPlayer, position);
+            if(!battleVictory){
+                if(freeDice.size() != 0){
+                    chosenDie = player.chooseDie(freeDice);
+                    if(chosenDie != null){
+                        if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
+                            diceDiscs.discardTarget(targetPlayer, position);
+                        }
+                    }
+                }
+            }
+        }
 
         return activated;
     }

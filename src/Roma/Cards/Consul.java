@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -28,6 +30,17 @@ public class Consul extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        Dice chosenDice = null;
+
+        if(freeDice.size() != 0){
+            chosenDice = player.chooseDie(freeDice);
+            if(chosenDice == null){
+                activated = false;
+            } else {
+                //TODO: access player interface
+            }
+        }
 
         return activated;
     }

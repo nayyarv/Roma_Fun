@@ -59,11 +59,13 @@ public class BattleManager {
         int battleValue[];
         Card targetCard = diceDiscs.getTargetCard(targetPlayer, target);
 
+        //TODO: Allow player to roll
         diceHolder.rollBattleDice();
         battleValue = diceHolder.getBattleValue();
 
         if(battleValue[0] >= targetCard.getDefense() + defenseMod[targetPlayer]){
             diceDiscs.discardTarget(targetPlayer, target);
+            kill = true;
         }
 
         return kill;

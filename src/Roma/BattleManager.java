@@ -13,7 +13,8 @@ import Roma.Cards.Card;
 //TODO: flesh out battle manager while creating cards
 
 public class BattleManager {
-    private int[] defenseMod = new int[Roma.MAX_PLAYERS];
+    private int[] defenseModPassive = new int[Roma.MAX_PLAYERS];
+    private int[] defenseModActive = new int[Roma.MAX_PLAYERS];
     private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
     private final PlayArea playArea;
     DiceDiscs diceDiscs;
@@ -22,7 +23,7 @@ public class BattleManager {
     public BattleManager(PlayArea playArea){
         this.playArea = playArea;
 
-        for(int defense : defenseMod){
+        for(int defense : defenseModPassive){
             defense = 0;
         }
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
@@ -46,12 +47,20 @@ public class BattleManager {
         active[playerID][position] = true;
     }
 
-    public int[] getDefenseMod() {
-        return defenseMod;
+    public int getDefenseModPassive(int playerID) {
+        return defenseModPassive[playerID];
     }
 
-    public void setDefenseMod(int[] defenseMod) {
-        this.defenseMod = defenseMod;
+    public void setDefenseModPassive(int playerID, int defenseModPassive) {
+        this.defenseModPassive[playerID] = defenseModPassive;
+    }
+
+    public int getDefenseModActive(int playerID){
+        return defenseModActive[playerID];
+    }
+
+    public void setDefenseModActive(int playerID, int defenseModActive){
+        this.defenseModActive[playerID] = defenseModActive;
     }
 
     public boolean battle(int targetPlayer, int target){
@@ -66,7 +75,7 @@ public class BattleManager {
 
         //TODO: Print battle die value
 
-        if(battleValue[0] >= targetCard.getDefense() + defenseMod[targetPlayer]){
+        if(battleValue[0] >= targetCard.getDefense() + defenseModPassive[targetPlayer] + defenseModActive[targetPlayer]){
             diceDiscs.discardTarget(targetPlayer, target);
             kill = true;
         }

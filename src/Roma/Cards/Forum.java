@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -31,6 +33,23 @@ public class Forum extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        Dice chosenDie = null;
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+
+        if(freeDice.size() == 0){
+            activated = false;
+            System.out.println("Not enough free action dice!");
+        } else {
+            chosenDie = player.chooseDie(freeDice);
+            if(chosenDie != null){
+                victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+                //TODO: check for 2 special adjacency cases
+            } else {
+                activated = false;
+            }
+        }
+
 
         return activated;
     }

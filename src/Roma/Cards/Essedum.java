@@ -15,6 +15,7 @@ public class Essedum extends Card {
     private final static int COST = 6;
     private final static int DEFENCE = 3;
     private final static boolean ACTIVATE_ENABLED = true;
+    private final static int MOD_DEFENCE_ACTIVE = -2;
 
     public final static int OCCURENCES = 2;
 
@@ -26,7 +27,12 @@ public class Essedum extends Card {
 
 
     public boolean activate(Player player, int position) {
+        BattleManager battleManager = playArea.getBattleManager();
+
         boolean activated = true;
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        battleManager.modDefenseModActive(targetPlayerID, MOD_DEFENCE_ACTIVE);
 
         return activated;
     }

@@ -51,16 +51,22 @@ public class BattleManager {
         return defenseModPassive[playerID];
     }
 
-    public void setDefenseModPassive(int playerID, int defenseModPassive) {
-        this.defenseModPassive[playerID] = defenseModPassive;
+    public void modDefenseModPassive(int playerID, int defenseModPassive) {
+        this.defenseModPassive[playerID] += defenseModPassive;
     }
 
     public int getDefenseModActive(int playerID){
         return defenseModActive[playerID];
     }
 
-    public void setDefenseModActive(int playerID, int defenseModActive){
-        this.defenseModActive[playerID] = defenseModActive;
+    public void modDefenseModActive(int playerID, int defenseModActive){
+        this.defenseModActive[playerID] += defenseModActive;
+    }
+
+    public void clearDefenseModActive(){
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            defenseModActive[i] = 0;
+        }
     }
 
     public boolean battle(int targetPlayer, int target){

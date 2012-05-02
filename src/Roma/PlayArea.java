@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class PlayArea {
     //#defines
-    private final int NUM_INIT_CARDS = 4;
     private final int PAD_LENGTH = 20;
 
     //Object pointers
@@ -65,50 +64,46 @@ public class PlayArea {
 
 
     public void getAndSwapCards(){
-        ArrayList<Card> newHand = new ArrayList<Card>();
+        ArrayList<Card> initialSet = new ArrayList<Card>();
+        //gets the inital cards for the game
+
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
-            newHand.addAll(0, getFirstHand());
+            initialSet.addAll(0, cardManager.drawNCards(Roma.NUM_INIT_CARDS));
         } //gets all the cards needed
 
-        //players[0].printCardList(temp);
-        Card choice1 = null;
-        Card choice2 = null;
+        ArrayList<Card> choices = new ArrayList<Card>();
+        //stores the choices of the previous player
+
         for (int i =0; i<Roma.MAX_PLAYERS;i++){
-            //System.out.println("NEXT Player");
-            players[i].addCardToHand(choice1);
-            players[i].addCardToHand(choice2);
-            choice1 = null;
-            choice2=null;
+
+            for (Card card: choices){
+                players[i].addCardToHand(card);
+                choices.remove(card);
+            }
+
             //add prev choices
-            ArrayList<Card> individualHand = new ArrayList<Card>();
-            individualHand.addAll(newHand.subList((i * NUM_INIT_CARDS), (i + 1) * NUM_INIT_CARDS));
+            ArrayList<Card> individualHand
+                    = (ArrayList<Card>)initialSet.subList(
+                    (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS);
+            //extracts the first num-init-cards from the initial set
+
             System.out.println(players[i].getName() +
                     ", these are the 4 cards dealt to you.\n" +
                     "You must choose 2 to give to your opponent.\n" +
                     "Choose the first Card");
+            //Prompt: move printing to player interface?
 
-            while (choice1==null){
-                choice1 = players[i].chooseCard(individualHand);
-                if(choice1==null) System.out.println("You must choose a card: ");
-            }
-            System.out.println("Choose the second card:");
-            while(choice2==null){
-                choice2 = players[i].chooseCard(individualHand);
-                if(choice2==null) System.out.println("You must choose a card: ");
+            for(Card card: individualHand){
+                while(card==null){
+                    card = players[i].chooseCard(individualHand);
+                    if (card == null) System.out.println("You must choose a card: ");
+                }
+                System.out.println("Choose the next card:");
             }
 
             players[i].addCardListToHand(individualHand);
         }
-        players[0].addCardToHand(choice1);
-        players[0].addCardToHand(choice2);
-    }
-
-    public ArrayList<Card> getFirstHand(){
-        ArrayList<Card> tempHand = new ArrayList<Card>();
-        for (int i=0; i<NUM_INIT_CARDS;i++){
-            tempHand.add(cardManager.drawACard());
-        }
-        return tempHand;
+        players[0].addCardListToHand(choices);
     }
 
     public CardManager getCardManager() {

@@ -58,7 +58,7 @@ public class DiceDiscs {
         boolean activateEnabled = false;
         position--;
 
-        //TODO: Change position-- to the player interface
+        //TODO: Change position -- to the player interface
 
         if(activeCards[player.getPlayerID()][position] != null){
             activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
@@ -84,7 +84,7 @@ public class DiceDiscs {
     }
 
     public String getCardName(int player, int position){
-        String cardName = null;
+        String cardName;
 
         if(activeCards[player][position] != null){
             cardName = activeCards[player][position].getName();

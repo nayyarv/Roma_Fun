@@ -76,6 +76,14 @@ public class CardManager {
         return temp;
     }
 
+    public ArrayList<Card> drawNCards(int number){
+        ArrayList<Card> drawHand = new ArrayList<Card>();
+        for (int i=0; i<number;i++){
+            drawHand.add(drawACard());
+        }
+        return drawHand;
+    }
+
     //
     public void insertCard(Card theCard) {
         playingDeck.add(0, theCard);

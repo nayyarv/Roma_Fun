@@ -12,6 +12,10 @@ public class Roma {
     public final static int PLAYER_ONE = 0;
     public final static int PLAYER_TWO = 1;
     public final static int PAUSE_DURATION = 1500;
+    public final static int NUM_CARDS_SWAPPED = 2;
+    public final static int NUM_INIT_CARDS = 5;
+
+
 
     //Object pointers
     PlayerInterface playerInterface = new PlayerInterface();

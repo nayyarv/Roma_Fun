@@ -29,6 +29,17 @@ public class Praetorianus extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetDisc = -1;
+
+        playArea.printStats();
+        System.out.println("Blocking...");
+        targetDisc = player.chooseCardDisc();
+        if(targetDisc != -1){ // not cancel
+            battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
+        } else {
+            activated = false;
+        }
 
         return activated;
     }

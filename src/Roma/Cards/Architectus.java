@@ -47,6 +47,7 @@ public class Architectus extends Card {
         }
 
         while(!endSelection){
+            playArea.printStats();
             chosenCard = player.chooseCard(tempHand);
             if(chosenCard == null){
                 endSelection = true;

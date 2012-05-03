@@ -1,7 +1,7 @@
 package Roma.Cards;
 
-import Roma.PlayArea;
-import Roma.Player;
+import Roma.*;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -9,13 +9,13 @@ import Roma.Player;
  * Desc:
  */
 public class Legionarius extends Card {
-    private final static String NAME = "Legionarius";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Attacks the opponent's card which is directly opposite, " +
+    public final static String NAME = "Legionarius";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Attacks the opponent's card which is directly opposite, " +
             "whether it is a character or a building card.";
-    private final static int COST = 4;
-    private final static int DEFENCE = 5;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 4;
+    final static int DEFENCE = 5;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 3;
 
@@ -27,6 +27,16 @@ public class Legionarius extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
+            System.out.println("No card to attack!");
+            activated = false;
+        } else {
+            battleManager.battle(targetPlayerID, position);
+        }
 
         return activated;
     }

@@ -3,7 +3,6 @@ package Roma;
 import Roma.Cards.Card;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -64,8 +63,6 @@ public class Player {
         int option = 0;
         Dice chosenDie = null;
         boolean endTurn = false;
-
-        printCardList(hand);
 
         //choose an action
         option = playerInterface.readInput("Select Option:",
@@ -231,7 +228,7 @@ public class Player {
 
         printCardList(cardList);
 
-        if(cardList.size() != 0){
+        if(cardList.size() == 0){
             System.out.println("There are no cards!");
         } else {
             while(!validChoice){
@@ -353,22 +350,6 @@ public class Player {
         hand.add(chosenCard);
     }
 
-    public void layCard() {
-        Card card = null;
-        int playerChoice = 0;
-        int position = 3;
-
-        // player chooses a card in hand
-        do {
-            playerChoice = 0;
-            card = hand.get(playerChoice);
-            position = 4;
-        } while (!commit() && !card.isPlayable());
-
-
-        //playArea.getDiceDiscs().placeCard(card, position);
-    }
-
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
         for (Card card : hand) {
@@ -416,5 +397,9 @@ public class Player {
 
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
     }
 }

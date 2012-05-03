@@ -1,12 +1,17 @@
 package Roma;
 
 import Roma.Cards.Card;
+import Roma.Cards.Turris;
 
 import java.util.ArrayList;
 
 public class DiceDiscs {
+    private static final boolean DEBUG = true;
     public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;
+    public static final int TURRIS_LAID = 1;
+    public static final int TURRIS_DISCARD = -1;
+
     private final PlayArea playArea;
 
     private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
@@ -22,6 +27,10 @@ public class DiceDiscs {
                 }
             discs.add(new ArrayList<Dice>());
         }
+    }
+
+    public Card[] getPlayerActives(int playerID){
+        return activeCards[playerID];
     }
 
     public ArrayList<Card> setOfCards(Player player, String type){
@@ -45,12 +54,18 @@ public class DiceDiscs {
         cardDisc.clear();
     }
 
-    public void layCard(int player, int position, Card newCard) {
-        position--;
-        if(activeCards[player][position] !=  null){
-            playArea.getCardManager().discard(activeCards[player][position]);
+    public void layCard(int playerID, int position, Card newCard) {
+        BattleManager battleManager = playArea.getBattleManager();
+        if(newCard.getName() == Turris.NAME){
+            battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
         }
-        activeCards[player][position] = newCard;
+
+        //TODO: Check position declarations
+        position--;
+        if(activeCards[playerID][position] !=  null){
+            playArea.getCardManager().discard(activeCards[playerID][position]);
+        }
+        activeCards[playerID][position] = newCard;
     }
 
     public boolean activateCard(Player player, int position, Dice die) {
@@ -61,13 +76,18 @@ public class DiceDiscs {
         //TODO: Change position -- to the player interface
 
         if(activeCards[player.getPlayerID()][position] != null){
+            if(DEBUG){
+                System.out.println("Card activating: " + activeCards[player.getPlayerID()][position].getName());
+            }
             activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
             activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
 
             if(activateEnabled){
-                discs.get(position).add(die);
                 activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
+                if(activateEnabled){
+                    discs.get(position).add(die);
+                }
             } else {
                 System.out.println("That card can't be activated");
             }
@@ -127,8 +147,77 @@ public class DiceDiscs {
 
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
+        BattleManager battleManager = playArea.getBattleManager();
+
+        Card card = activeCards[playerID][position];
+        if(card.getName() == Turris.NAME){
+            battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
+        }
 
         cardManager.discard(activeCards[playerID][position]);
         activeCards[playerID][position] = null;
+    }
+
+    public boolean checkAdjacent(int playerID, int position, String cardName){
+        boolean adjacent = false;
+
+        if(position > 1){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        if(position < 6){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+
+        return adjacent;
+    }
+
+    public boolean checkAdjacentDown(int playerID, int position, String cardName){
+        boolean adjacent = false;
+        if(position > 1){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        return adjacent;
+    }
+
+    public boolean checkAdjacentUp(int playerID, int position, String cardName){
+        boolean adjacent = false;
+        if(position < 6){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        return adjacent;
+    }
+
+    public void returnTarget(int targetPlayerID, int position){
+        Player targetPlayer = playArea.getPlayer(targetPlayerID);
+
+        targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
+        activeCards[targetPlayerID][position] = null;
+    }
+
+    public void clearPlayerDice(int playerID){
+        ArrayList<Dice> disc;
+
+        for(int i = 0; i < CARD_POSITIONS; i++){
+            disc = discs.get(i);
+            if(!disc.isEmpty()){
+                for(Dice die : disc){
+                    if(die.getPlayerID() == playerID){
+                        disc.remove(die);
+                    }
+                }
+            }
+        }
+    }
+
+    public void addDiceToDisc(int targetDisc, Dice die){
+        discs.get(targetDisc).add(die);
     }
 }

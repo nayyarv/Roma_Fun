@@ -12,14 +12,14 @@ import Roma.*;
 import java.util.Scanner;
 
 public class Mercator extends Card {
-    private final static String NAME = "Mercator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
+    public final static String NAME = "Mercator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
             " from their opponent as long as there are money and victory points left!" +
             "The opponent gets the money.";
-    private final static int COST = 7;
-    private final static int DEFENCE = 2;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 7;
+    final static int DEFENCE = 2;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 1;
 
@@ -28,29 +28,36 @@ public class Mercator extends Card {
     }
 
     public boolean activate(Player player, int position) {
+        final String STR_PROMPT = "How many Victory Points would you like from your opponent? (max 3 or 0 to cancel): ";
+        final int MAX_PURCHASE = 3;
+        final int MIN_PURCHASE = 1;
+
         boolean activated = true;
-
-        PlayArea playArea = super.getPlayArea();
-        //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
-        int numTokensReqd;
-
-        String prompt = "How many Victory Points would you like from your opponent?: ";
-        System.out.println(prompt);
         Scanner input = new Scanner(System.in);
-        numTokensReqd = input.nextInt();
-        //TODO: Fix this part
-        //if (playArea.getMoneyManager().transferMoney(player, otherPlayer(player), 2 * numTokensReqd)) {
-          //  playArea.getVictoryTokens().playerToPlayer(otherPlayer(player), player, numTokensReqd);
-        //}
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        boolean validInput = false;
+
+        //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
+        int numTokensRead;
+
+        System.out.println(STR_PROMPT);
+
+        while(!validInput){
+            numTokensRead = input.nextInt();
+            if(numTokensRead <= MAX_PURCHASE && numTokensRead >= MIN_PURCHASE){
+                if (moneyManager.transferMoney(player.getPlayerID(), otherPlayer(player.getPlayerID()), 2 * numTokensRead)) {
+                    victoryTokens.playerToPlayer(otherPlayer(player.getPlayerID()), player.getPlayerID(), numTokensRead);
+                    validInput = true;
+                }
+            } else if (numTokensRead == 0) {
+                validInput = true;
+                activated = false;
+            } else {
+                System.out.println("Please give a valid number");
+            }
+        }
 
         return activated;
-    }
-
-    private int otherPlayer(int player) {
-        if (player == Roma.PLAYER_ONE) {
-            return Roma.PLAYER_TWO;
-        } else {
-            return Roma.PLAYER_ONE;
-        }
     }
 }

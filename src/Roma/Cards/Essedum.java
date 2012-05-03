@@ -9,13 +9,13 @@ import Roma.*;
  * Desc:
  */
 public class Essedum extends Card {
-    private final static String NAME = "Essedum";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
-    private final static int COST = 6;
-    private final static int DEFENCE = 3;
-    private final static boolean ACTIVATE_ENABLED = true;
-    private final static int MOD_DEFENCE_ACTIVE = -2;
+    public final static String NAME = "Essedum";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
+    final static int COST = 6;
+    final static int DEFENCE = 3;
+    final static boolean ACTIVATE_ENABLED = true;
+    final static int MOD_DEFENCE_ACTIVE = -2;
 
     public final static int OCCURENCES = 2;
 

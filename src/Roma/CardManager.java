@@ -105,7 +105,9 @@ public class CardManager {
         }
     }
 
-
+    public ArrayList<Card> getPlayingDeck() {
+        return playingDeck;
+    }
 
     public int getPlayingSize() {
         return playingDeck.size();

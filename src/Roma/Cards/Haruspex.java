@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -28,8 +30,14 @@ public class Haruspex extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        CardManager cardManager = playArea.getCardManager();
+        ArrayList<Card> deck = cardManager.getPlayingDeck();
+        Card chosenCard;
 
+        chosenCard = player.chooseCard(deck);
+        player.addCardToHand(chosenCard);
 
+        cardManager.shuffle();
 
         return activated;
     }

@@ -16,10 +16,13 @@ public class CardManager {
     private final ArrayList<Card> playingDeck = new ArrayList<Card>();
     private final ArrayList<Card> discardPile = new ArrayList<Card>();
 
+    private PlayArea playArea;
+
     //Variabls
     private boolean noMoreCards = false;
 
     public CardManager(PlayArea playArea) {
+        this.playArea = playArea;
         //Will insert all cards, and shuffle
         addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
         addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
@@ -97,6 +100,17 @@ public class CardManager {
             shuffle();
             noMoreCards = false;
         }
+    }
+
+
+    public Card getCardfromDeck(String name){
+        for(Card card: playingDeck){
+            if (card.nameEquals(name)){
+                playingDeck.remove(card);
+                return card;
+            }
+        }
+        return null;
     }
 
     public void discard(ArrayList<Card> cardList) {

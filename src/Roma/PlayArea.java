@@ -73,7 +73,9 @@ public class PlayArea {
     }
 
     //for testing
-    public PlayArea(){
+    @Deprecated
+    public PlayArea(boolean testing){
+        assert testing;
         System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
@@ -88,8 +90,10 @@ public class PlayArea {
         }
     }
 
-    public void getCardfromDeckfor(String cardName, int playerID){
+    public void getCardfromDeckAndAddToHand(String cardName, int playerID){
         //for testing
+        Card obtain = cardManager.getCardfromDeck(cardName);
+        players[playerID].addCardToHand(obtain);
 
     }
 

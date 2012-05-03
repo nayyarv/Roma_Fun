@@ -32,12 +32,4 @@ public class TribunisPlebis extends Card {
 
         return activated;
     }
-
-    private int otherPlayer(int player) {
-        if (player == Roma.PLAYER_ONE) {
-            return Roma.PLAYER_TWO;
-        } else {
-            return Roma.PLAYER_ONE;
-        }
-    }
 }

@@ -99,8 +99,14 @@ public class DiceDiscs {
     }
 
     public boolean useBriberyDisc(Player player, Dice die){
+        boolean activated = false;
+        MoneyManager moneyManager = playArea.getMoneyManager();
         int position = BRIBERY_POSITION;
-        return activateCard(player, position, die);
+        if(moneyManager.loseMoney(player.getPlayerID(), die.getValue())){
+            activated = activateCard(player, position, die);
+        }
+
+        return activated;
     }
 
     public String getCardName(int player, int position){

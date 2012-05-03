@@ -2,6 +2,9 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -27,7 +30,39 @@ public class Scaenicus extends Card {
 
     //TODO: handle infinite loop selecting self
     public boolean activate(Player player, int position) {
+        //TODO: refactor input to interface or player
+        Scanner input = new Scanner(System.in);
+        ArrayList<Integer> validInput = new ArrayList<Integer>();
+        boolean inputValid = false;
+        int chosenInput = -1;
+
         boolean activated = true;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        Card[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
+
+        System.out.println("Available Targets:");
+        for(int i = 0; i < friendlyCards.length; i++){
+            if(friendlyCards[i].getType() == Card.CHARACTER){
+                System.out.println((i + 1) + ") " + friendlyCards[i].getName());
+                validInput.add(i + 1);
+            } else {
+                System.out.println((i + 1) + ") #");
+            }
+        }
+
+        while(!inputValid){
+            chosenInput = input.nextInt();
+            for(int number : validInput){
+                if(chosenInput == number){
+                    inputValid = true;
+                }
+            }
+        }
+        chosenInput--;
+
+        friendlyCards[chosenInput].activate(player, position);
 
         return activated;
     }

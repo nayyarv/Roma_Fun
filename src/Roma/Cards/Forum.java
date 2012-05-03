@@ -38,7 +38,7 @@ public class Forum extends Card {
         Dice chosenDie = null;
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
 
-        if(freeDice.size() == 0){
+        if(freeDice.isEmpty()){
             activated = false;
             System.out.println("Not enough free action dice!");
         } else {
@@ -46,10 +46,25 @@ public class Forum extends Card {
             chosenDie = player.chooseDie(freeDice);
             if(chosenDie != null){
                 victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
-                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME))
-                //TODO: check for 2 special adjacency cases
+                // check for adjacent Templum
+                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
+                    System.out.println("Would you like to use a 3rd die?");
+                    chosenDie = null;
+                    chosenDie = player.chooseDie(freeDice);
+                    if(chosenDie != null){
+                        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+                    }
+                }
+                // check for adjacent Basilicas
+                if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
+                    System.out.println("You get 2 extra victory tokens from your adjacent Basilica!");
+                }
+                if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
+                    System.out.println("You get 2 extra victory tokens from your adjacent Basilica!");
+                }
             } else {
                 activated = false;
+                System.out.println("Card activation cancelled.");
             }
         }
 

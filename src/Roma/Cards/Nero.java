@@ -44,7 +44,7 @@ public class Nero extends Card {
 
         System.out.println("Available Targets:");
         for(int i = 0; i < enemyCards.length; i++){
-            if(enemyCards[i].getType() == Card.BUILDING){
+            if(enemyCards[i] != null && enemyCards[i].getType() == Card.BUILDING){
                 System.out.println((i + 1) + ") " + enemyCards[i].getName());
                 validInput.add(i + 1);
             } else {

@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.Card;
+import Roma.Cards.Turris;
 
 import java.util.ArrayList;
 
@@ -49,12 +50,18 @@ public class DiceDiscs {
         cardDisc.clear();
     }
 
-    public void layCard(int player, int position, Card newCard) {
-        position--;
-        if(activeCards[player][position] !=  null){
-            playArea.getCardManager().discard(activeCards[player][position]);
+    public void layCard(int playerID, int position, Card newCard) {
+        BattleManager battleManager = playArea.getBattleManager();
+        if(newCard.getName() == Turris.NAME){
+            battleManager.modDefenseModPassive(playerID, 1);
         }
-        activeCards[player][position] = newCard;
+
+        //TODO: Check position declarations
+        position--;
+        if(activeCards[playerID][position] !=  null){
+            playArea.getCardManager().discard(activeCards[playerID][position]);
+        }
+        activeCards[playerID][position] = newCard;
     }
 
     public boolean activateCard(Player player, int position, Dice die) {
@@ -131,6 +138,12 @@ public class DiceDiscs {
 
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
+        BattleManager battleManager = playArea.getBattleManager();
+
+        Card card = activeCards[playerID][position];
+        if(card.getName() == Turris.NAME){
+            battleManager.modDefenseModPassive(playerID, -1);
+        }
 
         cardManager.discard(activeCards[playerID][position]);
         activeCards[playerID][position] = null;

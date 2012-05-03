@@ -169,6 +169,7 @@ public class PlayArea {
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
+        battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
     }
 

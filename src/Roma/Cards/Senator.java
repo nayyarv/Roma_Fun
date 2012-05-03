@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -28,6 +30,32 @@ public class Senator extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+
+        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<Card> hand = player.getHand();
+        boolean endSelection = false;
+        Card chosenCard = null;
+        int targetPosition;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        for(Card card : hand){
+            if(card.getType() == Card.CHARACTER){
+                if(hand.remove(card)){
+                    tempHand.add(card);
+                }
+            }
+        }
+
+        while(!endSelection){
+            playArea.printStats();
+            chosenCard = player.chooseCard(tempHand);
+            if(chosenCard == null){
+                endSelection = true;
+            } else {
+                targetPosition = player.chooseCardDisc();
+                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+            }
+        }
 
         return activated;
     }

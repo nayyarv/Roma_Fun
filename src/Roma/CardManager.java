@@ -61,6 +61,10 @@ public class CardManager {
         Collections.shuffle(playingDeck);
     }
 
+    public void shuffle(ArrayList<Card> cardList){
+        Collections.shuffle(cardList);
+    }
+
     private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);

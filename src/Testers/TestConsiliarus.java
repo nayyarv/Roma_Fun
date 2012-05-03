@@ -15,6 +15,11 @@ public class TestConsiliarus {
         PlayArea playArea = new PlayArea(true);
         Card temp = new Consiliarus(playArea);
 
+        playArea.getCardfromDeckAndAddToHand("Senator", Roma.PLAYER_ONE);
+        playArea.getCardfromDeckAndAddToHand("Sicarius", Roma.PLAYER_ONE);
+        playArea.getCardfromDeckAndAddToHand("Gladiator", Roma.PLAYER_ONE);
+        playArea.getCardfromDeckAndAddToHand("Sicarius", Roma.PLAYER_ONE);
+        System.err.println(playArea.getPlayer(Roma.PLAYER_ONE).getHand().toString());
 
 
 

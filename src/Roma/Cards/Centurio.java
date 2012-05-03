@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Centurio extends Card {
     public final static String NAME = "Centurio";
     final static String TYPE = Card.CHARACTER;
-    final static String DESCRIPTION = "attacks the card directly opposite, whether it is a character " +
+    final static String DESCRIPTION = "Attacks the card directly opposite, whether it is a character " +
             "or building card." +
             " The value of an unused action die can be added to the value of the battle die (the action die is " +
             "then counted as used)." +
@@ -50,6 +50,7 @@ public class Centurio extends Card {
                 if(freeDice.size() != 0){
                     chosenDie = player.chooseDie(freeDice);
                     if(chosenDie != null){
+                        diceDiscs.addDiceToDisc(position, chosenDie);
                         if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
                             diceDiscs.discardTarget(targetPlayer, position);
                         }

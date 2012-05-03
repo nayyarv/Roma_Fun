@@ -131,4 +131,41 @@ public class DiceDiscs {
         cardManager.discard(activeCards[playerID][position]);
         activeCards[playerID][position] = null;
     }
+
+    public boolean checkAdjacent(int playerID, int position, String cardName){
+        boolean adjacent = false;
+
+        if(position > 1){
+            if(activeCards[playerID][position - 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        if(position < 6){
+            if(activeCards[playerID][position + 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+
+        return adjacent;
+    }
+
+    public boolean checkAdjacentDown(int playerID, int position, String cardName){
+        boolean adjacent = false;
+        if(position > 1){
+            if(activeCards[playerID][position - 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        return adjacent;
+    }
+
+    public boolean checkAdjacentUp(int playerID, int position, String cardName){
+        boolean adjacent = false;
+        if(position < 6){
+            if(activeCards[playerID][position + 1].getName() == cardName){
+                adjacent = true;
+            }
+        }
+        return adjacent;
+    }
 }

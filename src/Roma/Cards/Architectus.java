@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * Desc: Architectus Card
  */
 public class Architectus extends Card {
-    private final static String NAME = "Architectus";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
+    final static String NAME = "Architectus";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
             "of charge. The player is allowed to cover any cards.";
-    private final static int COST = 3;
-    private final static int DEFENCE = 4;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 3;
+    final static int DEFENCE = 4;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

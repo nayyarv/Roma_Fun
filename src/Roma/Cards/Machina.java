@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Machina extends Card {
 
-    private final static String NAME = "Machina";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "The player picks up their building cards and lays " +
+    final static String NAME = "Machina";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "The player picks up their building cards and lays " +
             "them again on any dice discs. Character cards can be covered.";
-    private final static int COST = 4;
-    private final static int DEFENCE = 4;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 4;
+    final static int DEFENCE = 4;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

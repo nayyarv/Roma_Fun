@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Onager extends Card {
 
-    private final static String NAME = "Onager";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "This Roman catapult attacks any opposing building. " +
+    final static String NAME = "Onager";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "This Roman catapult attacks any opposing building. " +
             "The battle die is thrown once.";
-    private final static int COST = 5;
-    private final static int DEFENCE = 4;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 5;
+    final static int DEFENCE = 4;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Legat extends Card {
 
-    private final static String NAME = "Legat";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "A player gets 1 victory point from the stockpile for" +
+    final static String NAME = "Legat";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "A player gets 1 victory point from the stockpile for" +
             "every dice disc not occupied by the opponent.";
-    private final static int COST = 5;
-    private final static int DEFENCE = 2;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 5;
+    final static int DEFENCE = 2;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

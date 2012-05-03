@@ -9,14 +9,14 @@ import Roma.*;
  * Desc:
  */
 public class Senator extends Card {
-    private final static String NAME = "Senator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
+    final static String NAME = "Senator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
             "they wish free of " +
             "charge. The player is allowed to cover any cards.";
-    private final static int COST = 3;
-    private final static int DEFENCE = 3;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 3;
+    final static int DEFENCE = 3;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

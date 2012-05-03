@@ -11,14 +11,14 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Consul extends Card {
-    private final static String NAME = "Gladiator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "The score on an action die which has not yet been " +
+    final static String NAME = "Gladiator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "The score on an action die which has not yet been " +
             "used can be " +
             "increased or decreased by 1 point.";
-    private final static int COST = 3;
-    private final static int DEFENCE = 3;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 3;
+    final static int DEFENCE = 3;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

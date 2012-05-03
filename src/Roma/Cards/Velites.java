@@ -9,13 +9,13 @@ import Roma.*;
  * Desc:
  */
 public class Velites extends Card {
-    private final static String NAME = "Velites";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Attacks any opposing character card " +
+    final static String NAME = "Velites";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Attacks any opposing character card " +
             "(does not have to be directly opposite). The battle die is thrown once.";
-    private final static int COST = 8;
-    private final static int DEFENCE = 3;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 8;
+    final static int DEFENCE = 3;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

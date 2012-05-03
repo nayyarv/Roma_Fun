@@ -11,16 +11,16 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Centurio extends Card {
-    private final static String NAME = "Centurio";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "attacks the card directly opposite, whether it is a character " +
+    final static String NAME = "Centurio";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "attacks the card directly opposite, whether it is a character " +
             "or building card." +
             " The value of an unused action die can be added to the value of the battle die (the action die is " +
             "then counted as used)." +
             " This is decided after the battle die has been thrown.";
-    private final static int COST = 9;
-    private final static int DEFENCE = 5;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 9;
+    final static int DEFENCE = 5;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

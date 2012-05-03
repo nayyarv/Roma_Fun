@@ -9,13 +9,13 @@ import Roma.*;
  * Desc:
  */
 public class Nero extends Card {
-    private final static String NAME = "Nero";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
+    final static String NAME = "Nero";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
             "The destroyed card and Nero are both discarded.";
-    private final static int COST = 8;
-    private final static int DEFENCE = 9;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 8;
+    final static int DEFENCE = 9;
+    final static boolean ACTIVATE_ENABLED = true;
 
 
     public final static int OCCURENCES = 1;

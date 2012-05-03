@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Aesculapinum extends Card {
-    private final static String NAME = "Aesculapinum";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "The temple of Asculapius (the God of healing) enables the player to " +
+    final static String NAME = "Aesculapinum";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "The temple of Asculapius (the God of healing) enables the player to " +
             "pick up any character card from the discard pile and add it to their hand.";
-    private final static int COST = 5;
-    private final static int DEFENCE = 2;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 5;
+    final static int DEFENCE = 2;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

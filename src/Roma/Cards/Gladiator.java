@@ -9,13 +9,13 @@ import Roma.*;
  * Desc:
  */
 public class Gladiator extends Card {
-    private final static String NAME = "Gladiator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
+    final static String NAME = "Gladiator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
             "whose turn it is) must be returned to the opponent's hand.";
-    private final static int COST = 6;
-    private final static int DEFENCE = 5;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 6;
+    final static int DEFENCE = 5;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

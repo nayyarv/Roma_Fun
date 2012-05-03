@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Praetorianus extends Card {
 
-    private final static String NAME = "Praetorianus";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
+    final static String NAME = "Praetorianus";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
             " for one go.";
-    private final static int COST = 8;
-    private final static int DEFENCE = 9;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 8;
+    final static int DEFENCE = 9;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

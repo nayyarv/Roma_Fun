@@ -12,14 +12,14 @@ import Roma.*;
 import java.util.Scanner;
 
 public class Mercator extends Card {
-    private final static String NAME = "Mercator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
+    final static String NAME = "Mercator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "For 2 sestertii each, the player can buy 1 victory point" +
             " from their opponent as long as there are money and victory points left!" +
             "The opponent gets the money.";
-    private final static int COST = 7;
-    private final static int DEFENCE = 2;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 7;
+    final static int DEFENCE = 2;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 1;
 

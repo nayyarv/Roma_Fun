@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Mercatus extends Card {
 
-    private final static String NAME = "Mercatus";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "The player gets 1 victory point from the pool" +
+    final static String NAME = "Mercatus";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "The player gets 1 victory point from the pool" +
                     " for every face-up Forum that the opponent has.";
-    private final static int COST = 6;
-    private final static int DEFENCE = 3;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 6;
+    final static int DEFENCE = 3;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 

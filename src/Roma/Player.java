@@ -101,7 +101,7 @@ public class Player {
         chosenCard = chooseCard(hand);
         if(chosenCard != null){
             chosenPosition = chooseCardDisc();
-            if(moneyManager.loseMoney(playerID, chosenCard.getCost())){
+            if(chosenPosition != CANCEL && moneyManager.loseMoney(playerID, chosenCard.getCost())){
                 diceDiscs.layCard(playerID, chosenPosition, chosenCard);
             } else {
                 hand.add(chosenCard);

@@ -1,7 +1,7 @@
 package Roma.Cards;
 
-import Roma.PlayArea;
-import Roma.Player;
+import Roma.*;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -27,6 +27,16 @@ public class Legionarius extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
+            System.out.println("No card to attack!");
+            activated = false;
+        } else {
+            battleManager.battle(targetPlayerID, position);
+        }
 
         return activated;
     }

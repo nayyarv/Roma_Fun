@@ -69,11 +69,11 @@ public class BattleManager {
         }
     }
 
-    public boolean battle(int targetPlayer, int target){
+    public boolean battle(int targetPlayerID, int target){
         //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
-        Card targetCard = diceDiscs.getTargetCard(targetPlayer, target);
+        Card targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
 
         //TODO: Allow player to roll
         diceHolder.rollBattleDice();
@@ -81,9 +81,12 @@ public class BattleManager {
 
         //TODO: Print battle die value
 
-        if(battleValue[0] >= targetCard.getDefense() + defenseModPassive[targetPlayer] + defenseModActive[targetPlayer]){
-            diceDiscs.discardTarget(targetPlayer, target);
+        if(battleValue[0] >= targetCard.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID]){
+            diceDiscs.discardTarget(targetPlayerID, target);
             kill = true;
+            System.out.println("Battle Victory!");
+        } else {
+            System.out.println("Battle Defeat!");
         }
 
         return kill;

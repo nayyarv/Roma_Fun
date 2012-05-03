@@ -55,6 +55,12 @@ public class Gladiator extends Card {
             }
         }
 
+        if(validInput.isEmpty()){
+            System.out.println("No valid targets!");
+            inputValid = true;
+            activated = false;
+        }
+
         while(!inputValid){
             chosenInput = input.nextInt();
             for(int number : validInput){

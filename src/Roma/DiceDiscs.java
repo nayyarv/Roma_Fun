@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class DiceDiscs {
     public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;
+    public static final int TURRIS_LAID = 1;
+    public static final int TURRIS_DISCARD = -1;
+
     private final PlayArea playArea;
 
     private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
@@ -53,7 +56,7 @@ public class DiceDiscs {
     public void layCard(int playerID, int position, Card newCard) {
         BattleManager battleManager = playArea.getBattleManager();
         if(newCard.getName() == Turris.NAME){
-            battleManager.modDefenseModPassive(playerID, 1);
+            battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
         }
 
         //TODO: Check position declarations
@@ -142,7 +145,7 @@ public class DiceDiscs {
 
         Card card = activeCards[playerID][position];
         if(card.getName() == Turris.NAME){
-            battleManager.modDefenseModPassive(playerID, -1);
+            battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
         }
 
         cardManager.discard(activeCards[playerID][position]);

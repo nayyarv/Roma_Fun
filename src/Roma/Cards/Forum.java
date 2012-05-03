@@ -45,6 +45,7 @@ public class Forum extends Card {
             System.out.println("Please choose a second die to use");
             chosenDie = player.chooseDie(freeDice);
             if(chosenDie != null){
+                diceDiscs.addDiceToDisc(position, chosenDie);
                 victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
                 // check for adjacent Templum
                 if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
@@ -52,6 +53,7 @@ public class Forum extends Card {
                     chosenDie = null;
                     chosenDie = player.chooseDie(freeDice);
                     if(chosenDie != null){
+                        diceDiscs.addDiceToDisc(position, chosenDie);
                         victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
                     }
                 }

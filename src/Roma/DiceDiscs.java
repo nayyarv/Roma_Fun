@@ -163,12 +163,12 @@ public class DiceDiscs {
         boolean adjacent = false;
 
         if(position > 1){
-            if(activeCards[playerID][position - 1].getName() == cardName){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
                 adjacent = true;
             }
         }
         if(position < 6){
-            if(activeCards[playerID][position + 1].getName() == cardName){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -179,7 +179,7 @@ public class DiceDiscs {
     public boolean checkAdjacentDown(int playerID, int position, String cardName){
         boolean adjacent = false;
         if(position > 1){
-            if(activeCards[playerID][position - 1].getName() == cardName){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -189,7 +189,7 @@ public class DiceDiscs {
     public boolean checkAdjacentUp(int playerID, int position, String cardName){
         boolean adjacent = false;
         if(position < 6){
-            if(activeCards[playerID][position + 1].getName() == cardName){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -216,5 +216,9 @@ public class DiceDiscs {
                 }
             }
         }
+    }
+
+    public void addDiceToDisc(int targetDisc, Dice die){
+        discs.get(targetDisc).add(die);
     }
 }

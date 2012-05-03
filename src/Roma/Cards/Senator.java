@@ -1,6 +1,8 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
 
 import java.util.ArrayList;
 
@@ -46,14 +48,18 @@ public class Senator extends Card {
             }
         }
 
-        while(!endSelection){
-            playArea.printStats();
-            chosenCard = player.chooseCard(tempHand);
-            if(chosenCard == null){
-                endSelection = true;
-            } else {
-                targetPosition = player.chooseCardDisc();
-                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+        if(tempHand.isEmpty()){
+            activated = false;
+        } else {
+            while(!endSelection){
+                playArea.printStats();
+                chosenCard = player.chooseCard(tempHand);
+                if(chosenCard == null){
+                    endSelection = true;
+                } else {
+                    targetPosition = player.chooseCardDisc();
+                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+                }
             }
         }
 

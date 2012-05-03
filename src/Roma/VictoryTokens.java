@@ -48,11 +48,21 @@ public class VictoryTokens {
     }
 
     private void checkEndConditions(){
-        boolean shouldGameEnd = (tokenPool<=END_GAME_VALUE);
-        for (int i=0; !shouldGameEnd && (i< Roma.MAX_PLAYERS); i++){
-            shouldGameEnd = !(playerTokens[i]<=END_GAME_VALUE);
+        boolean shouldGameEnd = false;
+
+        if(tokenPool <= END_GAME_VALUE){
+            shouldGameEnd = true;
+        }
+        for (int i = 0; !shouldGameEnd && i < Roma.MAX_PLAYERS; i++){
+            if(playerTokens[i] <= END_GAME_VALUE){
+                shouldGameEnd = true;
+            }
          } //checks each player isn't bankrupt of victory tokens
         if(shouldGameEnd){
+            System.out.println("Player1: " + playerTokens[0]);
+            System.out.println("Player2: " + playerTokens[1]);
+            System.out.println("Token Pool: " + tokenPool);
+
             playArea.endGame();
         }
     }

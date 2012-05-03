@@ -87,7 +87,7 @@ public class BattleManager {
         battleValue = diceHolder.getBattleValue();
 
         //TODO: Print battle die value
-        System.out.println("You rolled a:" + battleValue[0]);
+        System.out.println("You rolled a: " + battleValue[0]);
         if(battleValue[0] >= defense){
             diceDiscs.discardTarget(targetPlayerID, target);
             kill = true;

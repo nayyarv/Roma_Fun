@@ -6,6 +6,7 @@ import Roma.Cards.Turris;
 import java.util.ArrayList;
 
 public class DiceDiscs {
+    private static final boolean DEBUG = true;
     public static final int BRIBERY_POSITION = 6;
     public static final int CARD_POSITIONS = 7;
     public static final int TURRIS_LAID = 1;
@@ -72,16 +73,22 @@ public class DiceDiscs {
         boolean activateEnabled = false;
         position--;
 
+
         //TODO: Change position-- to the player interface
 
         if(activeCards[player.getPlayerID()][position] != null){
+            if(DEBUG){
+                System.out.println("Card activating: " + activeCards[player.getPlayerID()][position].getName());
+            }
             activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
             activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
 
             if(activateEnabled){
-                discs.get(position).add(die);
                 activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
+                if(activateEnabled){
+                    discs.get(position).add(die);
+                }
             } else {
                 System.out.println("That card can't be activated");
             }
@@ -194,5 +201,20 @@ public class DiceDiscs {
 
         targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
         activeCards[targetPlayerID][position] = null;
+    }
+
+    public void clearPlayerDice(int playerID){
+        ArrayList<Dice> disc;
+
+        for(int i = 0; i < CARD_POSITIONS; i++){
+            disc = discs.get(i);
+            if(!disc.isEmpty()){
+                for(Dice die : disc){
+                    if(die.getPlayerID() == playerID){
+                        disc.remove(die);
+                    }
+                }
+            }
+        }
     }
 }

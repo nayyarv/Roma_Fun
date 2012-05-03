@@ -350,22 +350,6 @@ public class Player {
         hand.add(chosenCard);
     }
 
-    public void layCard() {
-        Card card = null;
-        int playerChoice = 0;
-        int position = 3;
-
-        // player chooses a card in hand
-        do {
-            playerChoice = 0;
-            card = hand.get(playerChoice);
-            position = 4;
-        } while (!commit() && !card.isPlayable());
-
-
-        //playArea.getDiceDiscs().placeCard(card, position);
-    }
-
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
         for (Card card : hand) {

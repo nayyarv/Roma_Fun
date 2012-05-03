@@ -29,6 +29,8 @@ public class Haruspex extends Card {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
+
+
         return activated;
     }
 }

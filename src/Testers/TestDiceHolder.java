@@ -53,7 +53,7 @@ public class TestDiceHolder {
     }
 
     private static void statisticsTest() {
-        int[] diceValues = new int[Dice.DICE_SIZE];
+        int[] diceValues = new int[Dice.MAX_DIE_VALUE];
 
         for (int i = 0; i < SAMPLE_SIZE; i++) {
             diceValues[--(diceHolder.getBattleValue()[0])]++;
@@ -61,7 +61,7 @@ public class TestDiceHolder {
         }
 
         System.out.println("Dice values: ");
-        for (int i = 0; i < Dice.DICE_SIZE; i++) {
+        for (int i = 0; i < Dice.MAX_DIE_VALUE; i++) {
             System.out.println((i + 1) + " = " + (double) diceValues[i] / SAMPLE_SIZE * 100 + "%");
         }
     }

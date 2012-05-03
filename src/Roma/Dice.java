@@ -3,7 +3,8 @@ package Roma;
 import java.util.Random;
 
 public class Dice {
-    static final public int DICE_SIZE = 6;
+    static final public int MAX_DIE_VALUE = 6;
+    static final public int MIN_DIE_VALUE = 1;
     private final static boolean DEBUG = false;
     private final int playerID;
 
@@ -17,7 +18,7 @@ public class Dice {
     }
 
     public void roll() {
-        value = generator.nextInt(DICE_SIZE);
+        value = generator.nextInt(MAX_DIE_VALUE);
         value++;
     }
 
@@ -27,5 +28,13 @@ public class Dice {
 
     public int getPlayerID() {
         return playerID;
+    }
+
+    public void incrementValue(){
+        value++;
+    }
+
+    public void decrementValue(){
+        value--;
     }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class PlayArea {
     //#defines
+    private final int NUM_INIT_CARDS = 4;
     private final int PAD_LENGTH = 20;
 
     //Object pointers
@@ -36,7 +37,39 @@ public class PlayArea {
             players[i] = Player.makeRealPlayer(i, this);
         }
         getAndSwapCards();
+        layAllCardsInHand();
+    }
 
+    private void layAllCardsInHand() {
+        Player activePlayer = null;
+        ArrayList<Card> hand = null;
+        Card chosenCard = null;
+        int targetDisc;
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            activePlayer = players[i];
+            hand = activePlayer.getHand();
+
+            while(!hand.isEmpty()){
+                printStats();
+                System.out.println(activePlayer.getName() + ", please lay all your cards");
+                chosenCard = null;
+                while(chosenCard == null){
+                    chosenCard = activePlayer.chooseCard(hand);
+                    if(chosenCard == null){
+                        System.out.println("You must choose a card");
+                    }
+                }
+                targetDisc = -1; // cancel value
+                while(targetDisc == -1){
+                    targetDisc = activePlayer.chooseCardDisc();
+                    if(targetDisc == -1){
+                        System.out.println("You must choose a disc");
+                    }
+                }
+                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, chosenCard);
+            }
+        }
     }
 
     //for testing
@@ -144,6 +177,7 @@ public class PlayArea {
         System.out.println("It's " + player.getName() + "'s turn");
         //TODO: lose victory points equal to empty slots
 
+        diceDiscs.clearPlayerDice(turn % Roma.MAX_PLAYERS);
         player.rollActionDice();
 
         //TODO: set up auto roll option
@@ -160,10 +194,12 @@ public class PlayArea {
 //            }
 //        }
 
+        diceDiscs.clearPlayerDice(turn % Roma.MAX_PLAYERS);
 
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
+        battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
     }
 

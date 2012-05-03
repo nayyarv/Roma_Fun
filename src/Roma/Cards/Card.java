@@ -112,4 +112,13 @@ public abstract class Card {
     }
 
     public abstract boolean activate(Player player, int position);
+
+
+    public int otherPlayer(int player) {
+        if (player == Roma.PLAYER_ONE) {
+            return Roma.PLAYER_TWO;
+        } else {
+            return Roma.PLAYER_ONE;
+        }
+    }
 }

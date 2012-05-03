@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Basilica extends Card {
 
-    private final static String NAME = "Basilica";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "If a Forum is activated (it must lie directly next to the basilica)," +
+    public final static String NAME = "Basilica";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "If a Forum is activated (it must lie directly next to the basilica)," +
             " the player gets 2 more victory points. The Basilica itself is not activiated.";
-    private final static int COST = 5;
-    private final static int DEFENCE = 2;
-    private final static boolean ACTIVATE_ENABLED = false;
+    final static int COST = 5;
+    final static int DEFENCE = 2;
+    final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;
 

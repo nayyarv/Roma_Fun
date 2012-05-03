@@ -1,6 +1,12 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
+import Roma.Roma;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * File Name:
@@ -9,13 +15,13 @@ import Roma.*;
  * Desc:
  */
 public class Gladiator extends Card {
-    private final static String NAME = "Gladiator";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
+    public final static String NAME = "Gladiator";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
             "whose turn it is) must be returned to the opponent's hand.";
-    private final static int COST = 6;
-    private final static int DEFENCE = 5;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 6;
+    final static int DEFENCE = 5;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
@@ -27,7 +33,45 @@ public class Gladiator extends Card {
 
 
     public boolean activate(Player player, int position) {
+        //TODO: refactor input to interface or player
+        Scanner input = new Scanner(System.in);
+        ArrayList<Integer> validInput = new ArrayList<Integer>();
+        boolean inputValid = false;
+        int chosenInput = -1;
+
         boolean activated = true;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+
+        System.out.println("Available Targets:");
+        for(int i = 0; i < enemyCards.length; i++){
+            if(enemyCards[i] != null && enemyCards[i].getType() == Card.CHARACTER){
+                System.out.println((i + 1) + ") " + enemyCards[i].getName());
+                validInput.add(i + 1);
+            } else {
+                System.out.println((i + 1) + ") #");
+            }
+        }
+
+        if(validInput.isEmpty()){
+            System.out.println("No valid targets!");
+            inputValid = true;
+            activated = false;
+        }
+
+        while(!inputValid){
+            chosenInput = input.nextInt();
+            for(int number : validInput){
+                if(chosenInput == number){
+                    inputValid = true;
+                }
+            }
+        }
+        chosenInput--;
+
+        diceDiscs.returnTarget(targetPlayerID, chosenInput);
 
         return activated;
     }

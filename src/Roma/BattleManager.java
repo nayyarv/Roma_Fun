@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.Card;
+import Roma.Cards.Turris;
 
 /**
  * Created with IntelliJ IDEA.
@@ -69,21 +70,30 @@ public class BattleManager {
         }
     }
 
-    public boolean battle(int targetPlayer, int target){
+    public boolean battle(int targetPlayerID, int target){
         //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
-        Card targetCard = diceDiscs.getTargetCard(targetPlayer, target);
+        Card targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
+        int defense = targetCard.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID];
 
+        if(targetCard.getName() == Turris.NAME){
+            defense--;
+        }
+
+        System.out.println("Defense to beat: " + defense);
         //TODO: Allow player to roll
         diceHolder.rollBattleDice();
         battleValue = diceHolder.getBattleValue();
 
         //TODO: Print battle die value
-
-        if(battleValue[0] >= targetCard.getDefense() + defenseModPassive[targetPlayer] + defenseModActive[targetPlayer]){
-            diceDiscs.discardTarget(targetPlayer, target);
+        System.out.println("You rolled a: " + battleValue[0]);
+        if(battleValue[0] >= defense){
+            diceDiscs.discardTarget(targetPlayerID, target);
             kill = true;
+            System.out.println("Battle Victory!");
+        } else {
+            System.out.println("Battle Defeat!");
         }
 
         return kill;

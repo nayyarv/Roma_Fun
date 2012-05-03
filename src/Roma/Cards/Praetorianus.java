@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Praetorianus extends Card {
 
-    private final static String NAME = "Praetorianus";
-    private final static String TYPE = Card.CHARACTER;
-    private final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
+    public final static String NAME = "Praetorianus";
+    final static String TYPE = Card.CHARACTER;
+    final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
             " for one go.";
-    private final static int COST = 8;
-    private final static int DEFENCE = 9;
-    private final static boolean ACTIVATE_ENABLED = true;
+    final static int COST = 8;
+    final static int DEFENCE = 9;
+    final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
 
@@ -29,6 +29,17 @@ public class Praetorianus extends Card {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetDisc = -1;
+
+        playArea.printStats();
+        System.out.println("Blocking...");
+        targetDisc = player.chooseCardDisc();
+        if(targetDisc != -1){ // not cancel
+            battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
+        } else {
+            activated = false;
+        }
 
         return activated;
     }

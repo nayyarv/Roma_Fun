@@ -10,13 +10,13 @@ import Roma.*;
  */
 public class Turris extends Card {
 
-    private final static String NAME = "Turris";
-    private final static String TYPE = Card.BUILDING;
-    private final static String DESCRIPTION = "As long as the Turris is face-up, the defence value of all the " +
+    public final static String NAME = "Turris";
+    final static String TYPE = Card.BUILDING;
+    final static String DESCRIPTION = "As long as the Turris is face-up, the defence value of all the " +
             "player's other face-up cards increases by 1.";
-    private final static int COST = 6;
-    private final static int DEFENCE = 6;
-    private final static boolean ACTIVATE_ENABLED = false;
+    final static int COST = 6;
+    final static int DEFENCE = 6;
+    final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;
 
@@ -29,7 +29,6 @@ public class Turris extends Card {
         boolean activated = false;
 
         return activated;
-
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class PlayArea {
     //#defines
-    private final int NUM_INIT_CARDS = 4;
+    private final int NUM_INIT_CARDS = 5;
     private final int PAD_LENGTH = 20;
 
     //Object pointers
@@ -181,7 +181,8 @@ public class PlayArea {
         System.out.println("It's " + player.getName() + "'s turn");
         //TODO: lose victory points equal to empty slots
 
-        diceDiscs.clearPlayerDice(turn % Roma.MAX_PLAYERS);
+        deductVictoryTokens(player.getPlayerID());
+        diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();
 
         //TODO: set up auto roll option
@@ -198,13 +199,22 @@ public class PlayArea {
 //            }
 //        }
 
-        diceDiscs.clearPlayerDice(turn % Roma.MAX_PLAYERS);
-
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
         battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
+    }
+
+    private void deductVictoryTokens(int playerID) {
+        Card[] friendlyCards = diceDiscs.getPlayerActives(playerID);
+        int countNull = 0;
+        for(Card card : friendlyCards){
+            if(card == null){
+                countNull++;
+            }
+        }
+        victoryTokens.playerToPool(playerID, countNull);
     }
 
 

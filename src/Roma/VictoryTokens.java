@@ -41,11 +41,6 @@ public class VictoryTokens {
         checkEndConditions();
     }
 
-    //Not sure if this should be used?
-    public void playerToPlayer(Player fromPlayer, Player toPlayerID, int amount) {
-        playerToPlayer(fromPlayer.getPlayerID(), toPlayerID.getPlayerID(),amount);
-    }
-
     public void playerToPlayer(int fromPlayerID, int toPlayerID, int amount) {
         playerTokens[fromPlayerID] -= amount;
         playerTokens[toPlayerID] += amount;

@@ -19,7 +19,7 @@ public class Templum extends Card {
                     "activated separately.";
     final static int COST = 2;
     final static int DEFENCE = 2;
-    final static boolean ACTIVATE_ENABLED = true;
+    final static boolean ACTIVATE_ENABLED = false;
 
 
     public final static int OCCURENCES = 2;
@@ -30,7 +30,7 @@ public class Templum extends Card {
 
 
     public boolean activate(Player player, int position) {
-        boolean activated = true;
+        boolean activated = false;
 
         return activated;
     }

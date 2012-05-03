@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Aesculapinum extends Card {
-    final static String NAME = "Aesculapinum";
+    public final static String NAME = "Aesculapinum";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The temple of Asculapius (the God of healing) enables the player to " +
             "pick up any character card from the discard pile and add it to their hand.";

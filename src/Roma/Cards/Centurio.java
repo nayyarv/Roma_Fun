@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Centurio extends Card {
-    final static String NAME = "Centurio";
+    public final static String NAME = "Centurio";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "attacks the card directly opposite, whether it is a character " +
             "or building card." +

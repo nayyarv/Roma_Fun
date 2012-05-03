@@ -9,7 +9,7 @@ import Roma.*;
  * Desc:
  */
 public class Velites extends Card {
-    final static String NAME = "Velites";
+    public final static String NAME = "Velites";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks any opposing character card " +
             "(does not have to be directly opposite). The battle die is thrown once.";

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Consiliarus extends Card {
-    final static String NAME = "Consiliarus";
+    public final static String NAME = "Consiliarus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player picks up their character cards and can then lay them again " +
             "on any dice disc. Buildings can be covered.";

@@ -9,7 +9,7 @@ import Roma.*;
  * Desc:
  */
 public class Essedum extends Card {
-    final static String NAME = "Essedum";
+    public final static String NAME = "Essedum";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
     final static int COST = 6;

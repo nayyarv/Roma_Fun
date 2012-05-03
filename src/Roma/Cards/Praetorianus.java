@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Praetorianus extends Card {
 
-    final static String NAME = "Praetorianus";
+    public final static String NAME = "Praetorianus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
             " for one go.";

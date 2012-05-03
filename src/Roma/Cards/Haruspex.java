@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Haruspex extends Card {
-    final static String NAME = "Haruspex";
+    public final static String NAME = "Haruspex";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player can choose any card from the pile of face-down cards " +
             "and add it to their hand. Afterwards the pile is shuffled.";

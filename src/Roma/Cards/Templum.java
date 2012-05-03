@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Templum extends Card {
 
-    final static String NAME = "Templum";
+    public final static String NAME = "Templum";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION =
             "If a Forum is activated (it must lie directly next to the Templum), the third action die can be \n" +

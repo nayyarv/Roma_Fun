@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Desc:
  */
 public class Nero extends Card {
-    final static String NAME = "Nero";
+    public final static String NAME = "Nero";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
             "The destroyed card and Nero are both discarded.";

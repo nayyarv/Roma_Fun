@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Senator extends Card {
-    final static String NAME = "Senator";
+    public final static String NAME = "Senator";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
             "they wish free of " +

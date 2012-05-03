@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Desc:
  */
 public class Gladiator extends Card {
-    final static String NAME = "Gladiator";
+    public final static String NAME = "Gladiator";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "An opponent's face-up character card (chosen by the player " +
             "whose turn it is) must be returned to the opponent's hand.";

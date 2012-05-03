@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Desc: Architectus Card
  */
 public class Architectus extends Card {
-    final static String NAME = "Architectus";
+    public final static String NAME = "Architectus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
             "of charge. The player is allowed to cover any cards.";

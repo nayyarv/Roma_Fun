@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Onager extends Card {
 
-    final static String NAME = "Onager";
+    public final static String NAME = "Onager";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "This Roman catapult attacks any opposing building. " +
             "The battle die is thrown once.";

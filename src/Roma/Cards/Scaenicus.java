@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Desc:
  */
 public class Scaenicus extends Card {
-    final static String NAME = "Scaenicus";
+    public final static String NAME = "Scaenicus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "He performs no action of his own but can copy the action of any of " +
             "the player's own face-up character cards, and the next time round that of another.";

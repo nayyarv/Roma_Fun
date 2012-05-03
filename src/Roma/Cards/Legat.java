@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Legat extends Card {
 
-    final static String NAME = "Legat";
+    public final static String NAME = "Legat";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "A player gets 1 victory point from the stockpile for" +
             "every dice disc not occupied by the opponent.";

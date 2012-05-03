@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Mercatus extends Card {
 
-    final static String NAME = "Mercatus";
+    public final static String NAME = "Mercatus";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The player gets 1 victory point from the opponent " +
                     " for every face-up Forum that the opponent has.";

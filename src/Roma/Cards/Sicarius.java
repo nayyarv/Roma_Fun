@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Desc:
  */
 public class Sicarius extends Card {
-    final static String NAME = "Sicarius";
+    public final static String NAME = "Sicarius";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Eliminates an opposing, face-up character card." +
             "The opposing card and the Sicarius are both discarded.";

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Machina extends Card {
 
-    final static String NAME = "Machina";
+    public final static String NAME = "Machina";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The player picks up their building cards and lays " +
             "them again on any dice discs. Character cards can be covered.";

@@ -44,7 +44,7 @@ public class Scaenicus extends Card {
 
         System.out.println("Available Targets:");
         for(int i = 0; i < friendlyCards.length; i++){
-            if(friendlyCards[i].getType() == Card.CHARACTER){
+            if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
                 System.out.println((i + 1) + ") " + friendlyCards[i].getName());
                 validInput.add(i + 1);
             } else {

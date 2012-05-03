@@ -24,6 +24,10 @@ public class DiceDiscs {
         }
     }
 
+    public Card[] getPlayerActives(int playerID){
+        return activeCards[playerID];
+    }
+
     public ArrayList<Card> setOfCards(Player player, String type){
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
@@ -167,5 +171,12 @@ public class DiceDiscs {
             }
         }
         return adjacent;
+    }
+
+    public void returnTarget(int targetPlayerID, int position){
+        Player targetPlayer = playArea.getPlayer(targetPlayerID);
+
+        targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
+        activeCards[targetPlayerID][position] = null;
     }
 }

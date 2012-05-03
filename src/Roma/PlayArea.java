@@ -74,6 +74,7 @@ public class PlayArea {
 
     //for testing
     public PlayArea(){
+        System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
@@ -109,35 +110,35 @@ public class PlayArea {
         //stores the choices of the previous player
 
         for (int i =0; i<Roma.MAX_PLAYERS;i++){
-
-            for (Card card: choices){
-                players[i].addCardToHand(card);
-                choices.remove(card);
-            }
-
+            choices.clear();
             //add prev choices
-            ArrayList<Card> individualHand
-                    = (ArrayList<Card>)initialSet.subList(
-                    (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS);
+            ArrayList<Card> individualHand = new ArrayList<Card>();
+
+            individualHand.addAll(initialSet.subList(
+                    (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
             //extracts the first num-init-cards from the initial set
 
             System.out.println(players[i].getName() +
-                    ", these are the 4 cards dealt to you.\n" +
-                    "You must choose 2 to give to your opponent.\n" +
+                    ", these are the " +Roma.NUM_INIT_CARDS+ " cards dealt to you.\n" +
+                    "You must choose " + Roma.NUM_CARDS_SWAPPED + " to give to your opponent.\n" +
                     "Choose the first Card");
             //Prompt: move printing to player interface?
 
-            for(Card card: individualHand){
-                while(card==null){
-                    card = players[i].chooseCard(individualHand);
-                    if (card == null) System.out.println("You must choose a card: ");
-                }
-                System.out.println("Choose the next card:");
-            }
+            Card temp = null;
 
+            for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
+                while(temp == null){
+                    temp = players[i].chooseCard(individualHand);
+                    if (temp == null) System.out.println("You must choose a card: ");
+                }
+                choices.add(temp);
+                individualHand.remove(temp);
+                if(j!=Roma.NUM_CARDS_SWAPPED-1) System.out.println("Choose the next card:");
+            }
             players[i].addCardListToHand(individualHand);
+            players[(i+1)%Roma.MAX_PLAYERS].addCardListToHand(choices);
+
         }
-        players[0].addCardListToHand(choices);
     }
 
     public CardManager getCardManager() {

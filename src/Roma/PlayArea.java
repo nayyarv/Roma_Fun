@@ -177,9 +177,9 @@ public class PlayArea {
         char roll = 'b';
 
         System.out.println("It's " + player.getName() + "'s turn");
-        //TODO: lose victory points equal to empty slots
 
-        diceDiscs.clearPlayerDice(turn % Roma.MAX_PLAYERS);
+        deductVictoryTokens(player.getPlayerID());
+        diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();
 
         //TODO: set up auto roll option
@@ -211,6 +211,7 @@ public class PlayArea {
                 countNull++;
             }
         }
+        System.out.println("There are " + countNull + "empty slots, losing that many players");
         victoryTokens.playerToPool(playerID, countNull);
     }
 

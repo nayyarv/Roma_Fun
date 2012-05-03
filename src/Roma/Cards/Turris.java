@@ -9,7 +9,6 @@ import Roma.*;
  * Desc:
  */
 public class Turris extends Card {
-
     public final static String NAME = "Turris";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "As long as the Turris is face-up, the defence value of all the " +

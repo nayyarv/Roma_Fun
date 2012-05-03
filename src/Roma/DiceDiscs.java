@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
+import Roma.Cards.*;
 
 import java.util.ArrayList;
 

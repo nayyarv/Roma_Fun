@@ -64,8 +64,6 @@ public class Player {
         Dice chosenDie = null;
         boolean endTurn = false;
 
-        printCardList(hand);
-
         //choose an action
         option = playerInterface.readInput("Select Option:",
                         "View action dice",
@@ -230,7 +228,7 @@ public class Player {
 
         printCardList(cardList);
 
-        if(cardList.size() != 0){
+        if(cardList.size() == 0){
             System.out.println("There are no cards!");
         } else {
             while(!validChoice){

@@ -78,7 +78,7 @@ public class PlayArea {
             players[i].addCardToHand(choice1);
             players[i].addCardToHand(choice2);
             choice1 = null;
-            choice2=null;
+            choice2 = null;
             //add prev choices
             ArrayList<Card> individualHand = new ArrayList<Card>();
             individualHand.addAll(newHand.subList((i * NUM_INIT_CARDS), (i + 1) * NUM_INIT_CARDS));

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Consul extends Card {
-    public final static String NAME = "Gladiator";
+    public final static String NAME = "Consul";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The score on an action die which has not yet been " +
             "used can be " +

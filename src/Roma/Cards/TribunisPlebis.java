@@ -26,9 +26,10 @@ public class TribunisPlebis extends Card {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
         int ID = player.getPlayerID();
-        PlayArea playArea = super.getPlayArea();
-        playArea.getVictoryTokens().playerToPlayer(otherPlayer(ID), player.getPlayerID(), 1);
+
+        victoryTokens.playerToPlayer(otherPlayer(ID), player.getPlayerID(), 1);
 
         return activated;
     }

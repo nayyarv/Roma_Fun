@@ -4,6 +4,8 @@ import Roma.Cards.*;
 
 import java.util.ArrayList;
 
+//TODO: create a dice disc class that will handle temporary and passive defense changes
+
 public class DiceDiscs {
     private static final boolean DEBUG = true;
     public static final int BRIBERY_POSITION = 6;

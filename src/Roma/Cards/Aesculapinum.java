@@ -21,7 +21,22 @@ public class Aesculapinum extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public Aesculapinum(PlayArea playArea) {
+    public static ArrayList<Card> playsetAesculapinum(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Aesculapinum(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Aesculapinum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

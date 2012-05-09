@@ -21,7 +21,7 @@ public class CardManager {
 
     public CardManager(PlayArea playArea) {
         //Will insert all cards, and shuffle
-        addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
+        playingDeck.addAll(Aesculapinum.playsetAesculapinum(playArea));
         addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
         addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
         addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);

@@ -4,7 +4,7 @@ import Roma.*;
 
 import java.util.ArrayList;
 
-public abstract class CardBase {
+public abstract class CardBase implements Card {
     public final static String CHARACTER = "Character";
     public final static String BUILDING = "Building";
 
@@ -14,7 +14,9 @@ public abstract class CardBase {
     private final String description;
     private final int cost;
     private final int defence;
+    private final boolean wrapper = false;
 
+    private boolean inWrapper = false;
     final PlayArea playArea;
     private boolean playable = false;
     private ArrayList<Integer> playerActions;
@@ -33,6 +35,22 @@ public abstract class CardBase {
         this.defence = defense;
         this.playArea = playArea;
         this.activateEnabled = activateEnabled;
+    }
+
+    public boolean isInWrapper() {
+        return inWrapper;
+    }
+
+    public void putInWrapper() {
+        inWrapper = true;
+    }
+
+    public void takeFromWrapper() {
+        inWrapper = false;
+    }
+
+    public boolean isWrapper(){
+        return wrapper;
     }
 
     public String getName() {
@@ -67,7 +85,6 @@ public abstract class CardBase {
     public String toString() {
         return "Card Name: " + name + "; Type: " + type + "\nDescription: " + description + "\nCost: "
                 + cost + "; Defence: " + defence;
-
     }
 
     public boolean isPlayable() {
@@ -89,7 +106,7 @@ public abstract class CardBase {
         return activateEnabled;
     }
 
-    @Override
+    @Override //TODO: wtf is this hack? :s
     public boolean equals(Object o) {
         //Takes either a string or card and compares them
         String test = "Equal";
@@ -107,7 +124,7 @@ public abstract class CardBase {
         //check they are the same name
     }
 
-    @Override
+    @Override //TODO: wtf is this hack? :s
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }

@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc:
  */
-public class Consul extends Card {
+public class Consul extends CardBase {
     public final static String NAME = "Consul";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "The score on an action die which has not yet been " +
             "used can be " +
             "increased or decreased by 1 point.";

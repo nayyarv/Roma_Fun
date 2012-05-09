@@ -8,10 +8,10 @@ import Roma.*;
  * Date: 11/04/12
  * Desc:
  */
-public class Basilica extends Card {
+public class Basilica extends CardBase {
 
     public final static String NAME = "Basilica";
-    final static String TYPE = Card.BUILDING;
+    final static String TYPE = CardBase.BUILDING;
     final static String DESCRIPTION = "If a Forum is activated (it must lie directly next to the basilica)," +
             " the player gets 2 more victory points. The Basilica itself is not activiated.";
     final static int COST = 5;

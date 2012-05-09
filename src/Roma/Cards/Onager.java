@@ -11,10 +11,10 @@ import java.util.Scanner;
  * Date: 11/04/12
  * Desc:
  */
-public class Onager extends Card {
+public class Onager extends CardBase {
 
     public final static String NAME = "Onager";
-    final static String TYPE = Card.BUILDING;
+    final static String TYPE = CardBase.BUILDING;
     final static String DESCRIPTION = "This Roman catapult attacks any opposing building. " +
             "The battle die is thrown once.";
     final static int COST = 5;
@@ -42,12 +42,12 @@ public class Onager extends Card {
         BattleManager battleManager = playArea.getBattleManager();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
-        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        CardBase[] enemyCardBases = diceDiscs.getPlayerActives(targetPlayerID);
 
         System.out.println("Available Targets:");
-        for(int i = 0; i < enemyCards.length; i++){
-            if(enemyCards[i] != null && enemyCards[i].getType() == Card.BUILDING){
-                System.out.println((i + 1) + ") " + enemyCards[i].getName());
+        for(int i = 0; i < enemyCardBases.length; i++){
+            if(enemyCardBases[i] != null && enemyCardBases[i].getType() == CardBase.BUILDING){
+                System.out.println((i + 1) + ") " + enemyCardBases[i].getName());
                 validInput.add(i + 1);
             } else {
                 System.out.println((i + 1) + ") #");

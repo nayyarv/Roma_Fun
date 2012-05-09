@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc:
  */
-public class Centurio extends Card {
+public class Centurio extends CardBase {
     public final static String NAME = "Centurio";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "Attacks the card directly opposite, whether it is a character " +
             "or building card." +
             " The value of an unused action die can be added to the value of the battle die (the action die is " +
@@ -40,9 +40,9 @@ public class Centurio extends Card {
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
         Dice chosenDie = null;
-        Card targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+        CardBase targetCardBase = diceDiscs.getTargetCard(targetPlayer, position);
 
-        if(targetCard == null){
+        if(targetCardBase == null){
             activated = false;
         } else {
             battleVictory = battleManager.battle(targetPlayer, position);
@@ -51,7 +51,7 @@ public class Centurio extends Card {
                     chosenDie = player.chooseDie(freeDice);
                     if(chosenDie != null){
                         diceDiscs.addDiceToDisc(position, chosenDie);
-                        if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
+                        if(targetCardBase.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
                             diceDiscs.discardTarget(targetPlayer, position);
                         }
                     }

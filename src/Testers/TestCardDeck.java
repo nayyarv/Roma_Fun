@@ -19,7 +19,7 @@ public class TestCardDeck {
             //test.insertCard(new Card(i));
         }//Dummy fill function
         testDisplay();
-        Card tmp = test.drawACard();
+        CardBase tmp = test.drawACard();
         System.out.println("Drawing a Card. It is: " + tmp);
         testDisplay();
         System.out.println("Putting a card back. It is 100");

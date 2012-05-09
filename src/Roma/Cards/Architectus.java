@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc: Architectus Card
  */
-public class Architectus extends Card {
+public class Architectus extends CardBase {
     public final static String NAME = "Architectus";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
             "of charge. The player is allowed to cover any cards.";
     final static int COST = 3;
@@ -31,29 +31,29 @@ public class Architectus extends Card {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
-        ArrayList<Card> tempHand = new ArrayList<Card>();
-        ArrayList<Card> hand = player.getHand();
+        ArrayList<CardBase> tempHand = new ArrayList<CardBase>();
+        ArrayList<CardBase> hand = player.getHand();
         boolean endSelection = false;
-        Card chosenCard = null;
+        CardBase chosenCardBase = null;
         int targetPosition;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        for(Card card : hand){
-            if(card.getType() == Card.BUILDING){
-                if(hand.remove(card)){
-                    tempHand.add(card);
+        for(CardBase cardBase : hand){
+            if(cardBase.getType() == CardBase.BUILDING){
+                if(hand.remove(cardBase)){
+                    tempHand.add(cardBase);
                 }
             }
         }
 
         while(!endSelection){
             playArea.printStats();
-            chosenCard = player.chooseCard(tempHand);
-            if(chosenCard == null){
+            chosenCardBase = player.chooseCard(tempHand);
+            if(chosenCardBase == null){
                 endSelection = true;
             } else {
                 targetPosition = player.chooseCardDisc();
-                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCardBase);
             }
         }
 

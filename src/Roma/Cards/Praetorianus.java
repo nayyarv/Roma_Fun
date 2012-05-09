@@ -8,10 +8,10 @@ import Roma.*;
  * Date: 11/04/12
  * Desc:
  */
-public class Praetorianus extends Card {
+public class Praetorianus extends CardBase {
 
     public final static String NAME = "Praetorianus";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
             " for one go.";
     final static int COST = 8;

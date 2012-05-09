@@ -8,9 +8,9 @@ import Roma.*;
  * Date: 11/04/12
  * Desc:
  */
-public class Essedum extends Card {
+public class Essedum extends CardBase {
     public final static String NAME = "Essedum";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
     final static int COST = 6;
     final static int DEFENCE = 3;

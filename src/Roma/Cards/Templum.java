@@ -8,10 +8,10 @@ import Roma.*;
  * Date: 11/04/12
  * Desc:
  */
-public class Templum extends Card {
+public class Templum extends CardBase {
 
     public final static String NAME = "Templum";
-    final static String TYPE = Card.BUILDING;
+    final static String TYPE = CardBase.BUILDING;
     final static String DESCRIPTION =
             "If a Forum is activated (it must lie directly next to the Templum), the third action die can be \n" +
                     "used to determine the number of additional victory points which the player gets from the general \n" +

@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
+import Roma.Cards.CardBase;
 
 import java.util.ArrayList;
 
@@ -42,8 +42,8 @@ public class PlayArea {
 
     private void layAllCardsInHand() {
         Player activePlayer = null;
-        ArrayList<Card> hand = null;
-        Card chosenCard = null;
+        ArrayList<CardBase> hand = null;
+        CardBase chosenCardBase = null;
         int targetDisc;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
@@ -53,10 +53,10 @@ public class PlayArea {
             while(!hand.isEmpty()){
                 printStats();
                 System.out.println(activePlayer.getName() + ", please lay all your cards");
-                chosenCard = null;
-                while(chosenCard == null){
-                    chosenCard = activePlayer.chooseCard(hand);
-                    if(chosenCard == null){
+                chosenCardBase = null;
+                while(chosenCardBase == null){
+                    chosenCardBase = activePlayer.chooseCard(hand);
+                    if(chosenCardBase == null){
                         System.out.println("You must choose a card");
                     }
                 }
@@ -67,7 +67,7 @@ public class PlayArea {
                         System.out.println("You must choose a disc");
                     }
                 }
-                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, chosenCard);
+                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, chosenCardBase);
             }
         }
     }
@@ -99,20 +99,20 @@ public class PlayArea {
 
 
     public void getAndSwapCards(){
-        ArrayList<Card> initialSet = new ArrayList<Card>();
+        ArrayList<CardBase> initialSet = new ArrayList<CardBase>();
         //gets the inital cards for the game
 
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
             initialSet.addAll(0, cardManager.drawNCards(Roma.NUM_INIT_CARDS));
         } //gets all the cards needed
 
-        ArrayList<Card> choices = new ArrayList<Card>();
+        ArrayList<CardBase> choices = new ArrayList<CardBase>();
         //stores the choices of the previous player
 
         for (int i =0; i<Roma.MAX_PLAYERS;i++){
             choices.clear();
             //add prev choices
-            ArrayList<Card> individualHand = new ArrayList<Card>();
+            ArrayList<CardBase> individualHand = new ArrayList<CardBase>();
 
             individualHand.addAll(initialSet.subList(
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
@@ -124,7 +124,7 @@ public class PlayArea {
                     "Choose the first Card");
             //Prompt: move printing to player interface?
 
-            Card temp = null;
+            CardBase temp = null;
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
                 while(temp == null){
@@ -204,10 +204,10 @@ public class PlayArea {
     }
 
     private void deductVictoryTokens(int playerID) {
-        Card[] friendlyCards = diceDiscs.getPlayerActives(playerID);
+        CardBase[] friendlyCardBases = diceDiscs.getPlayerActives(playerID);
         int countNull = 0;
-        for(Card card : friendlyCards){
-            if(card == null){
+        for(CardBase cardBase : friendlyCardBases){
+            if(cardBase == null){
                 countNull++;
             }
         }

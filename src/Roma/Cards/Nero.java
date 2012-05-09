@@ -11,9 +11,9 @@ import java.util.Scanner;
  * Date: 11/04/12
  * Desc:
  */
-public class Nero extends Card {
+public class Nero extends CardBase {
     public final static String NAME = "Nero";
-    final static String TYPE = Card.CHARACTER;
+    final static String TYPE = CardBase.CHARACTER;
     final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
             "The destroyed card and Nero are both discarded.";
     final static int COST = 8;
@@ -40,12 +40,12 @@ public class Nero extends Card {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
-        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        CardBase[] enemyCardBases = diceDiscs.getPlayerActives(targetPlayerID);
 
         System.out.println("Available Targets:");
-        for(int i = 0; i < enemyCards.length; i++){
-            if(enemyCards[i] != null && enemyCards[i].getType() == Card.BUILDING){
-                System.out.println((i + 1) + ") " + enemyCards[i].getName());
+        for(int i = 0; i < enemyCardBases.length; i++){
+            if(enemyCardBases[i] != null && enemyCardBases[i].getType() == CardBase.BUILDING){
+                System.out.println((i + 1) + ") " + enemyCardBases[i].getName());
                 validInput.add(i + 1);
             } else {
                 System.out.println((i + 1) + ") #");

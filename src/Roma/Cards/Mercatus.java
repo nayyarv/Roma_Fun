@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -20,7 +22,22 @@ public class Mercatus extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public Mercatus(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Mercatus(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Mercatus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

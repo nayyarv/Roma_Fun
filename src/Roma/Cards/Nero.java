@@ -20,10 +20,24 @@ public class Nero extends CardBase {
     final static int DEFENCE = 9;
     final static boolean ACTIVATE_ENABLED = true;
 
-
     public final static int OCCURENCES = 1;
 
-    public Nero(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Nero(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Nero(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

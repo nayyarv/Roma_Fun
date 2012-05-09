@@ -9,6 +9,7 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Mercator extends CardBase {
@@ -23,7 +24,22 @@ public class Mercator extends CardBase {
 
     public final static int OCCURENCES = 1;
 
-    public Mercator(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Mercator(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Mercator(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

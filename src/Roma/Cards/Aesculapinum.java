@@ -21,7 +21,7 @@ public class Aesculapinum extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playsetAesculapinum(PlayArea playArea){
+    public static ArrayList<Card> playSet(PlayArea playArea){
         ArrayList<Card> set = new ArrayList<Card>();
         CardHolder cardHolder;
         Card card;

@@ -23,8 +23,23 @@ public class Onager extends CardBase {
 
     public final static int OCCURENCES = 2;
 
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
 
-    public Onager(PlayArea playArea) {
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Onager(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+
+    private Onager(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

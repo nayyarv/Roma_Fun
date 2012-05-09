@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardManager {
+    private final static int CARDS_IN_DECK = 52;
     //Objects
     private final ArrayList<Card> playingDeck = new ArrayList<Card>();
     private final ArrayList<Card> discardPile = new ArrayList<Card>();
@@ -51,6 +52,7 @@ public class CardManager {
         playingDeck.addAll(Turris.playSet(playArea));
         playingDeck.addAll(Velites.playSet(playArea));
 
+        assert(playingDeck.size() == CARDS_IN_DECK);
         shuffle();
     }
 

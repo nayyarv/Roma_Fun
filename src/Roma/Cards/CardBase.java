@@ -15,7 +15,6 @@ public abstract class CardBase implements Card {
 
     private boolean inWrapper = false;
     final PlayArea playArea;
-    private boolean playable = false;
     private ArrayList<Integer> playerActions;
 
     //activated values
@@ -82,14 +81,6 @@ public abstract class CardBase implements Card {
     public String toString() {
         return "Card Name: " + name + "; Type: " + type + "\nDescription: " + description + "\nCost: "
                 + cost + "; Defence: " + defence;
-    }
-
-    public boolean isPlayable() {
-        return playable;
-    }
-
-    public void setPlayable(boolean playable) {
-        this.playable = playable;
     }
 
     public void cancelActivate(){

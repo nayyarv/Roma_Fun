@@ -99,11 +99,6 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public boolean isPlayable() {
-        return contents.isPlayable();
-    }
-
-    @Override
     public boolean isInWrapper() {
         return inWrapper;
     }

@@ -350,15 +350,6 @@ public class Player {
         hand.add(chosenCard);
     }
 
-    public void checkPlayable() {
-        MoneyManager moneyManager = playArea.getMoneyManager();
-        for (Card card : hand) {
-            if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
-                card.setPlayable(true);
-            }
-        }
-    }
-
     public boolean commit() {
         boolean confirm = true;
 

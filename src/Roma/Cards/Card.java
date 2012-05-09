@@ -20,7 +20,6 @@ public interface Card {
     public int getCost();
     public int getDefense();
     public boolean isWrapper();
-    public boolean isPlayable();
     public boolean isInWrapper();
     public void putInWrapper();
     public void takeFromWrapper();

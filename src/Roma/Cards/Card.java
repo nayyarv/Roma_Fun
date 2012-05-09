@@ -10,6 +10,9 @@ import Roma.*;
  * To change this template use File | Settings | File Templates.
  */
 public interface Card {
+    public final static String CHARACTER = "Character";
+    public final static String BUILDING = "Building";
+
     public boolean isActivateEnabled();
     public String getName();
     public String getType();

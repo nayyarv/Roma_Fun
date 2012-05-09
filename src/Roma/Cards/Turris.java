@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Turris extends CardBase {
     public final static String NAME = "Turris";
-    final static String TYPE = CardBase.BUILDING;
+    final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "As long as the Turris is face-up, the defence value of all the " +
             "player's other face-up cards increases by 1.";
     final static int COST = 6;

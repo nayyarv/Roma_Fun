@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Architectus extends CardBase {
     public final static String NAME = "Architectus";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
             "of charge. The player is allowed to cover any cards.";
     final static int COST = 3;
@@ -31,29 +31,29 @@ public class Architectus extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
-        ArrayList<CardBase> tempHand = new ArrayList<CardBase>();
-        ArrayList<CardBase> hand = player.getHand();
+        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<Card> hand = player.getHand();
         boolean endSelection = false;
-        CardBase chosenCardBase = null;
+        Card chosenCard = null;
         int targetPosition;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        for(CardBase cardBase : hand){
-            if(cardBase.getType() == CardBase.BUILDING){
-                if(hand.remove(cardBase)){
-                    tempHand.add(cardBase);
+        for(Card card : hand){
+            if(card.getType() == Card.BUILDING){
+                if(hand.remove(card)){
+                    tempHand.add(card);
                 }
             }
         }
 
         while(!endSelection){
             playArea.printStats();
-            chosenCardBase = player.chooseCard(tempHand);
-            if(chosenCardBase == null){
+            chosenCard = player.chooseCard(tempHand);
+            if(chosenCard == null){
                 endSelection = true;
             } else {
                 targetPosition = player.chooseCardDisc();
-                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCardBase);
+                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
             }
         }
 

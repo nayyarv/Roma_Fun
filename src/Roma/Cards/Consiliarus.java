@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Consiliarus extends CardBase {
     public final static String NAME = "Consiliarus";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player picks up their character cards and can then lay them again " +
             "on any dice disc. Buildings can be covered.";
     final static int COST = 4;
@@ -29,21 +29,21 @@ public class Consiliarus extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<CardBase> characterCardBases = diceDiscs.setOfCards(player,CHARACTER);//all the cards
+        ArrayList<Card> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
 
-        while (!characterCardBases.isEmpty()){
+        while (!characterCards.isEmpty()){
             playArea.printStats();
-            player.printCardList(characterCardBases);
-            CardBase cardBase = player.chooseCard(characterCardBases);
+            player.printCardList(characterCards);
+            Card card = player.chooseCard(characterCards);
             //TODO: Allow players to see the dice discs while placing their cards
-            if (cardBase ==null) { //i.e. cancelled
+            if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");
             } else {
                 int choice = player.chooseCardDisc();
                 if (choice!=-1){//I.e not cancel
-                    diceDiscs.layCard(player.getPlayerID(), choice, cardBase);
+                    diceDiscs.layCard(player.getPlayerID(), choice, card);
                 } else {
-                    characterCardBases.add(cardBase);
+                    characterCards.add(card);
                 }
             }
         }

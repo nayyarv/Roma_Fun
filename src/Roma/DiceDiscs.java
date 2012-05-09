@@ -15,7 +15,7 @@ public class DiceDiscs {
 
     private final PlayArea playArea;
 
-    private CardBase[][] activeCardBases = new CardBase[Roma.MAX_PLAYERS][CARD_POSITIONS];
+    private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
@@ -24,24 +24,24 @@ public class DiceDiscs {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
                 for(int j = 0; j < Roma.MAX_PLAYERS; j++){
-                    activeCardBases[j][i] = null;
+                    activeCards[j][i] = null;
                 }
             discs.add(new ArrayList<Dice>());
         }
     }
 
-    public CardBase[] getPlayerActives(int playerID){
-        return activeCardBases[playerID];
+    public Card[] getPlayerActives(int playerID){
+        return activeCards[playerID];
     }
 
-    public ArrayList<CardBase> setOfCards(Player player, String type){
-        assert (type.equalsIgnoreCase(CardBase.BUILDING)||type.equalsIgnoreCase(CardBase.CHARACTER));
+    public ArrayList<Card> setOfCards(Player player, String type){
+        assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
-        ArrayList<CardBase> set = new ArrayList<CardBase>();
-        for (int i=0; i< activeCardBases[playerID].length;i++){
-            if(activeCardBases[playerID][i]!=null){ //add if not null
-                set.add(activeCardBases[playerID][i]);
-                activeCardBases[playerID][i] = null; // remove cards
+        ArrayList<Card> set = new ArrayList<Card>();
+        for (int i=0; i< activeCards[playerID].length;i++){
+            if(activeCards[playerID][i]!=null){ //add if not null
+                set.add(activeCards[playerID][i]);
+                activeCards[playerID][i] = null; // remove cards
             }
         }
         return set;
@@ -55,18 +55,18 @@ public class DiceDiscs {
         cardDisc.clear();
     }
 
-    public void layCard(int playerID, int position, CardBase newCardBase) {
+    public void layCard(int playerID, int position, Card newCard) {
         BattleManager battleManager = playArea.getBattleManager();
-        if(newCardBase.getName() == Turris.NAME){
+        if(newCard.getName() == Turris.NAME){
             battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
         }
 
         //TODO: Check position declarations
         position--;
-        if(activeCardBases[playerID][position] !=  null){
-            playArea.getCardManager().discard(activeCardBases[playerID][position]);
+        if(activeCards[playerID][position] !=  null){
+            playArea.getCardManager().discard(activeCards[playerID][position]);
         }
-        activeCardBases[playerID][position] = newCardBase;
+        activeCards[playerID][position] = newCard;
     }
 
     public boolean activateCard(Player player, int position, Dice die) {
@@ -76,17 +76,17 @@ public class DiceDiscs {
 
         //TODO: Change position-- to the player interface
 
-        if(activeCardBases[player.getPlayerID()][position] != null){
+        if(activeCards[player.getPlayerID()][position] != null){
             if(DEBUG){
-                System.out.println("Card activating: " + activeCardBases[player.getPlayerID()][position].getName());
+                System.out.println("Card activating: " + activeCards[player.getPlayerID()][position].getName());
             }
-            activateEnabled = activeCardBases[player.getPlayerID()][position].isActivateEnabled();
+            activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
             activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
 
             if(activateEnabled){
                 discs.get(position).add(die);
-                activateEnabled = activeCardBases[player.getPlayerID()][position].activate(player, position);
+                activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
                 if(activateEnabled){
                     discs.get(position).add(die);
                 }
@@ -114,8 +114,8 @@ public class DiceDiscs {
     public String getCardName(int player, int position){
         String cardName;
 
-        if(activeCardBases[player][position] != null){
-            cardName = activeCardBases[player][position].getName();
+        if(activeCards[player][position] != null){
+            cardName = activeCards[player][position].getName();
         } else {
             cardName = "";
         }
@@ -149,33 +149,33 @@ public class DiceDiscs {
         cardDisc.add(chosenDie);
     }
 
-    public CardBase getTargetCard(int playerID, int position){
-        return activeCardBases[playerID][position];
+    public Card getTargetCard(int playerID, int position){
+        return activeCards[playerID][position];
     }
 
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
         BattleManager battleManager = playArea.getBattleManager();
 
-        CardBase cardBase = activeCardBases[playerID][position];
-        if(cardBase.getName() == Turris.NAME){
+        Card card = activeCards[playerID][position];
+        if(card.getName() == Turris.NAME){
             battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
         }
 
-        cardManager.discard(activeCardBases[playerID][position]);
-        activeCardBases[playerID][position] = null;
+        cardManager.discard(activeCards[playerID][position]);
+        activeCards[playerID][position] = null;
     }
 
     public boolean checkAdjacent(int playerID, int position, String cardName){
         boolean adjacent = false;
 
         if(position > 1){
-            if(activeCardBases[playerID][position - 1] != null && activeCardBases[playerID][position - 1].getName() == cardName){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
                 adjacent = true;
             }
         }
         if(position < 6){
-            if(activeCardBases[playerID][position + 1] != null && activeCardBases[playerID][position + 1].getName() == cardName){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -186,7 +186,7 @@ public class DiceDiscs {
     public boolean checkAdjacentDown(int playerID, int position, String cardName){
         boolean adjacent = false;
         if(position > 1){
-            if(activeCardBases[playerID][position - 1] != null && activeCardBases[playerID][position - 1].getName() == cardName){
+            if(activeCards[playerID][position - 1] != null && activeCards[playerID][position - 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -196,7 +196,7 @@ public class DiceDiscs {
     public boolean checkAdjacentUp(int playerID, int position, String cardName){
         boolean adjacent = false;
         if(position < 6){
-            if(activeCardBases[playerID][position + 1] != null && activeCardBases[playerID][position + 1].getName() == cardName){
+            if(activeCards[playerID][position + 1] != null && activeCards[playerID][position + 1].getName() == cardName){
                 adjacent = true;
             }
         }
@@ -206,8 +206,8 @@ public class DiceDiscs {
     public void returnTarget(int targetPlayerID, int position){
         Player targetPlayer = playArea.getPlayer(targetPlayerID);
 
-        targetPlayer.addCardToHand(activeCardBases[targetPlayerID][position]);
-        activeCardBases[targetPlayerID][position] = null;
+        targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
+        activeCards[targetPlayerID][position] = null;
     }
 
     public void clearPlayerDice(int playerID){

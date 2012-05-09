@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Senator extends CardBase {
     public final static String NAME = "Senator";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
             "they wish free of " +
             "charge. The player is allowed to cover any cards.";
@@ -33,17 +33,17 @@ public class Senator extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
-        ArrayList<CardBase> tempHand = new ArrayList<CardBase>();
-        ArrayList<CardBase> hand = player.getHand();
+        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<Card> hand = player.getHand();
         boolean endSelection = false;
-        CardBase chosenCardBase = null;
+        Card chosenCard = null;
         int targetPosition;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        for(CardBase cardBase : hand){
-            if(cardBase.getType() == CardBase.CHARACTER){
-                if(hand.remove(cardBase)){
-                    tempHand.add(cardBase);
+        for(Card card : hand){
+            if(card.getType() == Card.CHARACTER){
+                if(hand.remove(card)){
+                    tempHand.add(card);
                 }
             }
         }
@@ -53,12 +53,12 @@ public class Senator extends CardBase {
         } else {
             while(!endSelection){
                 playArea.printStats();
-                chosenCardBase = player.chooseCard(tempHand);
-                if(chosenCardBase == null){
+                chosenCard = player.chooseCard(tempHand);
+                if(chosenCard == null){
                     endSelection = true;
                 } else {
                     targetPosition = player.chooseCardDisc();
-                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCardBase);
+                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
                 }
             }
         }

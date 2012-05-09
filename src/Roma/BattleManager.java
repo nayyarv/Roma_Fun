@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.CardBase;
+import Roma.Cards.Card;
 import Roma.Cards.Turris;
 
 /**
@@ -74,10 +74,10 @@ public class BattleManager {
         //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
-        CardBase targetCardBase = diceDiscs.getTargetCard(targetPlayerID, target);
-        int defense = targetCardBase.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID];
+        Card targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
+        int defense = targetCard.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID];
 
-        if(targetCardBase.getName() == Turris.NAME){
+        if(targetCard.getName() == Turris.NAME){
             defense--;
         }
 

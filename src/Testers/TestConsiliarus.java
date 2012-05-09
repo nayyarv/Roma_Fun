@@ -13,7 +13,7 @@ public class TestConsiliarus {
 
     public static void main(String[] args){
         PlayArea playArea = new PlayArea();
-        CardBase temp = new Consiliarus(playArea);
+        Card temp = new Consiliarus(playArea);
         System.err.println("The card is a Consiliarus: " + temp.equals("Consiliarus"));
 
 

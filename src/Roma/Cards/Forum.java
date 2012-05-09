@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Forum extends CardBase {
 
     public final static String NAME = "Forum";
-    final static String TYPE = CardBase.BUILDING;
+    final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "Requires 2 action dice: one to activate the Forum and the other to " +
             "determine how many victory points the player receives";
     final static int COST = 5;

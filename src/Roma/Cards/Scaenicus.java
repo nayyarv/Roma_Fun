@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Scaenicus extends CardBase {
     public final static String NAME = "Scaenicus";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "He performs no action of his own but can copy the action of any of " +
             "the player's own face-up character cards, and the next time round that of another.";
     final static int COST = 8;
@@ -40,12 +40,12 @@ public class Scaenicus extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
-        CardBase[] friendlyCardBases = diceDiscs.getPlayerActives(targetPlayerID);
+        Card[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
         System.out.println("Available Targets:");
-        for(int i = 0; i < friendlyCardBases.length; i++){
-            if(friendlyCardBases[i] != null && friendlyCardBases[i].getType() == CardBase.CHARACTER){
-                System.out.println((i + 1) + ") " + friendlyCardBases[i].getName());
+        for(int i = 0; i < friendlyCards.length; i++){
+            if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
+                System.out.println((i + 1) + ") " + friendlyCards[i].getName());
                 validInput.add(i + 1);
             } else {
                 System.out.println((i + 1) + ") #");
@@ -62,7 +62,7 @@ public class Scaenicus extends CardBase {
         }
         chosenInput--;
 
-        friendlyCardBases[chosenInput].activate(player, position);
+        friendlyCards[chosenInput].activate(player, position);
 
         return activated;
     }

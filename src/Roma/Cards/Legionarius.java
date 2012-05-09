@@ -10,7 +10,7 @@ import Roma.*;
  */
 public class Legionarius extends CardBase {
     public final static String NAME = "Legionarius";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks the opponent's card which is directly opposite, " +
             "whether it is a character or a building card.";
     final static int COST = 4;

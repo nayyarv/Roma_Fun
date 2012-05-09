@@ -11,7 +11,7 @@ import Roma.*;
 public class Mercatus extends CardBase {
 
     public final static String NAME = "Mercatus";
-    final static String TYPE = CardBase.BUILDING;
+    final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The player gets 1 victory point from the opponent " +
                     " for every face-up Forum that the opponent has.";
     final static int COST = 6;
@@ -30,11 +30,11 @@ public class Mercatus extends CardBase {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        CardBase[] enemyCardBases = diceDiscs.getPlayerActives(otherPlayer(player.getPlayerID()));
+        Card[] enemyCards = diceDiscs.getPlayerActives(otherPlayer(player.getPlayerID()));
         int forumCount = 0;
 
-        for(CardBase cardBase : enemyCardBases){
-            if(cardBase != null && cardBase.getName() == Forum.NAME){
+        for(Card card : enemyCards){
+            if(card != null && card.getName() == Forum.NAME){
                 forumCount++;
             }
         }

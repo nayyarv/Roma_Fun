@@ -11,7 +11,7 @@ import Roma.*;
 
 public class TribunisPlebis extends CardBase {
     public final static String NAME = "Tribunis Plebis";
-    final static String TYPE = CardBase.CHARACTER;
+    final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player gets 1 victory point from their opponent.";
     final static int COST = 5;
     final static int DEFENCE = 5;

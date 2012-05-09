@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Machina extends CardBase {
 
     public final static String NAME = "Machina";
-    final static String TYPE = CardBase.BUILDING;
+    final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The player picks up their building cards and lays " +
             "them again on any dice discs. Character cards can be covered.";
     final static int COST = 4;
@@ -33,21 +33,21 @@ public class Machina extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<CardBase> buildingCardBases = diceDiscs.setOfCards(player, CardBase.BUILDING);//all the cards
+        ArrayList<Card> buildingCards = diceDiscs.setOfCards(player, Card.BUILDING);//all the cards
 
-        while (!buildingCardBases.isEmpty()){
+        while (!buildingCards.isEmpty()){
             playArea.printStats();
-            player.printCardList(buildingCardBases);
-            CardBase cardBase = player.chooseCard(buildingCardBases);
+            player.printCardList(buildingCards);
+            Card card = player.chooseCard(buildingCards);
             //TODO: Allow players to see the dice discs while placing their cards
-            if (cardBase ==null) { //i.e. cancelled
+            if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");
             } else {
                 int choice = player.chooseCardDisc();
                 if (choice!=-1){//I.e not cancel
-                    diceDiscs.layCard(player.getPlayerID(), choice, cardBase);
+                    diceDiscs.layCard(player.getPlayerID(), choice, card);
                 } else {
-                    buildingCardBases.add(cardBase);
+                    buildingCards.add(card);
                 }
             }
         }

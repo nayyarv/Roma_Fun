@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Aesculapinum extends CardBase {
     public final static String NAME = "Aesculapinum";
-    final static String TYPE = CardBase.BUILDING;
+    final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The temple of Asculapius (the God of healing) enables the player to " +
             "pick up any character card from the discard pile and add it to their hand.";
     final static int COST = 5;
@@ -30,13 +30,13 @@ public class Aesculapinum extends CardBase {
         boolean activated = true;
 
         CardManager cardManager = playArea.getCardManager();
-        ArrayList<CardBase> discardPile = cardManager.getDiscardPile();
-        ArrayList<CardBase> tempHand = new ArrayList<CardBase>();
+        ArrayList<Card> discardPile = cardManager.getDiscardPile();
+        ArrayList<Card> tempHand = new ArrayList<Card>();
 
-        for(CardBase cardBase : discardPile){
-            if(cardBase.getType() == CardBase.CHARACTER){
-                tempHand.add(cardBase);
-                discardPile.remove(cardBase);
+        for(Card card : discardPile){
+            if(card.getType() == Card.CHARACTER){
+                tempHand.add(card);
+                discardPile.remove(card);
             }
         }
 

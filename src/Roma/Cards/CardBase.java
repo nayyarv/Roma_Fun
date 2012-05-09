@@ -13,9 +13,9 @@ public abstract class CardBase implements Card {
     private final int defence;
     private final boolean wrapper = false;
 
-    private boolean inWrapper = false;
     final PlayArea playArea;
     private ArrayList<Integer> playerActions;
+    private Card container;
 
     //activated values
     protected boolean cardActivated = false;
@@ -33,16 +33,19 @@ public abstract class CardBase implements Card {
         this.activateEnabled = activateEnabled;
     }
 
-    public boolean isInWrapper() {
-        return inWrapper;
+    public Card getContents(){
+        return null;
+    }
+    public void setContents(Card card){
+        assert(false);
     }
 
-    public void putInWrapper() {
-        inWrapper = true;
+    public Card getContainer() {
+        return container;
     }
 
-    public void takeFromWrapper() {
-        inWrapper = false;
+    public void setContainer(Card holder) {
+        container = holder;
     }
 
     public boolean isWrapper(){

@@ -12,23 +12,34 @@ import Roma.Player;
 public class Wrapper implements Card {
     private final boolean isWrapper = true;
 
+    private Card container;
     private Card contents;
     private boolean activateEnabled;
     private int defenseShift = 0;
     private int defenseScale = 1;
     private int costShift = 0;
     private int costScale = 1;
-    private boolean inWrapper = false;
 
-    public Wrapper(Card card){
+    public Wrapper(Card card, Card holder){
         contents = card;
-        contents.putInWrapper();
+        container = holder;
         activateEnabled = contents.isActivateEnabled();
     }
 
     public Card getContents() {
-        contents.takeFromWrapper();
         return contents;
+    }
+
+    public void setContents(Card card){
+        contents = card;
+    }
+
+    public Card getContainer(){
+        return container;
+    }
+
+    public void setContainer(Card holder){
+        container = holder;
     }
 
     public void setDefenseShift(int defenseShift) {
@@ -98,24 +109,10 @@ public class Wrapper implements Card {
         return isWrapper;
     }
 
-    @Override
-    public boolean isInWrapper() {
-        return inWrapper;
-    }
-
-    @Override
-    public void putInWrapper() {
-        inWrapper = true;
-    }
-
-    @Override
-    public void takeFromWrapper() {
-        inWrapper = false;
-    }
-
     public String toString() {
-        return "Card Name: " + contents.getName() + "; Type: " + contents.getType() +
-               "\nDescription: " + contents.getDescription() + "\nCost: " + getCost() + "; Defence: " + getDefense();
+        return "Card Name: " + getName() + "; Type: " + getType() +
+               "\nDescription: " + getDescription() +
+                "\nCost: " + getCost() + "; Defence: " + getDefense();
     }
 
     public boolean activate(Player player, int position){

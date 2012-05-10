@@ -59,7 +59,7 @@ public class CardHolder implements Card {
     }
 
     public boolean isWrapper() {
-        return isWrapper;
+        return isWrapper();
     }
 
     public boolean activate(Player player, int position) {

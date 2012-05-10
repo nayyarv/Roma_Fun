@@ -49,7 +49,7 @@ public class Aesculapinum extends CardBase {
         ArrayList<Card> tempHand = new ArrayList<Card>();
 
         for(Card card : discardPile){
-            if(card.getType() == Card.CHARACTER){
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 tempHand.add(card);
                 discardPile.remove(card);
             }

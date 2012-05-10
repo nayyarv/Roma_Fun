@@ -211,7 +211,7 @@ public class PlayArea {
                 countNull++;
             }
         }
-        System.out.println("There are " + countNull + "empty slots, losing that many players");
+        System.out.println("There are " + countNull + " empty slots, losing that many players");
         victoryTokens.playerToPool(playerID, countNull);
     }
 

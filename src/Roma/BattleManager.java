@@ -1,7 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
-import Roma.Cards.Turris;
+import Roma.Cards.*;
 
 /**
  * Created with IntelliJ IDEA.

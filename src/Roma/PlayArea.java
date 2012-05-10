@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
+import Roma.Cards.*;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,11 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
+
+    private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
+    private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
+    private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
+    private ArrayList<Wrapper> endActionList = new ArrayList<Wrapper>();
 
     //Variables
     private int turn = 0;
@@ -245,5 +250,9 @@ public class PlayArea {
 
     public BattleManager getBattleManager() {
         return battleManager;
+    }
+
+    private void endActionPhase(){
+
     }
 }

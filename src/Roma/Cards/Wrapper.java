@@ -10,15 +10,17 @@ import Roma.Player;
  * To change this template use File | Settings | File Templates.
  */
 public class Wrapper implements Card {
+    private final static int INITIAL_SHIFT = 0;
+    private final static int INITIAL_SCALE = 1;
     private final boolean isWrapper = true;
 
     private Card container;
     private Card contents;
     private boolean activateEnabled;
-    private int defenseShift = 0;
-    private int defenseScale = 1;
-    private int costShift = 0;
-    private int costScale = 1;
+    private int defenseShift = INITIAL_SHIFT;
+    private int defenseScale = INITIAL_SCALE;
+    private int costShift = INITIAL_SHIFT;
+    private int costScale = INITIAL_SCALE;
 
     public Wrapper(Card card, Card holder){
         contents = card;

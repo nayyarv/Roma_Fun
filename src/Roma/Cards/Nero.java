@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Date: 11/04/12
  * Desc:
  */
-public class Nero extends Card {
+public class Nero extends CardBase {
     public final static String NAME = "Nero";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Destroys any face-up opposing building card. " +
@@ -20,10 +20,24 @@ public class Nero extends Card {
     final static int DEFENCE = 9;
     final static boolean ACTIVATE_ENABLED = true;
 
-
     public final static int OCCURENCES = 1;
 
-    public Nero(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Nero(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Nero(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

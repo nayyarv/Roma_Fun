@@ -2,13 +2,15 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
  * Date: 11/04/12
  * Desc:
  */
-public class Essedum extends Card {
+public class Essedum extends CardBase {
     public final static String NAME = "Essedum";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
@@ -19,8 +21,23 @@ public class Essedum extends Card {
 
     public final static int OCCURENCES = 2;
 
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
 
-    public Essedum(PlayArea playArea) {
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Essedum(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+
+    private Essedum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

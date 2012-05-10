@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Date: 11/04/12
  * Desc:
  */
-public class Scaenicus extends Card {
+public class Scaenicus extends CardBase {
     public final static String NAME = "Scaenicus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "He performs no action of his own but can copy the action of any of " +
@@ -23,7 +23,22 @@ public class Scaenicus extends Card {
 
     public final static int OCCURENCES = 2;
 
-    public Scaenicus(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Scaenicus(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Scaenicus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

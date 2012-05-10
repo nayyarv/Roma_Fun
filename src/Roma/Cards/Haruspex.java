@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc:
  */
-public class Haruspex extends Card {
+public class Haruspex extends CardBase {
     public final static String NAME = "Haruspex";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player can choose any card from the pile of face-down cards " +
@@ -21,8 +21,23 @@ public class Haruspex extends Card {
 
     public final static int OCCURENCES = 2;
 
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
 
-    public Haruspex(PlayArea playArea) {
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Haruspex(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+
+    private Haruspex(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

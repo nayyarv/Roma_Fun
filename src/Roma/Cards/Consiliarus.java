@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc:
  */
-public class Consiliarus extends Card {
+public class Consiliarus extends CardBase {
     public final static String NAME = "Consiliarus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player picks up their character cards and can then lay them again " +
@@ -21,7 +21,22 @@ public class Consiliarus extends Card {
 
     public final static int OCCURENCES = 2;
 
-    public Consiliarus(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Consiliarus(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Consiliarus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
@@ -36,7 +51,7 @@ public class Consiliarus extends Card {
             player.printCardList(characterCards);
             Card card = player.chooseCard(characterCards);
             //TODO: Allow players to see the dice discs while placing their cards
-            if (card==null) { //i.e. cancelled
+            if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");
             } else {
                 int choice = player.chooseCardDisc();

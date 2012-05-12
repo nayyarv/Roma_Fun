@@ -4,6 +4,8 @@ import Roma.Cards.*;
 
 import java.util.ArrayList;
 
+//TODO: create a dice disc class that will handle temporary and passive defense changes
+
 public class DiceDiscs {
     private static final boolean DEBUG = true;
     public static final int BRIBERY_POSITION = 6;
@@ -36,7 +38,7 @@ public class DiceDiscs {
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
         ArrayList<Card> set = new ArrayList<Card>();
-        for (int i=0; i<activeCards[playerID].length;i++){
+        for (int i=0; i< activeCards[playerID].length;i++){
             if(activeCards[playerID][i]!=null){ //add if not null
                 set.add(activeCards[playerID][i]);
                 activeCards[playerID][i] = null; // remove cards
@@ -99,8 +101,14 @@ public class DiceDiscs {
     }
 
     public boolean useBriberyDisc(Player player, Dice die){
+        boolean activated = false;
+        MoneyManager moneyManager = playArea.getMoneyManager();
         int position = BRIBERY_POSITION;
-        return activateCard(player, position, die);
+        if(moneyManager.loseMoney(player.getPlayerID(), die.getValue())){
+            activated = activateCard(player, position, die);
+        }
+
+        return activated;
     }
 
     public String getCardName(int player, int position){
@@ -208,10 +216,12 @@ public class DiceDiscs {
         for(int i = 0; i < CARD_POSITIONS; i++){
             disc = discs.get(i);
             if(!disc.isEmpty()){
+                int j = 0;
                 for(Dice die : disc){
                     if(die.getPlayerID() == playerID){
-                        disc.remove(die);
+                        disc.remove(j);
                     }
+                    j++;
                 }
             }
         }

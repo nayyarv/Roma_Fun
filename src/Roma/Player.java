@@ -208,7 +208,7 @@ public class Player {
     public void printCardList(ArrayList<Card> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
-        for(Card card: cardList){
+        for(Card card : cardList){
             System.out.println(i + ") " + card.getName());
             i++;
         }
@@ -350,15 +350,6 @@ public class Player {
         }
 
         hand.add(chosenCard);
-    }
-
-    public void checkPlayable() {
-        MoneyManager moneyManager = playArea.getMoneyManager();
-        for (Card card : hand) {
-            if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
-                card.setPlayable(true);
-            }
-        }
     }
 
     public boolean commit() {

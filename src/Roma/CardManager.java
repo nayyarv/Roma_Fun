@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardManager {
+    private final static int CARDS_IN_DECK = 52;
     //Objects
     private final ArrayList<Card> playingDeck = new ArrayList<Card>();
     private final ArrayList<Card> discardPile = new ArrayList<Card>();
@@ -24,36 +25,37 @@ public class CardManager {
     public CardManager(PlayArea playArea) {
         this.playArea = playArea;
         //Will insert all cards, and shuffle
-        addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
-        addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
-        addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
-        addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);
+        playingDeck.addAll(Aesculapinum.playSet(playArea));
+        playingDeck.addAll(Architectus.playSet(playArea));
+        playingDeck.addAll(Basilica.playSet(playArea));
+        playingDeck.addAll(Centurio.playSet(playArea));
 
-        addNumberOf(new Consiliarus(playArea), Consiliarus.OCCURENCES);
-        addNumberOf(new Consul(playArea), Consul.OCCURENCES);
-        addNumberOf(new Essedum(playArea), Essedum.OCCURENCES);
-        addNumberOf(new Forum(playArea), Forum.OCCURENCES);
+        playingDeck.addAll(Consiliarus.playSet(playArea));
+        playingDeck.addAll(Consul.playSet(playArea));
+        playingDeck.addAll(Essedum.playSet(playArea));
+        playingDeck.addAll(Forum.playSet(playArea));
 
-        addNumberOf(new Gladiator(playArea), Gladiator.OCCURENCES);
-        addNumberOf(new Haruspex(playArea), Legat.OCCURENCES);
-        addNumberOf(new Legionarius(playArea), Machina.OCCURENCES);
+        playingDeck.addAll(Gladiator.playSet(playArea));
+        playingDeck.addAll(Haruspex.playSet(playArea));
+        playingDeck.addAll(Legionarius.playSet(playArea));
 
-        addNumberOf(new Mercator(playArea), Mercator.OCCURENCES);
-        addNumberOf(new Mercatus(playArea), Mercatus.OCCURENCES);
-        addNumberOf(new Nero(playArea), Nero.OCCURENCES);
-        addNumberOf(new Onager(playArea), Onager.OCCURENCES);
+        playingDeck.addAll(Mercator.playSet(playArea));
+        playingDeck.addAll(Mercatus.playSet(playArea));
+        playingDeck.addAll(Nero.playSet(playArea));
+        playingDeck.addAll(Onager.playSet(playArea));
 
-        addNumberOf(new Praetorianus(playArea), Praetorianus.OCCURENCES);
-        addNumberOf(new Scaenicus(playArea), Scaenicus.OCCURENCES);
-        addNumberOf(new Senator(playArea), Senator.OCCURENCES);
+        playingDeck.addAll(Praetorianus.playSet(playArea));
+        playingDeck.addAll(Scaenicus.playSet(playArea));
+        playingDeck.addAll(Senator.playSet(playArea));
 
-        addNumberOf(new Sicarius(playArea), Sicarius.OCCURENCES);
-        addNumberOf(new Templum(playArea), TribunisPlebis.OCCURENCES);
-        addNumberOf(new TribunisPlebis(playArea), TribunisPlebis.OCCURENCES);
+        playingDeck.addAll(Sicarius.playSet(playArea));
+        playingDeck.addAll(Templum.playSet(playArea));
+        playingDeck.addAll(TribunisPlebis.playSet(playArea));
 
-        addNumberOf(new Turris(playArea), Turris.OCCURENCES);
-        addNumberOf(new Velites(playArea), Velites.OCCURENCES);
+        playingDeck.addAll(Turris.playSet(playArea));
+        playingDeck.addAll(Velites.playSet(playArea));
 
+        assert(playingDeck.size() == CARDS_IN_DECK);
         shuffle();
     }
 

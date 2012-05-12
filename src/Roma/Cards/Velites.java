@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Date: 11/04/12
  * Desc:
  */
-public class Velites extends Card {
+public class Velites extends CardBase {
     public final static String NAME = "Velites";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks any opposing character card " +
@@ -22,7 +22,22 @@ public class Velites extends Card {
 
     public final static int OCCURENCES = 2;
 
-    public Velites(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Velites(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Velites(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

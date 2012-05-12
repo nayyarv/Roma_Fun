@@ -15,8 +15,6 @@ public class Roma {
     public final static int NUM_CARDS_SWAPPED = 2;
     public final static int NUM_INIT_CARDS = 5;
 
-
-
     //Object pointers
     PlayerInterface playerInterface = new PlayerInterface();
     private PlayArea game;

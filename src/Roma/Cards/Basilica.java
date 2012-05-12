@@ -2,13 +2,15 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
  * Date: 11/04/12
  * Desc:
  */
-public class Basilica extends Card {
+public class Basilica extends CardBase {
 
     public final static String NAME = "Basilica";
     final static String TYPE = Card.BUILDING;
@@ -20,8 +22,23 @@ public class Basilica extends Card {
 
     public final static int OCCURENCES = 2;
 
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
 
-    public Basilica(PlayArea playArea) {
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Basilica(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+
+    private Basilica(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

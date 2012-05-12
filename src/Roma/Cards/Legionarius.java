@@ -2,13 +2,15 @@ package Roma.Cards;
 
 import Roma.*;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
  * Date: 11/04/12
  * Desc:
  */
-public class Legionarius extends Card {
+public class Legionarius extends CardBase {
     public final static String NAME = "Legionarius";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks the opponent's card which is directly opposite, " +
@@ -19,7 +21,22 @@ public class Legionarius extends Card {
 
     public final static int OCCURENCES = 3;
 
-    public Legionarius(PlayArea playArea) {
+    public static ArrayList<Card> playSet(PlayArea playArea){
+        ArrayList<Card> set = new ArrayList<Card>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new Legionarius(playArea);
+            cardHolder = new CardHolder(card);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    private Legionarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

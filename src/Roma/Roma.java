@@ -52,7 +52,8 @@ public class Roma {
                 game.runGame();
 
             } else if (choice == 2) {  // open pdf of rules
-                //Code found online: http://stackoverflow.com/questions/2546968/open-pdf-file-on-fly-from-java-application
+                //Code found online:
+                // http://stackoverflow.com/questions/2546968/open-pdf-file-on-fly-from-java-application
                 //Opens the pdf of Roma lol
                 if (Desktop.isDesktopSupported()) {
                     try {
@@ -80,7 +81,7 @@ public class Roma {
         }
     }
 
-    public void endGame() {
+    public void gameOverMessage() {
 
         //TODO: actually implement this
 

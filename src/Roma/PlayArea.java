@@ -53,7 +53,7 @@ public class PlayArea {
 
     public void endGame(){
         gameOver = true;
-        mainProgram.endGame();
+        mainProgram.gameOverMessage();
     }
 
     public void runGame() {
@@ -96,6 +96,7 @@ public class PlayArea {
         turn++;
     }
 
+    //TODO: move to playerInterface
     public void printStats() {
         String cardName;
 
@@ -173,11 +174,12 @@ public class PlayArea {
     /**
      * This is the section where the methods required for the interface
      * and our own tests are located
-     * @param testing
+     * @param testing "testing", so it isn't called by accident
      */
 
     @Deprecated
     public PlayArea(String testing){
+        mainProgram = new Roma();
         assert testing.equalsIgnoreCase("testing");
         System.err.println("In Testing phase");
         cardManager = new CardManager(this);
@@ -187,6 +189,8 @@ public class PlayArea {
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
         battleManager = new BattleManager(this);
+        playerInterface = new PlayerInterface();
+        gameRules = new GameRules(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             players[i] = Player.makeDummyPlayer(i, this);

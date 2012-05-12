@@ -24,8 +24,7 @@ public class TestVictoryTokens {
     }
 
     private static boolean Test01() {
-        Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
@@ -80,7 +79,7 @@ public class TestVictoryTokens {
 
     private static boolean Test02() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
@@ -103,7 +102,7 @@ public class TestVictoryTokens {
 
     private static boolean Test03() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 

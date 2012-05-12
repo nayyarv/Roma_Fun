@@ -26,7 +26,9 @@ public class PlayerInterface {
             integerInput = getIntegerInput();
         } while (!checkInBounds(integerInput, choices.length));
 
-        return integerInput;
+        return (integerInput-1);
+        //When multiple choices are given - we need to reduce the input by 1 for
+        // handling by arrays
     }
 
     private void showOptions(String title, String ... options){

@@ -23,6 +23,7 @@ public class DiceDiscs {
     public static final int TURRIS_DISCARD = -1;
 
     private final PlayArea playArea;
+    private PlayerInterface playerInterface;
 
     private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
@@ -38,6 +39,7 @@ public class DiceDiscs {
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
+        playerInterface = new PlayerInterface();
         for(int i = 0; i < CARD_POSITIONS; i++){
                 for(int j = 0; j < Roma.MAX_PLAYERS; j++){
                     activeCards[j][i] = null;
@@ -46,10 +48,12 @@ public class DiceDiscs {
         }
     }
 
+    //Returns an array of activeCards (Cards on DiceDiscs)
     public Card[] getPlayerActives(int playerID){
         return activeCards[playerID];
     }
 
+    //Gets all the cards of a certain type ~ Building or Character from the activeCards
     public ArrayList<Card> setOfCards(Player player, String type){
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
@@ -63,6 +67,8 @@ public class DiceDiscs {
         return set;
     }
 
+    //Clears all the dice placed on a disc
+    //TODO: This function is not being used, is it deprecated?
     public void clearDice() {
         for(ArrayList<Dice> disc : discs){
             disc.clear();
@@ -71,9 +77,10 @@ public class DiceDiscs {
         cardDisc.clear();
     }
 
+    //This function allows a Card to be placed on a dice Disc
     public void layCard(int playerID, int position, Card newCard) {
         BattleManager battleManager = playArea.getBattleManager();
-        if(newCard.getName() == Turris.NAME){
+        if(newCard.getName().equalsIgnoreCase(Turris.NAME)){
             battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
         }
 
@@ -81,28 +88,32 @@ public class DiceDiscs {
         position--;
         if(activeCards[playerID][position] !=  null){
             playArea.getCardManager().discard(activeCards[playerID][position]);
+            //If we need to place over another card, the current one must be discarded
         }
         activeCards[playerID][position] = newCard;
     }
 
     public boolean activateCard(Player player, int position, Dice die) {
         BattleManager battleManager = playArea.getBattleManager();
+        int playerID = player.getPlayerID();
         boolean activateEnabled = false;
         position--;
 
         //TODO: Change position-- to the player interface
 
-        if(activeCards[player.getPlayerID()][position] != null){
-            if(DEBUG){
-                System.out.println("Card activating: " + activeCards[player.getPlayerID()][position].getName());
-            }
-            activateEnabled = activeCards[player.getPlayerID()][position].isActivateEnabled();
 
-            activateEnabled &= battleManager.checkBlock(player.getPlayerID(), position);
+
+        if(activeCards[playerID][position] != null){
+            if(DEBUG){
+                playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName());
+            }
+            activateEnabled = activeCards[playerID][position].isActivateEnabled();
+
+            activateEnabled &= battleManager.checkBlock(playerID, position);
 
             if(activateEnabled){
                 discs.get(position).add(die);
-                activateEnabled = activeCards[player.getPlayerID()][position].activate(player, position);
+                activateEnabled = activeCards[playerID][position].activate(player, position);
                 if(activateEnabled){
                     discs.get(position).add(die);
                 }

@@ -14,7 +14,6 @@ public class TestCardDeck {
     static CardManager test = new CardManager(playArea);
 
     public static void main(String[] args) {
-        /*
         for (int i = 0; i < 10; i++) {
             //test.insertCard(new Card(i));
         }//Dummy fill function
@@ -36,7 +35,7 @@ public class TestCardDeck {
             testDisplay();
         }
 
-        */
+
 
         Card temp = test.getCardfromDeck("Senator");
         System.err.println(temp);

@@ -24,7 +24,6 @@ public class CardManager {
 
     public CardManager(PlayArea playArea) {
         this.playArea = playArea;
-        this.playArea = playArea;
         //Will insert all cards, and shuffle
         playingDeck.addAll(Aesculapinum.playSet(playArea));
         playingDeck.addAll(Architectus.playSet(playArea));
@@ -38,7 +37,10 @@ public class CardManager {
 
         playingDeck.addAll(Gladiator.playSet(playArea));
         playingDeck.addAll(Haruspex.playSet(playArea));
+        playingDeck.addAll(Legat.playSet(playArea));
         playingDeck.addAll(Legionarius.playSet(playArea));
+
+        playingDeck.addAll(Machina.playSet(playArea));
 
         playingDeck.addAll(Mercator.playSet(playArea));
         playingDeck.addAll(Mercatus.playSet(playArea));
@@ -57,7 +59,12 @@ public class CardManager {
         playingDeck.addAll(Velites.playSet(playArea));
 
         assert(playingDeck.size() == CARDS_IN_DECK);
-        shuffle();
+//        int i=1;
+//        for(Card card: playingDeck){
+//            System.out.println(i+") "+card.getName());
+//            i++;
+//        }
+
         shuffle();
     }
 

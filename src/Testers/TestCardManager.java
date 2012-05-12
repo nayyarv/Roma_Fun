@@ -15,7 +15,8 @@ public class TestCardManager {
 
     public static void main(String[] args){
 
-        CardManager cardManager= new CardManager(new PlayArea("testing"));
+        PlayArea playArea = new PlayArea("testing");
+        CardManager cardManager = playArea.getCardManager();
         PlayerInterface playerInterface = new PlayerInterface();
 
         playerInterface.printOut(cardManager.getPlayingSize());

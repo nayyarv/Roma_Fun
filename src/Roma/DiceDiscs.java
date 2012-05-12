@@ -4,6 +4,15 @@ import Roma.Cards.*;
 
 import java.util.ArrayList;
 
+/**
+ * File Name:
+ * Creator: Andrew Lem & Varun Nayyar
+ * Date: 19/03/12
+ * Desc: This Object models the DiceDiscs of the game
+ *
+ */
+
+
 //TODO: create a dice disc class that will handle temporary and passive defense changes
 
 public class DiceDiscs {
@@ -16,9 +25,16 @@ public class DiceDiscs {
     private final PlayArea playArea;
 
     private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
+    //Has the card placed on each disc
+
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
+    // Holds the dice on each disc
+
     private ArrayList<Dice> moneyDisc = new ArrayList<Dice>();
+    // Holds the dice placed on the money disc
+
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
+    //Holds the dice placed on the cardDisc
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;

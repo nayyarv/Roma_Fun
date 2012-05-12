@@ -21,7 +21,6 @@ public class PlayerInterface {
 
     public int readInput(String title, String ... choices){
         int integerInput;
-
         do {
             showOptions(title, choices);
             integerInput = getIntegerInput();
@@ -31,10 +30,10 @@ public class PlayerInterface {
     }
 
     private void showOptions(String title, String ... options){
-        System.out.println("-------------------------------------");
-        System.out.println(title);
+        printOut("-------------------------------------");
+        printOut(title);
         for(int i=0;i<options.length;i++){
-            System.out.println(i+1+") " + options[i]);
+            printOut((i+1)+") " + options[i]);
         }
     }
 
@@ -66,5 +65,9 @@ public class PlayerInterface {
             read=getIntegerInput();
         } while (!checkInBounds(read, bound));
         return read;
+    }
+
+    public void printOut(String string){
+        System.out.println(string);
     }
 }

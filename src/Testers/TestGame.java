@@ -11,7 +11,7 @@ import Roma.PlayArea;
 public class TestGame {
 
     public static void main (String[] args){
-        PlayArea playArea= new PlayArea();
+        PlayArea playArea= new PlayArea("testing");
 
     }
 }

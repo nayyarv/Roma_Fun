@@ -356,7 +356,12 @@ public class Player {
         MoneyManager moneyManager = playArea.getMoneyManager();
         for (Card card : hand) {
             if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
-                card.setPlayable(true);
+                //TODO: Broken Code
+                //TODO:
+                //TODO:
+                //TODO:
+                //What is this shit??
+                //card.setPlayable(true);
             }
         }
     }

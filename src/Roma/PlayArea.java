@@ -85,8 +85,8 @@ public class PlayArea {
 
     //for testing
     @Deprecated
-    public PlayArea(boolean testing){
-        assert testing;
+    public PlayArea(String testing){
+        assert testing.equalsIgnoreCase("testing");
         System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();

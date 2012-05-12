@@ -1,14 +1,13 @@
 package Roma;
 
 import Roma.Cards.Card;
-
 import java.util.ArrayList;
 
 /**
- * File Name:
+ * File Name: GameRules.java
  * Creator: Varun Nayyar
  * Date: 12/05/12
- * Desc:
+ * Desc: All the initial and regular global rules are run by this object
  */
 public class GameRules {
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class PlayArea {
     //#defines
-    private final int NUM_INIT_CARDS = 5;
     private final int PAD_LENGTH = 20;
 
     //Object pointers
@@ -19,10 +18,9 @@ public class PlayArea {
     private Player players[];
     private BattleManager battleManager;
     private PlayerInterface playerInterface;
-
     private GameRules gameRules;
 
-
+    //TODO: Use these functions
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
@@ -30,11 +28,6 @@ public class PlayArea {
 
     //Variables
     private int turn = 0;
-
-    public boolean isGameOver() {
-        return gameOver;
-    }
-
     private boolean gameOver = false;
 
 
@@ -63,34 +56,6 @@ public class PlayArea {
         mainProgram.endGame();
     }
 
-    public Player[] getAllPlayers() {
-        return players;
-    }
-
-    public CardManager getCardManager() {
-        return cardManager;
-    }
-
-    public DiceHolder getDiceHolder() {
-        return diceHolder;
-    }
-
-    public MoneyManager getMoneyManager() {
-        return moneyManager;
-    }
-
-    public VictoryTokens getVictoryTokens() {
-        return victoryTokens;
-    }
-
-    public DiceDiscs getDiceDiscs() {
-        return diceDiscs;
-    }
-
-    public Player getPlayer(int playerID) {
-        return players[playerID];
-    }
-
     public void runGame() {
         while (!gameOver) {
             Player player = players[turn % Roma.MAX_PLAYERS];
@@ -98,18 +63,16 @@ public class PlayArea {
         }
     }
 
-    public PlayerInterface getPlayerInterface() {
-        return playerInterface;
-    }
-
     public void playerTurn(Player player) {
         boolean endTurn = false;
         char roll = 'b';
 
-        System.out.println("It's " + player.getName() + "'s turn");
+        playerInterface.printOut("It's " + player.getName() + "'s turn");
 
         gameRules.deductVictoryTokens(player.getPlayerID());
+
         diceDiscs.clearPlayerDice(player.getPlayerID());
+
         player.rollActionDice();
 
         //TODO: set up auto roll option
@@ -140,7 +103,7 @@ public class PlayArea {
             System.out.println("-------------------------------------");
             System.out.println("Player: " + players[player].getName());
             System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                                "  \tMoney: " + moneyManager.getPlayerMoney(player));
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player));
             System.out.println("Cards in hand: " + players[player].handSize());
             System.out.println("Cards in play: ");
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
@@ -160,10 +123,49 @@ public class PlayArea {
         }
     }
 
+
+    //All the getters
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public Player[] getAllPlayers() {
+        return players;
+    }
+
+    public CardManager getCardManager() {
+        return cardManager;
+    }
+
+    public DiceHolder getDiceHolder() {
+        return diceHolder;
+    }
+
+    public MoneyManager getMoneyManager() {
+        return moneyManager;
+    }
+
+    public VictoryTokens getVictoryTokens() {
+        return victoryTokens;
+    }
+
+    public DiceDiscs getDiceDiscs() {
+        return diceDiscs;
+    }
+
+    public Player getPlayer(int playerID) {
+        return players[playerID];
+    }
+
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
+    }
+
     public BattleManager getBattleManager() {
         return battleManager;
     }
 
+    //TODO: What is this
     private void endActionPhase(){
 
     }

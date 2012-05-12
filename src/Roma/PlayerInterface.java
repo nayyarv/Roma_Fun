@@ -15,7 +15,6 @@ public class PlayerInterface {
     public final static int CANCEL = -1;
 
     public PlayerInterface(){
-        //Empty constructor??
         input = new Scanner(System.in);
     }
 
@@ -30,13 +29,16 @@ public class PlayerInterface {
     }
 
     private void showOptions(String title, String ... options){
-        printOut("-------------------------------------");
+        printLine();
         printOut(title);
         for(int i=0;i<options.length;i++){
             printOut((i+1)+") " + options[i]);
         }
     }
 
+    private void printLine(){
+        printOut("-------------------------------------");
+    }
     private int getIntegerInput(){
         if(input.hasNextInt()){
             return input.nextInt();

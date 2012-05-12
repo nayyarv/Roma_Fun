@@ -83,30 +83,6 @@ public class PlayArea {
         }
     }
 
-    //for testing
-    @Deprecated
-    public PlayArea(String testing){
-        assert testing.equalsIgnoreCase("testing");
-        System.err.println("In Testing phase");
-        cardManager = new CardManager(this);
-        diceHolder = new DiceHolder();
-        moneyManager = new MoneyManager();
-        victoryTokens = new VictoryTokens(this);
-        diceDiscs = new DiceDiscs(this);
-        players = new Player[Roma.MAX_PLAYERS];
-        battleManager = new BattleManager(this);
-
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
-            players[i] = Player.makeDummyPlayer(i, this);
-        }
-    }
-
-    public void getCardfromDeckAndAddToHand(String cardName, int playerID){
-        //for testing
-        Card obtain = cardManager.getCardfromDeck(cardName);
-        players[playerID].addCardToHand(obtain);
-
-    }
 
     public void endGame(){
         mainProgram.endGame();
@@ -268,4 +244,39 @@ public class PlayArea {
     private void endActionPhase(){
 
     }
+
+    /**
+     * This is the section where the methods required for the interface
+     * and our own tests are located
+     * @param testing
+     */
+
+    @Deprecated
+    public PlayArea(String testing){
+        assert testing.equalsIgnoreCase("testing");
+        System.err.println("In Testing phase");
+        cardManager = new CardManager(this);
+        diceHolder = new DiceHolder();
+        moneyManager = new MoneyManager();
+        victoryTokens = new VictoryTokens(this);
+        diceDiscs = new DiceDiscs(this);
+        players = new Player[Roma.MAX_PLAYERS];
+        battleManager = new BattleManager(this);
+
+        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+            players[i] = Player.makeDummyPlayer(i, this);
+        }
+    }
+
+    public void testGetSpecificCardforHand(String cardName, int playerID){
+        //for testing
+        Card obtain = cardManager.getCardfromDeck(cardName);
+        players[playerID].addCardToHand(obtain);
+
+    }
+
+    public void testFillHand(int playerID){
+        players[playerID].addCardListToHand(cardManager.drawNCards(Roma.NUM_INIT_CARDS));
+    }
+
 }

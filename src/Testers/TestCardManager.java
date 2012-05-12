@@ -23,6 +23,10 @@ public class TestCardManager {
         playerInterface.printOut(cardManager.getCardfromDeck(Turris.NAME).toString());
         playerInterface.printOut(cardManager.getPlayingSize());
 
+        playArea.testFillHand(0);
+        playArea.testFillHand(1);
+
+        playArea.runGame();
 
 
 

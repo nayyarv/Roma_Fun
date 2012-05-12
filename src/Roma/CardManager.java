@@ -69,13 +69,14 @@ public class CardManager {
     }
 
     public void shuffle() {
-        Collections.shuffle(playingDeck);
+        shuffle(playingDeck);
     }
 
     public void shuffle(ArrayList<Card> cardList){
         Collections.shuffle(cardList);
     }
 
+    @Deprecated //Made redundant
     private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
@@ -127,6 +128,7 @@ public class CardManager {
         }
         return null;
     }
+
 
     public void discard(ArrayList<Card> cardList) {
 

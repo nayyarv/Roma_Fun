@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+//TODO: Refactor Player
 public class Player {
     private final static int CANCEL = -1;
     private final String name;
@@ -15,11 +17,10 @@ public class Player {
     private ArrayList<Dice> freeDice;
     private PlayerInterface playerInterface;
 
-
-    private boolean testing;
     private int playerID;
     private boolean autoRoll;
 
+    //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
         return new Player(playerID, playArea);
     }
@@ -210,11 +211,19 @@ public class Player {
     //input: ArrayList (of dice or of cards)
     //return int
     public Card chooseCard(ArrayList<Card> cardList){
-        final String strPrompt = "Possible actions:";
-        final String strOption1 = "Choose a card";
-        final String strOption2 = "Check description";
-        final String strOption3 = "Print card list";
-        final String strOption4 = "Cancel/End selection";
+        final String
+                strPrompt = "Possible actions:",
+                strOption1 = "Choose a card",
+                strOption2 = "Check description",
+                strOption3 = "Print card list",
+                strOption4 = "Cancel/End selection";
+
+        final int
+                CHOOSE_CARDS = 1,
+                CHECK_DESC = 2,
+                PRINT_CARDS = 3,
+                CANCEL = 4;
+
 
         Card choice = null;
         int action = 0;
@@ -228,18 +237,18 @@ public class Player {
             while(!validChoice){
                 action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
 
-                if(action == 1){
+                if(action == CHOOSE_CARDS){
                     System.out.print("Card number: ");
                     int cardChoice = playerInterface.getIntegerInput(cardList.size());
                     choice = cardList.remove(cardChoice - 1);
                     validChoice = true;
-                } else if(action == 2){
+                } else if(action == CHECK_DESC){
                     System.out.print("Check which card number: ");
                     action = playerInterface.getIntegerInput(cardList.size());
                     System.out.println(cardList.get(action - 1).toString());
-                } else if(action == 3){
+                } else if(action == PRINT_CARDS){
                     printCardList(cardList);
-                } else if(action == 4){
+                } else if(action == CANCEL){
                     choice = null;
                     validChoice = true;
                 } else {

@@ -109,7 +109,7 @@ public class CardManager {
 
     public Card getCardfromDeck(String name){
         for(Card card: playingDeck){
-            if (card.nameEquals(name)){
+            if (name.equalsIgnoreCase(card.getName())){
                 playingDeck.remove(card);
                 return card;
             }

@@ -103,7 +103,8 @@ public class PlayArea {
 
     public void getCardfromDeckAndAddToHand(String cardName, int playerID){
         //for testing
-        //cardManager
+        Card obtain = cardManager.getCardfromDeck(cardName);
+        players[playerID].addCardToHand(obtain);
 
     }
 
@@ -114,11 +115,14 @@ public class PlayArea {
 
     public void getAndSwapCards(){
         ArrayList<Card> initialSet = new ArrayList<Card>();
-        //gets the inital cards for the game
+        //stores the initial cards for the game
 
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
             initialSet.addAll(0, cardManager.drawNCards(Roma.NUM_INIT_CARDS));
         } //gets all the cards needed
+
+        //cardManager.shuffle(initialSet);
+        //To ensure some extra randomness?
 
         ArrayList<Card> choices = new ArrayList<Card>();
         //stores the choices of the previous player
@@ -225,7 +229,7 @@ public class PlayArea {
                 countNull++;
             }
         }
-        System.out.println("There are " + countNull + "empty slots, losing that many players");
+        System.out.println("There are " + countNull + " empty slots, losing that many players");
         victoryTokens.playerToPool(playerID, countNull);
     }
 

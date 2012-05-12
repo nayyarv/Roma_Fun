@@ -1,12 +1,10 @@
 package Roma;
 /**
  * File Name:
- * Creator: Varun Nayyar & Andrew Lem
+ * Creator: Varun Nayyar
  * Date: 19/03/12
- * Desc: This object handles the card Decks - i.e. playing deck and discard pile
- *
+ * Desc:
  */
-//TODO:  only 48 cards at start
 
 import Roma.Cards.*;
 
@@ -14,73 +12,64 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardManager {
-    private final static int CARDS_IN_DECK = 52;
-
+    //Objects
     private final ArrayList<Card> playingDeck = new ArrayList<Card>();
     private final ArrayList<Card> discardPile = new ArrayList<Card>();
 
-    //Variables
+    private PlayArea playArea;
+
+    //Variabls
     private boolean noMoreCards = false;
 
-
-    //This function populates the card deck when called
     public CardManager(PlayArea playArea) {
+        this.playArea = playArea;
         //Will insert all cards, and shuffle
-        playingDeck.addAll(Aesculapinum.playSet(playArea));
-        playingDeck.addAll(Architectus.playSet(playArea));
-        playingDeck.addAll(Basilica.playSet(playArea));
-        playingDeck.addAll(Centurio.playSet(playArea));
+        addNumberOf(new Aesculapinum(playArea), Aesculapinum.OCCURENCES);
+        addNumberOf(new Architectus(playArea), Architectus.OCCURENCES);
+        addNumberOf(new Basilica(playArea), Basilica.OCCURENCES);
+        addNumberOf(new Centurio(playArea), Centurio.OCCURENCES);
 
-        playingDeck.addAll(Consiliarus.playSet(playArea));
-        playingDeck.addAll(Consul.playSet(playArea));
-        playingDeck.addAll(Essedum.playSet(playArea));
-        playingDeck.addAll(Forum.playSet(playArea));
+        addNumberOf(new Consiliarus(playArea), Consiliarus.OCCURENCES);
+        addNumberOf(new Consul(playArea), Consul.OCCURENCES);
+        addNumberOf(new Essedum(playArea), Essedum.OCCURENCES);
+        addNumberOf(new Forum(playArea), Forum.OCCURENCES);
 
-        playingDeck.addAll(Gladiator.playSet(playArea));
-        playingDeck.addAll(Haruspex.playSet(playArea));
-        playingDeck.addAll(Legionarius.playSet(playArea));
+        addNumberOf(new Gladiator(playArea), Gladiator.OCCURENCES);
+        addNumberOf(new Haruspex(playArea), Legat.OCCURENCES);
+        addNumberOf(new Legionarius(playArea), Machina.OCCURENCES);
 
-        playingDeck.addAll(Mercator.playSet(playArea));
-        playingDeck.addAll(Mercatus.playSet(playArea));
-        playingDeck.addAll(Nero.playSet(playArea));
-        playingDeck.addAll(Onager.playSet(playArea));
+        addNumberOf(new Mercator(playArea), Mercator.OCCURENCES);
+        addNumberOf(new Mercatus(playArea), Mercatus.OCCURENCES);
+        addNumberOf(new Nero(playArea), Nero.OCCURENCES);
+        addNumberOf(new Onager(playArea), Onager.OCCURENCES);
 
-        playingDeck.addAll(Praetorianus.playSet(playArea));
-        playingDeck.addAll(Scaenicus.playSet(playArea));
-        playingDeck.addAll(Senator.playSet(playArea));
+        addNumberOf(new Praetorianus(playArea), Praetorianus.OCCURENCES);
+        addNumberOf(new Scaenicus(playArea), Scaenicus.OCCURENCES);
+        addNumberOf(new Senator(playArea), Senator.OCCURENCES);
 
-        playingDeck.addAll(Sicarius.playSet(playArea));
-        playingDeck.addAll(Templum.playSet(playArea));
-        playingDeck.addAll(TribunisPlebis.playSet(playArea));
+        addNumberOf(new Sicarius(playArea), Sicarius.OCCURENCES);
+        addNumberOf(new Templum(playArea), TribunisPlebis.OCCURENCES);
+        addNumberOf(new TribunisPlebis(playArea), TribunisPlebis.OCCURENCES);
 
-        playingDeck.addAll(Turris.playSet(playArea));
-        playingDeck.addAll(Velites.playSet(playArea));
+        addNumberOf(new Turris(playArea), Turris.OCCURENCES);
+        addNumberOf(new Velites(playArea), Velites.OCCURENCES);
 
-        assert(playingDeck.size() == CARDS_IN_DECK);
         shuffle();
     }
-
 
     public void shuffle() {
         Collections.shuffle(playingDeck);
     }
 
-    public Card getCardfromDeck(String name){ //for testing
-        for(int i=0; i<playingDeck.size();i++){
-            if(playingDeck.get(i).getName().equalsIgnoreCase(name)){
-                return playingDeck.remove(i);
-            }
-        }
-        return null;
-
+    public void shuffle(ArrayList<Card> cardList){
+        Collections.shuffle(cardList);
     }
-    @Deprecated
+
     private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
         }
     }
-
 
     public Card drawACard() {
         Card temp = playingDeck.remove(0);
@@ -94,7 +83,6 @@ public class CardManager {
         return temp;
     }
 
-
     public ArrayList<Card> drawNCards(int number){
         ArrayList<Card> drawHand = new ArrayList<Card>();
         for (int i=0; i<number;i++){
@@ -103,7 +91,7 @@ public class CardManager {
         return drawHand;
     }
 
-
+    //
     public void insertCard(Card theCard) {
         playingDeck.add(0, theCard);
     }
@@ -118,7 +106,17 @@ public class CardManager {
         }
     }
 
-    //discard a list of cards
+
+    public Card getCardfromDeck(String name){
+        for(Card card: playingDeck){
+            if (card.nameEquals(name)){
+                playingDeck.remove(card);
+                return card;
+            }
+        }
+        return null;
+    }
+
     public void discard(ArrayList<Card> cardList) {
 
         /** TODO - check discard order here
@@ -146,7 +144,7 @@ public class CardManager {
     }
 
     public String toString() {
-        return "Playing deck is: " + playingDeck.toString() + "\n\nAnd Discard Pile is: " + discardPile.toString();
+        return "Playing deck is: " + playingDeck.toString() + "\nAnd Discard Pile is: " + discardPile.toString();
 
     }
 

@@ -3,6 +3,7 @@ package Roma;
 import Roma.Cards.Card;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Player {
@@ -110,7 +111,15 @@ public class Player {
     }
 
     public int chooseCardDisc() {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         final int CANCEL_OPTION = 8;
+        String [] DicePrompt = new String[8];
+
+        for (int i=0; i<6;i++){
+            DicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
+        }
+        DicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, 6);
+        DicePrompt[7] = "Cancel";
 
         int option = -1;
         int discTarget;
@@ -118,14 +127,7 @@ public class Player {
 
         while(!validChoice){
             option = playerInterface.readInput("Which disc?",
-                    "Dice Disc 1",
-                    "Dice Disc 2",
-                    "Dice Disc 3",
-                    "Dice Disc 4",
-                    "Dice Disc 5",
-                    "Dice Disc 6",
-                    "Bribery Disc",
-                    "Cancel");
+                    DicePrompt);
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
             } else if (option == CANCEL_OPTION) {
@@ -206,7 +208,7 @@ public class Player {
     public void printCardList(ArrayList<Card> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
-        for(Card card : cardList){
+        for(Card card: cardList){
             System.out.println(i + ") " + card.getName());
             i++;
         }
@@ -348,6 +350,15 @@ public class Player {
         }
 
         hand.add(chosenCard);
+    }
+
+    public void checkPlayable() {
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        for (Card card : hand) {
+            if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
+                card.setPlayable(true);
+            }
+        }
     }
 
     public boolean commit() {

@@ -13,7 +13,6 @@ public class Player {
     private PlayArea playArea;
     private ArrayList<Card> hand = new ArrayList<Card>();
     private ArrayList<Dice> freeDice;
-    private Scanner input;
     private PlayerInterface playerInterface;
 
 
@@ -32,22 +31,15 @@ public class Player {
     private Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = new Scanner(System.in);
-        System.out.print("Name of player" + (playerID + 1) + ": ");
-        this.name = input.nextLine();
-        playerInterface = new PlayerInterface();
-
+        playerInterface = playArea.getPlayerInterface();
+        this.name = playerInterface.getPlayerName(playerID);
     }
 
     private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = null;
         this.name = "dummyPlayer" + playerID;
-
     }
-
-
 
     public String getName() {
         return name;
@@ -87,7 +79,7 @@ public class Player {
         } else if(option == END_TURN){
             endTurn = true;
         } else {
-            System.out.println("Please choose a valid option.");
+            playerInterface.printOut("Please choose a valid option.");
         }
 
         return endTurn;
@@ -243,7 +235,7 @@ public class Player {
                     validChoice = true;
                 } else if(action == 2){
                     System.out.print("Check which card number: ");
-                    action = input.nextInt();
+                    action = playerInterface.getIntegerInput(cardList.size());
                     System.out.println(cardList.get(action - 1).toString());
                 } else if(action == 3){
                     printCardList(cardList);
@@ -275,7 +267,7 @@ public class Player {
             }
             i++;
             System.out.println(i + ") Cancel");
-            number = input.nextInt();
+            number = playerInterface.getIntegerInput(diceList.size());
             if(number < 1 || number > diceList.size() + 1){
                 System.out.println("Please choose a valid die");
             } else {
@@ -360,12 +352,13 @@ public class Player {
                 //TODO:
                 //TODO:
                 //TODO:
-                //What is this shit??
+                //What is this??
                 //card.setPlayable(true);
             }
         }
     }
 
+    //TODO: Nothing happening
     public boolean commit() {
         boolean confirm = true;
 

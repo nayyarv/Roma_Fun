@@ -39,14 +39,7 @@ public class PlayerInterface {
     private void printLine(){
         printOut("-------------------------------------");
     }
-    private int getIntegerInput(){
-        if(input.hasNextInt()){
-            return input.nextInt();
-        } else {
-            input.next(); //clear the current input
-            return CANCEL;
-        }
-    }
+
 
     private boolean checkInBounds(int input, int max){
         boolean inBounds = false;
@@ -60,7 +53,7 @@ public class PlayerInterface {
         return inBounds;
     }
 
-
+    //Keeps reading till valid input is recieved
     public int getIntegerInput(int bound){
         int read;
         do{
@@ -69,6 +62,28 @@ public class PlayerInterface {
         return read;
     }
 
+    //Simply returns input
+    private int getIntegerInput(){
+        if(input.hasNextInt()){
+            return input.nextInt();
+        } else {
+            input.next(); //clear the current input
+            return CANCEL;
+        }
+    }
+
+    public String getPlayerName(int num){
+        printOut("Name of player" + (num + 1) + ": ");
+        return readString();
+    }
+
+    public String readString(){
+        if(input.hasNextLine()){
+            return input.nextLine();
+        } else {
+            return "Anon"; //Since we have no input
+        }
+    }
     public void printOut(String string){
         System.out.println(string);
     }
@@ -76,4 +91,5 @@ public class PlayerInterface {
     public void printOut(Object object){
         System.out.println(object.toString());
     }
+
 }

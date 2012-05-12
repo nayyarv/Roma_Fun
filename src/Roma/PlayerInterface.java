@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 /**
  * File Name:
- * Creator: Varun Nayyar
+ * Creator: Varun Nayyar & Andrew Lem
  * Date: 27/04/12
- * Desc:
+ * Desc: Handles all input and output for
  */
 public class PlayerInterface {
     private Scanner input;
@@ -26,9 +26,7 @@ public class PlayerInterface {
             integerInput = getIntegerInput();
         } while (!checkInBounds(integerInput, choices.length));
 
-        return (integerInput-1);
-        //When multiple choices are given - we need to reduce the input by 1 for
-        // handling by arrays
+        return integerInput;
     }
 
     private void showOptions(String title, String ... options){
@@ -71,5 +69,9 @@ public class PlayerInterface {
 
     public void printOut(String string){
         System.out.println(string);
+    }
+
+    public void printOut(Object object){
+        System.out.println(object.toString());
     }
 }

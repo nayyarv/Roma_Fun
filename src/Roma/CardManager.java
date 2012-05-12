@@ -6,6 +6,7 @@ package Roma;
  * Desc: This object handles the card Decks - i.e. playing deck and discard pile
  *
  */
+//TODO:  only 48 cards at start
 
 import Roma.Cards.*;
 
@@ -64,6 +65,15 @@ public class CardManager {
         Collections.shuffle(playingDeck);
     }
 
+    public Card getCardfromDeck(String name){ //for testing
+        for(int i=0; i<playingDeck.size();i++){
+            if(playingDeck.get(i).getName().equalsIgnoreCase(name)){
+                return playingDeck.remove(i);
+            }
+        }
+        return null;
+
+    }
     @Deprecated
     private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){

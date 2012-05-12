@@ -100,16 +100,18 @@ public class DiceDiscs {
         position--;
 
         //TODO: Change position-- to the player interface
-
-
+        // Leave as is - make sure that it is handled in as few places as possible
 
         if(activeCards[playerID][position] != null){
+            // There is a card there
             if(DEBUG){
                 playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName());
             }
             activateEnabled = activeCards[playerID][position].isActivateEnabled();
+            // Can it be activated(Eg Turris is passive)
 
             activateEnabled &= battleManager.checkBlock(playerID, position);
+            // And Has it been blocked by another card?
 
             if(activateEnabled){
                 discs.get(position).add(die);
@@ -121,7 +123,7 @@ public class DiceDiscs {
                 System.out.println("That card can't be activated");
             }
         } else {
-            System.out.println("No card there!");
+            playerInterface.printOut("No card there!");
         }
 
         return activateEnabled;

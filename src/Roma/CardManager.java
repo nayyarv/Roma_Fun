@@ -1,9 +1,10 @@
 package Roma;
 /**
  * File Name:
- * Creator: Varun Nayyar
+ * Creator: Varun Nayyar & Andrew Lem
  * Date: 19/03/12
- * Desc:
+ * Desc: This object handles the card Decks - i.e. playing deck and discard pile
+ *
  */
 
 import Roma.Cards.*;
@@ -13,13 +14,15 @@ import java.util.Collections;
 
 public class CardManager {
     private final static int CARDS_IN_DECK = 52;
-    //Objects
+
     private final ArrayList<Card> playingDeck = new ArrayList<Card>();
     private final ArrayList<Card> discardPile = new ArrayList<Card>();
 
-    //Variabls
+    //Variables
     private boolean noMoreCards = false;
 
+
+    //This function populates the card deck when called
     public CardManager(PlayArea playArea) {
         //Will insert all cards, and shuffle
         playingDeck.addAll(Aesculapinum.playSet(playArea));
@@ -56,15 +59,18 @@ public class CardManager {
         shuffle();
     }
 
+
     public void shuffle() {
         Collections.shuffle(playingDeck);
     }
 
+    @Deprecated
     private void addNumberOf(Card card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
         }
     }
+
 
     public Card drawACard() {
         Card temp = playingDeck.remove(0);
@@ -78,6 +84,7 @@ public class CardManager {
         return temp;
     }
 
+
     public ArrayList<Card> drawNCards(int number){
         ArrayList<Card> drawHand = new ArrayList<Card>();
         for (int i=0; i<number;i++){
@@ -86,7 +93,7 @@ public class CardManager {
         return drawHand;
     }
 
-    //
+
     public void insertCard(Card theCard) {
         playingDeck.add(0, theCard);
     }
@@ -101,6 +108,7 @@ public class CardManager {
         }
     }
 
+    //discard a list of cards
     public void discard(ArrayList<Card> cardList) {
 
         /** TODO - check discard order here
@@ -128,7 +136,7 @@ public class CardManager {
     }
 
     public String toString() {
-        return "Playing deck is: " + playingDeck.toString() + "\nAnd Discard Pile is: " + discardPile.toString();
+        return "Playing deck is: " + playingDeck.toString() + "\n\nAnd Discard Pile is: " + discardPile.toString();
 
     }
 

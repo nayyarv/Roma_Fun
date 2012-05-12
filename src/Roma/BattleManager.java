@@ -3,8 +3,7 @@ package Roma;
 import Roma.Cards.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Andrew
+ * User: Andrew and Varun
  * Date: 26/04/12
  * Time: 12:49 AM
  * To change this template use File | Settings | File Templates.

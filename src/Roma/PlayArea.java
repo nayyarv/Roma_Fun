@@ -42,6 +42,12 @@ public class PlayArea {
             players[i] = Player.makeRealPlayer(i, this);
         }
         getAndSwapCards();
+        /* testing
+        System.out.println("\n\n\n HAnd 1");
+        players[0].printHand();
+        System.out.println("\n\n\n HAnd 2");
+        players[1].printHand();
+        */
         layAllCardsInHand();
     }
 
@@ -78,7 +84,9 @@ public class PlayArea {
     }
 
     //for testing
-    public PlayArea(){
+    @Deprecated
+    public PlayArea(boolean testing){
+        assert testing;
         System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
@@ -93,8 +101,10 @@ public class PlayArea {
         }
     }
 
-    public void getCardfromDeckfor(String cardName, int playerID){
+    public void getCardfromDeckAndAddToHand(String cardName, int playerID){
         //for testing
+        Card obtain = cardManager.getCardfromDeck(cardName);
+        players[playerID].addCardToHand(obtain);
 
     }
 
@@ -105,11 +115,14 @@ public class PlayArea {
 
     public void getAndSwapCards(){
         ArrayList<Card> initialSet = new ArrayList<Card>();
-        //gets the inital cards for the game
+        //stores the initial cards for the game
 
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
             initialSet.addAll(0, cardManager.drawNCards(Roma.NUM_INIT_CARDS));
         } //gets all the cards needed
+
+        //cardManager.shuffle(initialSet);
+        //To ensure some extra randomness?
 
         ArrayList<Card> choices = new ArrayList<Card>();
         //stores the choices of the previous player

@@ -20,19 +20,9 @@ public class Roma {
     private PlayArea game;
 
     //Variables
-    private boolean autoTesting;
-    private boolean manualTesting;
-    private boolean gameOver = false;
     private boolean exit = false;
 
-    public Roma() {
-        this.autoTesting = false;
-    }
 
-    public Roma(boolean autoTesting) {
-        this.autoTesting = autoTesting;
-        printTesting();
-    }
 
     public static void main(String[] arg){
         Roma game = new Roma();
@@ -58,7 +48,6 @@ public class Roma {
                     "Quit");
 
             if (choice == 1) { // new play area and game
-                gameOver = false;
                 game = new PlayArea(this);
                 game.runGame();
 
@@ -84,42 +73,16 @@ public class Roma {
                     // blank
                 }
             } else if (choice == 4) {  // debug choice
-                manualTesting = !manualTesting;
-                printTesting();
+
             } else {
                 System.out.println("Invalid choice. Please choose again.");
             }
         }
     }
 
-    public void newGame() {
-        gameOver = false;
-    }
-
     public void endGame() {
-        gameOver = true;
+
         //TODO: actually implement this
-    }
 
-    public boolean getGameOver() {
-        return gameOver;
-    }
-
-    public boolean isAutoTesting() {
-        return autoTesting;
-    }
-
-    public boolean isManualTesting() {
-        return manualTesting;
-    }
-
-    public void printTesting() {
-        if (autoTesting) {
-            System.out.println("Auto testing mode ENABLED. Print statements suppressed.");
-        } else if (manualTesting) {
-            System.out.println("Manual testing mode ENABLED. Extra debug statements ENABLED.");
-        } else {
-            System.out.println("Testing modes DISABLED. Game will run normally.");
-        }
     }
 }

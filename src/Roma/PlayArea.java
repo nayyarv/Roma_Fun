@@ -18,6 +18,7 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
+    private ArrayList<Wrapper> endTurnClear = new ArrayList<Wrapper>();
 
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
@@ -192,7 +193,6 @@ public class PlayArea {
 
     public void playerTurn(Player player) {
         boolean endTurn = false;
-        char roll = 'b';
 
         System.out.println("It's " + player.getName() + "'s turn");
 
@@ -217,6 +217,7 @@ public class PlayArea {
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
         }
+        clearEndTurnWrappers();
         battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
     }
@@ -263,6 +264,20 @@ public class PlayArea {
 
     public BattleManager getBattleManager() {
         return battleManager;
+    }
+
+    public void addToEndTurnClear(Wrapper wrapper){
+        endTurnClear.add(wrapper);
+    }
+
+    public void addToEndTurnClear(ArrayList<Wrapper> wrappers){
+        endTurnClear.addAll(wrappers);
+    }
+
+    private void clearEndTurnWrappers() {
+        for(Wrapper wrapper : endTurnClear){
+
+        }
     }
 
     private void endActionPhase(){

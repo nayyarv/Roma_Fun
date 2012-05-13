@@ -120,4 +120,11 @@ public class Wrapper implements Card {
     public boolean activate(Player player, int position){
         return contents.activate(player, position);
     }
+
+    public void deleteThisWrapper(){
+        if(container != null && contents != null){
+            container.setContents(contents);
+            contents.setContainer(container);
+        }
+    }
 }

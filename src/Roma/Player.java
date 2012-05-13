@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
+import Roma.Cards.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ public class Player {
     private final String name;
 
     private PlayArea playArea;
-    private ArrayList<Card> hand = new ArrayList<Card>();
+    private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
     private Scanner input;
     private PlayerInterface playerInterface;
@@ -94,7 +94,7 @@ public class Player {
     }
 
     private void viewHand() {
-        Card chosenCard = null;
+        CardHolder chosenCard = null;
         int chosenPosition = -1;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
@@ -205,10 +205,10 @@ public class Player {
         printCardList(hand);
     }
 
-    public void printCardList(ArrayList<Card> cardList){
+    public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
-        for(Card card : cardList){
+        for(CardHolder card : cardList){
             System.out.println(i + ") " + card.getName());
             i++;
         }
@@ -217,14 +217,14 @@ public class Player {
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
-    public Card chooseCard(ArrayList<Card> cardList){
+    public CardHolder chooseCard(ArrayList<CardHolder> cardList){
         final String strPrompt = "Possible actions:";
         final String strOption1 = "Choose a card";
         final String strOption2 = "Check description";
         final String strOption3 = "Print card list";
         final String strOption4 = "Cancel/End selection";
 
-        Card choice = null;
+        CardHolder choice = null;
         int action = 0;
         boolean validChoice = false;
 
@@ -332,9 +332,9 @@ public class Player {
     }
 
     public void drawCards(int value) {
-        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();
-        Card chosenCard = null;
+        CardHolder chosenCard = null;
 
         System.out.println("Drawing " + value + " cards...");
 
@@ -354,7 +354,7 @@ public class Player {
 
     public void checkPlayable() {
         MoneyManager moneyManager = playArea.getMoneyManager();
-        for (Card card : hand) {
+        for (CardHolder card : hand) {
             if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
                 card.setPlayable(true);
             }
@@ -385,11 +385,11 @@ public class Player {
         return hand.size();
     }
 
-    public void addCardToHand(Card c){
+    public void addCardToHand(CardHolder c){
         if(c!=null) hand.add(c);
     }
 
-    public void addCardListToHand(ArrayList<Card> cardList){
+    public void addCardListToHand(ArrayList<CardHolder> cardList){
         hand.addAll(cardList);
     }
 
@@ -397,7 +397,7 @@ public class Player {
         return playerID;
     }
 
-    public ArrayList<Card> getHand() {
+    public ArrayList<CardHolder> getHand() {
         return hand;
     }
 

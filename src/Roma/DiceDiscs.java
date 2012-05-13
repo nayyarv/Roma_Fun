@@ -25,7 +25,7 @@ public class DiceDiscs {
     private final PlayArea playArea;
     private PlayerInterface playerInterface;
 
-    private Card[][] activeCards = new Card[Roma.MAX_PLAYERS][CARD_POSITIONS];
+    private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
 
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
@@ -49,15 +49,15 @@ public class DiceDiscs {
     }
 
     //Returns an array of activeCards (Cards on DiceDiscs)
-    public Card[] getPlayerActives(int playerID){
+    public CardHolder[] getPlayerActives(int playerID){
         return activeCards[playerID];
     }
 
     //Gets all the cards of a certain type ~ Building or Character from the activeCards
-    public ArrayList<Card> setOfCards(Player player, String type){
+    public ArrayList<CardHolder> setOfCards(Player player, String type){
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));
         int playerID = player.getPlayerID();
-        ArrayList<Card> set = new ArrayList<Card>();
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         for (int i=0; i< activeCards[playerID].length;i++){
             if(activeCards[playerID][i]!=null){ //add if not null
                 set.add(activeCards[playerID][i]);
@@ -78,7 +78,7 @@ public class DiceDiscs {
     }
 
     //This function allows a Card to be placed on a dice Disc
-    public void layCard(int playerID, int position, Card newCard) {
+    public void layCard(int playerID, int position, CardHolder newCard) {
         BattleManager battleManager = playArea.getBattleManager();
         if(newCard.getName().equalsIgnoreCase(Turris.NAME)){
             battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
@@ -178,7 +178,7 @@ public class DiceDiscs {
         cardDisc.add(chosenDie);
     }
 
-    public Card getTargetCard(int playerID, int position){
+    public CardHolder getTargetCard(int playerID, int position){
         return activeCards[playerID][position];
     }
 
@@ -186,7 +186,7 @@ public class DiceDiscs {
         CardManager cardManager = playArea.getCardManager();
         BattleManager battleManager = playArea.getBattleManager();
 
-        Card card = activeCards[playerID][position];
+        CardHolder card = activeCards[playerID][position];
         if(card.getName() == Turris.NAME){
             battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
         }

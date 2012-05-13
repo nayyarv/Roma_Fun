@@ -9,13 +9,22 @@ import Roma.Player;
  * Time: 6:26 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CardHolder implements Card {
+public class CardHolder implements Card{
     private final boolean isWrapper = false;
 
+    private boolean playable = false;
     private Card contents;
 
     public CardHolder(Card card){
         contents = card;
+    }
+
+    public void setPlayable(boolean playable){
+        this.playable = playable;
+    }
+
+    public boolean getPlayable(){
+        return playable;
     }
 
     public Card getContents(){

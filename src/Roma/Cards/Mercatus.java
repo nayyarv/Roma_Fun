@@ -22,8 +22,8 @@ public class Mercatus extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -47,10 +47,10 @@ public class Mercatus extends CardBase {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        Card[] enemyCards = diceDiscs.getPlayerActives(otherPlayer(player.getPlayerID()));
+        CardHolder[] enemyCards = diceDiscs.getPlayerActives(otherPlayer(player.getPlayerID()));
         int forumCount = 0;
 
-        for(Card card : enemyCards){
+        for(CardHolder card : enemyCards){
             if(card != null && card.getName() == Forum.NAME){
                 forumCount++;
             }

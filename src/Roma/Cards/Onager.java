@@ -23,8 +23,8 @@ public class Onager extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -57,7 +57,7 @@ public class Onager extends CardBase {
         BattleManager battleManager = playArea.getBattleManager();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
-        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
         System.out.println("Available Targets:");
         for(int i = 0; i < enemyCards.length; i++){

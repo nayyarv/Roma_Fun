@@ -21,8 +21,8 @@ public class Architectus extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -46,14 +46,14 @@ public class Architectus extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
 
-        ArrayList<Card> tempHand = new ArrayList<Card>();
-        ArrayList<Card> hand = player.getHand();
+        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> hand = player.getHand();
         boolean endSelection = false;
-        Card chosenCard = null;
+        CardHolder chosenCard = null;
         int targetPosition;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        for(Card card : hand){
+        for(CardHolder card : hand){
             if(card.getType() == Card.BUILDING){
                 if(hand.remove(card)){
                     tempHand.add(card);

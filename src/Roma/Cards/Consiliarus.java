@@ -21,8 +21,8 @@ public class Consiliarus extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -44,12 +44,12 @@ public class Consiliarus extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<Card> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
+        ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
 
         while (!characterCards.isEmpty()){
             playArea.printStats();
             player.printCardList(characterCards);
-            Card card = player.chooseCard(characterCards);
+            CardHolder card = player.chooseCard(characterCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");

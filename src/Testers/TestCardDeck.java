@@ -38,7 +38,7 @@ public class TestCardDeck {
 
         */
 
-        Card temp = test.getCardfromDeck("Senator");
+        CardHolder temp = test.getCardfromDeck("Senator");
         System.err.println(temp);
     }
 

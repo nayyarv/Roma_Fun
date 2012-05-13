@@ -14,8 +14,8 @@ import java.util.Collections;
 public class CardManager {
     private static final int CARDS_IN_DECK = 52;
     //Objects
-    private final ArrayList<Card> playingDeck = new ArrayList<Card>();
-    private final ArrayList<Card> discardPile = new ArrayList<Card>();
+    private final ArrayList<CardHolder> playingDeck = new ArrayList<CardHolder>();
+    private final ArrayList<CardHolder> discardPile = new ArrayList<CardHolder>();
 
     private PlayArea playArea;
 
@@ -65,18 +65,18 @@ public class CardManager {
         Collections.shuffle(playingDeck);
     }
 
-    public void shuffle(ArrayList<Card> cardList){
+    public void shuffle(ArrayList<CardHolder> cardList){
         Collections.shuffle(cardList);
     }
 
-    private void addNumberOf(Card card, int num){
+    private void addNumberOf(CardHolder card, int num){
         for (int i=0;i<num;i++){
             playingDeck.add(card);
         }
     }
 
-    public Card drawACard() {
-        Card temp = playingDeck.remove(0);
+    public CardHolder drawACard() {
+        CardHolder temp = playingDeck.remove(0);
         if (playingDeck.isEmpty() && !discardPile.isEmpty()) {
             playingDeck.addAll(discardPile);
             discardPile.clear();
@@ -87,8 +87,8 @@ public class CardManager {
         return temp;
     }
 
-    public ArrayList<Card> drawNCards(int number){
-        ArrayList<Card> drawHand = new ArrayList<Card>();
+    public ArrayList<CardHolder> drawNCards(int number){
+        ArrayList<CardHolder> drawHand = new ArrayList<CardHolder>();
         for (int i=0; i<number;i++){
             drawHand.add(drawACard());
         }
@@ -96,11 +96,11 @@ public class CardManager {
     }
 
     //
-    public void insertCard(Card theCard) {
+    public void insertCard(CardHolder theCard) {
         playingDeck.add(0, theCard);
     }
 
-    public void discard(Card theCard) {
+    public void discard(CardHolder theCard) {
         discardPile.add(0, theCard);
         if (noMoreCards) {
             playingDeck.addAll(discardPile);
@@ -111,8 +111,8 @@ public class CardManager {
     }
 
 
-    public Card getCardfromDeck(String name){
-        for(Card card: playingDeck){
+    public CardHolder getCardfromDeck(String name){
+        for(CardHolder card: playingDeck){
             if (name.equalsIgnoreCase(card.getName())){
                 playingDeck.remove(card);
                 return card;
@@ -121,7 +121,7 @@ public class CardManager {
         return null;
     }
 
-    public void discard(ArrayList<Card> cardList) {
+    public void discard(ArrayList<CardHolder> cardList) {
 
         /** TODO - check discard order here
           * TODO - choose the top card discarded
@@ -135,7 +135,7 @@ public class CardManager {
         }
     }
 
-    public ArrayList<Card> getPlayingDeck() {
+    public ArrayList<CardHolder> getPlayingDeck() {
         return playingDeck;
     }
 
@@ -152,7 +152,7 @@ public class CardManager {
 
     }
 
-    public ArrayList<Card> getDiscardPile() {
+    public ArrayList<CardHolder> getDiscardPile() {
         return discardPile;
     }
 }

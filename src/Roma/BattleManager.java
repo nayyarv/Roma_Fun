@@ -1,7 +1,6 @@
 package Roma;
 
-import Roma.Cards.Card;
-import Roma.Cards.Turris;
+import Roma.Cards.*;
 
 /**
  * User: Andrew and Varun
@@ -73,7 +72,7 @@ public class BattleManager {
         //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
-        Card targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
+        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
         int defense = targetCard.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID];
 
         if(targetCard.getName() == Turris.NAME){

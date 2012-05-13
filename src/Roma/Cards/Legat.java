@@ -22,8 +22,8 @@ public class Legat extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -49,10 +49,10 @@ public class Legat extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
-        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
         int emptySlotCount = 0;
 
-        for(Card card : enemyCards){
+        for(CardHolder card : enemyCards){
             if(card == null){
                 emptySlotCount++;
             }

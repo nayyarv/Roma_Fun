@@ -22,8 +22,8 @@ public class Nero extends CardBase {
 
     public final static int OCCURENCES = 1;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -54,7 +54,7 @@ public class Nero extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
-        Card[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
         System.out.println("Available Targets:");
         for(int i = 0; i < enemyCards.length; i++){

@@ -24,8 +24,8 @@ public class Centurio extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -55,7 +55,7 @@ public class Centurio extends CardBase {
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
         Dice chosenDie = null;
-        Card targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
 
         if(targetCard == null){
             activated = false;

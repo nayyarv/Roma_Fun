@@ -52,10 +52,12 @@ public class PlayArea {
         layAllCardsInHand();
     }
 
+
+
     private void layAllCardsInHand() {
         Player activePlayer = null;
-        ArrayList<Card> hand = null;
-        Card chosenCard = null;
+        ArrayList<CardHolder> hand = null;
+        CardHolder chosenCard = null;
         int targetDisc;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
@@ -104,7 +106,7 @@ public class PlayArea {
 
     public void getCardfromDeckAndAddToHand(String cardName, int playerID){
         //for testing
-        Card obtain = cardManager.getCardfromDeck(cardName);
+        CardHolder obtain = cardManager.getCardfromDeck(cardName);
         players[playerID].addCardToHand(obtain);
 
     }
@@ -115,7 +117,7 @@ public class PlayArea {
 
 
     public void getAndSwapCards(){
-        ArrayList<Card> initialSet = new ArrayList<Card>();
+        ArrayList<CardHolder> initialSet = new ArrayList<CardHolder>();
         //stores the initial cards for the game
 
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
@@ -125,13 +127,13 @@ public class PlayArea {
         //cardManager.shuffle(initialSet);
         //To ensure some extra randomness?
 
-        ArrayList<Card> choices = new ArrayList<Card>();
+        ArrayList<CardHolder> choices = new ArrayList<CardHolder>();
         //stores the choices of the previous player
 
         for (int i =0; i<Roma.MAX_PLAYERS;i++){
             choices.clear();
             //add prev choices
-            ArrayList<Card> individualHand = new ArrayList<Card>();
+            ArrayList<CardHolder> individualHand = new ArrayList<CardHolder>();
 
             individualHand.addAll(initialSet.subList(
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
@@ -143,7 +145,7 @@ public class PlayArea {
                     "Choose the first Card");
             //Prompt: move printing to player interface?
 
-            Card temp = null;
+            CardHolder temp = null;
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
                 while(temp == null){
@@ -200,22 +202,9 @@ public class PlayArea {
         diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();
 
-        //TODO: set up auto roll option
-//        if (player.getAutoRoll()) {
-//            player.rollActionDice();
-//        } else {
-//            System.out.println("Press space to roll action dice." +
-//                    "Press 'a' for automated dice roll for the rest of the game.");
-//            while (!(roll == ' ' || roll == 'a')) {
-//                roll = mainProgram.getInput().nextChar
-//            }
-//            if (roll == 'a') {
-//                player.setAutoRoll(true);
-//            }
-//        }
-
         while (!mainProgram.getGameOver() && !endTurn) {
             endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
+            clearEndActionWrappers();
         }
         clearEndTurnWrappers();
         battleManager.clearDefenseModActive(); // reset temporary defense modifiers
@@ -223,9 +212,9 @@ public class PlayArea {
     }
 
     private void deductVictoryTokens(int playerID) {
-        Card[] friendlyCards = diceDiscs.getPlayerActives(playerID);
+        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(playerID);
         int countNull = 0;
-        for(Card card : friendlyCards){
+        for(CardHolder card : friendlyCards){
             if(card == null){
                 countNull++;
             }

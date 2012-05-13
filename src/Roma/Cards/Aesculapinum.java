@@ -21,8 +21,8 @@ public class Aesculapinum extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -45,10 +45,10 @@ public class Aesculapinum extends CardBase {
         boolean activated = true;
 
         CardManager cardManager = playArea.getCardManager();
-        ArrayList<Card> discardPile = cardManager.getDiscardPile();
-        ArrayList<Card> tempHand = new ArrayList<Card>();
+        ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
+        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
 
-        for(Card card : discardPile){
+        for(CardHolder card : discardPile){
             if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 tempHand.add(card);
                 discardPile.remove(card);

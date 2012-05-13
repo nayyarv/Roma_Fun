@@ -24,8 +24,8 @@ public class Machina extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static ArrayList<Card> playSet(PlayArea playArea){
-        ArrayList<Card> set = new ArrayList<Card>();
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
         Card card;
 
@@ -48,12 +48,12 @@ public class Machina extends CardBase {
     public boolean activate(Player player, int position) {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<Card> buildingCards = diceDiscs.setOfCards(player, Card.BUILDING);//all the cards
+        ArrayList<CardHolder> buildingCards = diceDiscs.setOfCards(player, Card.BUILDING);//all the cards
 
         while (!buildingCards.isEmpty()){
             playArea.printStats();
             player.printCardList(buildingCards);
-            Card card = player.chooseCard(buildingCards);
+            CardHolder card = player.chooseCard(buildingCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");

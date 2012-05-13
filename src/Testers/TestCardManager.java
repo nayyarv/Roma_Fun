@@ -1,9 +1,7 @@
 package Testers;
 
-import Roma.CardManager;
-import Roma.Cards.Turris;
-import Roma.PlayArea;
-import Roma.PlayerInterface;
+import Roma.*;
+import Roma.Cards.*;
 
 /**
  * File Name:
@@ -15,7 +13,7 @@ public class TestCardManager {
 
     public static void main(String[] args){
 
-        CardManager cardManager= new CardManager(new PlayArea());
+        CardManager cardManager= new CardManager(new PlayArea(new Roma(true)));
         PlayerInterface playerInterface = new PlayerInterface();
 
         playerInterface.printOut(cardManager.getPlayingSize());

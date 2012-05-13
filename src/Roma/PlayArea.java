@@ -286,12 +286,13 @@ public class PlayArea {
         for(Wrapper wrapper : endTurnList){
             wrapper.deleteThisWrapper();
         }
-        endTurnList.removeAll(endTurnList);
+        endTurnList.clear();
     }
 
     private void clearEndActionWrappers(){
         for(Wrapper wrapper : endActionList){
             wrapper.deleteThisWrapper();
         }
+        endActionList.clear();
     }
 }

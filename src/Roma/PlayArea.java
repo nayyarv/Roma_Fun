@@ -18,7 +18,6 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
-    private ArrayList<Wrapper> endTurnClear = new ArrayList<Wrapper>();
 
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
@@ -266,21 +265,31 @@ public class PlayArea {
         return battleManager;
     }
 
-    public void addToEndTurnClear(Wrapper wrapper){
-        endTurnClear.add(wrapper);
+    public void addToEndTurnList(Wrapper wrapper){
+        endTurnList.add(wrapper);
     }
 
-    public void addToEndTurnClear(ArrayList<Wrapper> wrappers){
-        endTurnClear.addAll(wrappers);
+    public void addToEndTurnList(ArrayList<Wrapper> wrappers){
+        endTurnList.addAll(wrappers);
+    }
+
+    public void addToEndActionList(Wrapper wrapper){
+        endActionList.add(wrapper);
+    }
+
+    public void addToEndActionList(ArrayList<Wrapper> wrappers){
+        endActionList.addAll(wrappers);
     }
 
     private void clearEndTurnWrappers() {
-        for(Wrapper wrapper : endTurnClear){
-
+        for(Wrapper wrapper : endTurnList){
+            wrapper.deleteThisWrapper();
         }
     }
 
-    private void endActionPhase(){
-
+    private void clearEndActionWrappers(){
+        for(Wrapper wrapper : endActionList){
+            wrapper.deleteThisWrapper();
+        }
     }
 }

@@ -3,6 +3,7 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayArea {
     //#defines
@@ -285,6 +286,7 @@ public class PlayArea {
         for(Wrapper wrapper : endTurnList){
             wrapper.deleteThisWrapper();
         }
+        endTurnList.removeAll(endTurnList);
     }
 
     private void clearEndActionWrappers(){

@@ -1,5 +1,8 @@
 package Roma;
 
+import Roma.Cards.CardHolder;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //TODO: change all print statements throughout the project to reroute through player interface
@@ -92,4 +95,8 @@ public class PlayerInterface {
         System.out.println(object.toString());
     }
 
+    //TODO: flesh out function
+    public int getHandIndex(ArrayList<CardHolder> hand, String type) {
+        return 0;  //To change body of created methods use File | Settings | File Templates.
+    }
 }

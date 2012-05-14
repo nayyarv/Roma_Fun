@@ -18,10 +18,6 @@ public class Architectus extends CardBase {
     final static int COST = 3;
     final static int DEFENCE = 4;
     final static boolean ACTIVATE_ENABLED = true;
-    private static int COST_SHIFT = 0;
-    private static int COST_SCALE = 0;
-    private static int DEFENSE_SHIFT = 0;
-    private static int DEFENSE_SCALE = 1;
 
     public final static int OCCURENCES = 2;
     
@@ -54,35 +50,44 @@ public class Architectus extends CardBase {
 
     }
 
+    private static int COST_SHIFT = 0;
+    private static int COST_SCALE = 0;
+    private static int DEFENSE_SHIFT = 0;
+    private static int DEFENSE_SCALE = 1;
+
     @Override
     public boolean activate(Player player, int position) {
         boolean activated = true;
-
-        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         ArrayList<CardHolder> hand = player.getHand();
-        boolean endSelection = false;
-        CardHolder chosenCard = null;
-        int targetPosition;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+        Wrapper wrapper = null;
+        CardHolder card;
+        int[] handindex = new int[hand.size()];
+        int[] discindex = new int[hand.size()];
+        int input = 0;
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
 
-        for(CardHolder card : hand){
-            if(card.getType() == Card.BUILDING){
-                if(hand.remove(card)){
-                    tempHand.add(card);
-                }
+
+        //wrap building cards in hand with costScale = 0 modifier
+        for(int i = 0; i < hand.size(); i++){
+            card = hand.get(i);
+            if(card.getType().equalsIgnoreCase(Card.BUILDING)){
+                wrapper = wrapperMaker.insertWrapper(card);
+
+                //add wrappers to endActionClear list
+                playArea.addToEndActionList(wrapper);
             }
         }
 
-        while(!endSelection){
-            playArea.printStats();
-            chosenCard = player.chooseCard(tempHand);
-            if(chosenCard == null){
-                endSelection = true;
-            } else {
-                targetPosition = player.chooseCardDisc();
-                diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
-            }
+        //get player input for which cards to lay
+        //collect player input
+        while(input != PlayerInterface.CANCEL){
+            input = playerInterface.getHandIndex(hand, Card.BUILDING);
         }
+
+
+        //lay cards
+
 
         return activated;
     }

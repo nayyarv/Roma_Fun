@@ -62,11 +62,15 @@ public class Architectus extends CardBase {
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper = null;
         CardHolder card;
-        int[] handindex = new int[hand.size()];
-        int[] discindex = new int[hand.size()];
+        int[] handIndex = new int[hand.size()];
+        int[] discIndex = new int[hand.size()];
         int input = 0;
         PlayerInterface playerInterface = playArea.getPlayerInterface();
 
+        for(int i = 0; i < handIndex.length; i++){
+            handIndex[i] = PlayerInterface.CANCEL;
+            discIndex[i] = PlayerInterface.CANCEL;
+        }
 
         //wrap building cards in hand with costScale = 0 modifier
         for(int i = 0; i < hand.size(); i++){
@@ -84,14 +88,17 @@ public class Architectus extends CardBase {
         int i = 0;
         while(input != PlayerInterface.CANCEL){
             input = playerInterface.getHandIndex(hand, Card.BUILDING);
-            handindex[i] = input;
+            handIndex[i] = input;
             input = player.chooseDiceDisc();
-            discindex[i] = input;
+            discIndex[i] = input;
         }
 
-
         //lay cards
-
+        i = 0;
+        while(handIndex[i] != PlayerInterface.CANCEL && discIndex[i] != PlayerInterface.CANCEL){
+            player.layCard(hand.get(handIndex[i]), discIndex[i]);
+            i++;
+        }
 
         return activated;
     }

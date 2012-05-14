@@ -224,7 +224,6 @@ public class Player {
                 PRINT_CARDS = 3,
                 CANCEL = 4;
 
-
         Card choice = null;
         int action = 0;
         boolean validChoice = false;

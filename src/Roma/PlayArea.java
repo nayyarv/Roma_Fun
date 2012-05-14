@@ -3,7 +3,6 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PlayArea {
     //#defines
@@ -18,7 +17,7 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
-    private PlayerInterface playerInterface;
+    private PlayerInterface2 playerInterface;
     private GameRules gameRules;
 
     //TODO: Use these functions
@@ -42,7 +41,7 @@ public class PlayArea {
         players = new Player[Roma.MAX_PLAYERS];
         battleManager = new BattleManager(this);
         this.mainProgram = mainProgram;
-        playerInterface = new PlayerInterface();
+        playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
@@ -162,7 +161,7 @@ public class PlayArea {
         return players[playerID];
     }
 
-    public PlayerInterface getPlayerInterface() {
+    public PlayerInterface2 getPlayerInterface() {
         return playerInterface;
     }
 
@@ -219,7 +218,7 @@ public class PlayArea {
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
         battleManager = new BattleManager(this);
-        playerInterface = new PlayerInterface();
+        playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {

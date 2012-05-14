@@ -3,7 +3,7 @@ package Roma.Cards;
 import Roma.Dice;
 import Roma.PlayArea;
 import Roma.Player;
-import Roma.PlayerInterface;
+import Roma.PlayerInterface2;
 
 import java.util.ArrayList;
 
@@ -55,7 +55,7 @@ public class Consul extends CardBase {
 
 
     public boolean activate(Player player, int position) {
-        PlayerInterface playerInterface = player.getPlayerInterface();
+        PlayerInterface2 playerInterface = player.getPlayerInterface();
         final String strPrompt = "Would you like to...";
         final String strOption1 = "Increase the die?";
         final String strOption2 = "Decrease the die?";

@@ -64,7 +64,7 @@ public class Senator extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         for(CardHolder card : hand){
-            if(card.getType() == Card.CHARACTER){
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 if(hand.remove(card)){
                     tempHand.add(card);
                 }
@@ -80,7 +80,7 @@ public class Senator extends CardBase {
                 if(chosenCard == null){
                     endSelection = true;
                 } else {
-                    targetPosition = player.chooseCardDisc();
+                    targetPosition = player.chooseDiceDisc();
                     diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
                 }
             }

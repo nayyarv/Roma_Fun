@@ -87,22 +87,29 @@ public class Player {
 
     private void viewHand() {
         CardHolder chosenCard = null;
-        int chosenPosition = -1;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        MoneyManager moneyManager = playArea.getMoneyManager();
+        int chosenPosition = 0;
 
         chosenCard = chooseCard(hand);
         if(chosenCard != null){
-            chosenPosition = chooseCardDisc();
-            if(chosenPosition != CANCEL && moneyManager.loseMoney(playerID, chosenCard.getCost())){
-                diceDiscs.layCard(playerID, chosenPosition, chosenCard);
-            } else {
-                hand.add(chosenCard);
+            chosenPosition = chooseDiceDisc();
+            if(chosenPosition != CANCEL){
+                layCard(chosenCard, chosenPosition);
             }
+        } else {
+            hand.add(chosenCard);
         }
     }
 
-    public int chooseCardDisc() {
+    public void layCard(CardHolder chosenCard, int chosenPosition){
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        moneyManager.loseMoney(playerID, chosenCard.getCost());
+        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+    }
+
+
+    public int chooseDiceDisc() {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         final int CANCEL_OPTION = 8;
         String [] DicePrompt = new String[8];
@@ -114,7 +121,6 @@ public class Player {
         DicePrompt[7] = "Cancel";
 
         int option = -1;
-        int discTarget;
         boolean validChoice = false;
 
         while(!validChoice){

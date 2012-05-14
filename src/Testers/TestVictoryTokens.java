@@ -24,8 +24,7 @@ public class TestVictoryTokens {
     }
 
     private static boolean Test01() {
-        Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
@@ -67,7 +66,7 @@ public class TestVictoryTokens {
         if (victoryTokens.getPlayerTokens(Roma.PLAYER_ONE) != 45) {
             pass = false;
         }
-        if (!newGame.getGameOver()) {
+        if (!playArea.isGameOver()) {
             pass = false;
         }
 
@@ -80,7 +79,7 @@ public class TestVictoryTokens {
 
     private static boolean Test02() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
@@ -90,7 +89,7 @@ public class TestVictoryTokens {
         if (victoryTokens.getPlayerTokens(Roma.PLAYER_TWO) != 41) {
             pass = false;
         }
-        if (!newGame.getGameOver()) {
+        if (!playArea.isGameOver()) {
             pass = false;
         }
 
@@ -103,14 +102,14 @@ public class TestVictoryTokens {
 
     private static boolean Test03() {
         Roma newGame = new Roma();
-        PlayArea playArea = new PlayArea(newGame);
+        PlayArea playArea = new PlayArea("testing");
         VictoryTokens victoryTokens = new VictoryTokens(playArea);
         boolean pass = true;
 
         System.out.print("Player one emptying the pool: ");
         victoryTokens.playerFromPool(Roma.PLAYER_ONE, 16);
 
-        if (!newGame.getGameOver()) {
+        if (!playArea.isGameOver()) {
             pass = false;
         }
 

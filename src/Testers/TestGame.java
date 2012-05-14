@@ -1,6 +1,6 @@
 package Testers;
 
-import Roma.*;
+import Roma.PlayArea;
 
 /**
  * File Name:
@@ -11,7 +11,7 @@ import Roma.*;
 public class TestGame {
 
     public static void main (String[] args){
-        PlayArea playArea= new PlayArea(new Roma(true));
+        PlayArea playArea= new PlayArea("testing");
 
     }
 }

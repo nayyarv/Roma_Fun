@@ -7,7 +7,6 @@ import java.util.Collections;
 
 public class PlayArea {
     //#defines
-    private final int NUM_INIT_CARDS = 5;
     private final int PAD_LENGTH = 20;
 
     //Object pointers
@@ -19,7 +18,10 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
+    private PlayerInterface playerInterface;
+    private GameRules gameRules;
 
+    //TODO: Use these functions
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
@@ -27,6 +29,7 @@ public class PlayArea {
 
     //Variables
     private int turn = 0;
+    private boolean gameOver = false;
 
 
     public PlayArea(Roma mainProgram) {
@@ -38,128 +41,100 @@ public class PlayArea {
         players = new Player[Roma.MAX_PLAYERS];
         battleManager = new BattleManager(this);
         this.mainProgram = mainProgram;
+        playerInterface = new PlayerInterface();
+        gameRules = new GameRules(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             players[i] = Player.makeRealPlayer(i, this);
         }
-        getAndSwapCards();
-        /* testing
-        System.out.println("\n\n\n HAnd 1");
-        players[0].printHand();
-        System.out.println("\n\n\n HAnd 2");
-        players[1].printHand();
-        */
-        layAllCardsInHand();
+        gameRules.getAndSwapCards();
+        gameRules.layAllCardsInHand();
     }
 
-
-
-    private void layAllCardsInHand() {
-        Player activePlayer = null;
-        ArrayList<CardHolder> hand = null;
-        CardHolder chosenCard = null;
-        int targetDisc;
-
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
-            activePlayer = players[i];
-            hand = activePlayer.getHand();
-
-            while(!hand.isEmpty()){
-                printStats();
-                System.out.println(activePlayer.getName() + ", please lay all your cards");
-                chosenCard = null;
-                while(chosenCard == null){
-                    chosenCard = activePlayer.chooseCard(hand);
-                    if(chosenCard == null){
-                        System.out.println("You must choose a card");
-                    }
-                }
-                targetDisc = -1; // cancel value
-                while(targetDisc == -1){
-                    targetDisc = activePlayer.chooseCardDisc();
-                    if(targetDisc == -1){
-                        System.out.println("You must choose a disc");
-                    }
-                }
-                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, chosenCard);
-            }
-        }
-    }
-
-    //for testing
-    @Deprecated
-    public PlayArea(boolean testing){
-        assert testing;
-        System.err.println("In Testing phase");
-        cardManager = new CardManager(this);
-        diceHolder = new DiceHolder();
-        moneyManager = new MoneyManager();
-        victoryTokens = new VictoryTokens(this);
-        diceDiscs = new DiceDiscs(this);
-        players = new Player[Roma.MAX_PLAYERS];
-        battleManager = new BattleManager(this);
-
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
-            players[i] = Player.makeDummyPlayer(i, this);
-        }
-    }
-
-    public void getCardfromDeckAndAddToHand(String cardName, int playerID){
-        //for testing
-        CardHolder obtain = cardManager.getCardfromDeck(cardName);
-        players[playerID].addCardToHand(obtain);
-
-    }
 
     public void endGame(){
-        mainProgram.endGame();
+        gameOver = true;
+        mainProgram.gameOverMessage();
+    }
+
+    public void runGame() {
+        while (!gameOver) {
+            Player player = players[turn % Roma.MAX_PLAYERS];
+            playerTurn(player);
+        }
+    }
+
+    public void playerTurn(Player player) {
+        boolean endTurn = false;
+        char roll = 'b';
+
+        playerInterface.printOut("It's " + player.getName() + "'s turn");
+
+        gameRules.deductVictoryTokens(player.getPlayerID());
+
+        diceDiscs.clearPlayerDice(player.getPlayerID());
+
+        player.rollActionDice();
+
+        //TODO: set up auto roll option
+//        if (player.getAutoRoll()) {
+//            player.rollActionDice();
+//        } else {
+//            System.out.println("Press space to roll action dice." +
+//                    "Press 'a' for automated dice roll for the rest of the game.");
+//            while (!(roll == ' ' || roll == 'a')) {
+//                roll = mainProgram.getInput().nextChar
+//            }
+//            if (roll == 'a') {
+//                player.setAutoRoll(true);
+//            }
+//        }
+
+        while (!gameOver && !endTurn) {
+            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
+            clearEndActionWrappers();
+        }
+        clearEndTurnWrappers();
+        battleManager.clearDefenseModActive(); // reset temporary defense modifiers
+        turn++;
+    }
+
+    //TODO: move to playerInterface
+    public void printStats() {
+        String cardName;
+
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            System.out.println("-------------------------------------");
+            System.out.println("Player: " + players[player].getName());
+            System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player));
+            System.out.println("Cards in hand: " + players[player].handSize());
+            System.out.println("Cards in play: ");
+            for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
+                cardName = diceDiscs.getCardName(player, position);
+                if(position == 6){
+                    System.out.print("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                } else {
+                    System.out.print("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ");
+                }
+                for(Dice die : diceDiscs.checkForDice(player, position)){
+                    System.out.print(die.getValue() + " ");
+                }
+                System.out.println();
+            }
+        }
     }
 
 
-    public void getAndSwapCards(){
-        ArrayList<CardHolder> initialSet = new ArrayList<CardHolder>();
-        //stores the initial cards for the game
+    //All the getters
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
-        for(int i = 0; i<Roma.MAX_PLAYERS;i++){
-            initialSet.addAll(0, cardManager.drawNCards(Roma.NUM_INIT_CARDS));
-        } //gets all the cards needed
-
-        //cardManager.shuffle(initialSet);
-        //To ensure some extra randomness?
-
-        ArrayList<CardHolder> choices = new ArrayList<CardHolder>();
-        //stores the choices of the previous player
-
-        for (int i =0; i<Roma.MAX_PLAYERS;i++){
-            choices.clear();
-            //add prev choices
-            ArrayList<CardHolder> individualHand = new ArrayList<CardHolder>();
-
-            individualHand.addAll(initialSet.subList(
-                    (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
-            //extracts the first num-init-cards from the initial set
-
-            System.out.println(players[i].getName() +
-                    ", these are the " +Roma.NUM_INIT_CARDS+ " cards dealt to you.\n" +
-                    "You must choose " + Roma.NUM_CARDS_SWAPPED + " to give to your opponent.\n" +
-                    "Choose the first Card");
-            //Prompt: move printing to player interface?
-
-            CardHolder temp = null;
-
-            for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
-                while(temp == null){
-                    temp = players[i].chooseCard(individualHand);
-                    if (temp == null) System.out.println("You must choose a card: ");
-                }
-                choices.add(temp);
-                individualHand.remove(temp);
-                if(j!=Roma.NUM_CARDS_SWAPPED-1) System.out.println("Choose the next card:");
-            }
-            players[i].addCardListToHand(individualHand);
-            players[(i+1)%Roma.MAX_PLAYERS].addCardListToHand(choices);
-
-        }
+    public Player[] getAllPlayers() {
+        return players;
     }
 
     public CardManager getCardManager() {
@@ -186,78 +161,16 @@ public class PlayArea {
         return players[playerID];
     }
 
-    public void runGame() {
-        while (!mainProgram.getGameOver()) {
-            Player player = players[turn % Roma.MAX_PLAYERS];
-            playerTurn(player);
-        }
-    }
-
-    public void playerTurn(Player player) {
-        boolean endTurn = false;
-
-        System.out.println("It's " + player.getName() + "'s turn");
-
-        deductVictoryTokens(player.getPlayerID());
-        diceDiscs.clearPlayerDice(player.getPlayerID());
-        player.rollActionDice();
-
-        while (!mainProgram.getGameOver() && !endTurn) {
-            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
-            clearEndActionWrappers();
-        }
-        clearEndTurnWrappers();
-        battleManager.clearDefenseModActive(); // reset temporary defense modifiers
-        turn++;
-    }
-
-    private void deductVictoryTokens(int playerID) {
-        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(playerID);
-        int countNull = 0;
-        for(CardHolder card : friendlyCards){
-            if(card == null){
-                countNull++;
-            }
-        }
-        System.out.println("There are " + countNull + " empty slots, losing that many players");
-        victoryTokens.playerToPool(playerID, countNull);
-    }
-
-
-    public void printStats() {
-        String cardName;
-
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            System.out.println("-------------------------------------");
-            System.out.println("Player: " + players[player].getName());
-            System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                                "  \tMoney: " + moneyManager.getPlayerMoney(player));
-            System.out.println("Cards in hand: " + players[player].handSize());
-            System.out.println("Cards in play: ");
-            for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
-                cardName = diceDiscs.getCardName(player, position);
-                if(position == 6){
-                    System.out.print("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
-                            " : Dice on disc: ");
-                } else {
-                    System.out.print("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
-                            " : Dice on disc: ");
-                }
-                for(Dice die : diceDiscs.checkForDice(player, position)){
-                    System.out.print(die.getValue() + " ");
-                }
-                System.out.println();
-            }
-        }
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
     }
 
     public BattleManager getBattleManager() {
         return battleManager;
     }
 
-    public void addToEndTurnList(Wrapper wrapper){
-        endTurnList.add(wrapper);
-    }
+    //TODO: What is this
+    private void endActionPhase(){
 
     public void addToEndTurnList(ArrayList<Wrapper> wrappers){
         endTurnList.addAll(wrappers);
@@ -284,4 +197,42 @@ public class PlayArea {
         }
         endActionList.clear();
     }
+
+    /**
+     * This is the section where the methods required for the interface
+     * and our own tests are located
+     * @param testing "testing", so it isn't called by accident
+     */
+
+    @Deprecated
+    public PlayArea(String testing){
+        mainProgram = new Roma();
+        assert testing.equalsIgnoreCase("testing");
+        System.err.println("In Testing phase");
+        cardManager = new CardManager(this);
+        diceHolder = new DiceHolder();
+        moneyManager = new MoneyManager();
+        victoryTokens = new VictoryTokens(this);
+        diceDiscs = new DiceDiscs(this);
+        players = new Player[Roma.MAX_PLAYERS];
+        battleManager = new BattleManager(this);
+        playerInterface = new PlayerInterface();
+        gameRules = new GameRules(this);
+
+        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+            players[i] = Player.makeDummyPlayer(i, this);
+        }
+    }
+
+    public void testGetSpecificCardforHand(String cardName, int playerID){
+        //for testing
+        Card obtain = cardManager.getCardfromDeck(cardName);
+        players[playerID].addCardToHand(obtain);
+
+    }
+
+    public void testFillHand(int playerID){
+        players[playerID].addCardListToHand(cardManager.drawNCards(Roma.NUM_INIT_CARDS));
+    }
+
 }

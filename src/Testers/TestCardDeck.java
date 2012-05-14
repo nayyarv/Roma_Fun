@@ -10,7 +10,7 @@ import Roma.Cards.*;
  * Desc:
  */
 public class TestCardDeck {
-    private static PlayArea playArea = new PlayArea(true);
+    private static PlayArea playArea = new PlayArea("testing");
     static CardManager test = new CardManager(playArea);
 
     public static void main(String[] args) {

@@ -11,7 +11,7 @@ public class VictoryTokens {
     public final static int MAX_TOKENS = 36;
     public final static int TOKEN_START_VALUE = 10;
 
-    final private PlayArea playArea;  // pointer to the main game to activate the endGame() function
+    final private PlayArea playArea;  // pointer to the main game to activate the gameOverMessage() function
 
     private int[] playerTokens = new int[Roma.MAX_PLAYERS];
     private int tokenPool;
@@ -49,6 +49,7 @@ public class VictoryTokens {
 
     private void checkEndConditions(){
         boolean shouldGameEnd = false;
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
 
         if(tokenPool <= END_GAME_VALUE){
             shouldGameEnd = true;
@@ -59,9 +60,11 @@ public class VictoryTokens {
             }
          } //checks each player isn't bankrupt of victory tokens
         if(shouldGameEnd){
-            System.out.println("Player1: " + playerTokens[0]);
-            System.out.println("Player2: " + playerTokens[1]);
-            System.out.println("Token Pool: " + tokenPool);
+            for (int i=0; i<Roma.MAX_PLAYERS;i++){
+                playerInterface.printOut("Player"+(i+1)+": "+playerTokens[i]);
+            }
+
+            playerInterface.printOut("Token Pool: " + tokenPool);
 
             playArea.endGame();
         }

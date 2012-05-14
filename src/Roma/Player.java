@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+//TODO: Refactor Player
 public class Player {
     private final static int CANCEL = -1;
     private final String name;
@@ -13,14 +15,12 @@ public class Player {
     private PlayArea playArea;
     private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
-    private Scanner input;
     private PlayerInterface playerInterface;
 
-
-    private boolean testing;
     private int playerID;
     private boolean autoRoll;
 
+    //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
         return new Player(playerID, playArea);
     }
@@ -32,22 +32,15 @@ public class Player {
     private Player(int playerID, PlayArea playArea) {
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = new Scanner(System.in);
-        System.out.print("Name of player" + (playerID + 1) + ": ");
-        this.name = input.nextLine();
-        playerInterface = new PlayerInterface();
-
+        playerInterface = playArea.getPlayerInterface();
+        this.name = playerInterface.getPlayerName(playerID);
     }
 
     private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
-        this.input = null;
         this.name = "dummyPlayer" + playerID;
-
     }
-
-
 
     public String getName() {
         return name;
@@ -87,7 +80,7 @@ public class Player {
         } else if(option == END_TURN){
             endTurn = true;
         } else {
-            System.out.println("Please choose a valid option.");
+            playerInterface.printOut("Please choose a valid option.");
         }
 
         return endTurn;
@@ -236,18 +229,18 @@ public class Player {
             while(!validChoice){
                 action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
 
-                if(action == 1){
+                if(action == CHOOSE_CARDS){
                     System.out.print("Card number: ");
                     int cardChoice = playerInterface.getIntegerInput(cardList.size());
                     choice = cardList.remove(cardChoice - 1);
                     validChoice = true;
-                } else if(action == 2){
+                } else if(action == CHECK_DESC){
                     System.out.print("Check which card number: ");
-                    action = input.nextInt();
+                    action = playerInterface.getIntegerInput(cardList.size());
                     System.out.println(cardList.get(action - 1).toString());
-                } else if(action == 3){
+                } else if(action == PRINT_CARDS){
                     printCardList(cardList);
-                } else if(action == 4){
+                } else if(action == CANCEL){
                     choice = null;
                     validChoice = true;
                 } else {
@@ -275,7 +268,7 @@ public class Player {
             }
             i++;
             System.out.println(i + ") Cancel");
-            number = input.nextInt();
+            number = playerInterface.getIntegerInput(diceList.size());
             if(number < 1 || number > diceList.size() + 1){
                 System.out.println("Please choose a valid die");
             } else {
@@ -361,6 +354,7 @@ public class Player {
         }
     }
 
+    //TODO: Nothing happening
     public boolean commit() {
         boolean confirm = true;
 

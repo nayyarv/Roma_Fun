@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Roma_Fun:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/Roma_Fun_jar2</output-path>
+    <root id="archive" name="Roma_Fun.jar">
+      <element id="module-output" name="Roma_Fun" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+    </root>
+  </artifact>
+</component>

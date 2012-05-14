@@ -1,6 +1,8 @@
 package Roma;
 
 import Roma.Cards.Card;
+import Roma.Cards.CardHolder;
+
 import java.util.ArrayList;
 
 /**
@@ -24,7 +26,7 @@ public class GameRules {
 
 
 
-        ArrayList<Card> initialSet = new ArrayList<Card>();
+        ArrayList<CardHolder> initialSet = new ArrayList<CardHolder>();
         //stores the initial cards for the game
 
         for(int i = 0; i<Roma.MAX_PLAYERS;i++){
@@ -34,13 +36,13 @@ public class GameRules {
         //cardManager.shuffle(initialSet);
         //To ensure some extra randomness?
 
-        ArrayList<Card> choices = new ArrayList<Card>();
+        ArrayList<CardHolder> choices = new ArrayList<CardHolder>();
         //stores the choices of the previous player
 
         for (int i =0; i<Roma.MAX_PLAYERS;i++){
             choices.clear();
             //add prev choices
-            ArrayList<Card> individualHand = new ArrayList<Card>();
+            ArrayList<CardHolder> individualHand = new ArrayList<CardHolder>();
 
             individualHand.addAll(initialSet.subList(
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
@@ -52,7 +54,7 @@ public class GameRules {
                     "Choose the first Card");
             //Prompt: move printing to player interface?
 
-            Card temp = null;
+            CardHolder temp = null;
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
                 while(temp == null){
@@ -73,8 +75,8 @@ public class GameRules {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         Player activePlayer = null;
-        ArrayList<Card> hand = null;
-        Card chosenCard = null;
+        ArrayList<CardHolder> hand = null;
+        CardHolder chosenCard = null;
         int targetDisc;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){

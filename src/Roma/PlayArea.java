@@ -172,6 +172,8 @@ public class PlayArea {
     //TODO: What is this
     private void endActionPhase(){
 
+    }
+
     public void addToEndTurnList(ArrayList<Wrapper> wrappers){
         endTurnList.addAll(wrappers);
     }
@@ -226,7 +228,7 @@ public class PlayArea {
 
     public void testGetSpecificCardforHand(String cardName, int playerID){
         //for testing
-        Card obtain = cardManager.getCardfromDeck(cardName);
+        CardHolder obtain = cardManager.getCardfromDeck(cardName);
         players[playerID].addCardToHand(obtain);
 
     }

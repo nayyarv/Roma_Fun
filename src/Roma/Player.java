@@ -217,6 +217,11 @@ public class Player {
         final String strOption3 = "Print card list";
         final String strOption4 = "Cancel/End selection";
 
+        final int
+                CHOOSE_CARDS =1,
+                CHECK_DESC = 2,
+                PRINT_CARDS =3;
+
         CardHolder choice = null;
         int action = 0;
         boolean validChoice = false;

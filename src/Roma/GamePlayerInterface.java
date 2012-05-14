@@ -107,7 +107,6 @@ public class GamePlayerInterface extends PlayerInterface2 {
             input = getIntegerInput(hand.size())-1;
         } while (!chosenRightType(hand, type, input));
         return input;
-
     }
 
     private boolean chosenRightType(ArrayList<CardHolder> hand, String type, int index){
@@ -115,7 +114,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
         // check's the chosen card is of the correct type
         if(!correct){
             printOut("Incorrect card type chosen," +
-                    " expecting a "+ type +" card, instead you chose a "+ hand.get(index).getType()+" card");
+                    " expecting a "+ type +" card, instead received a "+ hand.get(index).getType()+" card");
         }
         return correct;
     }
@@ -127,7 +126,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
             if(card.getType().equalsIgnoreCase(type)){
                 printOut(card.getName());
             } else {
-                printOut("-~-"+card.getName()+"-~-");
+                printOut("###"+card.getName()+"###");
             }
             i++;
         }

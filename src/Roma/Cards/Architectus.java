@@ -18,6 +18,10 @@ public class Architectus extends CardBase {
     final static int COST = 3;
     final static int DEFENCE = 4;
     final static boolean ACTIVATE_ENABLED = true;
+    private static int COST_SHIFT = 0;
+    private static int COST_SCALE = 0;
+    private static int DEFENSE_SHIFT = 0;
+    private static int DEFENSE_SCALE = 1;
 
     public final static int OCCURENCES = 2;
     

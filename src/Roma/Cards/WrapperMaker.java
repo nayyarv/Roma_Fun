@@ -19,7 +19,7 @@ public class WrapperMaker {
         this.defenseScale = defenseScale;
     }
 
-    public Wrapper insertWrapper(Card card){
+    public Wrapper insertWrapper(CardHolder card){
         Wrapper wrapper = new Wrapper(card.getContents(), card);
 
         card.getContents().setContainer(wrapper);

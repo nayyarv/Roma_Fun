@@ -2,8 +2,9 @@ package Testers;
 
 import Roma.CardManager;
 import Roma.Cards.Turris;
+import Roma.GamePlayerInterface;
 import Roma.PlayArea;
-import Roma.PlayerInterface;
+import Roma.PlayerInterface2;
 
 /**
  * File Name:
@@ -17,7 +18,7 @@ public class TestCardManager {
 
         PlayArea playArea = new PlayArea("testing");
         CardManager cardManager = playArea.getCardManager();
-        PlayerInterface playerInterface = new PlayerInterface();
+        PlayerInterface2 playerInterface = new GamePlayerInterface();
 
         playerInterface.printOut(cardManager.getPlayingSize());
         playerInterface.printOut(cardManager.getCardfromDeck(Turris.NAME).toString());

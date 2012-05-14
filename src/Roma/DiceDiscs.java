@@ -3,6 +3,7 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * File Name:
@@ -23,7 +24,7 @@ public class DiceDiscs {
     public static final int TURRIS_DISCARD = -1;
 
     private final PlayArea playArea;
-    private PlayerInterface playerInterface;
+    private PlayerInterface2 playerInterface;
 
     private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
@@ -39,7 +40,7 @@ public class DiceDiscs {
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
-        playerInterface = new PlayerInterface();
+        playerInterface = playArea.getPlayerInterface();
         for(int i = 0; i < CARD_POSITIONS; i++){
                 for(int j = 0; j < Roma.MAX_PLAYERS; j++){
                     activeCards[j][i] = null;
@@ -65,6 +66,12 @@ public class DiceDiscs {
             }
         }
         return set;
+    }
+
+    public ArrayList<CardHolder> toList(int playerID){
+        ArrayList<CardHolder> discList= new ArrayList<CardHolder>();
+        Collections.addAll(discList, activeCards[playerID]);
+        return discList;
     }
 
     //Clears all the dice placed on a disc
@@ -187,7 +194,7 @@ public class DiceDiscs {
         BattleManager battleManager = playArea.getBattleManager();
 
         CardHolder card = activeCards[playerID][position];
-        if(card.getName() == Turris.NAME){
+        if(card.getName().equalsIgnoreCase(Turris.NAME)){
             battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
         }
 

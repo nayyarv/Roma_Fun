@@ -3,7 +3,6 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 //TODO: Refactor Player
@@ -14,7 +13,7 @@ public class Player {
     private PlayArea playArea;
     private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
-    private PlayerInterface playerInterface;
+    private PlayerInterface2 playerInterface;
 
     private int playerID;
     private boolean autoRoll;
@@ -413,7 +412,7 @@ public class Player {
         return hand;
     }
 
-    public PlayerInterface getPlayerInterface() {
+    public PlayerInterface2 getPlayerInterface() {
         return playerInterface;
     }
 }

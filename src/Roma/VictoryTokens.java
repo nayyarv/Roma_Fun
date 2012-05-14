@@ -49,7 +49,7 @@ public class VictoryTokens {
 
     private void checkEndConditions(){
         boolean shouldGameEnd = false;
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
 
         if(tokenPool <= END_GAME_VALUE){
             shouldGameEnd = true;

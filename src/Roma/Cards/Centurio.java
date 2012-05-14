@@ -53,6 +53,7 @@ public class Centurio extends CardBase {
 
     }
 
+    //TODO: Refactor for testing purposes
     public boolean activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         BattleManager battleManager = playArea.getBattleManager();

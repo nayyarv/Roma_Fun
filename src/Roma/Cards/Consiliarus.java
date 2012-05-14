@@ -48,10 +48,15 @@ public class Consiliarus extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
+    private static int FROM_TO_DIMENSIONS = 2;
 
+
+    //TODO: refactor for testing reasons
     public boolean activate(Player player, int position) {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+
         ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
 
         while (!characterCards.isEmpty()){

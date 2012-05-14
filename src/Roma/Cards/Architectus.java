@@ -65,7 +65,7 @@ public class Architectus extends CardBase {
         int[] handIndex = new int[hand.size()];
         int[] discIndex = new int[hand.size()];
         int input = 0;
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
 
         for(int i = 0; i < handIndex.length; i++){
             handIndex[i] = PlayerInterface.CANCEL;
@@ -86,7 +86,7 @@ public class Architectus extends CardBase {
         //get player input for which cards to lay
         //collect player input
         int i = 0;
-        while(input != PlayerInterface.CANCEL){
+        while(input != PlayerInterface2.CANCEL){
             input = playerInterface.getHandIndex(hand, Card.BUILDING);
             handIndex[i] = input;
             input = player.chooseDiceDisc();

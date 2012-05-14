@@ -1,5 +1,6 @@
 package Roma;
 
+import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import java.util.Scanner;
  * Date: 27/04/12
  * Desc: Handles all input and output for
  */
-public class PlayerInterface {
+public class GamePlayerInterface extends PlayerInterface2 {
     private Scanner input;
-    public final static int CANCEL = -1;
 
-    public PlayerInterface(){
+
+    public GamePlayerInterface(){
         input = new Scanner(System.in);
     }
 
@@ -97,6 +98,37 @@ public class PlayerInterface {
 
     //TODO: flesh out function
     public int getHandIndex(ArrayList<CardHolder> hand, String type) {
-        return 0;  //To change body of created methods use File | Settings | File Templates.
+        assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
+        printFilteredList(hand, type);
+
+        printOut("Which Card: ");
+        int input;
+        do {
+            input = getIntegerInput(hand.size())-1;
+        } while (!chosenRightType(hand, type, input));
+        return input;
+    }
+
+    private boolean chosenRightType(ArrayList<CardHolder> hand, String type, int index){
+        boolean correct = hand.get(index).getType().equalsIgnoreCase(type);
+        // check's the chosen card is of the correct type
+        if(!correct){
+            printOut("Incorrect card type chosen," +
+                    " expecting a "+ type +" card, instead received a "+ hand.get(index).getType()+" card");
+        }
+        return correct;
+    }
+
+    private void printFilteredList(ArrayList<CardHolder> hand, String type){
+        int i = 1;
+        for(CardHolder card: hand){
+            System.out.print(i+")");
+            if(card.getType().equalsIgnoreCase(type)){
+                printOut(card.getName());
+            } else {
+                printOut("###"+card.getName()+"###");
+            }
+            i++;
+        }
     }
 }

@@ -43,6 +43,11 @@ public class CardHolder implements Card{
         assert false;
     }
 
+    @Override
+    public void discarded() {
+        //no action
+    }
+
     public boolean isActivateEnabled() {
         return contents.isActivateEnabled();
     }

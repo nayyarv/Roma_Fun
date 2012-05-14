@@ -51,7 +51,7 @@ public class Aesculapinum extends CardBase {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
         int cardIndex;
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();

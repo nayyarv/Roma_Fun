@@ -130,4 +130,8 @@ public abstract class CardBase implements Card {
             return Roma.PLAYER_ONE;
         }
     }
+
+    public void discarded(){
+
+    }
 }

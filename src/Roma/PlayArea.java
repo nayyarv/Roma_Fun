@@ -28,6 +28,7 @@ public class PlayArea {
     private ArrayList<Wrapper> endActionList = new ArrayList<Wrapper>();
 
     //Variables
+    private boolean testing = false;
     private int turn = 0;
     private boolean gameOver = false;
 
@@ -54,7 +55,7 @@ public class PlayArea {
 
     public void endGame(){
         gameOver = true;
-        mainProgram.gameOverMessage();
+        if(!testing) mainProgram.gameOverMessage();
     }
 
     public void runGame() {
@@ -208,8 +209,8 @@ public class PlayArea {
 
     @Deprecated
     public PlayArea(String testing){
-        mainProgram = new Roma();
         assert testing.equalsIgnoreCase("testing");
+        this.testing = true;
         System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();

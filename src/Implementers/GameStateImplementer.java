@@ -1,5 +1,7 @@
 package Implementers;
 
+import Roma.PlayArea;
+import Roma.VictoryTokens;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 
@@ -13,6 +15,8 @@ import java.util.List;
  * Desc:
  */
 public class GameStateImplementer implements GameState{
+    PlayArea playArea = new PlayArea("testing");
+
     /**
      * Get the current turn's player number
      * <p/>
@@ -26,7 +30,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getWhoseTurn() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;
     }
 
     /**
@@ -123,7 +127,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getPlayerSestertii(int playerNum) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return playArea.getMoneyManager().getPlayerMoney(playerNum);
     }
 
     /**
@@ -157,7 +161,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getPlayerVictoryPoints(int playerNum) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return playArea.getVictoryTokens().getPlayerTokens(playerNum);
     }
 
     /**
@@ -302,7 +306,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getPoolVictoryPoints() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        return victoryTokens.getPoolTokens();  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     /**
@@ -313,6 +318,6 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public boolean isGameCompleted() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return playArea.isGameOver();
     }
 }

@@ -27,7 +27,7 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
      */
     @Override
     public MoveMaker getMover(GameState state) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new MoveMakerImplementer(state);
     }
 
     /**
@@ -47,6 +47,6 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
      */
     @Override
     public GameState getInitialState() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new GameStateImplementer();  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

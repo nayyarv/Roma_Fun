@@ -1,6 +1,7 @@
 package Implementers;
 
 import framework.cards.Card;
+import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
 
@@ -11,6 +12,12 @@ import framework.interfaces.activators.CardActivator;
  * Desc:
  */
 public class MoveMakerImplementer implements MoveMaker{
+
+
+    public MoveMakerImplementer(GameState state) {
+
+    }
+
     /**
      * Activate the card that is currently on the given dice disc.
      * <p/>

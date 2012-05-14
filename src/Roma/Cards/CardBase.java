@@ -132,6 +132,6 @@ public abstract class CardBase implements Card {
     }
 
     public void discarded(){
-
+        //no action
     }
 }

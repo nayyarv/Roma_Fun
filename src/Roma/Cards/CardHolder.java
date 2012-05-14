@@ -45,7 +45,13 @@ public class CardHolder implements Card{
 
     @Override
     public void discarded() {
-        //no action
+        Wrapper wrapper;
+        //remove all wrappers
+        while(!contents.isWrapper()){
+            wrapper = (Wrapper) contents;
+            wrapper.deleteThisWrapper();
+        }
+        contents.discarded();
     }
 
     public boolean isActivateEnabled() {

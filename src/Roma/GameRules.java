@@ -95,7 +95,7 @@ public class GameRules {
                 }
                 targetDisc = -1; // cancel value
                 while(targetDisc == -1){
-                    targetDisc = activePlayer.chooseCardDisc();
+                    targetDisc = activePlayer.chooseDiceDisc();
                     if(targetDisc == -1){
                         System.out.println("You must choose a disc");
                     }

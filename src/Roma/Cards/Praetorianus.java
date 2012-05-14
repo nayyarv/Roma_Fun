@@ -59,7 +59,7 @@ public class Praetorianus extends CardBase {
 
         playArea.printStats();
         System.out.println("Blocking...");
-        targetDisc = player.chooseCardDisc();
+        targetDisc = player.chooseDiceDisc();
         if(targetDisc != -1){ // not cancel
             battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
         } else {

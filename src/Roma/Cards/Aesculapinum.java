@@ -51,26 +51,14 @@ public class Aesculapinum extends CardBase {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
-
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        int cardIndex;
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
-        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
 
-        for(CardHolder card : discardPile){
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
-                tempHand.add(card);
-                discardPile.remove(card);
-            }
-        }
-
-        if(tempHand.size() != 0){
-            player.addCardToHand(player.chooseCard(tempHand));
-        } else {
-            System.out.println("No character cards in discard pile");
-            activated = false;
-        }
-
-        discardPile.addAll(tempHand);
+        cardIndex = playerInterface.getHandIndex(discardPile, Card.CHARACTER);
+        player.addCardToHand(discardPile.get(cardIndex));
+        discardPile.remove(cardIndex);
 
         return activated;
     }

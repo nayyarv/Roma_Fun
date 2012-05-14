@@ -22,6 +22,14 @@ public class Nero extends CardBase {
 
     public final static int OCCURENCES = 1;
 
+    public static CardHolder makeOne(PlayArea playArea){
+        Card card = new Nero(playArea);
+        CardHolder cardHolder = new CardHolder(card);
+        card.setContainer(cardHolder);
+
+        return cardHolder;
+    }
+
     public static ArrayList<CardHolder> playSet(PlayArea playArea){
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;

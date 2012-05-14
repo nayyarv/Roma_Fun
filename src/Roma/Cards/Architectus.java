@@ -20,6 +20,14 @@ public class Architectus extends CardBase {
     final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
+    
+    public static CardHolder makeOne(PlayArea playArea){
+        Card card = new Architectus(playArea);
+        CardHolder cardHolder = new CardHolder(card);
+        card.setContainer(cardHolder);
+
+        return cardHolder;
+    }
 
     public static ArrayList<CardHolder> playSet(PlayArea playArea){
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();

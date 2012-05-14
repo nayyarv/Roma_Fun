@@ -24,6 +24,14 @@ public class Mercator extends CardBase {
 
     public final static int OCCURENCES = 1;
 
+    public static CardHolder makeOne(PlayArea playArea){
+        Card card = new Mercator(playArea);
+        CardHolder cardHolder = new CardHolder(card);
+        card.setContainer(cardHolder);
+
+        return cardHolder;
+    }
+
     public static ArrayList<CardHolder> playSet(PlayArea playArea){
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;

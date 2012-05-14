@@ -22,6 +22,14 @@ public class Forum extends CardBase {
 
     public final static int OCCURENCES = 6;
 
+    public static CardHolder makeOne(PlayArea playArea){
+        Card card = new Forum(playArea);
+        CardHolder cardHolder = new CardHolder(card);
+        card.setContainer(cardHolder);
+
+        return cardHolder;
+    }
+
     public static ArrayList<CardHolder> playSet(PlayArea playArea){
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;

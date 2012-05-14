@@ -21,6 +21,14 @@ public class Legionarius extends CardBase {
 
     public final static int OCCURENCES = 3;
 
+    public static CardHolder makeOne(PlayArea playArea){
+        Card card = new Legionarius(playArea);
+        CardHolder cardHolder = new CardHolder(card);
+        card.setContainer(cardHolder);
+
+        return cardHolder;
+    }
+
     public static ArrayList<CardHolder> playSet(PlayArea playArea){
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;

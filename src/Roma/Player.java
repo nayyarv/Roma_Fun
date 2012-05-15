@@ -125,30 +125,35 @@ public class Player {
     //Main method that allows players to perform an action
     public boolean planningPhase(ActionData actionData) {
         //internal #defines
+        final String strPrompt = "Select Option:";
+        final String strOption1 = "View action dice";
+        final String strOption2 = "View Hand";
+        final String strOption3 = "Show game stats";
+        final String strOption4 = "End turn";
         final int VIEW_ACTION_DIE = 1;
         final int VIEW_HAND = 2;
         final int SHOW_GAME_STATS = 3;
         final int END_TURN = 4;
 
         int option = 0;
-        Dice chosenDie = null;
+        int chosenDieIndex = PlayerInterface.CANCEL;
         boolean endTurn = false;
 
         //choose an action
-        option = playerInterface.readInput("Select Option:",
-                        "View action dice",
-                        "View Hand",
-                        "Show game stats",
-                        "End turn");
+        option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
 
         if(option == VIEW_ACTION_DIE){
             actionData.setUseDice(true);
-            actionData.setActionDiceIndex(chooseDie(freeDice));
+            chosenDieIndex = chooseDie(freeDice);
+            if(chosenDieIndex != PlayerInterface.CANCEL){
+                actionData.setActionDiceIndex(chosenDieIndex);
+            } else {
+                actionData.setCancel(true);
+            }
+
+            chosenDie = useActionDie(chosenDie);
             if(chosenDie != null){
-                chosenDie = useActionDie(chosenDie);
-                if(chosenDie != null){
-                    freeDice.add(chosenDie);
-                }
+                freeDice.add(chosenDie);
             }
         } else if(option == VIEW_HAND){
             viewHand();

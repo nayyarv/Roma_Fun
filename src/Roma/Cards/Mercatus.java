@@ -53,13 +53,12 @@ public class Mercatus extends CardBase {
 
     public boolean activate(Player player, int position) {
         boolean activated = true;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<CardHolder> enemyCards= playArea.getDiceDiscs().toList(otherPlayer(player.getPlayerID()));
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        CardHolder[] enemyCards = diceDiscs.getPlayerActives(otherPlayer(player.getPlayerID()));
         int forumCount = 0;
 
         for(CardHolder card : enemyCards){
-            if(card != null && card.getName() == Forum.NAME){
+            if(card != null && (card.getName().equalsIgnoreCase(Forum.NAME))){
                 forumCount++;
             }
         }

@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -85,17 +86,6 @@ public class Player {
         return hand.size();
     }
 
-    private void printDiceList(ArrayList<Dice> diceList) {
-        System.out.println("Dice:");
-        int i = 0;
-        for(Dice dice : diceList){
-            i++;
-            System.out.println(i + ") " + dice.getValue());
-        }
-    }
-
-
-
     //first action of turn
     public void rollActionDice() {
         final int YES = 1;
@@ -133,7 +123,7 @@ public class Player {
 
 
     //Main method that allows players to perform an action
-    public boolean takeAction() {
+    public boolean planningPhase(ActionData actionData) {
         //internal #defines
         final int VIEW_ACTION_DIE = 1;
         final int VIEW_HAND = 2;
@@ -152,7 +142,8 @@ public class Player {
                         "End turn");
 
         if(option == VIEW_ACTION_DIE){
-            chosenDie = chooseDie(freeDice);
+            actionData.setUseDice(true);
+            actionData.setActionDiceIndex(chooseDie(freeDice));
             if(chosenDie != null){
                 chosenDie = useActionDie(chosenDie);
                 if(chosenDie != null){
@@ -207,20 +198,20 @@ public class Player {
     public int chooseDiceDisc() {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         final int CANCEL_OPTION = 8;
-        String [] DicePrompt = new String[8];
+        String [] dicePrompt = new String[8];
 
         for (int i=0; i<6;i++){
-            DicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
+            dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
         }
-        DicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, 6);
-        DicePrompt[7] = "Cancel";
+        dicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, 6);
+        dicePrompt[7] = "Cancel";
 
         int option = -1;
         boolean validChoice = false;
 
         while(!validChoice){
             option = playerInterface.readInput("Which disc?",
-                    DicePrompt);
+                    dicePrompt);
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
             } else if (option == CANCEL_OPTION) {
@@ -305,9 +296,9 @@ public class Player {
         final String strOption4 = "Cancel/End selection";
 
         final int
-                CHOOSE_CARDS =1,
+                CHOOSE_CARDS = 1,
                 CHECK_DESC = 2,
-                PRINT_CARDS =3;
+                PRINT_CARDS = 3;
 
         CardHolder choice = null;
         int action = 0;
@@ -346,32 +337,20 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public Dice chooseDie(ArrayList<Dice> diceList){
-        Dice choice = null;
-        int number = -1;
+    public int chooseDie(ArrayList<Dice> diceList){
+        final String strPrompt = "Which die do you want to use?";
+        String[] diceValues = new String[diceList.size() + 1];
+        int diceIndex = -1;
         boolean validChoice = false;
 
-        while(!validChoice){
-            System.out.println("Which die do you want to use?");
-            int i = 0;
-            for(Dice die : diceList){
-                i++;
-                System.out.println(i + ") " + die.getValue());
-            }
-            i++;
-            System.out.println(i + ") Cancel");
-            number = playerInterface.getIntegerInput(diceList.size());
-            if(number < 1 || number > diceList.size() + 1){
-                System.out.println("Please choose a valid die");
-            } else {
-                validChoice = true;
-                if(number <= diceList.size()){
-                    choice = diceList.remove(number - 1);
-                }
-            }
+        for(int i = 0; i < diceList.size(); i++){
+            diceValues[i] = diceList.get(i).getValue().toString();
         }
+        diceValues[diceList.size()] = "Cancel";
 
-        return choice;
+        diceIndex = playerInterface.readIndex(strPrompt, diceValues);
+
+        return diceIndex;
     }
 
     //input value

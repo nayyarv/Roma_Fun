@@ -73,11 +73,10 @@ public class PlayArea {
         PlayState playState = new PlayState(this, player);
 
         while (!gameOver && !endTurn) {
-            diceHolder.rollBattleDice();
-            ActionData temp = new ActionData();
+            ActionData action = new ActionData(player.getPlayerID());
             //read player input through player interface and and store into action data
 
-            endTurn = player.takeAction(/*ActionData temp*/);
+            endTurn = player.planningPhase(action);
             //perform stored actions if commit = true
 
             //end action phase

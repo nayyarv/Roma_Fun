@@ -17,6 +17,8 @@ public abstract class PlayerInterface {
 
     abstract public int readInput(String title, String ... choices);
 
+    abstract public int readIndex(String title, String ... choices);
+
     abstract public int getIntegerInput(int bound);
 
     abstract public String getPlayerName(int num);

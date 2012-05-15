@@ -31,7 +31,6 @@ public class ActionData {
     private boolean layCard = false;
     private boolean useDice = false;
     private boolean commit = false;
-    private boolean cancel = false;
 
     //For using action dice
     private int actionDiceIndex;
@@ -75,14 +74,6 @@ public class ActionData {
 
     public void setCommit(boolean commit) {
         this.commit = commit;
-    }
-
-    public boolean isCancel() {
-        return cancel;
-    }
-
-    public void setCancel(boolean cancel) {
-        this.cancel = cancel;
     }
 
     public int getActionDiceIndex() {

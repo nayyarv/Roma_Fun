@@ -76,7 +76,11 @@ public class PlayArea {
             ActionData action = new ActionData(player.getPlayerID());
             //read player input through player interface and and store into action data
 
-            endTurn = player.planningPhase(action);
+            try {
+                endTurn = player.planningPhase(action);
+            } catch (CancelAction cancelAction) {
+                cancelAction.message();
+            }
             //perform stored actions if commit = true
 
             //end action phase

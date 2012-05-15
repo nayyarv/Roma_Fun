@@ -42,4 +42,9 @@ public class TestingPlayerInterface extends PlayerInterface2 {
     public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int... chosen) {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

@@ -23,7 +23,7 @@ public class TestGamePlayerInterface {
 
 
         playerInterface.printOut("Discs that are buildings", true);
-        playerInterface.getHandIndex(playArea.getDiceDiscs().toList(0), Card.BUILDING);
+        playerInterface.getDiscIndex(playArea.getDiceDiscs().toList(0), playArea.getDiceDiscs().toList(1), Card.BUILDING);
 //
 //        playArea.getPlayer(0).printHand();
 //

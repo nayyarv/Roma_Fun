@@ -2,9 +2,9 @@ package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
+import Roma.DiceDiscs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 //TODO: change all print statements throughout the project to reroute through player interface
@@ -89,6 +89,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
             return "Anon"; //Since we have no input
         }
     }
+
     @Override
     public void printOut(Object object, boolean newLine){
         if (newLine){
@@ -98,13 +99,52 @@ public class GamePlayerInterface extends PlayerInterface2 {
         }
     }
 
+    public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen){
+        assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
+        boolean contains;
+        int i;
+        String name;
+
+        for(i=0; i< DiceDiscs.CARD_POSITIONS;i++){
+            if(enemyDisc.get(i)==null){
+                name = "Empty";
+            } else {
+                name = enemyDisc.get(i).getName();
+            }
+            printOut(name+"("+(i+1)+")", false);
+
+            contains = ArrayContains(i, chosen);
+
+            printFilter(myDiscs.get(i),type,contains);
+        }
+        printOut((i+1)+") Cancel",true);
+
+        int input;
+        do {
+            input = getIntegerInput(DiceDiscs.CARD_POSITIONS+1)-1;
+            contains = ArrayContains(input, chosen);
+        } while ((input!=DiceDiscs.CARD_POSITIONS)&&!chosenRightType(myDiscs.get(input), type ,contains));
+
+        if (input == DiceDiscs.CARD_POSITIONS) input = CANCEL;
+        return input;
+
+    }
+
     //TODO: flesh out function
     @Override
     public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
 
-        printFilteredList(hand, type, chosen);
+        int i = 1;
+        for(CardHolder card: hand){
+            printOut(i+")", false);
+            contains = ArrayContains(i-1, chosen);
+            printFilter(card, type, contains);
+            i++;
+        }
+        printOut(i+") Cancel",true);
+
 
         printOut("Which option: " , false);
         int input;
@@ -134,22 +174,14 @@ public class GamePlayerInterface extends PlayerInterface2 {
         return correct;
     }
 
-    private void printFilteredList(ArrayList<CardHolder> hand, String type, int ... chosen){
-        int i = 1;
-
-        for(CardHolder card: hand){
-            System.out.print(i+")");
-            if(card==null){
-                printOut("#Empty#", true);
-            } else if(card.getType().equalsIgnoreCase(type)&&!ArrayContains(i,chosen)){
-                printOut(card.getName(), true);
-            } else {
-                printOut("###"+card.getName()+"###", true);
-            }
-            i++;
+    private void printFilter(CardHolder card, String type, boolean contains){
+        if(card==null){
+            printOut("#Empty#", true);
+        } else if(card.getType().equalsIgnoreCase(type)&&!contains){
+            printOut(card.getName(), true);
+        } else {
+            printOut("###"+card.getName()+"###", true);
         }
-
-        printOut(i+") Cancel",true);
     }
 
     private boolean ArrayContains(int key, int ... chosen){

@@ -27,4 +27,6 @@ public abstract class PlayerInterface2 {
 
     abstract public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen);
 
+    abstract public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen);
+
 }

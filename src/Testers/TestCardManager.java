@@ -2,9 +2,9 @@ package Testers;
 
 import Roma.CardManager;
 import Roma.Cards.Turris;
-import Roma.GamePlayerInterface;
+import Roma.PlayerInterfaceFiles.GamePlayerInterface;
 import Roma.PlayArea;
-import Roma.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 /**
  * File Name:

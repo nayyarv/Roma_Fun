@@ -6,6 +6,8 @@
 
 package Roma;
 
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
+
 public class VictoryTokens {
     public final static int END_GAME_VALUE = 0;
     public final static int MAX_TOKENS = 36;

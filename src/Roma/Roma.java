@@ -1,5 +1,8 @@
 package Roma;
 
+import Roma.PlayerInterfaceFiles.GamePlayerInterface;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
+
 import java.io.*;
 import java.awt.*;
 

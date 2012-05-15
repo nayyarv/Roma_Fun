@@ -1,6 +1,7 @@
-package Roma;
+package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.CardHolder;
+import Roma.Roma;
 
 import java.util.ArrayList;
 

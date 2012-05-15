@@ -2,6 +2,7 @@ package Testers;
 
 import Roma.*;
 import Roma.Cards.Card;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 /**
  * File Name:

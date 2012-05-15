@@ -3,7 +3,7 @@ package Roma.Cards;
 import Roma.Dice;
 import Roma.PlayArea;
 import Roma.Player;
-import Roma.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 import java.util.ArrayList;
 

@@ -123,7 +123,7 @@ public abstract class CardBase implements Card {
     //public abstract ArrayList<Integer> gatherData();
     public abstract boolean activate(Player player, int position);
 
-    @Deprecated
+
     public int otherPlayer(int player) {
         if (player == Roma.PLAYER_ONE) {
             return Roma.PLAYER_TWO;

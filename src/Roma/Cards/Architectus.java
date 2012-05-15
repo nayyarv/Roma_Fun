@@ -1,7 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -64,12 +64,12 @@ public class Architectus extends CardBase {
         int[] discIndices = new int[hand.size()];
         int handIndex = 0;
         int discIndex = 0;
-        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
 
         //get player input for which cards to lay
         //collect player input
         int i = 0;
-        while(handIndex != PlayerInterface2.CANCEL || discIndex != PlayerInterface2.CANCEL){
+        while(handIndex != PlayerInterface.CANCEL || discIndex != PlayerInterface.CANCEL){
             handIndex = playerInterface.getHandIndex(hand, Card.BUILDING);
             handIndices[i] = handIndex;
             discIndex = player.chooseDiceDisc();

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Date: 14/05/12
  * Desc:
  */
-public class TestingPlayerInterface extends PlayerInterface2 {
+public class TestingPlayerInterface extends PlayerInterface {
 
 
     @Override

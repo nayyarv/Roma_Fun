@@ -1,23 +1,21 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
 
 //TODO: Refactor Player
 public class Player {
-    private final static int CANCEL = -1;
     private final String name;
+    private int playerID;
 
     private PlayArea playArea;
     private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
 
-    private int playerID;
-    private boolean autoRoll;
 
     //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
@@ -42,9 +40,31 @@ public class Player {
         this.name = "dummyPlayer" + playerID;
     }
 
+
+    //Simple Getters
+
     public String getName() {
         return name;
     }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public ArrayList<CardHolder> getHand() {
+        return hand;
+    }
+
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
+    }
+
+
+
+
+
+
+
 
     //Main method that allows players to perform an action
     public boolean takeAction() {
@@ -93,7 +113,7 @@ public class Player {
         chosenCard = chooseCard(hand);
         if(chosenCard != null){
             chosenPosition = chooseDiceDisc();
-            if(chosenPosition != CANCEL){
+            if(chosenPosition != PlayerInterface.CANCEL){
                 if(!layCard(chosenCard, chosenPosition)){
                     hand.add(chosenCard);
                 }
@@ -138,7 +158,7 @@ public class Player {
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
             } else if (option == CANCEL_OPTION) {
-                option = CANCEL;
+                option = PlayerInterface.CANCEL;
                 validChoice = true;
             } else {
                 System.out.println("Please choose a valid action");
@@ -160,7 +180,7 @@ public class Player {
         final String strOption4 = "Card Disc";
         final String strOption5 = "Cancel";
 
-        int option = CANCEL;
+        int option = PlayerInterface.CANCEL;
         boolean validChoice = false;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
@@ -259,7 +279,7 @@ public class Player {
                     System.out.println(cardList.get(action - 1).toString());
                 } else if(action == PRINT_CARDS){
                     printCardList(cardList);
-                } else if(action == CANCEL){
+                } else if(action == PlayerInterface.CANCEL){
                     choice = null;
                     validChoice = true;
                 } else {
@@ -317,7 +337,7 @@ public class Player {
 
         boolean reroll = false;
         boolean validChoice = false;
-        int option = CANCEL;
+        int option = PlayerInterface.CANCEL;
 
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
         printDiceList(freeDice);
@@ -386,35 +406,11 @@ public class Player {
         return confirm;
     }
 
-    public boolean getAutoRoll() {
-        return autoRoll;
-    }
-
-    public void setAutoRoll(boolean autoRoll) {
-        this.autoRoll = autoRoll;
-    }
-
-    public int handSize() {
-        return hand.size();
-    }
-
     public void addCardToHand(CardHolder c){
         if(c!=null) hand.add(c);
     }
 
     public void addCardListToHand(ArrayList<CardHolder> cardList){
         hand.addAll(cardList);
-    }
-
-    public int getPlayerID() {
-        return playerID;
-    }
-
-    public ArrayList<CardHolder> getHand() {
-        return hand;
-    }
-
-    public PlayerInterface2 getPlayerInterface() {
-        return playerInterface;
     }
 }

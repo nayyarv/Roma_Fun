@@ -17,7 +17,7 @@ public class Roma {
     public final static int NUM_INIT_CARDS = 5;
 
     //Object pointers
-    PlayerInterface2 playerInterface = new GamePlayerInterface();
+    PlayerInterface playerInterface = new GamePlayerInterface();
 
     private PlayArea game;
 

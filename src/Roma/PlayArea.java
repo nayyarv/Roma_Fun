@@ -2,7 +2,7 @@ package Roma;
 
 import Roma.Cards.*;
 import Roma.PlayerInterfaceFiles.GamePlayerInterface;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class PlayArea {
     private DiceDiscs diceDiscs;
     private Player players[];
     private BattleManager battleManager;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
     private GameRules gameRules;
 
     //TODO: Use these functions
@@ -169,7 +169,7 @@ public class PlayArea {
         return players[playerID];
     }
 
-    public PlayerInterface2 getPlayerInterface() {
+    public PlayerInterface getPlayerInterface() {
         return playerInterface;
     }
 

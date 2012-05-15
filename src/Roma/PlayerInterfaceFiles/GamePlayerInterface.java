@@ -4,7 +4,6 @@ import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 //TODO: change all print statements throughout the project to reroute through player interface
@@ -15,7 +14,7 @@ import java.util.Scanner;
  * Date: 27/04/12
  * Desc: Handles all input and output for
  */
-public class GamePlayerInterface extends PlayerInterface2 {
+public class GamePlayerInterface extends PlayerInterface {
     private Scanner input;
 
 

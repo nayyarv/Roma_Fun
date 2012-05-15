@@ -1,7 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,7 @@ public class Aesculapinum extends CardBase {
     @Override
     public ArrayList<Integer> gatherData(Player player, int position) {
         ArrayList<Integer> activationData = new ArrayList<Integer>();
-        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex;

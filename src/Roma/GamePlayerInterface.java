@@ -121,7 +121,6 @@ public class GamePlayerInterface extends PlayerInterface2 {
     }
 
     private void printFilteredList(ArrayList<CardHolder> hand, String type){
-        ArrayList<CardHolder> filteredList = new ArrayList<CardHolder>();
         int i = 1;
         for(CardHolder card: hand){
             printOut(i+")");

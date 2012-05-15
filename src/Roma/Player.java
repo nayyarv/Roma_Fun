@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class Player {
     private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
+        playerInterface = playArea.getPlayerInterface();
         this.name = "dummyPlayer" + playerID;
     }
 
@@ -78,7 +80,7 @@ public class Player {
         } else if(option == END_TURN){
             endTurn = true;
         } else {
-            playerInterface.printOut("Please choose a valid option.");
+            playerInterface.printOut("Please choose a valid option.", true);
         }
 
         return endTurn;

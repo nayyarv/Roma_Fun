@@ -124,15 +124,7 @@ public abstract class CardBase implements Card {
     public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
 
 
-    public int otherPlayer(int player) {
-        if (player == Roma.PLAYER_ONE) {
-            return Roma.PLAYER_TWO;
-        } else {
-            return Roma.PLAYER_ONE;
-        }
-    }
-
-    public void discarded(){
-        //no action
+    public int otherPlayer(int player){
+        return ((player==Roma.PLAYER_ONE)? Roma.PLAYER_TWO: Roma.PLAYER_ONE);
     }
 }

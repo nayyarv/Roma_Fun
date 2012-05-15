@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,7 +113,7 @@ public class DiceDiscs {
         if(activeCards[playerID][position] != null){
             // There is a card there
             if(DEBUG){
-                playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName());
+                playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName(), true);
             }
             activateEnabled = activeCards[playerID][position].isActivateEnabled();
             // Can it be activated(Eg Turris is passive)
@@ -130,7 +131,7 @@ public class DiceDiscs {
                 System.out.println("That card can't be activated");
             }
         } else {
-            playerInterface.printOut("No card there!");
+            playerInterface.printOut("No card there!", true);
         }
 
         return activateEnabled;

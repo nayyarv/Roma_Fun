@@ -1,6 +1,7 @@
-package Roma;
+package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.CardHolder;
+import Roma.Roma;
 
 import java.util.ArrayList;
 
@@ -22,8 +23,8 @@ public abstract class PlayerInterface2 {
 
     abstract public String readString();
 
-    abstract public void printOut(Object object);
+    abstract public void printOut(Object object, boolean newLine);
 
-    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type);
+    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen);
 
 }

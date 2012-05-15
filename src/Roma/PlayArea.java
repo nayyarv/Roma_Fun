@@ -1,6 +1,8 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.PlayerInterfaceFiles.GamePlayerInterface;
+import Roma.PlayerInterfaceFiles.PlayerInterface2;
 
 import java.util.ArrayList;
 
@@ -68,7 +70,7 @@ public class PlayArea {
         boolean endTurn = false;
         char roll = 'b';
 
-        playerInterface.printOut("It's " + player.getName() + "'s turn");
+        playerInterface.printOut("It's " + player.getName() + "'s turn", true);
 
         gameRules.deductVictoryTokens(player.getPlayerID());
 
@@ -203,6 +205,10 @@ public class PlayArea {
             wrapper.deleteThisWrapper();
         }
         endActionList.clear();
+    }
+
+    public GameRules getGameRules() {
+        return gameRules;
     }
 
     /**

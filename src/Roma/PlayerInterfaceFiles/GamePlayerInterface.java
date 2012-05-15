@@ -1,9 +1,10 @@
-package Roma;
+package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 //TODO: change all print statements throughout the project to reroute through player interface
@@ -34,14 +35,14 @@ public class GamePlayerInterface extends PlayerInterface2 {
 
     private void showOptions(String title, String ... options){
         printLine();
-        printOut(title);
+        printOut(title,true);
         for(int i=0;i<options.length;i++){
-            printOut((i+1)+") " + options[i]);
+            printOut((i+1)+") " + options[i], true);
         }
     }
 
     private void printLine(){
-        printOut("-------------------------------------");
+        printOut("-------------------------------------", true);
     }
 
 
@@ -77,7 +78,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
     }
 
     public String getPlayerName(int num){
-        printOut("Name of player" + (num + 1) + ": ");
+        printOut("Name of player" + (num + 1) + ": ", false);
         return readString();
     }
 
@@ -88,47 +89,71 @@ public class GamePlayerInterface extends PlayerInterface2 {
             return "Anon"; //Since we have no input
         }
     }
-    public void printOut(String string){
-        System.out.println(string);
-    }
-
-    public void printOut(Object object){
-        System.out.println(object.toString());
+    @Override
+    public void printOut(Object object, boolean newLine){
+        if (newLine){
+            System.out.println(object.toString());
+        } else {
+            System.out.print(object.toString());
+        }
     }
 
     //TODO: flesh out function
-    public int getHandIndex(ArrayList<CardHolder> hand, String type) {
+    @Override
+    public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
-        printFilteredList(hand, type);
+        boolean contains;
 
-        printOut("Which Card: ");
+        printFilteredList(hand, type, chosen);
+
+        printOut("Which Card: " , false);
         int input;
         do {
             input = getIntegerInput(hand.size())-1;
-        } while (!chosenRightType(hand, type, input));
+            contains = ArrayContains(input, chosen);
+        } while (!chosenRightType(hand.get(input),type, contains));
         return input;
     }
 
-    private boolean chosenRightType(ArrayList<CardHolder> hand, String type, int index){
-        boolean correct = hand.get(index).getType().equalsIgnoreCase(type);
+    private boolean chosenRightType(CardHolder card, String type, boolean contains){
+        boolean correct = (card!=null)&&(card.getType().equalsIgnoreCase(type));
         // check's the chosen card is of the correct type
         if(!correct){
-            printOut("Incorrect card type chosen," +
-                    " expecting a "+ type +" card, instead received a "+ hand.get(index).getType()+" card");
+            printOut("Incorrect card chosen," +
+                    " expecting a "+ type +" card, instead received a", false);
+            if (card==null){
+                printOut("n empty Card", true);
+            } else if (contains){
+                printOut("n already chosen card", true);
+            } else {
+                printOut(" "+ card.getType()+" card", true);
+            }
         }
         return correct;
     }
 
-    private void printFilteredList(ArrayList<CardHolder> hand, String type){
+    private void printFilteredList(ArrayList<CardHolder> hand, String type, int ... chosen){
         int i = 1;
+
         for(CardHolder card: hand){
             System.out.print(i+")");
-            if(card.getType().equalsIgnoreCase(type)){
-                printOut(card.getName());
+            if(card==null){
+                printOut("#Empty#", true);
+            } else if(card.getType().equalsIgnoreCase(type)&&!ArrayContains(i,chosen)){
+                printOut(card.getName(), true);
             } else {
-                printOut("###"+card.getName()+"###");
+                printOut("###"+card.getName()+"###", true);
             }
             i++;
         }
+    }
+
+    private boolean ArrayContains(int key, int ... chosen){
+        for (int num: chosen){
+            if (num==key){
+                return true;
+            }
+        }
+        return false;
     }
 }

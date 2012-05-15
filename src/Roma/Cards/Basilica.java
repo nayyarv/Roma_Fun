@@ -61,4 +61,9 @@ public class Basilica extends CardBase {
     public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
         return false;
     }
+
+    @Override
+    public void discarded() {
+        //do nothing when discarded
+    }
 }

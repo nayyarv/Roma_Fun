@@ -55,7 +55,13 @@ public class Essedum extends CardBase {
     private static int DEFENSE_SHIFT = -2;
     private static int DEFENSE_SCALE = 1;
 
-    public boolean activate(Player player, int position) {
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return new ArrayList<Integer>();
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
         boolean activated = true;
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper;
@@ -69,5 +75,10 @@ public class Essedum extends CardBase {
         }
 
         return activated;
+    }
+
+    @Override
+    public void discarded() {
+        //no discard action
     }
 }

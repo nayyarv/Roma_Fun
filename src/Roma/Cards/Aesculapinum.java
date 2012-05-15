@@ -80,4 +80,9 @@ public class Aesculapinum extends CardBase {
         return activated;
     }
 
+    @Override
+    public void discarded() {
+        //do nothing when discarded
+    }
+
 }

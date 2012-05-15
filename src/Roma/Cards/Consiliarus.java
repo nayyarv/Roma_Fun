@@ -56,7 +56,6 @@ public class Consiliarus extends CardBase {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-
         ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
 
         while (!characterCards.isEmpty()){
@@ -77,5 +76,20 @@ public class Consiliarus extends CardBase {
         }
 
         return activated;
+    }
+
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.Player;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Andrew
@@ -122,8 +124,14 @@ public class Wrapper implements Card {
                 "\nCost: " + getCost() + "; Defence: " + getDefense();
     }
 
-    public boolean activate(Player player, int position){
-        return contents.activate(player, position);
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return contents.gatherData(player, position);
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+        return contents.activate(player, position, activationData);
     }
 
     public void deleteThisWrapper(){

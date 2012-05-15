@@ -109,4 +109,9 @@ public class Architectus extends CardBase {
 
         return activated;
     }
+
+    @Override
+    public void discarded() {
+        //do nothing when discarded
+    }
 }

@@ -88,12 +88,16 @@ public class GamePlayerInterface extends PlayerInterface2 {
             return "Anon"; //Since we have no input
         }
     }
-    public void printOut(String string){
-        System.out.println(string);
-    }
-
     public void printOut(Object object){
         System.out.println(object.toString());
+    }
+
+    public void printOut(Object object, boolean newLine){
+        if (newLine){
+            System.out.println(object.toString());
+        } else {
+            System.out.print(object.toString());
+        }
     }
 
     //TODO: flesh out function
@@ -110,11 +114,16 @@ public class GamePlayerInterface extends PlayerInterface2 {
     }
 
     private boolean chosenRightType(ArrayList<CardHolder> hand, String type, int index){
-        boolean correct = hand.get(index).getType().equalsIgnoreCase(type);
+        boolean correct = (hand.get(index)!=null)&&(hand.get(index).getType().equalsIgnoreCase(type));
         // check's the chosen card is of the correct type
         if(!correct){
             printOut("Incorrect card type chosen," +
-                    " expecting a "+ type +" card, instead received a "+ hand.get(index).getType()+" card");
+                    " expecting a "+ type +" card, instead received a", false);
+            if (hand.get(index)==null){
+                printOut("n empty Card");
+            } else {
+                printOut(hand.get(index).getType()+" card");
+            }
         }
         return correct;
     }
@@ -123,7 +132,9 @@ public class GamePlayerInterface extends PlayerInterface2 {
         int i = 1;
         for(CardHolder card: hand){
             System.out.print(i+")");
-            if(card.getType().equalsIgnoreCase(type)){
+            if(card==null){
+                printOut("");
+            } else if(card.getType().equalsIgnoreCase(type)){
                 printOut(card.getName());
             } else {
                 printOut("###"+card.getName()+"###");

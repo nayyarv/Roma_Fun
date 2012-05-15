@@ -37,6 +37,7 @@ public class Player {
     private Player(int playerID, PlayArea playArea, boolean testing){
         this.playArea = playArea;
         this.playerID = playerID;
+        playerInterface = playArea.getPlayerInterface();
         this.name = "dummyPlayer" + playerID;
     }
 

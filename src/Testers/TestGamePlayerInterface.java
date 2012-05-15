@@ -16,15 +16,13 @@ public class TestGamePlayerInterface {
         PlayerInterface2 playerInterface = playArea.getPlayerInterface();
         GameRules gameRules = playArea.getGameRules();
 
-        gameRules.getAndSwapCards();
+        playArea.testFillHand(0);
+
         gameRules.layAllCardsInHand();
 
-//
-//
-//
-//        playArea.testFillHand(0);
-//        playArea.testFillHand(1);
-//
+
+        playerInterface.printOut("Discs that are buildings");
+        playerInterface.getHandIndex(playArea.getDiceDiscs().toList(0), Card.BUILDING);
 //
 //        playArea.getPlayer(0).printHand();
 //

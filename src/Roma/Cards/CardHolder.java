@@ -45,6 +45,17 @@ public class CardHolder implements Card{
         assert false;
     }
 
+    @Override
+    public void discarded() {
+        Wrapper wrapper;
+        //remove all wrappers
+        while(!contents.isWrapper()){
+            wrapper = (Wrapper) contents;
+            wrapper.deleteThisWrapper();
+        }
+        contents.discarded();
+    }
+
     public boolean isActivateEnabled() {
         return contents.isActivateEnabled();
     }

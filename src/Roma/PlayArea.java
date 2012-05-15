@@ -175,9 +175,8 @@ public class PlayArea {
         return battleManager;
     }
 
-    //TODO: What is this
-    private void endActionPhase(){
-
+    public void addToEndTurnList(Wrapper wrappers){
+        endTurnList.add(wrappers);
     }
 
     public void addToEndTurnList(ArrayList<Wrapper> wrappers){

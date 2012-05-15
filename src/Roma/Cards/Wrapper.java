@@ -44,6 +44,11 @@ public class Wrapper implements Card {
         container = holder;
     }
 
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public void setDefenseShift(int defenseShift) {
         this.defenseShift = defenseShift;
     }

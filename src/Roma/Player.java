@@ -92,19 +92,27 @@ public class Player {
         if(chosenCard != null){
             chosenPosition = chooseDiceDisc();
             if(chosenPosition != CANCEL){
-                layCard(chosenCard, chosenPosition);
+                if(!layCard(chosenCard, chosenPosition)){
+                    hand.add(chosenCard);
+                }
+            } else {
+                hand.add(chosenCard);
             }
-        } else {
-            hand.add(chosenCard);
         }
     }
 
-    public void layCard(CardHolder chosenCard, int chosenPosition){
+    public boolean layCard(CardHolder chosenCard, int chosenPosition){
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
+        boolean laid = true;
 
-        moneyManager.loseMoney(playerID, chosenCard.getCost());
-        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+        if(moneyManager.loseMoney(playerID, chosenCard.getCost())){
+            diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+        } else {
+            laid = false;
+        }
+        
+        return laid;
     }
 
 

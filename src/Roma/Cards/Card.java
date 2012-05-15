@@ -27,5 +27,5 @@ public interface Card {
     public void setContents(Card card);
     public Card getContainer();
     public void setContainer(Card holder);
-
+    public void discarded();
 }

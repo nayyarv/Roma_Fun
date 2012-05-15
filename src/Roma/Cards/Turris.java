@@ -55,4 +55,9 @@ public class Turris extends CardBase {
         return activated;
     }
 
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

@@ -70,7 +70,7 @@ public class Architectus extends CardBase {
         //collect player input
         int i = 0;
         while(handIndex != PlayerInterface.CANCEL || discIndex != PlayerInterface.CANCEL){
-            handIndex = playerInterface.getHandIndex(hand, Card.BUILDING);
+            handIndex = playerInterface.getCardIndexFiltered(hand, Card.BUILDING);
             handIndices[i] = handIndex;
             discIndex = player.chooseDiceDisc();
             discIndices[i] = discIndex;

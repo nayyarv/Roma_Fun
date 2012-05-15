@@ -1,7 +1,7 @@
 package Roma.PlayerInterfaceFiles;
 
-import Roma.Cards.CardHolder;
-import Roma.Roma;
+import Roma.Cards.*;
+import Roma.*;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,9 @@ public abstract class PlayerInterface {
 
     abstract public void printOut(Object object, boolean newLine);
 
-    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen);
+    abstract public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen);
 
+    abstract public int getCardIndex(ArrayList<CardHolder> cardList);
+
+    abstract public void printDiceList(ArrayList<Dice> diceList);
 }

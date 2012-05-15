@@ -58,7 +58,7 @@ public class Aesculapinum extends CardBase {
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex;
 
-        cardIndex = playerInterface.getHandIndex(discardPile, Card.CHARACTER);
+        cardIndex = playerInterface.getCardIndexFiltered(discardPile, Card.CHARACTER);
 
         activationData.add(cardIndex);
 

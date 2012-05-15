@@ -59,8 +59,40 @@ public class Player {
         return playerInterface;
     }
 
+    public ArrayList<Dice> getFreeDice() {
+        return freeDice;
+    }
 
 
+    public int chooseCardIndexFromList(ArrayList<CardHolder> cardList, String ... typeFilter){
+        int index = PlayerInterface.CANCEL;
+
+        return index;
+    }
+
+
+    //small simple functions
+
+    public void addCardToHand(CardHolder c){
+        if(c!=null) hand.add(c);
+    }
+
+    public void addCardListToHand(ArrayList<CardHolder> cardList){
+        hand.addAll(cardList);
+    }
+
+    public int handSize() {
+        return hand.size();
+    }
+
+    private void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
+    }
 
 
 
@@ -219,15 +251,6 @@ public class Player {
         return chosenDie;
     }
 
-    private void printDiceList(ArrayList<Dice> diceList) {
-        System.out.println("Dice:");
-        int i = 0;
-        for(Dice dice : diceList){
-            i++;
-            System.out.println(i + ") " + dice.getValue());
-        }
-    }
-
     public void printHand(){
         printCardList(hand);
     }
@@ -321,10 +344,6 @@ public class Player {
         return choice;
     }
 
-    public ArrayList<Dice> getFreeDice() {
-        return freeDice;
-    }
-
     //input value
     //
 
@@ -340,7 +359,7 @@ public class Player {
         int option = PlayerInterface.CANCEL;
 
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
-        printDiceList(freeDice);
+        playerInterface.printDiceList(freeDice);
 
         if(playArea.getDiceHolder().checkTriple(playerID)){
             while(!validChoice){
@@ -404,13 +423,5 @@ public class Player {
 
         }
         return confirm;
-    }
-
-    public void addCardToHand(CardHolder c){
-        if(c!=null) hand.add(c);
-    }
-
-    public void addCardListToHand(ArrayList<CardHolder> cardList){
-        hand.addAll(cardList);
     }
 }

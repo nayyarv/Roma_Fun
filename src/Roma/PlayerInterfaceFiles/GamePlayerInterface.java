@@ -2,6 +2,7 @@ package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
+import Roma.Dice;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -99,21 +100,26 @@ public class GamePlayerInterface extends PlayerInterface {
 
     //TODO: flesh out function
     @Override
-    public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
+    public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
 
-        printFilteredList(hand, type, chosen);
+        printFilteredList(cardList, type, chosen);
 
         printOut("Which option: " , false);
         int input;
         do {
-            input = getIntegerInput(hand.size()+1)-1;
+            input = getIntegerInput(cardList.size()+1)-1;
             contains = ArrayContains(input, chosen);
-        } while ((input!=hand.size())&&!chosenRightType(hand.get(input),type, contains));
+        } while ((input!= cardList.size())&&!chosenRightType(cardList.get(input),type, contains));
 
-        if (input==hand.size()) input = CANCEL;
+        if (input== cardList.size()) input = CANCEL;
         return input;
+    }
+
+    @Override
+    public int getCardIndex(ArrayList<CardHolder> cardList) {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     private boolean chosenRightType(CardHolder card, String type, boolean contains){
@@ -133,10 +139,10 @@ public class GamePlayerInterface extends PlayerInterface {
         return correct;
     }
 
-    private void printFilteredList(ArrayList<CardHolder> hand, String type, int ... chosen){
+    private void printFilteredList(ArrayList<CardHolder> cardList, String type, int ... chosen){
         int i = 1;
 
-        for(CardHolder card: hand){
+        for(CardHolder card: cardList){
             System.out.print(i+")");
             if(card==null){
                 printOut("#Empty#", true);
@@ -158,5 +164,15 @@ public class GamePlayerInterface extends PlayerInterface {
             }
         }
         return false;
+    }
+
+    @Override
+    public void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
     }
 }

@@ -49,14 +49,30 @@ public class Aesculapinum extends CardBase {
 
     }
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
         PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+        CardManager cardManager = playArea.getCardManager();
+        ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex;
+
+        cardIndex = playerInterface.getHandIndex(discardPile, Card.CHARACTER);
+
+        activationData.add(cardIndex);
+
+        return activationData;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> ActivationData) {
+        boolean activated = true;
+        int cardIndex = 0;
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
 
-        cardIndex = playerInterface.getHandIndex(discardPile, Card.CHARACTER);
+        //retrieve cardIndex from activationData
+        //cardIndex =
         player.addCardToHand(discardPile.get(cardIndex));
         discardPile.remove(cardIndex);
 

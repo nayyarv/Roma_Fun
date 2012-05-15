@@ -122,7 +122,7 @@ public class DiceDiscs {
 
             if(activateEnabled){
                 discs.get(position).add(die);
-                activateEnabled = activeCards[playerID][position].activate(player, position);
+                //activateEnabled = activeCards[playerID][position].activate(player, position);
                 if(activateEnabled){
                     discs.get(position).add(die);
                 }

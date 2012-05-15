@@ -56,17 +56,42 @@ public class Architectus extends CardBase {
     private static int DEFENSE_SCALE = 1;
 
     @Override
-    public boolean activate(Player player, int position) {
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<CardHolder> hand = player.getHand();
+        int[] handIndices = new int[hand.size()];
+        int[] discIndices = new int[hand.size()];
+        int handIndex = 0;
+        int discIndex = 0;
+        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+
+        //get player input for which cards to lay
+        //collect player input
+        int i = 0;
+        while(handIndex != PlayerInterface2.CANCEL || discIndex != PlayerInterface2.CANCEL){
+            handIndex = playerInterface.getHandIndex(hand, Card.BUILDING);
+            handIndices[i] = handIndex;
+            discIndex = player.chooseDiceDisc();
+            discIndices[i] = discIndex;
+            i++;
+        }
+
+        while(i > 0){
+            i--;
+            activationData.add(handIndices[i]);
+            activationData.add(discIndices[i]);
+        }
+
+        return activationData;
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
         boolean activated = true;
+        CardHolder card;
         ArrayList<CardHolder> hand = player.getHand();
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper = null;
-        CardHolder card;
-        int[] handindex = new int[hand.size()];
-        int[] discindex = new int[hand.size()];
-        int input = 0;
-        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
-
 
         //wrap building cards in hand with costScale = 0 modifier
         for(int i = 0; i < hand.size(); i++){
@@ -79,19 +104,7 @@ public class Architectus extends CardBase {
             }
         }
 
-        //get player input for which cards to lay
-        //collect player input
-        int i = 0;
-        while(input != PlayerInterface2.CANCEL){
-            input = playerInterface.getHandIndex(hand, Card.BUILDING);
-            handindex[i] = input;
-            input = player.chooseDiceDisc();
-            discindex[i] = input;
-        }
-
-
-        //lay cards
-
+        //TODO: implement lay cards
 
         return activated;
     }

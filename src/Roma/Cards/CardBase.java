@@ -120,8 +120,8 @@ public abstract class CardBase implements Card {
         return name != null ? name.hashCode() : 0;
     }
 
-    //public abstract ArrayList<Integer> gatherData();
-    public abstract boolean activate(Player player, int position);
+    public abstract ArrayList<Integer> gatherData(Player player, int position);
+    public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
 
 
     public int otherPlayer(int player) {

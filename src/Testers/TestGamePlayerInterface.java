@@ -1,7 +1,6 @@
 package Testers;
 
 import Roma.Cards.Card;
-import Roma.GamePlayerInterface;
 import Roma.PlayArea;
 import Roma.PlayerInterface2;
 

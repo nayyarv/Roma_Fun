@@ -39,7 +39,7 @@ public class TestingPlayerInterface extends PlayerInterface2 {
     }
 
     @Override
-    public int getHandIndex(ArrayList<CardHolder> hand, String type) {
+    public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

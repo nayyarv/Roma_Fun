@@ -206,6 +206,10 @@ public class PlayArea {
         endActionList.clear();
     }
 
+    public GameRules getGameRules() {
+        return gameRules;
+    }
+
     /**
      * This is the section where the methods required for the interface
      * and our own tests are located

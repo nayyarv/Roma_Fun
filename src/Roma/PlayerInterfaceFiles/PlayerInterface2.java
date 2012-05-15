@@ -25,6 +25,6 @@ public abstract class PlayerInterface2 {
 
     abstract public void printOut(Object object, boolean newLine);
 
-    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type);
+    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen);
 
 }

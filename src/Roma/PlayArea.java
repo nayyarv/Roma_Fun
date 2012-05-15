@@ -1,8 +1,8 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.GamePlayerInterface;
-import Roma.PlayerInterfaceFiles.PlayerInterface;
+import Roma.History.*;
+import Roma.PlayerInterfaceFiles.*;
 
 import java.util.ArrayList;
 
@@ -68,43 +68,33 @@ public class PlayArea {
 
     public void playerTurn(Player player) {
         boolean endTurn = false;
-        char roll = 'b';
 
-        playerInterface.printOut("It's " + player.getName() + "'s turn", true);
-
-        gameRules.deductVictoryTokens(player.getPlayerID());
-
-        diceDiscs.clearPlayerDice(player.getPlayerID());
-
-        player.rollActionDice();
-
-        //TODO: set up auto roll option
-//        if (player.getAutoRoll()) {
-//            player.rollActionDice();
-//        } else {
-//            System.out.println("Press space to roll action dice." +
-//                    "Press 'a' for automated dice roll for the rest of the game.");
-//            while (!(roll == ' ' || roll == 'a')) {
-//                roll = mainProgram.getInput().nextChar
-//            }
-//            if (roll == 'a') {
-//                player.setAutoRoll(true);
-//            }
-//        }
+        startTurnPhase(player);
+        PlayState playState = new PlayState(this, player);
 
         while (!gameOver && !endTurn) {
+            diceHolder.rollBattleDice();
+            ActionData temp = new ActionData();
             //read player input through player interface and and store into action data
-            //create ActionData temp = new ActionData
-            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction(/*ActionData temp*/);
+
+            endTurn = player.takeAction(/*ActionData temp*/);
             //perform stored actions if commit = true
 
             //end action phase
             //add actionData to turnHistory
             clearEndActionWrappers();
         }
+
         clearEndTurnWrappers();
-        battleManager.clearDefenseModActive(); // reset temporary defense modifiers
+        //battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
+    }
+
+    private void startTurnPhase(Player player) {
+        playerInterface.printOut("It's " + player.getName() + "'s turn", true);
+        gameRules.deductVictoryTokens(player.getPlayerID());
+        diceDiscs.clearPlayerDice(player.getPlayerID());
+        player.rollActionDice();
     }
 
     //TODO: move to playerInterface
@@ -137,6 +127,10 @@ public class PlayArea {
 
 
     //All the getters
+    public int getTurn(){
+        return turn;
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }

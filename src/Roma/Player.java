@@ -96,6 +96,40 @@ public class Player {
 
 
 
+    //first action of turn
+    public void rollActionDice() {
+        final int YES = 1;
+        final int NO = 2;
+
+        boolean reroll = false;
+        boolean validChoice = false;
+        int option = PlayerInterface.CANCEL;
+
+        freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+        playerInterface.printDiceList(freeDice);
+
+        if(playArea.getDiceHolder().checkTriple(playerID)){
+            while(!validChoice){
+                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
+                        "Yes",
+                        "No");
+                if(option == YES){
+                    reroll = true;
+                    validChoice = true;
+                } else if (option == NO){
+                    reroll = false;
+                    validChoice = true;
+                } else {
+                    System.out.println("Please choose either yes or no.");
+                }
+            }
+            if(reroll){
+                rollActionDice();
+            }
+        }
+    }
+
+
 
 
     //Main method that allows players to perform an action
@@ -251,10 +285,6 @@ public class Player {
         return chosenDie;
     }
 
-    public void printHand(){
-        printCardList(hand);
-    }
-
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
         System.out.println("-------------------------------------");
@@ -350,37 +380,7 @@ public class Player {
     //Or maybe just have a function that requests a number from the player?
     //With "autoResponse" values when in testing mode?
 
-    public void rollActionDice() {
-        final int YES = 1;
-        final int NO = 2;
 
-        boolean reroll = false;
-        boolean validChoice = false;
-        int option = PlayerInterface.CANCEL;
-
-        freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
-        playerInterface.printDiceList(freeDice);
-
-        if(playArea.getDiceHolder().checkTriple(playerID)){
-            while(!validChoice){
-                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
-                        "Yes",
-                        "No");
-                if(option == YES){
-                    reroll = true;
-                    validChoice = true;
-                } else if (option == NO){
-                    reroll = false;
-                    validChoice = true;
-                } else {
-                    System.out.println("Please choose either yes or no.");
-                }
-            }
-            if(reroll){
-                rollActionDice();
-            }
-        }
-    }
 
     public void drawCards(int value) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();

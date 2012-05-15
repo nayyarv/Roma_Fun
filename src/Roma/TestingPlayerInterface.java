@@ -34,7 +34,7 @@ public class TestingPlayerInterface extends PlayerInterface2 {
     }
 
     @Override
-    public void printOut(Object object) {
+    public void printOut(Object object, boolean newLine) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

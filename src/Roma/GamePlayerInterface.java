@@ -34,14 +34,14 @@ public class GamePlayerInterface extends PlayerInterface2 {
 
     private void showOptions(String title, String ... options){
         printLine();
-        printOut(title);
+        printOut(title,true);
         for(int i=0;i<options.length;i++){
-            printOut((i+1)+") " + options[i]);
+            printOut((i+1)+") " + options[i], true);
         }
     }
 
     private void printLine(){
-        printOut("-------------------------------------");
+        printOut("-------------------------------------", true);
     }
 
 
@@ -77,7 +77,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
     }
 
     public String getPlayerName(int num){
-        printOut("Name of player" + (num + 1) + ": ");
+        printOut("Name of player" + (num + 1) + ": ", false);
         return readString();
     }
 
@@ -88,10 +88,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
             return "Anon"; //Since we have no input
         }
     }
-    public void printOut(Object object){
-        System.out.println(object.toString());
-    }
-
+    @Override
     public void printOut(Object object, boolean newLine){
         if (newLine){
             System.out.println(object.toString());
@@ -101,11 +98,12 @@ public class GamePlayerInterface extends PlayerInterface2 {
     }
 
     //TODO: flesh out function
+    @Override
     public int getHandIndex(ArrayList<CardHolder> hand, String type) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         printFilteredList(hand, type);
 
-        printOut("Which Card: ");
+        printOut("Which Card: " , false);
         int input;
         do {
             input = getIntegerInput(hand.size())-1;
@@ -120,9 +118,9 @@ public class GamePlayerInterface extends PlayerInterface2 {
             printOut("Incorrect card type chosen," +
                     " expecting a "+ type +" card, instead received a", false);
             if (hand.get(index)==null){
-                printOut("n empty Card");
+                printOut("n empty Card", true);
             } else {
-                printOut(hand.get(index).getType()+" card");
+                printOut(hand.get(index).getType()+" card", true);
             }
         }
         return correct;
@@ -133,11 +131,11 @@ public class GamePlayerInterface extends PlayerInterface2 {
         for(CardHolder card: hand){
             System.out.print(i+")");
             if(card==null){
-                printOut("");
+                printOut("#Empty#", true);
             } else if(card.getType().equalsIgnoreCase(type)){
-                printOut(card.getName());
+                printOut(card.getName(), true);
             } else {
-                printOut("###"+card.getName()+"###");
+                printOut("###"+card.getName()+"###", true);
             }
             i++;
         }

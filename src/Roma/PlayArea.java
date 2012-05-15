@@ -68,7 +68,7 @@ public class PlayArea {
         boolean endTurn = false;
         char roll = 'b';
 
-        playerInterface.printOut("It's " + player.getName() + "'s turn");
+        playerInterface.printOut("It's " + player.getName() + "'s turn", true);
 
         gameRules.deductVictoryTokens(player.getPlayerID());
 

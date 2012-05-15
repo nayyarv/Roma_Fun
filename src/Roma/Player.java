@@ -79,7 +79,7 @@ public class Player {
         } else if(option == END_TURN){
             endTurn = true;
         } else {
-            playerInterface.printOut("Please choose a valid option.");
+            playerInterface.printOut("Please choose a valid option.", true);
         }
 
         return endTurn;

@@ -21,7 +21,7 @@ public class TestGamePlayerInterface {
         gameRules.layAllCardsInHand();
 
 
-        playerInterface.printOut("Discs that are buildings");
+        playerInterface.printOut("Discs that are buildings", true);
         playerInterface.getHandIndex(playArea.getDiceDiscs().toList(0), Card.BUILDING);
 //
 //        playArea.getPlayer(0).printHand();

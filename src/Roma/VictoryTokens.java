@@ -61,10 +61,10 @@ public class VictoryTokens {
          } //checks each player isn't bankrupt of victory tokens
         if(shouldGameEnd){
             for (int i=0; i<Roma.MAX_PLAYERS;i++){
-                playerInterface.printOut("Player"+(i+1)+": "+playerTokens[i]);
+                playerInterface.printOut("Player"+(i+1)+": "+playerTokens[i], true);
             }
 
-            playerInterface.printOut("Token Pool: " + tokenPool);
+            playerInterface.printOut("Token Pool: " + tokenPool, true);
 
             playArea.endGame();
         }

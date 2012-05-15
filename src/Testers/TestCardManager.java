@@ -20,9 +20,9 @@ public class TestCardManager {
         CardManager cardManager = playArea.getCardManager();
         PlayerInterface2 playerInterface = new GamePlayerInterface();
 
-        playerInterface.printOut(cardManager.getPlayingSize());
-        playerInterface.printOut(cardManager.getCardfromDeck(Turris.NAME).toString());
-        playerInterface.printOut(cardManager.getPlayingSize());
+        playerInterface.printOut(cardManager.getPlayingSize(), true);
+        playerInterface.printOut(cardManager.getCardfromDeck(Turris.NAME).toString(), true);
+        playerInterface.printOut(cardManager.getPlayingSize(), true);
 
         playArea.testFillHand(0);
         playArea.testFillHand(1);

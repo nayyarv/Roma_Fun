@@ -91,7 +91,13 @@ public class PlayArea {
 //        }
 
         while (!gameOver && !endTurn) {
-            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction();
+            //read player input through player interface and and store into action data
+            //create ActionData temp = new ActionData
+            endTurn = players[turn % Roma.MAX_PLAYERS].takeAction(/*ActionData temp*/);
+            //perform stored actions if commit = true
+
+            //end action phase
+            //add actionData to turnHistory
             clearEndActionWrappers();
         }
         clearEndTurnWrappers();

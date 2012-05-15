@@ -56,26 +56,21 @@ public abstract class CardBase implements Card {
         return name;
     }
 
-
     public String getType() {
         return type;
     }
-
 
     public String getDescription() {
         return description;
     }
 
-
     public int getCost() {
         return cost;
     }
 
-
     public int getDefense() {
         return defence;
     }
-
 
     public PlayArea getPlayArea() {
         return playArea;
@@ -97,8 +92,10 @@ public abstract class CardBase implements Card {
         return activateEnabled;
     }
 
-    //public abstract ArrayList<Integer> gatherData();
-    public abstract boolean activate(Player player, int position);
+    @Override
+    public abstract ArrayList<Integer> gatherData(Player player, int position);
+    @Override
+    public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
 
 
     public int otherPlayer(int player){

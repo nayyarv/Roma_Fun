@@ -1,23 +1,21 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
 
 //TODO: Refactor Player
 public class Player {
-    private final static int CANCEL = -1;
     private final String name;
+    private int playerID;
 
     private PlayArea playArea;
     private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
 
-    private int playerID;
-    private boolean autoRoll;
 
     //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
@@ -42,9 +40,97 @@ public class Player {
         this.name = "dummyPlayer" + playerID;
     }
 
+
+    //Simple Getters
+
     public String getName() {
         return name;
     }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public ArrayList<CardHolder> getHand() {
+        return hand;
+    }
+
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
+    }
+
+    public ArrayList<Dice> getFreeDice() {
+        return freeDice;
+    }
+
+
+    public int chooseCardIndexFromList(ArrayList<CardHolder> cardList, String ... typeFilter){
+        int index = PlayerInterface.CANCEL;
+
+        return index;
+    }
+
+
+    //small simple functions
+
+    public void addCardToHand(CardHolder c){
+        if(c!=null) hand.add(c);
+    }
+
+    public void addCardListToHand(ArrayList<CardHolder> cardList){
+        hand.addAll(cardList);
+    }
+
+    public int handSize() {
+        return hand.size();
+    }
+
+    private void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
+    }
+
+
+
+    //first action of turn
+    public void rollActionDice() {
+        final int YES = 1;
+        final int NO = 2;
+
+        boolean reroll = false;
+        boolean validChoice = false;
+        int option = PlayerInterface.CANCEL;
+
+        freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+        playerInterface.printDiceList(freeDice);
+
+        if(playArea.getDiceHolder().checkTriple(playerID)){
+            while(!validChoice){
+                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
+                        "Yes",
+                        "No");
+                if(option == YES){
+                    reroll = true;
+                    validChoice = true;
+                } else if (option == NO){
+                    reroll = false;
+                    validChoice = true;
+                } else {
+                    System.out.println("Please choose either yes or no.");
+                }
+            }
+            if(reroll){
+                rollActionDice();
+            }
+        }
+    }
+
+
+
 
     //Main method that allows players to perform an action
     public boolean takeAction() {
@@ -93,20 +179,28 @@ public class Player {
         chosenCard = chooseCard(hand);
         if(chosenCard != null){
             chosenPosition = chooseDiceDisc();
-            if(chosenPosition != CANCEL){
-                layCard(chosenCard, chosenPosition);
+            if(chosenPosition != PlayerInterface.CANCEL){
+                if(!layCard(chosenCard, chosenPosition)){
+                    hand.add(chosenCard);
+                }
+            } else {
+                hand.add(chosenCard);
             }
-        } else {
-            hand.add(chosenCard);
         }
     }
 
-    public void layCard(CardHolder chosenCard, int chosenPosition){
+    public boolean layCard(CardHolder chosenCard, int chosenPosition){
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
+        boolean laid = true;
 
-        moneyManager.loseMoney(playerID, chosenCard.getCost());
-        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+        if(moneyManager.loseMoney(playerID, chosenCard.getCost())){
+            diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+        } else {
+            laid = false;
+        }
+        
+        return laid;
     }
 
 
@@ -130,7 +224,7 @@ public class Player {
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
             } else if (option == CANCEL_OPTION) {
-                option = CANCEL;
+                option = PlayerInterface.CANCEL;
                 validChoice = true;
             } else {
                 System.out.println("Please choose a valid action");
@@ -152,7 +246,7 @@ public class Player {
         final String strOption4 = "Card Disc";
         final String strOption5 = "Cancel";
 
-        int option = CANCEL;
+        int option = PlayerInterface.CANCEL;
         boolean validChoice = false;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
@@ -189,19 +283,6 @@ public class Player {
         }
 
         return chosenDie;
-    }
-
-    private void printDiceList(ArrayList<Dice> diceList) {
-        System.out.println("Dice:");
-        int i = 0;
-        for(Dice dice : diceList){
-            i++;
-            System.out.println(i + ") " + dice.getValue());
-        }
-    }
-
-    public void printHand(){
-        printCardList(hand);
     }
 
     public void printCardList(ArrayList<CardHolder> cardList){
@@ -251,7 +332,7 @@ public class Player {
                     System.out.println(cardList.get(action - 1).toString());
                 } else if(action == PRINT_CARDS){
                     printCardList(cardList);
-                } else if(action == CANCEL){
+                } else if(action == PlayerInterface.CANCEL){
                     choice = null;
                     validChoice = true;
                 } else {
@@ -293,47 +374,13 @@ public class Player {
         return choice;
     }
 
-    public ArrayList<Dice> getFreeDice() {
-        return freeDice;
-    }
-
     //input value
     //
 
     //Or maybe just have a function that requests a number from the player?
     //With "autoResponse" values when in testing mode?
 
-    public void rollActionDice() {
-        final int YES = 1;
-        final int NO = 2;
 
-        boolean reroll = false;
-        boolean validChoice = false;
-        int option = CANCEL;
-
-        freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
-        printDiceList(freeDice);
-
-        if(playArea.getDiceHolder().checkTriple(playerID)){
-            while(!validChoice){
-                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
-                        "Yes",
-                        "No");
-                if(option == YES){
-                    reroll = true;
-                    validChoice = true;
-                } else if (option == NO){
-                    reroll = false;
-                    validChoice = true;
-                } else {
-                    System.out.println("Please choose either yes or no.");
-                }
-            }
-            if(reroll){
-                rollActionDice();
-            }
-        }
-    }
 
     public void drawCards(int value) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
@@ -376,37 +423,5 @@ public class Player {
 
         }
         return confirm;
-    }
-
-    public boolean getAutoRoll() {
-        return autoRoll;
-    }
-
-    public void setAutoRoll(boolean autoRoll) {
-        this.autoRoll = autoRoll;
-    }
-
-    public int handSize() {
-        return hand.size();
-    }
-
-    public void addCardToHand(CardHolder c){
-        if(c!=null) hand.add(c);
-    }
-
-    public void addCardListToHand(ArrayList<CardHolder> cardList){
-        hand.addAll(cardList);
-    }
-
-    public int getPlayerID() {
-        return playerID;
-    }
-
-    public ArrayList<CardHolder> getHand() {
-        return hand;
-    }
-
-    public PlayerInterface2 getPlayerInterface() {
-        return playerInterface;
     }
 }

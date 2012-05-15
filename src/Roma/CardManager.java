@@ -103,6 +103,7 @@ public class CardManager {
 
     public void discard(CardHolder theCard) {
         discardPile.add(0, theCard);
+        theCard.discarded();
         if (noMoreCards) {
             playingDeck.addAll(discardPile);
             discardPile.clear();

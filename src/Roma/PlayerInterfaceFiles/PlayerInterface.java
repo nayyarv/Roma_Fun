@@ -1,7 +1,7 @@
 package Roma.PlayerInterfaceFiles;
 
-import Roma.Cards.CardHolder;
-import Roma.Roma;
+import Roma.Cards.*;
+import Roma.*;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Date: 14/05/12
  * Desc:
  */
-public abstract class PlayerInterface2 {
+public abstract class PlayerInterface {
 
     public final static int CANCEL = -1;
 
@@ -25,8 +25,9 @@ public abstract class PlayerInterface2 {
 
     abstract public void printOut(Object object, boolean newLine);
 
-    abstract public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen);
+    abstract public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen);
 
-    abstract public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen);
+    abstract public int getCardIndex(ArrayList<CardHolder> cardList);
 
+    abstract public void printDiceList(ArrayList<Dice> diceList);
 }

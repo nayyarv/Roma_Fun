@@ -1,7 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +25,7 @@ public class DiceDiscs {
     public static final int TURRIS_DISCARD = -1;
 
     private final PlayArea playArea;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
 
     private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
@@ -123,7 +123,7 @@ public class DiceDiscs {
 
             if(activateEnabled){
                 discs.get(position).add(die);
-                activateEnabled = activeCards[playerID][position].activate(player, position);
+                //activateEnabled = activeCards[playerID][position].activate(player, position);
                 if(activateEnabled){
                     discs.get(position).add(die);
                 }

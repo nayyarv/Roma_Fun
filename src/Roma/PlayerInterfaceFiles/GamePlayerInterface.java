@@ -2,7 +2,7 @@ package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
-import Roma.DiceDiscs;
+import Roma.Dice;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Date: 27/04/12
  * Desc: Handles all input and output for
  */
-public class GamePlayerInterface extends PlayerInterface2 {
+public class GamePlayerInterface extends PlayerInterface {
     private Scanner input;
 
 
@@ -89,7 +89,6 @@ public class GamePlayerInterface extends PlayerInterface2 {
             return "Anon"; //Since we have no input
         }
     }
-
     @Override
     public void printOut(Object object, boolean newLine){
         if (newLine){
@@ -132,29 +131,26 @@ public class GamePlayerInterface extends PlayerInterface2 {
 
     //TODO: flesh out function
     @Override
-    public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
+    public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
 
-        int i = 1;
-        for(CardHolder card: hand){
-            printOut(i+")", false);
-            contains = ArrayContains(i-1, chosen);
-            printFilter(card, type, contains);
-            i++;
-        }
-        printOut(i+") Cancel",true);
-
+        printFilteredList(cardList, type, chosen);
 
         printOut("Which option: " , false);
         int input;
         do {
-            input = getIntegerInput(hand.size()+1)-1;
+            input = getIntegerInput(cardList.size()+1)-1;
             contains = ArrayContains(input, chosen);
-        } while ((input!=hand.size())&&!chosenRightType(hand.get(input),type, contains));
+        } while ((input!= cardList.size())&&!chosenRightType(cardList.get(input),type, contains));
 
-        if (input==hand.size()) input = CANCEL;
+        if (input== cardList.size()) input = CANCEL;
         return input;
+    }
+
+    @Override
+    public int getCardIndex(ArrayList<CardHolder> cardList) {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     private boolean chosenRightType(CardHolder card, String type, boolean contains){
@@ -174,14 +170,22 @@ public class GamePlayerInterface extends PlayerInterface2 {
         return correct;
     }
 
-    private void printFilter(CardHolder card, String type, boolean contains){
-        if(card==null){
-            printOut("#Empty#", true);
-        } else if(card.getType().equalsIgnoreCase(type)&&!contains){
-            printOut(card.getName(), true);
-        } else {
-            printOut("###"+card.getName()+"###", true);
+    private void printFilteredList(ArrayList<CardHolder> cardList, String type, int ... chosen){
+        int i = 1;
+
+        for(CardHolder card: cardList){
+            System.out.print(i+")");
+            if(card==null){
+                printOut("#Empty#", true);
+            } else if(card.getType().equalsIgnoreCase(type)&&!ArrayContains(i,chosen)){
+                printOut(card.getName(), true);
+            } else {
+                printOut("###"+card.getName()+"###", true);
+            }
+            i++;
         }
+
+        printOut(i+") Cancel",true);
     }
 
     private boolean ArrayContains(int key, int ... chosen){
@@ -191,5 +195,15 @@ public class GamePlayerInterface extends PlayerInterface2 {
             }
         }
         return false;
+    }
+
+    @Override
+    public void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
     }
 }

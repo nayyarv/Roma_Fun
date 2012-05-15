@@ -85,4 +85,20 @@ public class Centurio extends CardBase {
 
         return activated;
     }
+
+    //TODO: Needs the refactor
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

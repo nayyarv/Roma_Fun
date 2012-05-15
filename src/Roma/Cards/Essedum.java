@@ -50,15 +50,35 @@ public class Essedum extends CardBase {
 
     }
 
+    private static int COST_SHIFT = 0;
+    private static int COST_SCALE = 1;
+    private static int DEFENSE_SHIFT = -2;
+    private static int DEFENSE_SCALE = 1;
 
-    public boolean activate(Player player, int position) {
-        BattleManager battleManager = playArea.getBattleManager();
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return new ArrayList<Integer>();
+    }
 
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
         boolean activated = true;
+        WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+        Wrapper wrapper;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        CardHolder[] enemyActives = diceDiscs.getPlayerActives(targetPlayerID);
 
-        battleManager.modDefenseModActive(targetPlayerID, MOD_DEFENCE_ACTIVE);
+        for(CardHolder card : enemyActives){
+            wrapper = wrapperMaker.insertWrapper(card);
+            playArea.addToEndTurnList(wrapper);
+        }
 
         return activated;
+    }
+
+    @Override
+    public void discarded() {
+        //no discard action
     }
 }

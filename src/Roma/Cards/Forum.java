@@ -52,21 +52,27 @@ public class Forum extends CardBase {
 
 
     public boolean activate(Player player, int position) {
-        boolean activated = true;
+
+    }
+
+    //TODO: refactor incomplete
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
+
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Dice> freeDice = player.getFreeDice();
         Dice chosenDie = null;
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
 
         if(freeDice.isEmpty()){
-            activated = false;
+            activationData = null;
             System.out.println("Not enough free action dice!");
         } else {
             System.out.println("Please choose a second die to use");
             chosenDie = player.chooseDie(freeDice);
             if(chosenDie != null){
                 diceDiscs.addDiceToDisc(position, chosenDie);
-                victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
                 // check for adjacent Templum
                 if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
                     System.out.println("Would you like to use a 3rd die?");
@@ -74,7 +80,6 @@ public class Forum extends CardBase {
                     chosenDie = player.chooseDie(freeDice);
                     if(chosenDie != null){
                         diceDiscs.addDiceToDisc(position, chosenDie);
-                        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
                     }
                 }
                 // check for adjacent Basilicas
@@ -85,13 +90,25 @@ public class Forum extends CardBase {
                     System.out.println("You get 2 extra victory tokens from your adjacent Basilica!");
                 }
             } else {
-                activated = false;
                 System.out.println("Card activation cancelled.");
+                activationData = null;
             }
         }
 
+        return activationData;
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+        boolean activated = true;
+        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
 
         return activated;
     }
 
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

@@ -1,7 +1,5 @@
 package Roma.History;
 
-import Roma.Roma;
-
 import java.util.ArrayList;
 
 /**
@@ -22,15 +20,17 @@ public class ActionData {
      *      - TargetDiscindex (0-6)
      */
 
-    //#defines
+    //#defines for action dice
     public static final String DICE = "Dice"; //0-6
     public static final String MONEY = "Money";
     public static final String CARD = "Card";
 
+    public final int playerID;
+
     //action types
     private boolean layCard = false;
     private boolean useDice = false;
-    private boolean actionTaken = false;
+    private boolean commit = false;
 
     //For using action dice
     private int actionDiceIndex;
@@ -48,8 +48,8 @@ public class ActionData {
 
 
     //Called from playerInterface
-    public ActionData(){
-
+    public ActionData(int playerID){
+        this.playerID = playerID;
     }
 
     public boolean isLayCard() {
@@ -68,12 +68,12 @@ public class ActionData {
         this.useDice = useDice;
     }
 
-    public boolean isActionTaken() {
-        return actionTaken;
+    public boolean isCommit() {
+        return commit;
     }
 
-    public void setActionTaken(boolean actionTaken) {
-        this.actionTaken = actionTaken;
+    public void setCommit(boolean commit) {
+        this.commit = commit;
     }
 
     public int getActionDiceIndex() {

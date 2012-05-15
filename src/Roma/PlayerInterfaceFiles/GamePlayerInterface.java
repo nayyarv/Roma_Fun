@@ -30,6 +30,25 @@ public class GamePlayerInterface extends PlayerInterface {
             integerInput = getIntegerInput();
         } while (!checkInBounds(integerInput, choices.length));
 
+        if(integerInput == choices.length){
+            integerInput = CANCEL;
+        }
+        return integerInput;
+    }
+
+    public int readIndex(String title, String ... choices){
+        int integerInput;
+        do {
+            showOptions(title, choices);
+            integerInput = getIntegerInput();
+        } while (!checkInBounds(integerInput, choices.length));
+
+
+        if(integerInput == choices.length){
+            integerInput = CANCEL;
+        } else {
+            integerInput--;
+        }
         return integerInput;
     }
 

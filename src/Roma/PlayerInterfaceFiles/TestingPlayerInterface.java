@@ -20,6 +20,11 @@ public class TestingPlayerInterface extends PlayerInterface {
     }
 
     @Override
+    public int readIndex(String title, String... choices) {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public int getIntegerInput(int bound) {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }

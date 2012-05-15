@@ -106,12 +106,14 @@ public class GamePlayerInterface extends PlayerInterface2 {
 
         printFilteredList(hand, type, chosen);
 
-        printOut("Which Card: " , false);
+        printOut("Which option: " , false);
         int input;
         do {
-            input = getIntegerInput(hand.size())-1;
+            input = getIntegerInput(hand.size()+1)-1;
             contains = ArrayContains(input, chosen);
-        } while (!chosenRightType(hand.get(input),type, contains));
+        } while ((input!=hand.size())&&!chosenRightType(hand.get(input),type, contains));
+
+        if (input==hand.size()) input = CANCEL;
         return input;
     }
 
@@ -146,6 +148,8 @@ public class GamePlayerInterface extends PlayerInterface2 {
             }
             i++;
         }
+
+        printOut(i+") Cancel",true);
     }
 
     private boolean ArrayContains(int key, int ... chosen){

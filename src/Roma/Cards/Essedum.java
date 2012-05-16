@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,6 @@ public class Essedum extends CardBase {
     final static int COST = 6;
     final static int DEFENCE = 3;
     final static boolean ACTIVATE_ENABLED = true;
-    final static int MOD_DEFENCE_ACTIVE = -2;
 
     public final static int OCCURENCES = 2;
 
@@ -57,13 +57,12 @@ public class Essedum extends CardBase {
     private static int DEFENSE_SCALE = 1;
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
-        return new ArrayList<Integer>();
+    public void gatherData(Player player, int position) throws CancelAction{
+        player.commit();
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        boolean activated = true;
+    public void activate(Player player, int position) {
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
@@ -74,12 +73,10 @@ public class Essedum extends CardBase {
             wrapper = wrapperMaker.insertWrapper(card);
             playArea.addToEndTurnList(wrapper);
         }
-
-        return activated;
     }
 
     @Override
     public void discarded() {
-        //no discard action
+        //do nothing when discarded
     }
 }

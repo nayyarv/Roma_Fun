@@ -91,13 +91,13 @@ public class Centurio extends CardBase {
         }
         // if size() == 0 then battleVictory was true
         // else if value is -1 then dice selection was cancelled and the target survives
-        player.getCurrentAction().setActivationData(activationData);
+        player.setActivationData(activationData);
     }
 
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        ArrayList<Integer> activationData = player.getActivationData();
         DiceHolder diceHolder = playArea.getDiceHolder();
 
         int targetPlayer = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
@@ -125,6 +125,6 @@ public class Centurio extends CardBase {
 
     @Override
     public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing when discarded
     }
 }

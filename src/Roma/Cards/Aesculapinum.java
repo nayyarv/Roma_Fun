@@ -74,12 +74,12 @@ public class Aesculapinum extends CardBase {
             }
         }
         activationData.add(cardIndex);
-        player.getCurrentAction().setActivationData(activationData);
+        player.setActivationData(activationData);
     }
 
     @Override
     public void activate(Player player, int position) {
-        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        ArrayList<Integer> activationData = player.getActivationData();
         int cardIndex = activationData.remove(0);
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();

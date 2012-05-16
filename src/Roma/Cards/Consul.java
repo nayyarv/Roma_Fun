@@ -3,6 +3,7 @@ package Roma.Cards;
 import Roma.Dice;
 import Roma.PlayArea;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -55,52 +56,67 @@ public class Consul extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        PlayerInterface playerInterface = player.getPlayerInterface();
-        final String strPrompt = "Would you like to...";
-        final String strOption1 = "Increase the die?";
-        final String strOption2 = "Decrease the die?";
-        final String strOption3 = "Cancel";
-        final int INCREASE = 1;
-        final int DECREASE = 2;
-        final int CANCEL = 3;
+//    public boolean activate(Player player, int position) {
+//        PlayerInterface playerInterface = player.getPlayerInterface();
+//        final String strPrompt = "Would you like to...";
+//        final String strOption1 = "Increase the die?";
+//        final String strOption2 = "Decrease the die?";
+//        final String strOption3 = "Cancel";
+//        final int INCREASE = 1;
+//        final int DECREASE = 2;
+//        final int CANCEL = 3;
+//
+//        int choice = 3;
+//        boolean validChoice = false;
+//
+//        boolean activated = true;
+//        ArrayList<Dice> freeDice = player.getFreeDice();
+//        Dice chosenDice = null;
+//
+//        if(freeDice.size() != 0){
+//            chosenDice = player.getDieIndex(freeDice);
+//            if(chosenDice == null){
+//                activated = false;
+//            } else {
+//                while(!validChoice){
+//                    choice = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3);
+//                    if(choice == INCREASE){
+//                        if(chosenDice.getValue() == Dice.MAX_DIE_VALUE){
+//                            PlayerInterface.printOut("Can't increase die value over" + Dice.MAX_DIE_VALUE + "!", true);
+//                        } else {
+//                            chosenDice.incrementValue();
+//                            validChoice = true;
+//                        }
+//                    } else if(choice == DECREASE){
+//                        if(chosenDice.getValue() == Dice.MIN_DIE_VALUE){
+//                            PlayerInterface.printOut("Can't decrease die value over" + Dice.MIN_DIE_VALUE + "!", true);
+//                        } else {
+//                            chosenDice.decrementValue();
+//                            validChoice = false;
+//                        }
+//                    } else if(choice == CANCEL){
+//                        validChoice = true;
+//                        activated = false;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return activated;
+//    }
 
-        int choice = 3;
-        boolean validChoice = false;
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        boolean activated = true;
-        ArrayList<Dice> freeDice = player.getFreeDice();
-        Dice chosenDice = null;
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
 
-        if(freeDice.size() != 0){
-            chosenDice = player.getDieIndex(freeDice);
-            if(chosenDice == null){
-                activated = false;
-            } else {
-                while(!validChoice){
-                    choice = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3);
-                    if(choice == INCREASE){
-                        if(chosenDice.getValue() == Dice.MAX_DIE_VALUE){
-                            PlayerInterface.printOut("Can't increase die value over" + Dice.MAX_DIE_VALUE + "!", true);
-                        } else {
-                            chosenDice.incrementValue();
-                            validChoice = true;
-                        }
-                    } else if(choice == DECREASE){
-                        if(chosenDice.getValue() == Dice.MIN_DIE_VALUE){
-                            PlayerInterface.printOut("Can't decrease die value over" + Dice.MIN_DIE_VALUE + "!", true);
-                        } else {
-                            chosenDice.decrementValue();
-                            validChoice = false;
-                        }
-                    } else if(choice == CANCEL){
-                        validChoice = true;
-                        activated = false;
-                    }
-                }
-            }
-        }
-
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

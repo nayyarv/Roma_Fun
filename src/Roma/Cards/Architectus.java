@@ -91,7 +91,7 @@ public class Architectus extends CardBase {
             activationData.add(discIndices[i]);
         }
 
-        player.getCurrentAction().setActivationData(activationData);
+        player.setActivationData(activationData);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Architectus extends CardBase {
         ArrayList<CardHolder> hand = player.getHand();
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper = null;
-        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Integer> handIndices = new ArrayList<Integer>();
         ArrayList<Integer> discIndices = new ArrayList<Integer>();
         ArrayList<CardHolder> cards = new ArrayList<CardHolder>();

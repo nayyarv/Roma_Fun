@@ -70,6 +70,14 @@ public class Player {
         return currentAction;
     }
 
+    public void setActivationData(ArrayList<Integer> activationData){
+        currentAction.setActivationData(activationData);
+    }
+
+    public ArrayList<Integer> getActivationData(){
+        return currentAction.getActivationData();
+    }
+
 
     //small simple functions
 

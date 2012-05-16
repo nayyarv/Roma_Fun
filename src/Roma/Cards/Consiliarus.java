@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -53,45 +54,61 @@ public class Consiliarus extends CardBase {
     private static int FROM_TO_DIMENSIONS = 2;
 
 
-    //TODO: refactor for testing reasons
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
+//    //TODO: refactor for testing reasons
+//    public void activate(Player player, int position) {
+//        boolean activated = true;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//
+//        ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
+//
+//        while (!characterCards.isEmpty()){
+//            playArea.printStats();
+//            playerInterface.printCardList(characterCards);
+//            CardHolder card = player.chooseCardIndex(characterCards);
+//            //TODO: Allow players to see the dice discs while placing their cards
+//            if (card ==null) { //i.e. cancelled
+//                PlayerInterface.printOut("You must choose a card", true);
+//            } else {
+//                int choice = player.getDiceDiscIndex("");
+//                if (choice!=-1){//I.e not cancel
+//                    diceDiscs.layCard(player.getPlayerID(), choice, card);
+//                } else {
+//                    characterCards.add(card);
+//                }
+//            }
+//        }
+//    }
+
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction{
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
+        int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
 
-        ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
+        //TODO: flesh out
+        //Maybe collect which cards player desires to move first
+        //then gather where to move the cards too?
+        //problem is how to show the changes to the player in progress...
 
-        while (!characterCards.isEmpty()){
-            playArea.printStats();
-            playerInterface.printCardList(characterCards);
-            CardHolder card = player.chooseCardIndex(characterCards);
-            //TODO: Allow players to see the dice discs while placing their cards
-            if (card ==null) { //i.e. cancelled
-                PlayerInterface.printOut("You must choose a card", true);
-            } else {
-                int choice = player.getDiceDiscIndex("");
-                if (choice!=-1){//I.e not cancel
-                    diceDiscs.layCard(player.getPlayerID(), choice, card);
-                } else {
-                    characterCards.add(card);
-                }
-            }
-        }
+        player.commit();
 
-        return activated;
+        player.setActivationData(activationData);
     }
 
-    @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+    //activation data should be alternating between fromIndex toIndex
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void activate(Player player, int position) {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[] activeCards = diceDiscs.getPlayerActives(player.getPlayerID());
+        ArrayList<Integer> activationData = player.getActivationData();
+
+        //TODO: flesh out
     }
 
     @Override
     public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing when discarded
     }
 }

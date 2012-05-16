@@ -21,6 +21,8 @@ public abstract class PlayerInterface {
 
     abstract public int getIntegerInput(int bound);
 
+    abstract public int getIndex(int bound);
+
     abstract public String getPlayerName(int num);
 
     abstract public String readString();
@@ -29,7 +31,7 @@ public abstract class PlayerInterface {
 
     abstract public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen);
 
-    abstract public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction;
-
     abstract public void printDiceList(ArrayList<Dice> diceList);
+
+    abstract public void printCardList(ArrayList<CardHolder> cardList);
 }

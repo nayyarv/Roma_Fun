@@ -100,8 +100,12 @@ public class Player {
         if(option == 1){
             currentAction.setCommit(true);
         } else if(option == 2){
-            throw new CancelAction();
+            cancel();
         }
+    }
+
+    public void cancel() throws CancelAction{
+        throw new CancelAction();
     }
 
     //first action of turn
@@ -245,13 +249,58 @@ public class Player {
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
-        chosenCardIndex = playerInterface.getCardIndex(hand);
+        chosenCardIndex = getCardIndex(hand);
         if(chosenCardIndex == CANCEL) throw new CancelAction();
         currentAction.setCardIndex(chosenCardIndex);
 
         chosenPosition = chooseDiceDiscIndex();
         if(chosenPosition == CANCEL) throw new CancelAction();
         currentAction.setTargetDisc(chosenPosition);
+    }
+
+    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+        final String strPrompt = "Possible actions:";
+        final String strOption1 = "Choose a card";
+        final String strOption2 = "Check description";
+        final String strOption3 = "Print card list";
+        final String strOption4 = "Cancel/End selection";
+
+        final int
+                CHOOSE_CARDS = 1,
+                CHECK_DESC = 2,
+                PRINT_CARDS = 3;
+
+        int choice = CANCEL;
+        int action = 0;
+        boolean validChoice = false;
+
+        playerInterface.printCardList(cardList);
+
+        if(cardList.size() == 0){
+            System.out.println("There are no cards!");
+        } else {
+            while(!validChoice){
+                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
+
+                if(action == CHOOSE_CARDS){
+                    System.out.print("Card number: ");
+                    choice = playerInterface.getIndex(cardList.size());
+                    validChoice = true;
+                } else if(action == CHECK_DESC){
+                    System.out.print("Check which card number: ");
+                    action = playerInterface.getIndex(cardList.size());
+                    System.out.println(cardList.get(action).toString());
+                } else if(action == PRINT_CARDS){
+                    playerInterface.printCardList(cardList);
+                } else if(action == CANCEL){
+                    throw new CancelAction();
+                } else {
+                    System.out.println("Please choose a valid action");
+                }
+            }
+        }
+
+        return choice;
     }
 
     public int chooseDiceDiscIndex() throws CancelAction{

@@ -86,6 +86,16 @@ public class GamePlayerInterface extends PlayerInterface {
         return read;
     }
 
+    //Keeps reading till valid input is recieved
+    public int getIndex(int bound){
+        int read;
+        do{
+            read=getIntegerInput();
+        } while (!checkInBounds(read, bound));
+        read--;
+        return read;
+    }
+
     //Simply returns input
     private int getIntegerInput(){
         if(input.hasNextInt()){
@@ -140,51 +150,7 @@ public class GamePlayerInterface extends PlayerInterface {
     //input: ArrayList (of dice or of cards)
     //return int
     @Override
-    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
-        final String strPrompt = "Possible actions:";
-        final String strOption1 = "Choose a card";
-        final String strOption2 = "Check description";
-        final String strOption3 = "Print card list";
-        final String strOption4 = "Cancel/End selection";
 
-        final int
-                CHOOSE_CARDS = 1,
-                CHECK_DESC = 2,
-                PRINT_CARDS = 3;
-
-        int choice = CANCEL;
-        int action = 0;
-        boolean validChoice = false;
-
-        printCardList(cardList);
-
-        if(cardList.size() == 0){
-            System.out.println("There are no cards!");
-        } else {
-            while(!validChoice){
-                action = readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
-
-                if(action == CHOOSE_CARDS){
-                    System.out.print("Card number: ");
-                    choice = getIntegerInput(cardList.size());
-                    choice--;
-                    validChoice = true;
-                } else if(action == CHECK_DESC){
-                    System.out.print("Check which card number: ");
-                    action = getIntegerInput(cardList.size());
-                    System.out.println(cardList.get(action - 1).toString());
-                } else if(action == PRINT_CARDS){
-                    printCardList(cardList);
-                } else if(action == CANCEL){
-                    throw new CancelAction();
-                } else {
-                    System.out.println("Please choose a valid action");
-                }
-            }
-        }
-
-        return choice;
-    }
 
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;

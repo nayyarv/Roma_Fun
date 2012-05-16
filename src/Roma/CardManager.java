@@ -30,24 +30,22 @@ public class CardManager {
         playingDeck.addAll(Architectus.playSet(playArea));
         playingDeck.addAll(Basilica.playSet(playArea));
         playingDeck.addAll(Centurio.playSet(playArea));
-
         playingDeck.addAll(Consiliarus.playSet(playArea));
+
         playingDeck.addAll(Consul.playSet(playArea));
         playingDeck.addAll(Essedum.playSet(playArea));
         playingDeck.addAll(Forum.playSet(playArea));
-
         playingDeck.addAll(Gladiator.playSet(playArea));
         playingDeck.addAll(Haruspex.playSet(playArea));
+
         playingDeck.addAll(Legat.playSet(playArea));
         playingDeck.addAll(Legionarius.playSet(playArea));
-
         playingDeck.addAll(Machina.playSet(playArea));
-
         playingDeck.addAll(Mercator.playSet(playArea));
         playingDeck.addAll(Mercatus.playSet(playArea));
+
         playingDeck.addAll(Nero.playSet(playArea));
         playingDeck.addAll(Onager.playSet(playArea));
-
         playingDeck.addAll(Praetorianus.playSet(playArea));
         playingDeck.addAll(Scaenicus.playSet(playArea));
         playingDeck.addAll(Senator.playSet(playArea));
@@ -55,7 +53,6 @@ public class CardManager {
         playingDeck.addAll(Sicarius.playSet(playArea));
         playingDeck.addAll(Templum.playSet(playArea));
         playingDeck.addAll(TribunisPlebis.playSet(playArea));
-
         playingDeck.addAll(Turris.playSet(playArea));
         playingDeck.addAll(Velites.playSet(playArea));
 

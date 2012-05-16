@@ -21,7 +21,8 @@ public class Haruspex extends CardBase {
 
     public final static int OCCURENCES = 2;
 
-    public static CardHolder makeOne(PlayArea playArea){
+    @Override
+    public CardHolder makeOne(PlayArea playArea){
         Card card = new Haruspex(playArea);
         CardHolder cardHolder = new CardHolder(card);
         card.setContainer(cardHolder);

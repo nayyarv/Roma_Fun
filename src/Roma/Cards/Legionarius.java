@@ -21,7 +21,8 @@ public class Legionarius extends CardBase {
 
     public final static int OCCURENCES = 3;
 
-    public static CardHolder makeOne(PlayArea playArea){
+    @Override
+    public CardHolder makeOne(PlayArea playArea){
         Card card = new Legionarius(playArea);
         CardHolder cardHolder = new CardHolder(card);
         card.setContainer(cardHolder);

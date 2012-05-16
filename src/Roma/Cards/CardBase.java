@@ -99,6 +99,7 @@ public abstract class CardBase implements Card {
     @Override
     public abstract boolean activate(Player player, int position);
 
+    public abstract CardHolder makeOne(PlayArea playArea);
 
     public int otherPlayer(int player){
         return ((player==Roma.PLAYER_ONE)? Roma.PLAYER_TWO: Roma.PLAYER_ONE);

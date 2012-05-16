@@ -114,6 +114,7 @@ public class PlayArea {
     }
 
     //TODO: move to playerInterface
+    //TODO: add display last card discarded
     public void printStats() {
         String cardName;
 

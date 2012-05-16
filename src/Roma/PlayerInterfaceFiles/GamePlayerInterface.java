@@ -147,7 +147,7 @@ public class GamePlayerInterface extends PlayerInterface {
 
     }
 
-    //TODO: flesh out function
+    //TODO: merge with player.getCardIndex
     @Override
     public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));

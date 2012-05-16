@@ -8,7 +8,6 @@ import Roma.PlayerInterfaceFiles.PlayerInterface;
 import java.util.ArrayList;
 
 
-//TODO: Refactor Player
 public class Player {
     public final int CANCEL = PlayerInterface.CANCEL;
     private final String name;

@@ -16,9 +16,6 @@ import java.util.Collections;
  *
  */
 
-
-//TODO: create a dice disc class that will handle temporary and passive defense changes
-
 public class DiceDiscs {
     private static final boolean DEBUG = true;
     public static final int BRIBERY_INDEX = 6;
@@ -75,16 +72,6 @@ public class DiceDiscs {
         ArrayList<CardHolder> discList= new ArrayList<CardHolder>();
         Collections.addAll(discList, activeCards[playerID]);
         return discList;
-    }
-
-    //Clears all the dice placed on a disc
-    //TODO: This function is not being used, is it deprecated?
-    public void clearDice() {
-        for(ArrayList<Dice> disc : discs){
-            disc.clear();
-        }
-        moneyDisc.clear();
-        cardDisc.clear();
     }
 
     //This function allows a Card to be placed on a dice Disc

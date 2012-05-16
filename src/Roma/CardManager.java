@@ -126,10 +126,6 @@ public class CardManager {
 
 
     public void discard(ArrayList<CardHolder> cardList) {
-
-        /** TODO - check discard order here
-          * TODO - choose the top card discarded
-          */
         discardPile.addAll(0, cardList);
         if (noMoreCards) {
             playingDeck.addAll(discardPile);

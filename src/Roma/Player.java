@@ -415,8 +415,7 @@ public class Player {
 
         } else if(actionData.getDiscType() == ActionData.CARD){
             diceDiscs.useDrawDisc(playerID, chosenDie);
-            drawCards(chosenDieValue.getValue());
-            chosenDieValue = null;
+            drawCards(chosenDie.getValue(), actionData.getDrawCardIndex());
 
         } else {
             System.err.println("WTF action data error!");
@@ -434,7 +433,7 @@ public class Player {
 
 
 
-    public void drawCards(int value) {
+    public void drawCards(int value, int cardDrawIndex) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();
         CardHolder chosenCard = null;
@@ -443,12 +442,8 @@ public class Player {
             tempHand.add(cardManager.drawACard());
         }
 
-        while(chosenCard == null){
-            chosenCard = chooseCardIndex(tempHand);
-            if(chosenCard == null){
-                System.out.println("You have to choose a card to draw.");
-            }
-        }
+        chosenCard = tempHand.remove(cardDrawIndex);
+        cardManager.discard(tempHand);
 
         hand.add(chosenCard);
     }

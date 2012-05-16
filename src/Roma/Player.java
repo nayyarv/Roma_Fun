@@ -241,21 +241,46 @@ public class Player {
         }
     }
 
-    private void viewHand() {
-        CardHolder chosenCard = null;
-        int chosenPosition = 0;
+    private void viewHand() throws CancelAction{
+        int chosenCardIndex = CANCEL;
+        int chosenPosition = CANCEL;
 
-        chosenCard = chooseCardIndex(hand);
-        if(chosenCard != null){
-            chosenPosition = chooseDiceDisc();
-            if(chosenPosition != CANCEL){
-                if(!layCard(chosenCard, chosenPosition)){
-                    hand.add(chosenCard);
-                }
+        chosenCardIndex = playerInterface.getCardIndex(hand);
+        if(chosenCardIndex == CANCEL) throw new CancelAction();
+        currentAction.setCardIndex(chosenCardIndex);
+
+        chosenPosition = chooseDiceDiscIndex();
+        if(chosenPosition == CANCEL) throw new CancelAction();
+        currentAction.setTargetDisc(chosenPosition);
+    }
+
+    public int chooseDiceDiscIndex() throws CancelAction{
+        final String strPrompt = "Which disc?";
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        final int CANCEL_OPTION = 8;
+        String [] dicePrompt = new String[8];
+
+        for (int i=0; i<6;i++){
+            dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
+        }
+        dicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
+        dicePrompt[7] = "Cancel";
+
+        int option = -1;
+        boolean validChoice = false;
+
+        while(!validChoice){
+            option = playerInterface.readInput(strPrompt, dicePrompt);
+            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
+                validChoice = true;
+            } else if (option == CANCEL_OPTION) {
+                throw new CancelAction();
             } else {
-                hand.add(chosenCard);
+                System.out.println("Please choose a valid action");
             }
         }
+        option--;
+        return option;
     }
 
     private void useMoneyDisc(){
@@ -284,34 +309,6 @@ public class Player {
     }
 
 
-    public int chooseDiceDisc() {
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        final int CANCEL_OPTION = 8;
-        String [] dicePrompt = new String[8];
-
-        for (int i=0; i<6;i++){
-            dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
-        }
-        dicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, 6);
-        dicePrompt[7] = "Cancel";
-
-        int option = -1;
-        boolean validChoice = false;
-
-        while(!validChoice){
-            option = playerInterface.readInput("Which disc?",
-                    dicePrompt);
-            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
-                validChoice = true;
-            } else if (option == CANCEL_OPTION) {
-                option = CANCEL;
-                validChoice = true;
-            } else {
-                System.out.println("Please choose a valid action");
-            }
-        }
-        return option;
-    }
 
     //choose a dice disc
     //return int

@@ -105,6 +105,7 @@ public class Player {
     }
 
     public void cancel() throws CancelAction{
+        currentAction = null;
         throw new CancelAction();
     }
 
@@ -184,7 +185,7 @@ public class Player {
         int chosenDieValue;
 
         chosenDieIndex = chooseDie(freeDice);
-        if(chosenDieIndex == CANCEL) throw new CancelAction();
+        if(chosenDieIndex == CANCEL) cancel();
         chosenDieValue = freeDice.get(chosenDieIndex).getValue();
 
         currentAction.setActionDiceIndex(chosenDieIndex);
@@ -238,7 +239,7 @@ public class Player {
                 currentAction.setDiscType(ActionData.CARD);
                 validChoice = true;
             } else if(option == CANCEL_OPTION){
-                throw new CancelAction();
+                cancel();
             } else {
                 System.out.println("Please choose a valid action");
             }
@@ -250,11 +251,11 @@ public class Player {
         int chosenPosition = CANCEL;
 
         chosenCardIndex = getCardIndex(hand);
-        if(chosenCardIndex == CANCEL) throw new CancelAction();
+        if(chosenCardIndex == CANCEL) cancel();
         currentAction.setCardIndex(chosenCardIndex);
 
         chosenPosition = chooseDiceDiscIndex();
-        if(chosenPosition == CANCEL) throw new CancelAction();
+        if(chosenPosition == CANCEL) cancel();
         currentAction.setTargetDisc(chosenPosition);
     }
 
@@ -293,7 +294,7 @@ public class Player {
                 } else if(action == PRINT_CARDS){
                     playerInterface.printCardList(cardList);
                 } else if(action == CANCEL){
-                    throw new CancelAction();
+                    cancel();
                 } else {
                     System.out.println("Please choose a valid action");
                 }
@@ -323,7 +324,7 @@ public class Player {
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
             } else if (option == CANCEL_OPTION) {
-                throw new CancelAction();
+                cancel();
             } else {
                 System.out.println("Please choose a valid action");
             }

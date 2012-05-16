@@ -65,7 +65,7 @@ public class GameRules {
 
 
                     try {
-                        temp = players[i].getCardIndex(individualHand);
+                        temp = players[i].getCardIndex(individualHand,"");
                         choices.add(individualHand.remove(temp));
                     } catch (CancelAction cancelAction) {
                         System.out.println("You must choose a card: ");
@@ -99,7 +99,7 @@ public class GameRules {
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){
                     try {
-                        chosenCardIndex = activePlayer.getCardIndex(hand);
+                        chosenCardIndex = activePlayer.getCardIndex(hand,"");
                     } catch (CancelAction cancelAction) {
                         System.out.println("You must choose a card");
                     }

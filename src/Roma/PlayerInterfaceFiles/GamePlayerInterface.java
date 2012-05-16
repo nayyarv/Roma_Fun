@@ -89,12 +89,7 @@ public class GamePlayerInterface extends PlayerInterface {
 
     //Keeps reading till valid input is recieved
     public int getIndex(int bound){
-        int read;
-        do{
-            read=getIntegerInput();
-        } while (!checkInBounds(read, bound));
-        read--;
-        return read;
+        return (getIntegerInput(bound)-1);
     }
 
     //Simply returns input
@@ -119,15 +114,8 @@ public class GamePlayerInterface extends PlayerInterface {
             return "Anon"; //Since we have no input
         }
     }
-//    @Override
-//    public void printOut(Object object, boolean newLine){
-//        if (newLine){
-//            System.out.println(object.toString());
-//        } else {
-//            System.out.print(object.toString());
-//        }
-//    }
 
+    @Override
     public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen){
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
@@ -165,7 +153,15 @@ public class GamePlayerInterface extends PlayerInterface {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
 
-        printFilteredList(cardList, type, chosen);
+        int i = 1;
+        for(CardHolder card: cardList){
+            printOut(i+")", false);
+            contains = ArrayContains(i-1, chosen);
+            printFilter(card, type, contains);
+            i++;
+        }
+        printOut(i+") Cancel",true);
+
 
         printOut("Which option: " , false);
         int input;
@@ -210,22 +206,14 @@ public class GamePlayerInterface extends PlayerInterface {
         return correct;
     }
 
-    private void printFilteredList(ArrayList<CardHolder> cardList, String type, int ... chosen){
-        int i = 1;
-
-        for(CardHolder card: cardList){
-            System.out.print(i+")");
-            if(card==null){
-                printOut("#Empty#", true);
-            } else if(card.getType().equalsIgnoreCase(type)&&!ArrayContains(i,chosen)){
-                printOut(card.getName(), true);
-            } else {
-                printOut("###"+card.getName()+"###", true);
-            }
-            i++;
+    private void printFilter(CardHolder card, String type, boolean contains){
+        if(card==null){
+            printOut("#Empty#", true);
+        } else if(card.getType().equalsIgnoreCase(type)&&!contains){
+            printOut(card.getName(), true);
+        } else {
+            printOut("###"+card.getName()+"###", true);
         }
-
-        printOut(i+") Cancel",true);
     }
 
     private boolean ArrayContains(int key, int ... chosen){

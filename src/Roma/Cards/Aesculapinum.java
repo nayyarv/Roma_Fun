@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -51,29 +52,37 @@ public class Aesculapinum extends CardBase {
     }
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
+    public void gatherData(Player player, int position) {
         ArrayList<Integer> activationData = new ArrayList<Integer>();
         PlayerInterface playerInterface = playArea.getPlayerInterface();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex;
 
-        cardIndex = playerInterface.getCardIndexFiltered(discardPile, Card.CHARACTER);
+        if(discardPile.isEmpty()){
+
+        }
+        player.commit();
+
+
+        try {
+            cardIndex = player.getCardIndex(discardPile, Card.CHARACTER);
+        } catch (CancelAction cancelAction) {
+            PlayerInterface.printOut("Must chose a card");
+        }
 
         activationData.add(cardIndex);
-
-        return activationData;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> ActivationData) {
+    public boolean activate(Player player, int position) {
         boolean activated = true;
-        int cardIndex = 0;
+        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        int cardIndex = activationData.remove(0);
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
 
         //retrieve cardIndex from activationData
-        //cardIndex =
         player.addCardToHand(discardPile.get(cardIndex));
         discardPile.remove(cardIndex);
 

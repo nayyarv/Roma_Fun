@@ -27,11 +27,17 @@ public abstract class PlayerInterface {
 
     abstract public String readString();
 
-    abstract public void printOut(Object object, boolean newLine);
-
     abstract public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen);
 
     abstract public void printDiceList(ArrayList<Dice> diceList);
 
     abstract public void printCardList(ArrayList<CardHolder> cardList);
+
+    public static void printOut(Object object, boolean newLine){
+        if (newLine){
+            System.out.println(object.toString());
+        } else {
+            System.out.print(object.toString());
+        }
+    }
 }

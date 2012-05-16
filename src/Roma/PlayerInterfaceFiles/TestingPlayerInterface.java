@@ -30,6 +30,11 @@ public class TestingPlayerInterface extends PlayerInterface {
     }
 
     @Override
+    public int getIndex(int bound) {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public String getPlayerName(int num) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -50,17 +55,12 @@ public class TestingPlayerInterface extends PlayerInterface {
     }
 
     @Override
-    public int getCardIndex(ArrayList<CardHolder> cardList) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public void printDiceList(ArrayList<Dice> diceList) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int... chosen) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public void printCardList(ArrayList<CardHolder> cardList) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

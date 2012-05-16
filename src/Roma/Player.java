@@ -306,7 +306,7 @@ public class Player {
         commit();
     }
 
-    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+    public int getCardIndex(ArrayList<CardHolder> cardList, String type, int ... chosenIndices) throws CancelAction{
         final String strPrompt = "Possible actions:";
         final String strOption1 = "Choose a card";
         final String strOption2 = "Check description";
@@ -325,7 +325,7 @@ public class Player {
         playerInterface.printCardList(cardList);
 
         if(cardList.size() == 0){
-            System.out.println("There are no cards!");
+            playerInterface.printOut("There are no cards!", true);
         } else {
             while(!validChoice){
                 action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);

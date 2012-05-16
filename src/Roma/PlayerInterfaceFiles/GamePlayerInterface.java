@@ -3,6 +3,7 @@ package Roma.PlayerInterfaceFiles;
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 import Roma.Dice;
+import Roma.DiceDiscs;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -118,14 +119,14 @@ public class GamePlayerInterface extends PlayerInterface {
             return "Anon"; //Since we have no input
         }
     }
-    @Override
-    public void printOut(Object object, boolean newLine){
-        if (newLine){
-            System.out.println(object.toString());
-        } else {
-            System.out.print(object.toString());
-        }
-    }
+//    @Override
+//    public void printOut(Object object, boolean newLine){
+//        if (newLine){
+//            System.out.println(object.toString());
+//        } else {
+//            System.out.print(object.toString());
+//        }
+//    }
 
     public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen){
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));

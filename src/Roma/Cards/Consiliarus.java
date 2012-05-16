@@ -60,7 +60,7 @@ public class Consiliarus extends CardBase {
 
         while (!characterCards.isEmpty()){
             playArea.printStats();
-            player.printCardList(characterCards);
+            playerInterface.printCardList(characterCards);
             CardHolder card = player.chooseCardIndex(characterCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled

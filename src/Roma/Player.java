@@ -194,6 +194,23 @@ public class Player {
         useActionDie(chosenDieValue);
     }
 
+    //choose a dice disc
+    //return int
+    public int chooseDie(ArrayList<Dice> diceList){
+        final String strPrompt = "Which die do you want to use?";
+        String[] diceValues = new String[diceList.size() + 1];
+        int diceIndex = -1;
+
+        for(int i = 0; i < diceList.size(); i++){
+            diceValues[i] = diceList.get(i).getValue().toString();
+        }
+        diceValues[diceList.size()] = "Cancel";
+
+        diceIndex = playerInterface.readIndex(strPrompt, diceValues);
+
+        return diceIndex;
+    }
+
     private void useActionDie(int chosenDieValue) throws CancelAction {
         final int ACTIVATE_CARD = 1;
         final int BRIBERY = 2;
@@ -247,12 +264,19 @@ public class Player {
     }
 
     private void viewHand() throws CancelAction{
+        MoneyManager moneyManager = playArea.getMoneyManager();
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
         chosenCardIndex = getCardIndex(hand);
         if(chosenCardIndex == CANCEL) cancel();
         currentAction.setCardIndex(chosenCardIndex);
+
+        if(moneyManager.enoughMoney(playerID, hand.get(chosenCardIndex).getCost())){
+            playerInterface.printOut("Laying card...", true);
+        } else {
+            cancel();
+        }
 
         chosenPosition = chooseDiceDiscIndex();
         if(chosenPosition == CANCEL) cancel();
@@ -313,8 +337,8 @@ public class Player {
         for (int i=0; i<6;i++){
             dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
         }
-        dicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
-        dicePrompt[7] = "Cancel";
+        dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc" + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
+        dicePrompt[CANCEL_OPTION - 1] = "Cancel";
 
         int option = -1;
         boolean validChoice = false;
@@ -331,6 +355,10 @@ public class Player {
         }
         option--;
         return option;
+    }
+
+    public void performActions(ActionData actionData){
+
     }
 
     private void useMoneyDisc(){
@@ -359,24 +387,6 @@ public class Player {
     }
 
 
-
-    //choose a dice disc
-    //return int
-    public int chooseDie(ArrayList<Dice> diceList){
-        final String strPrompt = "Which die do you want to use?";
-        String[] diceValues = new String[diceList.size() + 1];
-        int diceIndex = -1;
-        boolean validChoice = false;
-
-        for(int i = 0; i < diceList.size(); i++){
-            diceValues[i] = diceList.get(i).getValue().toString();
-        }
-        diceValues[diceList.size()] = "Cancel";
-
-        diceIndex = playerInterface.readIndex(strPrompt, diceValues);
-
-        return diceIndex;
-    }
 
     //input value
     //

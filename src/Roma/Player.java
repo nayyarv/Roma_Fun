@@ -179,7 +179,7 @@ public class Player {
         int chosenDieIndex;
         int chosenDieValue;
 
-        chosenDieIndex = chooseDie(freeDice);
+        chosenDieIndex = getDieIndex(freeDice);
         if(chosenDieIndex == CANCEL) cancel();
         chosenDieValue = freeDice.get(chosenDieIndex).getValue();
 
@@ -191,7 +191,7 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public int chooseDie(ArrayList<Dice> diceList){
+    public int getDieIndex(ArrayList<Dice> diceList){
         final String strPrompt = "Which die do you want to use?";
         String[] diceValues = new String[diceList.size() + 1];
         int diceIndex = -1;
@@ -288,7 +288,7 @@ public class Player {
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
-        chosenCardIndex = getCardIndex(hand,"");
+        chosenCardIndex = getCardIndex(hand, "");
         if(chosenCardIndex == CANCEL) cancel();
         currentAction.setCardIndex(chosenCardIndex);
 
@@ -298,13 +298,14 @@ public class Player {
             cancel();
         }
 
-        chosenPosition = chooseDiceDiscIndex();
+        chosenPosition = getDiceDiscIndex("");
         if(chosenPosition == CANCEL) cancel();
         currentAction.setTargetDisc(chosenPosition);
 
         commit();
     }
 
+    //TODO: refactor this to include a filter
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int ... chosenIndices) throws CancelAction{
         final String strPrompt = "Possible actions:";
         final String strOption1 = "Choose a card";
@@ -350,7 +351,8 @@ public class Player {
         return choice;
     }
 
-    public int chooseDiceDiscIndex() throws CancelAction{
+    //TODO: refactor this to include a filter
+    public int getDiceDiscIndex(String type, int... chosenIndices) throws CancelAction{
         final String strPrompt = "Which disc?";
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         final int CANCEL_OPTION = 8;

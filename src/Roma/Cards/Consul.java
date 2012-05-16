@@ -73,7 +73,7 @@ public class Consul extends CardBase {
         Dice chosenDice = null;
 
         if(freeDice.size() != 0){
-            chosenDice = player.chooseDie(freeDice);
+            chosenDice = player.getDieIndex(freeDice);
             if(chosenDice == null){
                 activated = false;
             } else {

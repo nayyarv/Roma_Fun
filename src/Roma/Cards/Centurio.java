@@ -73,7 +73,7 @@ public class Centurio extends CardBase {
             battleVictory = battleManager.battle(targetPlayer, position);
             if(!battleVictory){
                 if(freeDice.size() != 0){
-                    chosenDie = player.chooseDie(freeDice);
+                    chosenDie = player.getDieIndex(freeDice);
                     if(chosenDie != null){
                         diceDiscs.addDiceToDisc(position, chosenDie);
                         if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){

@@ -107,7 +107,7 @@ public class GameRules {
                 targetDisc = CANCEL; // cancel value
                 while(targetDisc == CANCEL){
                     try {
-                        targetDisc = activePlayer.chooseDiceDiscIndex();
+                        targetDisc = activePlayer.getDiceDiscIndex("");
                     } catch (CancelAction cancelAction) {
                         System.out.println("You must choose a disc");
                     }

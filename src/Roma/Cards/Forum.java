@@ -71,14 +71,14 @@ public class Forum extends CardBase {
             System.out.println("Not enough free action dice!");
         } else {
             System.out.println("Please choose a second die to use");
-            chosenDie = player.chooseDie(freeDice);
+            chosenDie = player.getDieIndex(freeDice);
             if(chosenDie != null){
                 diceDiscs.addDiceToDisc(position, chosenDie);
                 // check for adjacent Templum
                 if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
                     System.out.println("Would you like to use a 3rd die?");
                     chosenDie = null;
-                    chosenDie = player.chooseDie(freeDice);
+                    chosenDie = player.getDieIndex(freeDice);
                     if(chosenDie != null){
                         diceDiscs.addDiceToDisc(position, chosenDie);
                     }

@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -58,24 +59,30 @@ public class Architectus extends CardBase {
     private static int DEFENSE_SCALE = 1;
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
+    public void gatherData(Player player, int position) throws CancelAction{
         ArrayList<Integer> activationData = new ArrayList<Integer>();
         ArrayList<CardHolder> hand = player.getHand();
         int[] handIndices = new int[hand.size()];
         int[] discIndices = new int[hand.size()];
         int handIndex = 0;
         int discIndex = 0;
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
+
+        player.commit();
 
         //get player input for which cards to lay
         //collect player input
         int i = 0;
-        while(handIndex != PlayerInterface.CANCEL || discIndex != PlayerInterface.CANCEL){
-            handIndex = playerInterface.getCardIndexFiltered(hand, Card.BUILDING);
-            handIndices[i] = handIndex;
-            discIndex = player.getDiceDiscIndex("");
-            discIndices[i] = discIndex;
-            i++;
+        while(handIndex != CANCEL || discIndex != CANCEL){
+            try {
+                handIndex = player.getCardIndex(hand, Card.BUILDING, handIndices);
+                handIndices[i] = handIndex;
+                discIndex = player.getDiceDiscIndex("");
+                discIndices[i] = discIndex;
+                i++;
+            } catch (CancelAction cancelAction) {
+                handIndex = CANCEL;
+                discIndex = CANCEL;
+            }
         }
 
         while(i > 0){
@@ -84,16 +91,20 @@ public class Architectus extends CardBase {
             activationData.add(discIndices[i]);
         }
 
-        return activationData;
+        player.getCurrentAction().setActivationData(activationData);
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        boolean activated = true;
+    public void activate(Player player, int position) {
         CardHolder card;
         ArrayList<CardHolder> hand = player.getHand();
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper = null;
+        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        ArrayList<Integer> handIndices = new ArrayList<Integer>();
+        ArrayList<Integer> discIndices = new ArrayList<Integer>();
+        ArrayList<CardHolder> cards = new ArrayList<CardHolder>();
+        int discIndex;
 
         //wrap building cards in hand with costScale = 0 modifier
         for(int i = 0; i < hand.size(); i++){
@@ -106,9 +117,25 @@ public class Architectus extends CardBase {
             }
         }
 
-        //TODO: implement lay cards
+        //retrieve data from activationData
+        while(!activationData.isEmpty()){
+            handIndices.add(activationData.remove(0));
+            discIndices.add(activationData.remove(0));
+        }
 
-        return activated;
+        //get cards from hand without removing to preserve indices
+        for(int i : handIndices){
+            cards.add(hand.get(i));
+        }
+
+        //remove cards chosen from hand
+        hand.removeAll(cards);
+
+        for(int i = 0; i < cards.size(); i++){
+            card = cards.get(i);
+            discIndex = discIndices.get(i);
+            player.layCard(card, discIndex);
+        }
     }
 
     @Override

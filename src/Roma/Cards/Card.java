@@ -26,7 +26,7 @@ public interface Card {
     public boolean isWrapper();
     public String toString();
     public abstract void gatherData(Player player, int position) throws CancelAction;
-    public abstract boolean activate(Player player, int position);
+    public abstract void activate(Player player, int position);
     public Card getContents();
     public void setContents(Card card);
     public Card getContainer();

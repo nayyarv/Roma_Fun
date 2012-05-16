@@ -94,11 +94,11 @@ public class CardHolder implements Card{
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        contents.gatherData(player, position);  //To change body of implemented methods use File | Settings | File Templates.
+        contents.gatherData(player, position);
     }
 
     @Override
-    public boolean activate(Player player, int position) {
-        return contents.activate(player, position);  //To change body of implemented methods use File | Settings | File Templates.
+    public void activate(Player player, int position) {
+        contents.activate(player, position);
     }
 }

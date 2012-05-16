@@ -3,10 +3,12 @@ package Roma.Cards;
 import Roma.*;
 import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
 public abstract class CardBase implements Card {
+    public final int CANCEL = PlayerInterface.CANCEL;
     private final boolean activateEnabled;
     private final String name;
     private final String type;
@@ -97,7 +99,7 @@ public abstract class CardBase implements Card {
     @Override
     public abstract void gatherData(Player player, int position) throws CancelAction;
     @Override
-    public abstract boolean activate(Player player, int position);
+    public abstract void activate(Player player, int position);
 
     public abstract CardHolder makeOne(PlayArea playArea);
 

@@ -306,7 +306,7 @@ public class Player {
     }
 
     //TODO: refactor this to include a filter
-    public int getCardIndex(ArrayList<CardHolder> cardList, String type, int ... chosenIndices) throws CancelAction{
+    public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
         final String strPrompt = "Possible actions:";
         final String strOption1 = "Choose a card";
         final String strOption2 = "Check description";
@@ -382,6 +382,7 @@ public class Player {
     }
 
     public void performActions(ActionData actionData){
+        currentAction = actionData;
         if(actionData.isUseDice()){
             useDice(actionData);
         } else if(actionData.isLayCard()){

@@ -53,41 +53,42 @@ public class Aesculapinum extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) {
+    public void gatherData(Player player, int position) throws CancelAction{
         ArrayList<Integer> activationData = new ArrayList<Integer>();
         PlayerInterface playerInterface = playArea.getPlayerInterface();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
-        int cardIndex;
+        int cardIndex = CANCEL;
 
         if(player.countType(discardPile, Card.CHARACTER) == 0){
-
+            PlayerInterface.printOut("No character cards in Discard pile", true);
+            player.cancel();
         }
         player.commit();
 
-
-        try {
-            cardIndex = player.getCardIndex(discardPile, Card.CHARACTER);
-        } catch (CancelAction cancelAction) {
-            PlayerInterface.printOut("Must chose a card", true);
+        while(cardIndex == CANCEL){
+            try {
+                cardIndex = player.getCardIndex(discardPile, Card.CHARACTER);
+            } catch (CancelAction cancelAction) {
+                PlayerInterface.printOut("Must chose a card", true);
+            }
         }
-
         activationData.add(cardIndex);
+        player.getCurrentAction().setActivationData(activationData);
     }
 
     @Override
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
+    public void activate(Player player, int position) {
         ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
         int cardIndex = activationData.remove(0);
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
 
         //retrieve cardIndex from activationData
-        player.addCardToHand(discardPile.get(cardIndex));
-        discardPile.remove(cardIndex);
-
-        return activated;
+        if(cardIndex != CANCEL){
+            player.addCardToHand(discardPile.get(cardIndex));
+            discardPile.remove(cardIndex);
+        }
     }
 
     @Override

@@ -132,8 +132,8 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public boolean activate(Player player, int position) {
-        return contents.activate(player, position);
+    public void activate(Player player, int position) {
+        contents.activate(player, position);
     }
 
     public void deleteThisWrapper(){

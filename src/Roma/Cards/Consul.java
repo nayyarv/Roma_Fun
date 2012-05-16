@@ -48,7 +48,7 @@ public class Consul extends CardBase {
         return set;
     }
 
-    private Consul(PlayArea playArea) {
+    Consul(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

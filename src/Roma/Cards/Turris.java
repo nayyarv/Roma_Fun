@@ -45,7 +45,7 @@ public class Turris extends CardBase {
     }
 
 
-    private Turris(PlayArea playArea) {
+    Turris(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

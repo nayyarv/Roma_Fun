@@ -45,7 +45,7 @@ public class Nero extends CardBase {
         return set;
     }
 
-    private Nero(PlayArea playArea) {
+    Nero(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

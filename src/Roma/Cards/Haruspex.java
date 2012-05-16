@@ -45,7 +45,7 @@ public class Haruspex extends CardBase {
     }
 
 
-    private Haruspex(PlayArea playArea) {
+    Haruspex(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

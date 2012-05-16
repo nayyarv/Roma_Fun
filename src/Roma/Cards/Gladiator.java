@@ -49,7 +49,7 @@ public class Gladiator extends CardBase {
     }
 
 
-    private Gladiator(PlayArea playArea) {
+    Gladiator(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

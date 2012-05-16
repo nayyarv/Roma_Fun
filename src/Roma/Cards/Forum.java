@@ -45,7 +45,7 @@ public class Forum extends CardBase {
         return set;
     }
 
-    private Forum(PlayArea playArea) {
+    Forum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

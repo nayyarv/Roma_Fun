@@ -48,7 +48,7 @@ public class Centurio extends CardBase {
     }
 
 
-    private Centurio(PlayArea playArea) {
+    Centurio(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

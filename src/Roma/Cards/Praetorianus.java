@@ -47,7 +47,7 @@ public class Praetorianus extends CardBase {
     }
 
 
-    private Praetorianus(PlayArea playArea) {
+    Praetorianus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

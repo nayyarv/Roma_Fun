@@ -47,7 +47,7 @@ public class Machina extends CardBase {
         return set;
     }
 
-    private Machina(PlayArea playArea) {
+    Machina(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

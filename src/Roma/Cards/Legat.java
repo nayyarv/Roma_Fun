@@ -46,7 +46,7 @@ public class Legat extends CardBase {
     }
 
 
-    private Legat(PlayArea playArea) {
+    Legat(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

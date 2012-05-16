@@ -45,7 +45,7 @@ public class Mercatus extends CardBase {
         return set;
     }
 
-    private Mercatus(PlayArea playArea) {
+    Mercatus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

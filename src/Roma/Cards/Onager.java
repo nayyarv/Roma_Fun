@@ -47,7 +47,7 @@ public class Onager extends CardBase {
     }
 
 
-    private Onager(PlayArea playArea) {
+    Onager(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

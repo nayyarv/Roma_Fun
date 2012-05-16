@@ -45,7 +45,7 @@ public class Sicarius extends CardBase {
         return set;
     }
 
-    private Sicarius(PlayArea playArea) {
+    Sicarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

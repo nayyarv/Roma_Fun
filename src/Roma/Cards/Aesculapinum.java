@@ -46,7 +46,7 @@ public class Aesculapinum extends CardBase {
         return set;
     }
 
-    private Aesculapinum(PlayArea playArea) {
+    Aesculapinum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

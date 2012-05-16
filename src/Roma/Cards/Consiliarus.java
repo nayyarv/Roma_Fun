@@ -44,7 +44,7 @@ public class Consiliarus extends CardBase {
         return set;
     }
 
-    private Consiliarus(PlayArea playArea) {
+    Consiliarus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

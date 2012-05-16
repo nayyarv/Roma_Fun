@@ -44,7 +44,7 @@ public class TribunisPlebis extends CardBase {
         return set;
     }
 
-    private TribunisPlebis(PlayArea playArea) {
+    TribunisPlebis(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

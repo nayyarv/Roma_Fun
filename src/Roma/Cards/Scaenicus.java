@@ -46,7 +46,7 @@ public class Scaenicus extends CardBase {
         return set;
     }
 
-    private Scaenicus(PlayArea playArea) {
+    Scaenicus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

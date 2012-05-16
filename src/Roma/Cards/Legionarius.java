@@ -44,7 +44,7 @@ public class Legionarius extends CardBase {
         return set;
     }
 
-    private Legionarius(PlayArea playArea) {
+    Legionarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

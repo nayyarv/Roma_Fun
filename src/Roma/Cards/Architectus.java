@@ -46,7 +46,7 @@ public class Architectus extends CardBase {
     }
 
 
-    private Architectus(PlayArea playArea) {
+    Architectus(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

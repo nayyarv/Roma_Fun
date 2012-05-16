@@ -45,7 +45,7 @@ public class Essedum extends CardBase {
     }
 
 
-    private Essedum(PlayArea playArea) {
+    Essedum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

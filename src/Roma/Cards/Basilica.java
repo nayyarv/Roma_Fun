@@ -46,7 +46,7 @@ public class Basilica extends CardBase {
     }
 
 
-    private Basilica(PlayArea playArea) {
+    Basilica(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }

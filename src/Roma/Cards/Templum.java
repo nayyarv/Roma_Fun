@@ -48,7 +48,7 @@ public class Templum extends CardBase {
         return set;
     }
 
-    private Templum(PlayArea playArea) {
+    Templum(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

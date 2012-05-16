@@ -1,6 +1,8 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.History.ActionData;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -56,26 +58,21 @@ public abstract class CardBase implements Card {
         return name;
     }
 
-
     public String getType() {
         return type;
     }
-
 
     public String getDescription() {
         return description;
     }
 
-
     public int getCost() {
         return cost;
     }
 
-
     public int getDefense() {
         return defence;
     }
-
 
     public PlayArea getPlayArea() {
         return playArea;
@@ -97,7 +94,9 @@ public abstract class CardBase implements Card {
         return activateEnabled;
     }
 
-    //public abstract ArrayList<Integer> gatherData();
+    @Override
+    public abstract void gatherData(Player player, int position) throws CancelAction;
+    @Override
     public abstract boolean activate(Player player, int position);
 
 

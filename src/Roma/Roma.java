@@ -1,7 +1,6 @@
 package Roma;
 
-import Roma.PlayerInterfaceFiles.GamePlayerInterface;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.*;
 
 import java.io.*;
 import java.awt.*;
@@ -18,7 +17,7 @@ public class Roma {
     public final static int NUM_INIT_CARDS = 5;
 
     //Object pointers
-    PlayerInterface2 playerInterface = new GamePlayerInterface();
+    PlayerInterface playerInterface = new GamePlayerInterface();
 
     private PlayArea game;
 

@@ -58,7 +58,7 @@ public class GameRules {
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
                 while(temp == null){
-                    temp = players[i].chooseCard(individualHand);
+                    temp = players[i].chooseCardIndex(individualHand);
                     if (temp == null) System.out.println("You must choose a card: ");
                 }
                 choices.add(temp);
@@ -88,14 +88,14 @@ public class GameRules {
                 System.out.println(activePlayer.getName() + ", please lay all your cards");
                 chosenCard = null;
                 while(chosenCard == null){
-                    chosenCard = activePlayer.chooseCard(hand);
+                    chosenCard = activePlayer.chooseCardIndex(hand);
                     if(chosenCard == null){
                         System.out.println("You must choose a card");
                     }
                 }
                 targetDisc = -1; // cancel value
                 while(targetDisc == -1){
-                    targetDisc = activePlayer.chooseDiceDisc();
+                    targetDisc = activePlayer.chooseDiceDiscIndex();
                     if(targetDisc == -1){
                         System.out.println("You must choose a disc");
                     }

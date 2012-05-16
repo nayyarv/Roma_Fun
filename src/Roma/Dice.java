@@ -18,7 +18,7 @@ public class Dice {
 
     Random generator = new Random();
 
-    private int value = 0;
+    private Integer value = 0;
 
     public Dice(int playerID) {
         this.playerID = playerID;
@@ -30,7 +30,7 @@ public class Dice {
         value++;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 

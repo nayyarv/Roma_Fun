@@ -1,6 +1,10 @@
 package Roma.Cards;
 
+import Roma.History.ActionData;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.CancelAction;
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,6 +46,11 @@ public class Wrapper implements Card {
 
     public void setContainer(Card holder){
         container = holder;
+    }
+
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void setDefenseShift(int defenseShift) {
@@ -117,7 +126,13 @@ public class Wrapper implements Card {
                 "\nCost: " + getCost() + "; Defence: " + getDefense();
     }
 
-    public boolean activate(Player player, int position){
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        contents.gatherData(player, position);
+    }
+
+    @Override
+    public boolean activate(Player player, int position) {
         return contents.activate(player, position);
     }
 

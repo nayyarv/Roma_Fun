@@ -1,23 +1,25 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.History.ActionData;
+import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
 
 //TODO: Refactor Player
 public class Player {
-    private final static int CANCEL = -1;
+    public final int CANCEL = PlayerInterface.CANCEL;
     private final String name;
+    private int playerID;
 
     private PlayArea playArea;
     private ArrayList<CardHolder> hand = new ArrayList<CardHolder>();
     private ArrayList<Dice> freeDice;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
+    private ActionData currentAction;
 
-    private int playerID;
-    private boolean autoRoll;
 
     //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
@@ -42,267 +44,68 @@ public class Player {
         this.name = "dummyPlayer" + playerID;
     }
 
+
+    //Simple Getters
+
     public String getName() {
         return name;
     }
 
-    //Main method that allows players to perform an action
-    public boolean takeAction() {
-        //internal #defines
-        final int VIEW_ACTION_DIE = 1;
-        final int VIEW_HAND = 2;
-        final int SHOW_GAME_STATS = 3;
-        final int END_TURN = 4;
-
-        int option = 0;
-        Dice chosenDie = null;
-        boolean endTurn = false;
-
-        //choose an action
-        option = playerInterface.readInput("Select Option:",
-                        "View action dice",
-                        "View Hand",
-                        "Show game stats",
-                        "End turn");
-
-        if(option == VIEW_ACTION_DIE){
-            chosenDie = chooseDie(freeDice);
-            if(chosenDie != null){
-                chosenDie = useActionDie(chosenDie);
-                if(chosenDie != null){
-                    freeDice.add(chosenDie);
-                }
-            }
-        } else if(option == VIEW_HAND){
-            viewHand();
-        } else if(option == SHOW_GAME_STATS){
-            playArea.printStats();
-        } else if(option == END_TURN){
-            endTurn = true;
-        } else {
-            playerInterface.printOut("Please choose a valid option.", true);
-        }
-
-        return endTurn;
+    public int getPlayerID() {
+        return playerID;
     }
 
-    private void viewHand() {
-        CardHolder chosenCard = null;
-        int chosenPosition = 0;
-
-        chosenCard = chooseCard(hand);
-        if(chosenCard != null){
-            chosenPosition = chooseDiceDisc();
-            if(chosenPosition != CANCEL){
-                layCard(chosenCard, chosenPosition);
-            }
-        } else {
-            hand.add(chosenCard);
-        }
+    public ArrayList<CardHolder> getHand() {
+        return hand;
     }
 
-    public void layCard(CardHolder chosenCard, int chosenPosition){
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        MoneyManager moneyManager = playArea.getMoneyManager();
-
-        moneyManager.loseMoney(playerID, chosenCard.getCost());
-        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
-    }
-
-
-    public int chooseDiceDisc() {
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        final int CANCEL_OPTION = 8;
-        String [] DicePrompt = new String[8];
-
-        for (int i=0; i<6;i++){
-            DicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
-        }
-        DicePrompt[6] = "Bribery Disc" + diceDiscs.getCardName(playerID, 6);
-        DicePrompt[7] = "Cancel";
-
-        int option = -1;
-        boolean validChoice = false;
-
-        while(!validChoice){
-            option = playerInterface.readInput("Which disc?",
-                    DicePrompt);
-            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
-                validChoice = true;
-            } else if (option == CANCEL_OPTION) {
-                option = CANCEL;
-                validChoice = true;
-            } else {
-                System.out.println("Please choose a valid action");
-            }
-        }
-        return option;
-    }
-
-    private Dice useActionDie(Dice chosenDie) {
-        final int ACTIVATE_CARD = 1;
-        final int BRIBERY = 2;
-        final int MONEY = 3;
-        final int DRAW_CARD = 4;
-        final int CANCEL_OPTION = 5;
-        final String strPrompt = "Use on:";
-        final String strOption1 = "Activate card";
-        final String strOption2 = "Bribery Disc";
-        final String strOption3 = "Money Disc";
-        final String strOption4 = "Card Disc";
-        final String strOption5 = "Cancel";
-
-        int option = CANCEL;
-        boolean validChoice = false;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-
-        while(!validChoice){
-            option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
-            if(option == ACTIVATE_CARD){
-                if(diceDiscs.activateCard(this, chosenDie.getValue(), chosenDie)){
-                    chosenDie = null;
-                    validChoice = true;
-                } else {
-                    validChoice = false;
-                }
-            } else if(option == BRIBERY){
-                if(diceDiscs.useBriberyDisc(this, chosenDie)){
-                    chosenDie = null;
-                    validChoice = true;
-                } else {
-                    validChoice = false;
-                }
-            } else if(option == MONEY){
-                diceDiscs.useMoneyDisc(playerID, chosenDie);
-                chosenDie = null;
-                validChoice = true;
-            } else if(option == DRAW_CARD){
-                diceDiscs.useDrawDisc(playerID, chosenDie);
-                drawCards(chosenDie.getValue());
-                chosenDie = null;
-                validChoice = true;
-            } else if(option == CANCEL_OPTION){
-                validChoice = true;
-            } else {
-                System.out.println("Please choose a valid action");
-            }
-        }
-
-        return chosenDie;
-    }
-
-    private void printDiceList(ArrayList<Dice> diceList) {
-        System.out.println("Dice:");
-        int i = 0;
-        for(Dice dice : diceList){
-            i++;
-            System.out.println(i + ") " + dice.getValue());
-        }
-    }
-
-    public void printHand(){
-        printCardList(hand);
-    }
-
-    public void printCardList(ArrayList<CardHolder> cardList){
-        int i = 1;
-        System.out.println("-------------------------------------");
-        for(CardHolder card : cardList){
-            System.out.println(i + ") " + card.getName());
-            i++;
-        }
-    }
-
-    //choose from list
-    //input: ArrayList (of dice or of cards)
-    //return int
-    public CardHolder chooseCard(ArrayList<CardHolder> cardList){
-        final String strPrompt = "Possible actions:";
-        final String strOption1 = "Choose a card";
-        final String strOption2 = "Check description";
-        final String strOption3 = "Print card list";
-        final String strOption4 = "Cancel/End selection";
-
-        final int
-                CHOOSE_CARDS =1,
-                CHECK_DESC = 2,
-                PRINT_CARDS =3;
-
-        CardHolder choice = null;
-        int action = 0;
-        boolean validChoice = false;
-
-        printCardList(cardList);
-
-        if(cardList.size() == 0){
-            System.out.println("There are no cards!");
-        } else {
-            while(!validChoice){
-                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
-
-                if(action == CHOOSE_CARDS){
-                    System.out.print("Card number: ");
-                    int cardChoice = playerInterface.getIntegerInput(cardList.size());
-                    choice = cardList.remove(cardChoice - 1);
-                    validChoice = true;
-                } else if(action == CHECK_DESC){
-                    System.out.print("Check which card number: ");
-                    action = playerInterface.getIntegerInput(cardList.size());
-                    System.out.println(cardList.get(action - 1).toString());
-                } else if(action == PRINT_CARDS){
-                    printCardList(cardList);
-                } else if(action == CANCEL){
-                    choice = null;
-                    validChoice = true;
-                } else {
-                    System.out.println("Please choose a valid action");
-                }
-            }
-        }
-
-        return choice;
-    }
-
-    //choose a dice disc
-    //return int
-    public Dice chooseDie(ArrayList<Dice> diceList){
-        Dice choice = null;
-        int number = -1;
-        boolean validChoice = false;
-
-        while(!validChoice){
-            System.out.println("Which die do you want to use?");
-            int i = 0;
-            for(Dice die : diceList){
-                i++;
-                System.out.println(i + ") " + die.getValue());
-            }
-            i++;
-            System.out.println(i + ") Cancel");
-            number = playerInterface.getIntegerInput(diceList.size());
-            if(number < 1 || number > diceList.size() + 1){
-                System.out.println("Please choose a valid die");
-            } else {
-                validChoice = true;
-                if(number <= diceList.size()){
-                    choice = diceList.remove(number - 1);
-                }
-            }
-        }
-
-        return choice;
+    public PlayerInterface getPlayerInterface() {
+        return playerInterface;
     }
 
     public ArrayList<Dice> getFreeDice() {
         return freeDice;
     }
 
-    //input value
-    //
+    public ActionData getCurrentAction() {
+        return currentAction;
+    }
 
-    //Or maybe just have a function that requests a number from the player?
-    //With "autoResponse" values when in testing mode?
 
+    //small simple functions
+
+    public void addCardToHand(CardHolder c){
+        if(c!=null) hand.add(c);
+    }
+
+    public void addCardListToHand(ArrayList<CardHolder> cardList){
+        hand.addAll(cardList);
+    }
+
+    public int handSize() {
+        return hand.size();
+    }
+
+    public void commit() throws CancelAction{
+        final String strPrompt = "Commit to this action?";
+        final String strOption1 = "Yes";
+        final String strOption2 = "No";
+        int option;
+
+        option = playerInterface.readInput(strPrompt, strOption1, strOption2);
+
+        if(option == 1){
+            currentAction.setCommit(true);
+        } else if(option == 2){
+            cancel();
+        }
+    }
+
+    public void cancel() throws CancelAction{
+        throw new CancelAction();
+    }
+
+    //first action of turn
     public void rollActionDice() {
         final int YES = 1;
         final int NO = 2;
@@ -312,7 +115,7 @@ public class Player {
         int option = CANCEL;
 
         freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
-        printDiceList(freeDice);
+        playerInterface.printDiceList(freeDice);
 
         if(playArea.getDiceHolder().checkTriple(playerID)){
             while(!validChoice){
@@ -335,23 +138,312 @@ public class Player {
         }
     }
 
-    public void drawCards(int value) {
+    //Main method that allows players to perform an action
+    public boolean planningPhase(ActionData actionData) throws CancelAction{
+        //internal #defines
+        final String strPrompt = "Select Option:";
+        final String strOption1 = "View action dice";
+        final String strOption2 = "View Hand";
+        final String strOption3 = "Show game stats";
+        final String strOption4 = "End turn";
+        final int VIEW_ACTION_DIE = 1;
+        final int VIEW_HAND = 2;
+        final int SHOW_GAME_STATS = 3;
+        final int END_TURN = 4;
+
+        int option = 0;
+        boolean endTurn = false;
+
+        currentAction = actionData;
+
+        //choose an action
+        option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
+
+        if(option == VIEW_ACTION_DIE){
+            currentAction.setUseDice(true);
+            viewActionDice();
+        } else if(option == VIEW_HAND){
+            currentAction.setLayCard(true);
+            viewHand();
+        } else if(option == SHOW_GAME_STATS){
+            playArea.printStats();
+        } else if(option == END_TURN){
+            endTurn = true;
+        } else {
+            playerInterface.printOut("Please choose a valid option.", true);
+        }
+
+        return endTurn;
+    }
+
+    private void viewActionDice() throws CancelAction {
+        int chosenDieIndex;
+        int chosenDieValue;
+
+        chosenDieIndex = chooseDie(freeDice);
+        if(chosenDieIndex == CANCEL) cancel();
+        chosenDieValue = freeDice.get(chosenDieIndex).getValue();
+
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(chosenDieValue);
+
+        useActionDie(chosenDieValue);
+    }
+
+    //choose a dice disc
+    //return int
+    public int chooseDie(ArrayList<Dice> diceList){
+        final String strPrompt = "Which die do you want to use?";
+        String[] diceValues = new String[diceList.size() + 1];
+        int diceIndex = -1;
+
+        for(int i = 0; i < diceList.size(); i++){
+            diceValues[i] = diceList.get(i).getValue().toString();
+        }
+        diceValues[diceList.size()] = "Cancel";
+
+        diceIndex = playerInterface.readIndex(strPrompt, diceValues);
+
+        return diceIndex;
+    }
+
+    private void useActionDie(int chosenDieValue) throws CancelAction {
+        final int ACTIVATE_CARD = 1;
+        final int BRIBERY = 2;
+        final int MONEY = 3;
+        final int DRAW_CARD = 4;
+        final int CANCEL_OPTION = 5;
+        final String strPrompt = "Use on:";
+        final String strOption1 = "Activate card";
+        final String strOption2 = "Bribery Disc";
+        final String strOption3 = "Money Disc";
+        final String strOption4 = "Card Disc";
+        final String strOption5 = "Cancel";
+
+        int option = CANCEL;
+        boolean validChoice = false;
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int position = chosenDieValue - 1;
+
+        while(!validChoice){
+            option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
+            if(option == ACTIVATE_CARD){
+                if(diceDiscs.gatherData(this, position)){
+                    currentAction.setPosition(position);
+                    currentAction.setDiscType(ActionData.DICE);
+                    currentAction.setCardName(diceDiscs.getCardName(playerID, position));
+                    validChoice = true;
+                } else {
+                    validChoice = false;
+                }
+            } else if(option == BRIBERY){
+                if(diceDiscs.planBriberyDisc(this, chosenDieValue)){
+                    position = DiceDiscs.BRIBERY_INDEX;
+                    currentAction.setPosition(position);
+                    currentAction.setDiscType(ActionData.BRIBERY);
+                    currentAction.setCardName(diceDiscs.getCardName(playerID, position));
+                    validChoice = true;
+                } else {
+                    validChoice = false;
+                }
+            } else if(option == MONEY){
+                commit();
+                currentAction.setDiscType(ActionData.MONEY);
+                validChoice = true;
+            } else if(option == DRAW_CARD){
+                commit();
+                currentAction.setDiscType(ActionData.CARD);
+                currentAction.setDrawCardIndex(drawCardIndex(chosenDieValue));
+                validChoice = true;
+            } else if(option == CANCEL_OPTION){
+                cancel();
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+    }
+
+    private int drawCardIndex(int value) {
+        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
+        CardManager cardManager = playArea.getCardManager();
+        int chosenCardIndex = CANCEL;
+        boolean validChoice = false;
+
+        playerInterface.printOut("Drawing " + value + " cards...", true);
+
+        tempHand.addAll(cardManager.viewTopCards(value));
+        while(!validChoice){
+            try {
+                chosenCardIndex = getCardIndex(tempHand);
+                validChoice = true;
+            } catch (CancelAction cancelAction) {
+                playerInterface.printOut("Have to choose a card", true);
+            }
+        }
+
+        return chosenCardIndex;
+    }
+
+    private void viewHand() throws CancelAction{
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        int chosenCardIndex = CANCEL;
+        int chosenPosition = CANCEL;
+
+        chosenCardIndex = getCardIndex(hand);
+        if(chosenCardIndex == CANCEL) cancel();
+        currentAction.setCardIndex(chosenCardIndex);
+
+        if(moneyManager.enoughMoney(playerID, hand.get(chosenCardIndex).getCost())){
+            playerInterface.printOut("Laying card...", true);
+        } else {
+            cancel();
+        }
+
+        chosenPosition = chooseDiceDiscIndex();
+        if(chosenPosition == CANCEL) cancel();
+        currentAction.setTargetDisc(chosenPosition);
+
+        commit();
+    }
+
+    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+        final String strPrompt = "Possible actions:";
+        final String strOption1 = "Choose a card";
+        final String strOption2 = "Check description";
+        final String strOption3 = "Print card list";
+        final String strOption4 = "Cancel/End selection";
+
+        final int
+                CHOOSE_CARDS = 1,
+                CHECK_DESC = 2,
+                PRINT_CARDS = 3;
+
+        int choice = CANCEL;
+        int action = 0;
+        boolean validChoice = false;
+
+        playerInterface.printCardList(cardList);
+
+        if(cardList.size() == 0){
+            System.out.println("There are no cards!");
+        } else {
+            while(!validChoice){
+                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
+
+                if(action == CHOOSE_CARDS){
+                    System.out.print("Card number: ");
+                    choice = playerInterface.getIndex(cardList.size());
+                    validChoice = true;
+                } else if(action == CHECK_DESC){
+                    System.out.print("Check which card number: ");
+                    action = playerInterface.getIndex(cardList.size());
+                    System.out.println(cardList.get(action).toString());
+                } else if(action == PRINT_CARDS){
+                    playerInterface.printCardList(cardList);
+                } else if(action == CANCEL){
+                    cancel();
+                } else {
+                    System.out.println("Please choose a valid action");
+                }
+            }
+        }
+
+        return choice;
+    }
+
+    public int chooseDiceDiscIndex() throws CancelAction{
+        final String strPrompt = "Which disc?";
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        final int CANCEL_OPTION = 8;
+        String [] dicePrompt = new String[8];
+
+        for (int i=0; i<6;i++){
+            dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
+        }
+        dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc" + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
+        dicePrompt[CANCEL_OPTION - 1] = "Cancel";
+
+        int option = -1;
+        boolean validChoice = false;
+
+        while(!validChoice){
+            option = playerInterface.readInput(strPrompt, dicePrompt);
+            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
+                validChoice = true;
+            } else if (option == CANCEL_OPTION) {
+                cancel();
+            } else {
+                System.out.println("Please choose a valid action");
+            }
+        }
+        option--;
+        return option;
+    }
+
+    public void performActions(ActionData actionData){
+        if(actionData.isUseDice()){
+            useDice(actionData);
+        } else if(actionData.isLayCard()){
+            CardHolder chosenCard = hand.remove(actionData.getCardIndex());
+            layCard(chosenCard, actionData.getTargetDisc());
+        } else {
+            System.err.println("WTF action data error!");
+            assert(false);
+        }
+    }
+
+    public void layCard(CardHolder chosenCard, int chosenPosition){
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        moneyManager.loseMoney(playerID, chosenCard.getCost());
+        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+    }
+
+    private void useDice(ActionData actionData) {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Dice chosenDie = freeDice.remove(actionData.getActionDiceIndex());
+
+        if(actionData.getDiscType() == ActionData.DICE){
+            diceDiscs.activateCard(this, actionData.getPosition(), chosenDie);
+
+        } else if(actionData.getDiscType() == ActionData.BRIBERY){
+            diceDiscs.useBriberyDisc(this, actionData.getPosition(), chosenDie);
+
+        } else if(actionData.getDiscType() == ActionData.MONEY){
+            diceDiscs.useMoneyDisc(playerID, chosenDie);
+
+        } else if(actionData.getDiscType() == ActionData.CARD){
+            diceDiscs.useDrawDisc(playerID, chosenDie);
+            drawCards(chosenDie.getValue(), actionData.getDrawCardIndex());
+
+        } else {
+            System.err.println("WTF action data error!");
+            assert(false);
+        }
+    }
+
+
+
+    //input value
+    //
+
+    //Or maybe just have a function that requests a number from the player?
+    //With "autoResponse" values when in testing mode?
+
+
+
+    public void drawCards(int value, int cardDrawIndex) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();
         CardHolder chosenCard = null;
-
-        System.out.println("Drawing " + value + " cards...");
 
         for (int i = 0; i < value; i++) {
             tempHand.add(cardManager.drawACard());
         }
 
-        while(chosenCard == null){
-            chosenCard = chooseCard(tempHand);
-            if(chosenCard == null){
-                System.out.println("You have to choose a card to draw.");
-            }
-        }
+        chosenCard = tempHand.remove(cardDrawIndex);
+        cardManager.discard(tempHand);
 
         hand.add(chosenCard);
     }
@@ -363,50 +455,5 @@ public class Player {
                 card.setPlayable(true);
             }
         }
-    }
-
-    //TODO: Nothing happening
-    public boolean commit() {
-        boolean confirm = true;
-
-        // player confirms
-        confirm = true;
-
-        if (confirm) {
-
-        }
-        return confirm;
-    }
-
-    public boolean getAutoRoll() {
-        return autoRoll;
-    }
-
-    public void setAutoRoll(boolean autoRoll) {
-        this.autoRoll = autoRoll;
-    }
-
-    public int handSize() {
-        return hand.size();
-    }
-
-    public void addCardToHand(CardHolder c){
-        if(c!=null) hand.add(c);
-    }
-
-    public void addCardListToHand(ArrayList<CardHolder> cardList){
-        hand.addAll(cardList);
-    }
-
-    public int getPlayerID() {
-        return playerID;
-    }
-
-    public ArrayList<CardHolder> getHand() {
-        return hand;
-    }
-
-    public PlayerInterface2 getPlayerInterface() {
-        return playerInterface;
     }
 }

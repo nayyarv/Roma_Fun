@@ -76,11 +76,11 @@ public class Senator extends CardBase {
         } else {
             while(!endSelection){
                 playArea.printStats();
-                chosenCard = player.chooseCard(tempHand);
+                chosenCard = player.chooseCardIndex(tempHand);
                 if(chosenCard == null){
                     endSelection = true;
                 } else {
-                    targetPosition = player.chooseDiceDisc();
+                    targetPosition = player.chooseDiceDiscIndex();
                     diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
                 }
             }

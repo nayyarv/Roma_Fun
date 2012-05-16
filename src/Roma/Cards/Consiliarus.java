@@ -56,18 +56,17 @@ public class Consiliarus extends CardBase {
         boolean activated = true;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-
         ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
 
         while (!characterCards.isEmpty()){
             playArea.printStats();
             player.printCardList(characterCards);
-            CardHolder card = player.chooseCard(characterCards);
+            CardHolder card = player.chooseCardIndex(characterCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");
             } else {
-                int choice = player.chooseDiceDisc();
+                int choice = player.chooseDiceDiscIndex();
                 if (choice!=-1){//I.e not cancel
                     diceDiscs.layCard(player.getPlayerID(), choice, card);
                 } else {
@@ -77,5 +76,20 @@ public class Consiliarus extends CardBase {
         }
 
         return activated;
+    }
+
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

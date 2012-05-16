@@ -9,31 +9,29 @@ public class MoneyManager {
 
     }
 
-    public void gainMoney(int player, int amount) {
-        playerMoney[player] += amount;
+    public void gainMoney(int playerID, int amount) {
+        playerMoney[playerID] += amount;
     }
 
-    public boolean loseMoney(int player, int amount) {
-        boolean enoughMoney = true;
-        if (amount > playerMoney[player]) {
-            System.out.println("Not enough money!");
-            enoughMoney = false;
+    public void loseMoney(int playerID, int amount) {
+        assert (playerMoney[playerID] > amount);
+        playerMoney[playerID] -= amount;
+    }
+
+    public boolean enoughMoney(int playerID, int amount) {
+        boolean enoughMoney = false;
+        if (playerMoney[playerID] > amount){
+            enoughMoney = true;
         } else {
-            playerMoney[player] -= amount;
+            System.out.println("Not enough money!");
         }
         return enoughMoney;
     }
 
-    public boolean transferMoney(int from, int to, int amount) {
-        boolean enoughMoney = true;
-        if (amount > playerMoney[from]) {
-            System.out.println("Not enough money!");
-            enoughMoney = false;
-        } else {
-            playerMoney[from] -= amount;
-            playerMoney[to] += amount;
-        }
-        return enoughMoney;
+    public void transferMoney(int from, int to, int amount) {
+        assert (playerMoney[from] > amount);
+        playerMoney[from] -= amount;
+        playerMoney[to] += amount;
     }
 
     public int getPlayerMoney(int player) {

@@ -1,6 +1,10 @@
 package Roma.Cards;
 
+import Roma.History.ActionData;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.CancelAction;
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,6 +47,17 @@ public class CardHolder implements Card{
         assert false;
     }
 
+    @Override
+    public void discarded() {
+        Wrapper wrapper;
+        //remove all wrappers
+        while(!contents.isWrapper()){
+            wrapper = (Wrapper) contents;
+            wrapper.deleteThisWrapper();
+        }
+        contents.discarded();
+    }
+
     public boolean isActivateEnabled() {
         return contents.isActivateEnabled();
     }
@@ -71,13 +86,19 @@ public class CardHolder implements Card{
         return isWrapper();
     }
 
-    public boolean activate(Player player, int position) {
-        return contents.activate(player, position);
-    }
-
     public String toString() {
         return "Card Name: " + getName() + "; Type: " + getType() +
                 "\nDescription: " + getDescription() +
                 "\nCost: " + getCost() + "; Defence: " + getDefense();
+    }
+
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        contents.gatherData(player, position);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean activate(Player player, int position) {
+        return contents.activate(player, position);  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

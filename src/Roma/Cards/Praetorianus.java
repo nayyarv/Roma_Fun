@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -51,21 +52,28 @@ public class Praetorianus extends CardBase {
 
     }
 
+    @Override
+    public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
+        int targetDisc = -1;
+        playArea.printStats();
+        targetDisc = player.chooseDiceDiscIndex();
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-    public boolean activate(Player player, int position) {
+    @Override
+    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
         boolean activated = true;
         BattleManager battleManager = playArea.getBattleManager();
         int targetDisc = -1;
 
-        playArea.printStats();
         System.out.println("Blocking...");
-        targetDisc = player.chooseDiceDisc();
-        if(targetDisc != -1){ // not cancel
-            battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
-        } else {
-            activated = false;
-        }
+        battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
 
         return activated;
+    }
+
+    @Override
+    public void discarded() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -1,8 +1,8 @@
 package Testers;
 
 import Roma.*;
-import Roma.Cards.Card;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.*;
+import Roma.Cards.*;
 
 /**
  * File Name:
@@ -14,7 +14,7 @@ public class TestGamePlayerInterface {
 
     public static void main (String[] args){
         PlayArea playArea = new PlayArea("testing");
-        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
         GameRules gameRules = playArea.getGameRules();
 
         playArea.testFillHand(0);
@@ -39,11 +39,11 @@ public class TestGamePlayerInterface {
 //
 //        playerInterface.printOut("Building Choice");
 //
-//        playerInterface.getHandIndex(playArea.getPlayer(0).getHand(), Card.BUILDING);
+//        playerInterface.getCardIndexFiltered(playArea.getPlayer(0).getHand(), Card.BUILDING);
 //
 //
 //
-//        playerInterface.getHandIndex(playArea.getPlayer(0).getHand(), Card.CHARACTER);
+//        playerInterface.getCardIndexFiltered(playArea.getPlayer(0).getHand(), Card.CHARACTER);
 
 
 

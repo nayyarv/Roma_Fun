@@ -1,7 +1,9 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.History.ActionData;
+import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,13 +21,13 @@ import java.util.Collections;
 
 public class DiceDiscs {
     private static final boolean DEBUG = true;
-    public static final int BRIBERY_POSITION = 6;
+    public static final int BRIBERY_INDEX = 6;
     public static final int CARD_POSITIONS = 7;
     public static final int TURRIS_LAID = 1;
     public static final int TURRIS_DISCARD = -1;
 
     private final PlayArea playArea;
-    private PlayerInterface2 playerInterface;
+    private PlayerInterface playerInterface;
 
     private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
@@ -87,48 +89,25 @@ public class DiceDiscs {
 
     //This function allows a Card to be placed on a dice Disc
     public void layCard(int playerID, int position, CardHolder newCard) {
-        BattleManager battleManager = playArea.getBattleManager();
-        if(newCard.getName().equalsIgnoreCase(Turris.NAME)){
-            battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
-        }
-
-        //TODO: Check position declarations
-        position--;
-        if(activeCards[playerID][position] !=  null){
-            playArea.getCardManager().discard(activeCards[playerID][position]);
-            //If we need to place over another card, the current one must be discarded
-        }
+        discardTarget(playerID, position);
         activeCards[playerID][position] = newCard;
     }
 
-    public boolean activateCard(Player player, int position, Dice die) {
-        BattleManager battleManager = playArea.getBattleManager();
+    public boolean gatherData(Player player, int position) throws CancelAction {
         int playerID = player.getPlayerID();
         boolean activateEnabled = false;
-        position--;
+        CardHolder targetCard = activeCards[playerID][position];
 
-        //TODO: Change position-- to the player interface
-        // Leave as is - make sure that it is handled in as few places as possible
-
-        if(activeCards[playerID][position] != null){
+        if(targetCard != null){
             // There is a card there
-            if(DEBUG){
-                playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName(), true);
-            }
+            playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName() + "...", true);
             activateEnabled = activeCards[playerID][position].isActivateEnabled();
-            // Can it be activated(Eg Turris is passive)
-
-            activateEnabled &= battleManager.checkBlock(playerID, position);
-            // And Has it been blocked by another card?
+            // Can it be activated(Eg Turris is passive) or is it blocked
 
             if(activateEnabled){
-                discs.get(position).add(die);
-                activateEnabled = activeCards[playerID][position].activate(player, position);
-                if(activateEnabled){
-                    discs.get(position).add(die);
-                }
+                targetCard.gatherData(player, position);
             } else {
-                System.out.println("That card can't be activated");
+                playerInterface.printOut("That card can't be activated", true);
             }
         } else {
             playerInterface.printOut("No card there!", true);
@@ -137,15 +116,25 @@ public class DiceDiscs {
         return activateEnabled;
     }
 
-    public boolean useBriberyDisc(Player player, Dice die){
-        boolean activated = false;
+    public boolean planBriberyDisc(Player player, int dieValue) throws CancelAction{
+        boolean activateEnabled = false;
         MoneyManager moneyManager = playArea.getMoneyManager();
-        int position = BRIBERY_POSITION;
-        if(moneyManager.loseMoney(player.getPlayerID(), die.getValue())){
-            activated = activateCard(player, position, die);
+        int position = BRIBERY_INDEX;
+        if(moneyManager.enoughMoney(player.getPlayerID(), dieValue)){
+            activateEnabled = gatherData(player, position);
         }
+        return activateEnabled;
+    }
 
-        return activated;
+    public void useBriberyDisc(Player player, int position, Dice die){
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        moneyManager.loseMoney(player.getPlayerID(), die.getValue());
+        activateCard(player, position, die);
+    }
+
+    public void activateCard(Player player, int position, Dice die) {
+        discs.get(position).add(die);
+        activeCards[player.getPlayerID()][position].activate(player, position);
     }
 
     public String getCardName(int player, int position){
@@ -192,15 +181,12 @@ public class DiceDiscs {
 
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
-        BattleManager battleManager = playArea.getBattleManager();
-
         CardHolder card = activeCards[playerID][position];
-        if(card.getName().equalsIgnoreCase(Turris.NAME)){
-            battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
-        }
 
-        cardManager.discard(activeCards[playerID][position]);
-        activeCards[playerID][position] = null;
+        if(card != null){
+            cardManager.discard(activeCards[playerID][position]);
+            activeCards[playerID][position] = null;
+        }
     }
 
     public boolean checkAdjacent(int playerID, int position, String cardName){

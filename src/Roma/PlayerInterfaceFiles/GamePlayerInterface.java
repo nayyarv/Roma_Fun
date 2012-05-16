@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Date: 27/04/12
  * Desc: Handles all input and output for
  */
-public class GamePlayerInterface extends PlayerInterface2 {
+public class GamePlayerInterface extends PlayerInterface {
     private Scanner input;
 
 
@@ -30,6 +30,25 @@ public class GamePlayerInterface extends PlayerInterface2 {
             integerInput = getIntegerInput();
         } while (!checkInBounds(integerInput, choices.length));
 
+        if(integerInput == choices.length){
+            integerInput = CANCEL;
+        }
+        return integerInput;
+    }
+
+    public int readIndex(String title, String ... choices){
+        int integerInput;
+        do {
+            showOptions(title, choices);
+            integerInput = getIntegerInput();
+        } while (!checkInBounds(integerInput, choices.length));
+
+
+        if(integerInput == choices.length){
+            integerInput = CANCEL;
+        } else {
+            integerInput--;
+        }
         return integerInput;
     }
 
@@ -64,6 +83,16 @@ public class GamePlayerInterface extends PlayerInterface2 {
         do{
             read=getIntegerInput();
         } while (!checkInBounds(read, bound));
+        return read;
+    }
+
+    //Keeps reading till valid input is recieved
+    public int getIndex(int bound){
+        int read;
+        do{
+            read=getIntegerInput();
+        } while (!checkInBounds(read, bound));
+        read--;
         return read;
     }
 
@@ -132,7 +161,7 @@ public class GamePlayerInterface extends PlayerInterface2 {
 
     //TODO: flesh out function
     @Override
-    public int getHandIndex(ArrayList<CardHolder> hand, String type, int ... chosen) {
+    public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen) {
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
 
@@ -149,12 +178,27 @@ public class GamePlayerInterface extends PlayerInterface2 {
         printOut("Which option: " , false);
         int input;
         do {
-            input = getIntegerInput(hand.size()+1)-1;
+            input = getIntegerInput(cardList.size()+1)-1;
             contains = ArrayContains(input, chosen);
-        } while ((input!=hand.size())&&!chosenRightType(hand.get(input),type, contains));
+        } while ((input!= cardList.size())&&!chosenRightType(cardList.get(input),type, contains));
 
-        if (input==hand.size()) input = CANCEL;
+        if (input== cardList.size()) input = CANCEL;
         return input;
+    }
+
+    //choose from list
+    //input: ArrayList (of dice or of cards)
+    //return int
+    @Override
+
+
+    public void printCardList(ArrayList<CardHolder> cardList){
+        int i = 1;
+        System.out.println("-------------------------------------");
+        for(CardHolder card : cardList){
+            System.out.println(i + ") " + card.getName());
+            i++;
+        }
     }
 
     private boolean chosenRightType(CardHolder card, String type, boolean contains){
@@ -191,5 +235,15 @@ public class GamePlayerInterface extends PlayerInterface2 {
             }
         }
         return false;
+    }
+
+    @Override
+    public void printDiceList(ArrayList<Dice> diceList) {
+        System.out.println("Dice:");
+        int i = 0;
+        for(Dice dice : diceList){
+            i++;
+            System.out.println(i + ") " + dice.getValue());
+        }
     }
 }

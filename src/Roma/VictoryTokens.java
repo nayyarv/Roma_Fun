@@ -6,7 +6,7 @@
 
 package Roma;
 
-import Roma.PlayerInterfaceFiles.PlayerInterface2;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 public class VictoryTokens {
     public final static int END_GAME_VALUE = 0;
@@ -51,7 +51,7 @@ public class VictoryTokens {
 
     private void checkEndConditions(){
         boolean shouldGameEnd = false;
-        PlayerInterface2 playerInterface = playArea.getPlayerInterface();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
 
         if(tokenPool <= END_GAME_VALUE){
             shouldGameEnd = true;

@@ -1,6 +1,8 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -54,48 +56,70 @@ public class Centurio extends CardBase {
 
     }
 
-    //TODO: Refactor for testing purposes
-    public boolean activate(Player player, int position) {
+    //TODO: Needs the refactor
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         BattleManager battleManager = playArea.getBattleManager();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
-        boolean activated = true;
         int targetPlayer = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int chosenDieIndex = CANCEL;
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
-        Dice chosenDie = null;
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
 
         if(targetCard == null){
-            activated = false;
+            PlayerInterface.printOut("No card directly opposite!", true);
+            player.cancel();
         } else {
+            player.commit();
             battleVictory = battleManager.battle(targetPlayer, position);
             if(!battleVictory){
                 if(freeDice.size() != 0){
-                    chosenDie = player.getDieIndex(freeDice);
-                    if(chosenDie != null){
-                        diceDiscs.addDiceToDisc(position, chosenDie);
-                        if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
-                            diceDiscs.discardTarget(targetPlayer, position);
-                        }
+                    try {
+                        PlayerInterface.printOut("Add an action die value to battle value...", true);
+                        chosenDieIndex = player.getDieIndex(freeDice);
+                    } catch (CancelAction cancelAction) {
+                        PlayerInterface.printOut("Not choosing a die to add...", true);
                     }
+                } else {
+                    PlayerInterface.printOut("No dice to add...", true);
+                }
+                activationData.add(chosenDieIndex);
+            }
+        }
+        // if size() == 0 then battleVictory was true
+        // else if value is -1 then dice selection was cancelled and the target survives
+        player.getCurrentAction().setActivationData(activationData);
+    }
+
+    @Override
+    public void activate(Player player, int position) {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getCurrentAction().getActivationData();
+        DiceHolder diceHolder = playArea.getDiceHolder();
+
+        int targetPlayer = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int chosenDieIndex = CANCEL;
+        Dice chosenDie = null;
+        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+        ArrayList<Dice> freeDice = player.getFreeDice();
+
+        //if empty then battleVictory == true
+        if(activationData.isEmpty()){
+            diceDiscs.discardTarget(targetPlayer, position);
+        } else {
+            chosenDieIndex = activationData.remove(0);
+            if(chosenDieIndex != CANCEL){
+                chosenDie = freeDice.remove(chosenDieIndex);
+                diceDiscs.addDiceToDisc(position, chosenDie);
+                if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
+                    diceDiscs.discardTarget(targetPlayer, position);
+                    PlayerInterface.printOut("Victory!", true);
                 }
             }
         }
-
-        return activated;
-    }
-
-    //TODO: Needs the refactor
-    @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

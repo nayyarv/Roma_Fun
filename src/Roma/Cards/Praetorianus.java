@@ -69,7 +69,6 @@ public class Praetorianus extends CardBase {
         int targetDisc = -1;
 
         PlayerInterface.printOut("Blocking...", true);
-        battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
 
         return activated;
     }

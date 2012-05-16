@@ -13,86 +13,32 @@ import Roma.PlayerInterfaceFiles.PlayerInterface;
 //TODO: flesh out battle manager while creating cards
 
 public class BattleManager {
-    private int[] defenseModPassive = new int[Roma.MAX_PLAYERS];
-    private int[] defenseModActive = new int[Roma.MAX_PLAYERS];
-    private boolean active[][] = new boolean[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    private final PlayArea playArea;
     DiceDiscs diceDiscs;
     DiceHolder diceHolder;
 
     public BattleManager(PlayArea playArea){
-        this.playArea = playArea;
-
-        for(int defense : defenseModPassive){
-            defense = 0;
-        }
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
-            for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
-                active[i][j] = true;
-            }
-        }
         this.diceDiscs = playArea.getDiceDiscs();
         this.diceHolder = playArea.getDiceHolder();
     }
 
-    public boolean checkBlock(int playerID, int position) {
-        return active[playerID][position];
-    }
-
-    public void block(int playerID, int position) {
-        active[playerID][position] = false;
-    }
-
-    public void unblock(int playerID, int position) {
-        active[playerID][position] = true;
-    }
-
-    public int getDefenseModPassive(int playerID) {
-        return defenseModPassive[playerID];
-    }
-
-    public void modDefenseModPassive(int playerID, int defenseModPassive) {
-        this.defenseModPassive[playerID] += defenseModPassive;
-    }
-
-    public int getDefenseModActive(int playerID){
-        return defenseModActive[playerID];
-    }
-
-    public void modDefenseModActive(int playerID, int defenseModActive){
-        this.defenseModActive[playerID] += defenseModActive;
-    }
-
-    public void clearDefenseModActive(){
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
-            defenseModActive[i] = 0;
-        }
-    }
-
     public boolean battle(int targetPlayerID, int target){
-        //TODO: battle initiated print statement
         boolean kill = false;
         int battleValue[];
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, target);
-        int defense = targetCard.getDefense() + defenseModPassive[targetPlayerID] + defenseModActive[targetPlayerID];
+        int defense = targetCard.getDefense();
 
-        if(targetCard.getName() == Turris.NAME){
-            defense--;
-        }
-
+        PlayerInterface.printOut("BATTLE!", true);
         PlayerInterface.printOut("Defense to beat: " + defense, true);
-        //TODO: Allow player to roll
         diceHolder.rollBattleDice();
         battleValue = diceHolder.getBattleValue();
-
-        //TODO: Print battle die value
         PlayerInterface.printOut("You rolled a: " + battleValue[0], true);
+
         if(battleValue[0] >= defense){
             diceDiscs.discardTarget(targetPlayerID, target);
             kill = true;
-            PlayerInterface.printOut("Battle Victory!", true);
+            PlayerInterface.printOut("Victory!", true);
         } else {
-            PlayerInterface.printOut("Battle Defeat!", true);
+            PlayerInterface.printOut("Defeat!", true);
         }
 
         return kill;

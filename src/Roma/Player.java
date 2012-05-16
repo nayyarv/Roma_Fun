@@ -180,7 +180,6 @@ public class Player {
         int chosenDieValue;
 
         chosenDieIndex = getDieIndex(freeDice);
-        if(chosenDieIndex == CANCEL) cancel();
         chosenDieValue = freeDice.get(chosenDieIndex).getValue();
 
         currentAction.setActionDiceIndex(chosenDieIndex);
@@ -191,7 +190,7 @@ public class Player {
 
     //choose a dice disc
     //return int
-    public int getDieIndex(ArrayList<Dice> diceList){
+    public int getDieIndex(ArrayList<Dice> diceList) throws CancelAction{
         final String strPrompt = "Which die do you want to use?";
         String[] diceValues = new String[diceList.size() + 1];
         int diceIndex = -1;
@@ -202,6 +201,8 @@ public class Player {
         diceValues[diceList.size()] = "Cancel";
 
         diceIndex = playerInterface.readIndex(strPrompt, diceValues);
+
+        if(diceIndex == diceList.size() + 1) cancel();
 
         return diceIndex;
     }

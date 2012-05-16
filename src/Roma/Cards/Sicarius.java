@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -53,42 +54,57 @@ public class Sicarius extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        //TODO: refactor input to interface or player
-        Scanner input = new Scanner(System.in);
-        ArrayList<Integer> validInput = new ArrayList<Integer>();
-        boolean inputValid = false;
-        int chosenInput = -1;
+//    public boolean activate(Player player, int position) {
+//        //TODO: refactor input to interface or player
+//        Scanner input = new Scanner(System.in);
+//        ArrayList<Integer> validInput = new ArrayList<Integer>();
+//        boolean inputValid = false;
+//        int chosenInput = -1;
+//
+//        boolean activated = true;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//
+//        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+//
+//        PlayerInterface.printOut("Available Targets:", true);
+//        for(int i = 0; i < enemyCards.length; i++){
+//            if(enemyCards[i] != null && enemyCards[i].getType() == Card.CHARACTER){
+//                PlayerInterface.printOut((i + 1) + ") " + enemyCards[i].getName(), true);
+//                validInput.add(i + 1);
+//            } else {
+//                PlayerInterface.printOut((i + 1) + ") #", true);
+//            }
+//        }
+//
+//        while(!inputValid){
+//            chosenInput = input.nextInt();
+//            for(int number : validInput){
+//                if(chosenInput == number){
+//                    inputValid = true;
+//                }
+//            }
+//        }
+//        chosenInput--;
+//
+//        diceDiscs.discardTarget(targetPlayerID, chosenInput);
+//        diceDiscs.discardTarget(player.getPlayerID(), position);
+//
+//        return activated;
+//    }
 
-        boolean activated = true;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
 
-        PlayerInterface.printOut("Available Targets:", true);
-        for(int i = 0; i < enemyCards.length; i++){
-            if(enemyCards[i] != null && enemyCards[i].getType() == Card.CHARACTER){
-                PlayerInterface.printOut((i + 1) + ") " + enemyCards[i].getName(), true);
-                validInput.add(i + 1);
-            } else {
-                PlayerInterface.printOut((i + 1) + ") #", true);
-            }
-        }
-
-        while(!inputValid){
-            chosenInput = input.nextInt();
-            for(int number : validInput){
-                if(chosenInput == number){
-                    inputValid = true;
-                }
-            }
-        }
-        chosenInput--;
-
-        diceDiscs.discardTarget(targetPlayerID, chosenInput);
-        diceDiscs.discardTarget(player.getPlayerID(), position);
-
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

@@ -54,27 +54,37 @@ public class Praetorianus extends CardBase {
 
     }
 
+//    @Override
+//    public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
+//        int targetDisc = -1;
+//        playArea.printStats();
+//        targetDisc = player.getDiceDiscIndex("");
+//        return null;  //To change body of implemented methods use File | Settings | File Templates.
+//    }
+//
+//    @Override
+//    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+//        boolean activated = true;
+//        BattleManager battleManager = playArea.getBattleManager();
+//        int targetDisc = -1;
+//
+//        PlayerInterface.printOut("Blocking...", true);
+//
+//        return activated;
+//    }
+
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
-        int targetDisc = -1;
-        playArea.printStats();
-        targetDisc = player.getDiceDiscIndex("");
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        boolean activated = true;
-        BattleManager battleManager = playArea.getBattleManager();
-        int targetDisc = -1;
-
-        PlayerInterface.printOut("Blocking...", true);
-
-        return activated;
+    public void activate(Player player, int position) {
+        //TODO: fill in
     }
 
     @Override
     public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing when discarded
     }
 }

@@ -3,6 +3,7 @@ package Roma.Cards;
 import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -54,39 +55,54 @@ public class Senator extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
+//    public boolean activate(Player player, int position) {
+//        boolean activated = true;
+//
+//        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
+//        ArrayList<CardHolder> hand = player.getHand();
+//        boolean endSelection = false;
+//        CardHolder chosenCard = null;
+//        int targetPosition;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//
+//        for(CardHolder card : hand){
+//            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+//                if(hand.remove(card)){
+//                    tempHand.add(card);
+//                }
+//            }
+//        }
+//
+//        if(tempHand.isEmpty()){
+//            activated = false;
+//        } else {
+//            while(!endSelection){
+//                playArea.printStats();
+//                chosenCard = player.chooseCardIndex(tempHand);
+//                if(chosenCard == null){
+//                    endSelection = true;
+//                } else {
+//                    targetPosition = player.getDiceDiscIndex("");
+//                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
+//                }
+//            }
+//        }
+//
+//        return activated;
+//    }
 
-        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
-        ArrayList<CardHolder> hand = player.getHand();
-        boolean endSelection = false;
-        CardHolder chosenCard = null;
-        int targetPosition;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        for(CardHolder card : hand){
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
-                if(hand.remove(card)){
-                    tempHand.add(card);
-                }
-            }
-        }
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
 
-        if(tempHand.isEmpty()){
-            activated = false;
-        } else {
-            while(!endSelection){
-                playArea.printStats();
-                chosenCard = player.chooseCardIndex(tempHand);
-                if(chosenCard == null){
-                    endSelection = true;
-                } else {
-                    targetPosition = player.getDiceDiscIndex("");
-                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
-                }
-            }
-        }
-
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

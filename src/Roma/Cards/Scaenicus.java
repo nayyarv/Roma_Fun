@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -53,43 +54,57 @@ public class Scaenicus extends CardBase {
 
     }
 
-    //TODO: handle infinite loop selecting self
-    public boolean activate(Player player, int position) {
-        //TODO: refactor input to interface or player
-        Scanner input = new Scanner(System.in);
-        ArrayList<Integer> validInput = new ArrayList<Integer>();
-        boolean inputValid = false;
-        int chosenInput = -1;
+//    //TODO: handle infinite loop selecting self
+//    public boolean activate(Player player, int position) {
+//        //TODO: refactor input to interface or player
+//        Scanner input = new Scanner(System.in);
+//        ArrayList<Integer> validInput = new ArrayList<Integer>();
+//        boolean inputValid = false;
+//        int chosenInput = -1;
+//
+//        boolean activated = true;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//
+//        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
+//
+//        PlayerInterface.printOut("Available Targets:", true);
+//        for(int i = 0; i < friendlyCards.length; i++){
+//            if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
+//                PlayerInterface.printOut((i + 1) + ") " + friendlyCards[i].getName(), true);
+//                validInput.add(i + 1);
+//            } else {
+//                PlayerInterface.printOut((i + 1) + ") #", true);
+//            }
+//        }
+//
+//        while(!inputValid){
+//            chosenInput = input.nextInt();
+//            for(int number : validInput){
+//                if(chosenInput == number){
+//                    inputValid = true;
+//                }
+//            }
+//        }
+//        chosenInput--;
+//
+//        friendlyCards[chosenInput].activate(player, position);
+//
+//        return activated;
+//    }
 
-        boolean activated = true;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
-
-        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
-
-        PlayerInterface.printOut("Available Targets:", true);
-        for(int i = 0; i < friendlyCards.length; i++){
-            if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
-                PlayerInterface.printOut((i + 1) + ") " + friendlyCards[i].getName(), true);
-                validInput.add(i + 1);
-            } else {
-                PlayerInterface.printOut((i + 1) + ") #", true);
-            }
-        }
-
-        while(!inputValid){
-            chosenInput = input.nextInt();
-            for(int number : validInput){
-                if(chosenInput == number){
-                    inputValid = true;
-                }
-            }
-        }
-        chosenInput--;
-
-        friendlyCards[chosenInput].activate(player, position);
-
-        return activated;
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
     }
 
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
+
+    @Override
+    public void discarded() {
+        //do nothing when discarded
+    }
 }

@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -53,11 +54,19 @@ public class Templum extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        System.err.println("Templum being activated somehow!");
+    }
 
-    public boolean activate(Player player, int position) {
-        boolean activated = false;
+    @Override
+    public void activate(Player player, int position) {
+        System.err.println("Templum being activated somehow!");
+    }
 
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 
 }

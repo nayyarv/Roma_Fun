@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -52,19 +53,34 @@ public class Legionarius extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        BattleManager battleManager = playArea.getBattleManager();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//    public boolean activate(Player player, int position) {
+//        boolean activated = true;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//        BattleManager battleManager = playArea.getBattleManager();
+//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//
+//        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
+//            PlayerInterface.printOut("No card to attack!", true);
+//            activated = false;
+//        } else {
+//            battleManager.battle(targetPlayerID, position);
+//        }
+//
+//        return activated;
+//    }
 
-        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
-            PlayerInterface.printOut("No card to attack!", true);
-            activated = false;
-        } else {
-            battleManager.battle(targetPlayerID, position);
-        }
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        return activated;
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
+
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

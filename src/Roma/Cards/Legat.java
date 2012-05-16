@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -53,22 +54,37 @@ public class Legat extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
-        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
-        int emptySlotCount = 0;
+//    public boolean activate(Player player, int position) {
+//        boolean activated = true;
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+//        int emptySlotCount = 0;
+//
+//        for(CardHolder card : enemyCards){
+//            if(card == null){
+//                emptySlotCount++;
+//            }
+//        }
+//
+//        victoryTokens.playerFromPool(player.getPlayerID(), emptySlotCount);
+//
+//        return activated;
+//    }
 
-        for(CardHolder card : enemyCards){
-            if(card == null){
-                emptySlotCount++;
-            }
-        }
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        victoryTokens.playerFromPool(player.getPlayerID(), emptySlotCount);
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
 
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

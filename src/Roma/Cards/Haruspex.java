@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -52,17 +53,32 @@ public class Haruspex extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
-        CardManager cardManager = playArea.getCardManager();
-        ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
-        CardHolder chosenCard;
+//    public boolean activate(Player player, int position) {
+//        boolean activated = true;
+//        CardManager cardManager = playArea.getCardManager();
+//        ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
+//        CardHolder chosenCard;
+//
+//        chosenCard = player.chooseCardIndex(deck);
+//        player.addCardToHand(chosenCard);
+//
+//        cardManager.shuffle();
+//
+//        return activated;
+//    }
 
-        chosenCard = player.chooseCardIndex(deck);
-        player.addCardToHand(chosenCard);
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
+    }
 
-        cardManager.shuffle();
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
 
-        return activated;
+    @Override
+    public void discarded() {
+        //do nothing when discarded
     }
 }

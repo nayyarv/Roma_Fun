@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -52,21 +53,35 @@ public class Mercatus extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
-        boolean activated = true;
-        ArrayList<CardHolder> enemyCards= playArea.getDiceDiscs().toList(otherPlayer(player.getPlayerID()));
-        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        int forumCount = 0;
+//    public boolean activate(Player player, int position) {
+//        boolean activated = true;
+//        ArrayList<CardHolder> enemyCards= playArea.getDiceDiscs().toList(otherPlayer(player.getPlayerID()));
+//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+//        int forumCount = 0;
+//
+//        for(CardHolder card : enemyCards){
+//            if(card != null && (card.getName().equalsIgnoreCase(Forum.NAME))){
+//                forumCount++;
+//            }
+//        }
+//
+//        victoryTokens.playerToPlayer(otherPlayer(player.getPlayerID()), player.getPlayerID(), forumCount);
+//
+//        return activated;
+//    }
 
-        for(CardHolder card : enemyCards){
-            if(card != null && (card.getName().equalsIgnoreCase(Forum.NAME))){
-                forumCount++;
-            }
-        }
-
-        victoryTokens.playerToPlayer(otherPlayer(player.getPlayerID()), player.getPlayerID(), forumCount);
-
-        return activated;
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
     }
 
+    @Override
+    public void activate(Player player, int position) {
+        //TODO: fill in
+    }
+
+    @Override
+    public void discarded() {
+        //do nothing when discarded
+    }
 }

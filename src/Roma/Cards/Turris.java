@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -50,15 +51,19 @@ public class Turris extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-    public boolean activate(Player player, int position) {
-        boolean activated = false;
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        System.err.println("Turris being activated somehow!");
+    }
 
-        return activated;
+    @Override
+    public void activate(Player player, int position) {
+        System.err.println("Turris being activated somehow!");
     }
 
     @Override
     public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing when discarded
     }
 
 }

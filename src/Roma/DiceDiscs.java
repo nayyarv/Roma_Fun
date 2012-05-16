@@ -100,17 +100,17 @@ public class DiceDiscs {
 
         if(targetCard != null){
             // There is a card there
-            playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName() + "...", true);
+            PlayerInterface.printOut("Card activating: " + activeCards[playerID][position].getName() + "...", true);
             activateEnabled = activeCards[playerID][position].isActivateEnabled();
             // Can it be activated(Eg Turris is passive) or is it blocked
 
             if(activateEnabled){
                 targetCard.gatherData(player, position);
             } else {
-                playerInterface.printOut("That card can't be activated", true);
+                PlayerInterface.printOut("That card can't be activated", true);
             }
         } else {
-            playerInterface.printOut("No card there!", true);
+            PlayerInterface.printOut("No card there!", true);
         }
 
         return activateEnabled;

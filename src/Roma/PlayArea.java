@@ -107,7 +107,7 @@ public class PlayArea {
     }
 
     private void startTurnPhase(Player player) {
-        playerInterface.printOut("It's " + player.getName() + "'s turn", true);
+        PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();

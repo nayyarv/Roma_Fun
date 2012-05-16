@@ -170,7 +170,7 @@ public class Player {
         } else if(option == END_TURN){
             endTurn = true;
         } else {
-            playerInterface.printOut("Please choose a valid option.", true);
+            PlayerInterface.printOut("Please choose a valid option.", true);
         }
 
         return endTurn;
@@ -269,7 +269,7 @@ public class Player {
         int chosenCardIndex = CANCEL;
         boolean validChoice = false;
 
-        playerInterface.printOut("Drawing " + value + " cards...", true);
+        PlayerInterface.printOut("Drawing " + value + " cards...", true);
 
         tempHand.addAll(cardManager.viewTopCards(value));
         while(!validChoice){
@@ -277,7 +277,7 @@ public class Player {
                 chosenCardIndex = getCardIndex(tempHand);
                 validChoice = true;
             } catch (CancelAction cancelAction) {
-                playerInterface.printOut("Have to choose a card", true);
+                PlayerInterface.printOut("Have to choose a card", true);
             }
         }
 
@@ -294,7 +294,7 @@ public class Player {
         currentAction.setCardIndex(chosenCardIndex);
 
         if(moneyManager.enoughMoney(playerID, hand.get(chosenCardIndex).getCost())){
-            playerInterface.printOut("Laying card...", true);
+            PlayerInterface.printOut("Laying card...", true);
         } else {
             cancel();
         }
@@ -325,7 +325,7 @@ public class Player {
         playerInterface.printCardList(cardList);
 
         if(cardList.size() == 0){
-            playerInterface.printOut("There are no cards!", true);
+            PlayerInterface.printOut("There are no cards!", true);
         } else {
             while(!validChoice){
                 action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
@@ -455,5 +455,16 @@ public class Player {
                 card.setPlayable(true);
             }
         }
+    }
+
+    public int countType(ArrayList<CardHolder> cardList, String type) {
+        int count = 0;
+
+        for(CardHolder card : cardList){
+            if(card.getType().equalsIgnoreCase(type)){
+                count++;
+            }
+        }
+        return count;
     }
 }

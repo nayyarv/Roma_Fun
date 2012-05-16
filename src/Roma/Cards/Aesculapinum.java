@@ -59,7 +59,7 @@ public class Aesculapinum extends CardBase {
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex;
 
-        if(discardPile.isEmpty()){
+        if(player.countType(discardPile, Card.CHARACTER) == 0){
 
         }
         player.commit();
@@ -68,7 +68,7 @@ public class Aesculapinum extends CardBase {
         try {
             cardIndex = player.getCardIndex(discardPile, Card.CHARACTER);
         } catch (CancelAction cancelAction) {
-            PlayerInterface.printOut("Must chose a card");
+            PlayerInterface.printOut("Must chose a card", true);
         }
 
         activationData.add(cardIndex);

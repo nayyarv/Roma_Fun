@@ -111,6 +111,7 @@ public class Centurio extends CardBase {
             diceDiscs.discardTarget(targetPlayer, position);
         } else {
             chosenDieIndex = activationData.remove(0);
+            //if chosenDieIndex isn't cancel then add die value to battle value and check defense again
             if(chosenDieIndex != CANCEL){
                 chosenDie = freeDice.remove(chosenDieIndex);
                 diceDiscs.addDiceToDisc(position, chosenDie);

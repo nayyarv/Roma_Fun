@@ -33,6 +33,8 @@ public abstract class PlayerInterface {
 
     abstract public void printCardList(ArrayList<CardHolder> cardList);
 
+    abstract public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen);
+
     public static void printOut(Object object, boolean newLine){
         if (newLine){
             System.out.println(object.toString());

@@ -2,6 +2,7 @@ package Roma.PlayerInterfaceFiles;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
+import Roma.Dice;
 import Roma.DiceDiscs;
 
 import java.util.ArrayList;
@@ -88,12 +89,7 @@ public class GamePlayerInterface extends PlayerInterface {
 
     //Keeps reading till valid input is recieved
     public int getIndex(int bound){
-        int read;
-        do{
-            read=getIntegerInput();
-        } while (!checkInBounds(read, bound));
-        read--;
-        return read;
+        return (getIntegerInput(bound)-1);
     }
 
     //Simply returns input
@@ -128,6 +124,7 @@ public class GamePlayerInterface extends PlayerInterface {
         }
     }
 
+    @Override
     public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen){
         assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
         boolean contains;
@@ -166,7 +163,7 @@ public class GamePlayerInterface extends PlayerInterface {
         boolean contains;
 
         int i = 1;
-        for(CardHolder card: hand){
+        for(CardHolder card: cardList){
             printOut(i+")", false);
             contains = ArrayContains(i-1, chosen);
             printFilter(card, type, contains);

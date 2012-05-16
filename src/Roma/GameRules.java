@@ -2,6 +2,8 @@ package Roma;
 
 import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
+import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
  * Desc: All the initial and regular global rules are run by this object
  */
 public class GameRules {
+
+    private static final int CANCEL = PlayerInterface.CANCEL;
 
     private PlayArea playArea;
     Player[] players;
@@ -54,15 +58,19 @@ public class GameRules {
                     "Choose the first Card");
             //Prompt: move printing to player interface?
 
-            CardHolder temp = null;
+            int temp = PlayerInterface.CANCEL;
 
-            for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, temp = null){
-                while(temp == null){
-                    temp = players[i].chooseCardIndex(individualHand);
-                    if (temp == null) System.out.println("You must choose a card: ");
+            for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++){
+                while(temp == PlayerInterface.CANCEL){
+
+
+                    try {
+                        temp = players[i].getCardIndex(individualHand);
+                        choices.add(individualHand.remove(temp));
+                    } catch (CancelAction cancelAction) {
+                        System.out.println("You must choose a card: ");
+                    }
                 }
-                choices.add(temp);
-                individualHand.remove(temp);
                 if(j!=Roma.NUM_CARDS_SWAPPED-1) System.out.println("Choose the next card:");
             }
             players[i].addCardListToHand(individualHand);
@@ -76,7 +84,9 @@ public class GameRules {
 
         Player activePlayer = null;
         ArrayList<CardHolder> hand = null;
-        CardHolder chosenCard = null;
+
+        int chosenCardIndex = CANCEL;
+
         int targetDisc;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
@@ -86,21 +96,23 @@ public class GameRules {
             while(!hand.isEmpty()){
                 playArea.printStats();
                 System.out.println(activePlayer.getName() + ", please lay all your cards");
-                chosenCard = null;
-                while(chosenCard == null){
-                    chosenCard = activePlayer.chooseCardIndex(hand);
-                    if(chosenCard == null){
+                chosenCardIndex = CANCEL;
+                while(chosenCardIndex == CANCEL){
+                    try {
+                        chosenCardIndex = activePlayer.getCardIndex(hand);
+                    } catch (CancelAction cancelAction) {
                         System.out.println("You must choose a card");
                     }
                 }
-                targetDisc = -1; // cancel value
-                while(targetDisc == -1){
-                    targetDisc = activePlayer.chooseDiceDiscIndex();
-                    if(targetDisc == -1){
+                targetDisc = CANCEL; // cancel value
+                while(targetDisc == CANCEL){
+                    try {
+                        targetDisc = activePlayer.chooseDiceDiscIndex();
+                    } catch (CancelAction cancelAction) {
                         System.out.println("You must choose a disc");
                     }
                 }
-                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, chosenCard);
+                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, hand.remove(chosenCardIndex));
             }
         }
     }

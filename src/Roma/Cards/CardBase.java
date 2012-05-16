@@ -97,7 +97,7 @@ public abstract class CardBase implements Card {
     @Override
     public abstract void gatherData(Player player, int position) throws CancelAction;
     @Override
-    public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
+    public abstract boolean activate(Player player, int position);
 
 
     public int otherPlayer(int player){

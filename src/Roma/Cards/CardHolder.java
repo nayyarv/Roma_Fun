@@ -98,7 +98,7 @@ public class CardHolder implements Card{
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        return contents.activate(player, position, activationData);  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean activate(Player player, int position) {
+        return contents.activate(player, position);  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

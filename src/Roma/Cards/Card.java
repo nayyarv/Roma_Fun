@@ -1,6 +1,8 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
  * Time: 11:36 AM
  */
 public interface Card {
+    public final int CANCEL = PlayerInterface.CANCEL;
     public final static String CHARACTER = "Character";
     public final static String BUILDING = "Building";
 
@@ -21,7 +24,7 @@ public interface Card {
     public int getDefense();
     public boolean isWrapper();
     public String toString();
-    public abstract ArrayList<Integer> gatherData(Player player, int position);
+    public abstract ArrayList<Integer> gatherData(Player player, int position) throws CancelAction;
     public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
     public Card getContents();
     public void setContents(Card card);

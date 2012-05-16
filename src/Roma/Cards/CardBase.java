@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -93,7 +94,7 @@ public abstract class CardBase implements Card {
     }
 
     @Override
-    public abstract ArrayList<Integer> gatherData(Player player, int position);
+    public abstract ArrayList<Integer> gatherData(Player player, int position) throws CancelAction;
     @Override
     public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
 

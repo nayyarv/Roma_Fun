@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -91,7 +92,7 @@ public class CardHolder implements Card{
     }
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
+    public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
         return contents.gatherData(player, position);  //To change body of implemented methods use File | Settings | File Templates.
     }
 

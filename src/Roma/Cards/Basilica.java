@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 
 import java.util.ArrayList;
 
@@ -53,14 +54,13 @@ public class Basilica extends CardBase {
     }
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
-        return activationData;
+    public void gatherData(Player player, int position) throws CancelAction {
+        System.err.println("Basilica activated somehow!");
     }
 
     @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        return false;
+    public void activate(Player player, int position) {
+        System.err.println("Basilica activated somehow!");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -101,6 +102,42 @@ public class DiceDiscs {
         activeCards[playerID][position] = newCard;
     }
 
+    public ArrayList<Integer> gatherData(Player player, int position, int dieValue) throws CancelAction {
+        int playerID = player.getPlayerID();
+        boolean activateEnabled = false;
+        CardHolder targetCard = activeCards[playerID][position];
+        ArrayList<Integer> activationData = null;
+        position--;
+
+        if(targetCard != null){
+            // There is a card there
+            playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName() + "...", true);
+            activateEnabled = activeCards[playerID][position].isActivateEnabled();
+            // Can it be activated(Eg Turris is passive) or is it blocked
+
+            if(activateEnabled){
+                activationData = targetCard.gatherData(player, position);
+            } else {
+                playerInterface.printOut("That card can't be activated", true);
+            }
+        } else {
+            playerInterface.printOut("No card there!", true);
+        }
+
+        return activationData;
+    }
+
+    public ArrayList<Integer> useBriberyDisc(Player player, int dieValue) throws CancelAction{
+        ArrayList<Integer> activationData = null;
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        int position = BRIBERY_POSITION;
+        if(moneyManager.loseMoney(player.getPlayerID(), dieValue)){
+            activationData = gatherData(player, position, dieValue);
+        }
+
+        return activationData;
+    }
+
     public boolean activateCard(Player player, int position, Dice die) {
         BattleManager battleManager = playArea.getBattleManager();
         int playerID = player.getPlayerID();
@@ -135,17 +172,6 @@ public class DiceDiscs {
         }
 
         return activateEnabled;
-    }
-
-    public boolean useBriberyDisc(Player player, Dice die){
-        boolean activated = false;
-        MoneyManager moneyManager = playArea.getMoneyManager();
-        int position = BRIBERY_POSITION;
-        if(moneyManager.loseMoney(player.getPlayerID(), die.getValue())){
-            activated = activateCard(player, position, die);
-        }
-
-        return activated;
     }
 
     public String getCardName(int player, int position){

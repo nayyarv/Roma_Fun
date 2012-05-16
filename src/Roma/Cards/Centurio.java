@@ -56,7 +56,6 @@ public class Centurio extends CardBase {
 
     }
 
-    //TODO: Needs the refactor
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

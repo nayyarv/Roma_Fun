@@ -21,23 +21,24 @@ public class ActionData {
      */
 
     //#defines for action dice
-    public static final String DICE = "Dice"; //0-6
-    public static final String MONEY = "Money";
+    public static final String DICE = "Dice"; //0-5     //used
+    public static final String BRIBERY = "Bribery";     //used
+    public static final String MONEY = "Money";         //used
     public static final String CARD = "Card";
 
     public final int playerID;
 
     //action types
-    private boolean layCard = false;
-    private boolean useDice = false;
-    private boolean commit = false;
+    private boolean layCard = false;    //used
+    private boolean useDice = false;    //used
+    private boolean commit = false;     //used
 
     //For using action dice
-    private int actionDiceIndex;
-    private String discType;
-    private int diceValue;
-    private int battleDice;
-    private String cardName;
+    private int actionDiceIndex;    //used
+    private String discType;        //used 1 2 3
+    private int diceValue;          //used
+    private int battleDice;         //used
+    private String cardName;        //used
 
     //For laying a card
     private int cardIndex;

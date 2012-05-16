@@ -74,6 +74,8 @@ public class PlayArea {
 
         while (!gameOver && !endTurn) {
             ActionData action = new ActionData(player.getPlayerID());
+            diceHolder.rollBattleDice();
+            action.setBattleDice(diceHolder.getBattleValue()[0]);
             //read player input through player interface and and store into action data
 
             try {
@@ -81,11 +83,22 @@ public class PlayArea {
             } catch (CancelAction cancelAction) {
                 cancelAction.message();
             }
-            //perform stored actions if commit = true
 
-            //end action phase
-            //add actionData to turnHistory
-            clearEndActionWrappers();
+            //perform stored actions if commit = true
+            if(action.isCommit()){
+                if(action.isUseDice()){
+
+                } else if(action.isLayCard()){
+
+                } else {
+                    System.err.println("Committed action without classifying");
+                    assert(false);
+                }
+
+                //end action phase
+                //add actionData to turnHistory
+                clearEndActionWrappers();
+            }
         }
 
         clearEndTurnWrappers();

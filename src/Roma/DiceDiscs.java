@@ -89,17 +89,7 @@ public class DiceDiscs {
 
     //This function allows a Card to be placed on a dice Disc
     public void layCard(int playerID, int position, CardHolder newCard) {
-        BattleManager battleManager = playArea.getBattleManager();
-        if(newCard.getName().equalsIgnoreCase(Turris.NAME)){
-            battleManager.modDefenseModPassive(playerID, TURRIS_LAID);
-        }
-
-        //TODO: Check position declarations
-        position--;
-        if(activeCards[playerID][position] !=  null){
-            playArea.getCardManager().discard(activeCards[playerID][position]);
-            //If we need to place over another card, the current one must be discarded
-        }
+        discardTarget(playerID, position);
         activeCards[playerID][position] = newCard;
     }
 
@@ -130,46 +120,15 @@ public class DiceDiscs {
         boolean activateEnabled = false;
         MoneyManager moneyManager = playArea.getMoneyManager();
         int position = BRIBERY_INDEX;
-        if(moneyManager.loseMoney(player.getPlayerID(), dieValue)){
+        if(moneyManager.enoughMoney(player.getPlayerID(), dieValue)){
             activateEnabled = gatherData(player, position);
         }
         return activateEnabled;
     }
 
-    public boolean activateCard(Player player, int position, Dice die) {
-        BattleManager battleManager = playArea.getBattleManager();
-        int playerID = player.getPlayerID();
-        boolean activateEnabled = false;
-        position--;
-
-        //TODO: Change position-- to the player interface
-        // Leave as is - make sure that it is handled in as few places as possible
-
-        if(activeCards[playerID][position] != null){
-            // There is a card there
-            if(DEBUG){
-                playerInterface.printOut("Card activating: " + activeCards[playerID][position].getName(), true);
-            }
-            activateEnabled = activeCards[playerID][position].isActivateEnabled();
-            // Can it be activated(Eg Turris is passive)
-
-            activateEnabled &= battleManager.checkBlock(playerID, position);
-            // And Has it been blocked by another card?
-
-            if(activateEnabled){
-                discs.get(position).add(die);
-                //activateEnabled = activeCards[playerID][position].activate(player, position);
-                if(activateEnabled){
-                    discs.get(position).add(die);
-                }
-            } else {
-                System.out.println("That card can't be activated");
-            }
-        } else {
-            playerInterface.printOut("No card there!", true);
-        }
-
-        return activateEnabled;
+    public void activateCard(Player player, int position, Dice die) {
+        discs.get(position).add(die);
+        activeCards[player.getPlayerID()][position].activate(player, position);
     }
 
     public String getCardName(int player, int position){
@@ -216,15 +175,12 @@ public class DiceDiscs {
 
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
-        BattleManager battleManager = playArea.getBattleManager();
-
         CardHolder card = activeCards[playerID][position];
-        if(card.getName().equalsIgnoreCase(Turris.NAME)){
-            battleManager.modDefenseModPassive(playerID, TURRIS_DISCARD);
-        }
 
-        cardManager.discard(activeCards[playerID][position]);
-        activeCards[playerID][position] = null;
+        if(card != null){
+            cardManager.discard(activeCards[playerID][position]);
+            activeCards[playerID][position] = null;
+        }
     }
 
     public boolean checkAdjacent(int playerID, int position, String cardName){

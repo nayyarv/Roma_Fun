@@ -9,6 +9,7 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 public class CardManager {
@@ -157,5 +158,15 @@ public class CardManager {
 
     public ArrayList<CardHolder> getDiscardPile() {
         return discardPile;
+    }
+
+    public ArrayList<CardHolder> viewTopCards(int value) {
+        ArrayList<CardHolder> temp = new ArrayList<CardHolder>();
+
+        for(int i = 0; i < value; i++){
+            temp.add(playingDeck.get(i));
+        }
+
+        return temp;
     }
 }

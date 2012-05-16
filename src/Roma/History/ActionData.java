@@ -36,9 +36,11 @@ public class ActionData {
     //For using action dice
     private int actionDiceIndex;    //used
     private String discType;        //used 1 2 3 4
+    private int position;
     private int diceValue;          //used
     private int battleDice;         //used
     private String cardName;        //used
+    private int drawCardIndex;      //used
 
     //For laying a card
     private int cardIndex;          //used
@@ -93,6 +95,14 @@ public class ActionData {
         this.discType = discType;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public int getDiceValue() {
         return diceValue;
     }
@@ -115,6 +125,14 @@ public class ActionData {
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
+    }
+
+    public int getDrawCardIndex() {
+        return drawCardIndex;
+    }
+
+    public void setDrawCardIndex(int drawCardIndex) {
+        this.drawCardIndex = drawCardIndex;
     }
 
     public int getCardIndex() {

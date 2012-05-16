@@ -86,14 +86,7 @@ public class PlayArea {
 
             //perform stored actions if commit = true
             if(action.isCommit()){
-                if(action.isUseDice()){
-
-                } else if(action.isLayCard()){
-
-                } else {
-                    System.err.println("Committed action without classifying");
-                    assert(false);
-                }
+                player.performActions(action);
 
                 //end action phase
                 //add actionData to turnHistory

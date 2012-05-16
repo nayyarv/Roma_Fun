@@ -29,7 +29,7 @@ public abstract class PlayerInterface {
 
     abstract public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen);
 
-    abstract public int getCardIndex(ArrayList<CardHolder> cardList);
+    abstract public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction;
 
     abstract public void printDiceList(ArrayList<Dice> diceList);
 }

@@ -245,7 +245,7 @@ public class Player {
         CardHolder chosenCard = null;
         int chosenPosition = 0;
 
-        chosenCard = chooseCard(hand);
+        chosenCard = chooseCardIndex(hand);
         if(chosenCard != null){
             chosenPosition = chooseDiceDisc();
             if(chosenPosition != CANCEL){
@@ -313,67 +313,6 @@ public class Player {
         return option;
     }
 
-
-
-    public void printCardList(ArrayList<CardHolder> cardList){
-        int i = 1;
-        System.out.println("-------------------------------------");
-        for(CardHolder card : cardList){
-            System.out.println(i + ") " + card.getName());
-            i++;
-        }
-    }
-
-    //choose from list
-    //input: ArrayList (of dice or of cards)
-    //return int
-    public CardHolder chooseCard(ArrayList<CardHolder> cardList){
-        final String strPrompt = "Possible actions:";
-        final String strOption1 = "Choose a card";
-        final String strOption2 = "Check description";
-        final String strOption3 = "Print card list";
-        final String strOption4 = "Cancel/End selection";
-
-        final int
-                CHOOSE_CARDS = 1,
-                CHECK_DESC = 2,
-                PRINT_CARDS = 3;
-
-        CardHolder choice = null;
-        int action = 0;
-        boolean validChoice = false;
-
-        printCardList(cardList);
-
-        if(cardList.size() == 0){
-            System.out.println("There are no cards!");
-        } else {
-            while(!validChoice){
-                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
-
-                if(action == CHOOSE_CARDS){
-                    System.out.print("Card number: ");
-                    int cardChoice = playerInterface.getIntegerInput(cardList.size());
-                    choice = cardList.remove(cardChoice - 1);
-                    validChoice = true;
-                } else if(action == CHECK_DESC){
-                    System.out.print("Check which card number: ");
-                    action = playerInterface.getIntegerInput(cardList.size());
-                    System.out.println(cardList.get(action - 1).toString());
-                } else if(action == PRINT_CARDS){
-                    printCardList(cardList);
-                } else if(action == CANCEL){
-                    choice = null;
-                    validChoice = true;
-                } else {
-                    System.out.println("Please choose a valid action");
-                }
-            }
-        }
-
-        return choice;
-    }
-
     //choose a dice disc
     //return int
     public int chooseDie(ArrayList<Dice> diceList){
@@ -412,7 +351,7 @@ public class Player {
         }
 
         while(chosenCard == null){
-            chosenCard = chooseCard(tempHand);
+            chosenCard = chooseCardIndex(tempHand);
             if(chosenCard == null){
                 System.out.println("You have to choose a card to draw.");
             }

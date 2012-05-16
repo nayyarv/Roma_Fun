@@ -61,7 +61,7 @@ public class Machina extends CardBase {
         while (!buildingCards.isEmpty()){
             playArea.printStats();
             player.printCardList(buildingCards);
-            CardHolder card = player.chooseCard(buildingCards);
+            CardHolder card = player.chooseCardIndex(buildingCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");

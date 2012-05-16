@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -53,64 +54,74 @@ public class Forum extends CardBase {
     }
 
 
-    public boolean activate(Player player, int position) {
+//    public boolean activate(Player player, int position) {
+//
+//    }
+//
+//    //TODO: refactor incomplete
+//    @Override
+//    public ArrayList<Integer> gatherData(Player player, int position) {
+//        ArrayList<Integer> activationData = new ArrayList<Integer>();
+//
+//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+//        ArrayList<Dice> freeDice = player.getFreeDice();
+//        Dice chosenDie = null;
+//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+//
+//        if(freeDice.isEmpty()){
+//            activationData = null;
+//            PlayerInterface.printOut("Not enough free action dice!", true);
+//        } else {
+//            PlayerInterface.printOut("Please choose a second die to use", true);
+//            chosenDie = player.getDieIndex(freeDice);
+//            if(chosenDie != null){
+//                diceDiscs.addDiceToDisc(position, chosenDie);
+//                // check for adjacent Templum
+//                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
+//                    PlayerInterface.printOut("Would you like to use a 3rd die?", true);
+//                    chosenDie = null;
+//                    chosenDie = player.getDieIndex(freeDice);
+//                    if(chosenDie != null){
+//                        diceDiscs.addDiceToDisc(position, chosenDie);
+//                    }
+//                }
+//                // check for adjacent Basilicas
+//                if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
+//                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
+//                }
+//                if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
+//                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
+//                }
+//            } else {
+//                PlayerInterface.printOut("Card activation cancelled.", true);
+//                activationData = null;
+//            }
+//        }
+//
+//        return activationData;
+//    }
+//
+//    @Override
+//    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
+//        boolean activated = true;
+//        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+//        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+//
+//        return activated;
+//    }
 
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        //TODO: fill in
     }
 
-    //TODO: refactor incomplete
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) {
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
-
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<Dice> freeDice = player.getFreeDice();
-        Dice chosenDie = null;
-        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-
-        if(freeDice.isEmpty()){
-            activationData = null;
-            PlayerInterface.printOut("Not enough free action dice!", true);
-        } else {
-            PlayerInterface.printOut("Please choose a second die to use", true);
-            chosenDie = player.getDieIndex(freeDice);
-            if(chosenDie != null){
-                diceDiscs.addDiceToDisc(position, chosenDie);
-                // check for adjacent Templum
-                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
-                    PlayerInterface.printOut("Would you like to use a 3rd die?", true);
-                    chosenDie = null;
-                    chosenDie = player.getDieIndex(freeDice);
-                    if(chosenDie != null){
-                        diceDiscs.addDiceToDisc(position, chosenDie);
-                    }
-                }
-                // check for adjacent Basilicas
-                if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
-                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
-                }
-                if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
-                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
-                }
-            } else {
-                PlayerInterface.printOut("Card activation cancelled.", true);
-                activationData = null;
-            }
-        }
-
-        return activationData;
-    }
-
-    @Override
-    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-        boolean activated = true;
-        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
-        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
-
-        return activated;
+    public void activate(Player player, int position) {
+        //TODO: fill in
     }
 
     @Override
     public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //do nothing when discarded
     }
 }

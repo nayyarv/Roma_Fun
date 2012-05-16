@@ -174,7 +174,7 @@ public class Player_old {
                     validChoice = false;
                 }
             } else if(option == BRIBERY){
-                if(diceDiscs.useBriberyDisc(this, chosenDie)){
+                if(diceDiscs.planBriberyDisc(this, chosenDie)){
                     chosenDie = null;
                     validChoice = true;
                 } else {

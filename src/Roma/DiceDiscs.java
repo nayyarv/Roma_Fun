@@ -116,7 +116,7 @@ public class DiceDiscs {
         return activateEnabled;
     }
 
-    public boolean useBriberyDisc(Player player, int dieValue) throws CancelAction{
+    public boolean planBriberyDisc(Player player, int dieValue) throws CancelAction{
         boolean activateEnabled = false;
         MoneyManager moneyManager = playArea.getMoneyManager();
         int position = BRIBERY_INDEX;
@@ -124,6 +124,12 @@ public class DiceDiscs {
             activateEnabled = gatherData(player, position);
         }
         return activateEnabled;
+    }
+
+    public void useBriberyDisc(Player player, int position, Dice die){
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        moneyManager.loseMoney(player.getPlayerID(), die.getValue());
+        activateCard(player, position, die);
     }
 
     public void activateCard(Player player, int position, Dice die) {

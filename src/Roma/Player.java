@@ -237,7 +237,7 @@ public class Player {
                     validChoice = false;
                 }
             } else if(option == BRIBERY){
-                if(diceDiscs.useBriberyDisc(this, chosenDieValue)){
+                if(diceDiscs.planBriberyDisc(this, chosenDieValue)){
                     position = DiceDiscs.BRIBERY_INDEX;
                     currentAction.setPosition(position);
                     currentAction.setDiscType(ActionData.BRIBERY);
@@ -406,27 +406,22 @@ public class Player {
 
         if(actionData.getDiscType() == ActionData.DICE){
             diceDiscs.activateCard(this, actionData.getPosition(), chosenDie);
+
         } else if(actionData.getDiscType() == ActionData.BRIBERY){
+            diceDiscs.useBriberyDisc(this, actionData.getPosition(), chosenDie);
 
         } else if(actionData.getDiscType() == ActionData.MONEY){
+            diceDiscs.useMoneyDisc(playerID, chosenDie);
 
         } else if(actionData.getDiscType() == ActionData.CARD){
+            diceDiscs.useDrawDisc(playerID, chosenDie);
+            drawCards(chosenDieValue.getValue());
+            chosenDieValue = null;
 
         } else {
             System.err.println("WTF action data error!");
             assert(false);
         }
-    }
-
-    private void useMoneyDisc(){
-        diceDiscs.planMoneyDisc(playerID, chosenDieValue);
-        chosenDieValue = null;
-    }
-
-    private void useCardDisc(){
-        diceDiscs.useDrawDisc(playerID, chosenDieValue);
-        drawCards(chosenDieValue.getValue());
-        chosenDieValue = null;
     }
 
 
@@ -443,8 +438,6 @@ public class Player {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();
         CardHolder chosenCard = null;
-
-        System.out.println("Drawing " + value + " cards...");
 
         for (int i = 0; i < value; i++) {
             tempHand.add(cardManager.drawACard());

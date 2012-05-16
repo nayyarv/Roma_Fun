@@ -36,9 +36,11 @@ public class ActionData {
     //For using action dice
     private int actionDiceIndex;    //used
     private String discType;        //used 1 2 3 4
+    private int position;
     private int diceValue;          //used
     private int battleDice;         //used
     private String cardName;        //used
+    private int drawCardIndex;
 
     //For laying a card
     private int cardIndex;          //used

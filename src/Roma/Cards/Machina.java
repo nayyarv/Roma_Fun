@@ -3,6 +3,7 @@ package Roma.Cards;
 import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -65,7 +66,7 @@ public class Machina extends CardBase {
             CardHolder card = player.chooseCardIndex(buildingCards);
             //TODO: Allow players to see the dice discs while placing their cards
             if (card ==null) { //i.e. cancelled
-                System.out.println("You must choose a card");
+                PlayerInterface.printOut("You must choose a card", true);
             } else {
                 int choice = player.getDiceDiscIndex("");
                 if (choice!=-1){//I.e not cancel

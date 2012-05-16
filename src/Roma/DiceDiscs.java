@@ -1,7 +1,6 @@
 package Roma;
 
 import Roma.Cards.*;
-import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 

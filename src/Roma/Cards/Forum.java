@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -68,15 +69,15 @@ public class Forum extends CardBase {
 
         if(freeDice.isEmpty()){
             activationData = null;
-            System.out.println("Not enough free action dice!");
+            PlayerInterface.printOut("Not enough free action dice!", true);
         } else {
-            System.out.println("Please choose a second die to use");
+            PlayerInterface.printOut("Please choose a second die to use", true);
             chosenDie = player.getDieIndex(freeDice);
             if(chosenDie != null){
                 diceDiscs.addDiceToDisc(position, chosenDie);
                 // check for adjacent Templum
                 if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
-                    System.out.println("Would you like to use a 3rd die?");
+                    PlayerInterface.printOut("Would you like to use a 3rd die?", true);
                     chosenDie = null;
                     chosenDie = player.getDieIndex(freeDice);
                     if(chosenDie != null){
@@ -85,13 +86,13 @@ public class Forum extends CardBase {
                 }
                 // check for adjacent Basilicas
                 if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
-                    System.out.println("You get 2 extra victory tokens from your adjacent Basilica!");
+                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
                 }
                 if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
-                    System.out.println("You get 2 extra victory tokens from your adjacent Basilica!");
+                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
                 }
             } else {
-                System.out.println("Card activation cancelled.");
+                PlayerInterface.printOut("Card activation cancelled.", true);
                 activationData = null;
             }
         }

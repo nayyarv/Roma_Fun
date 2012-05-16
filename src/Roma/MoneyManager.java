@@ -1,5 +1,7 @@
 package Roma;
 
+import Roma.PlayerInterfaceFiles.PlayerInterface;
+
 public class MoneyManager {
     public final static int STARTING_MONEY = 0;
 
@@ -23,7 +25,7 @@ public class MoneyManager {
         if (playerMoney[playerID] > amount){
             enoughMoney = true;
         } else {
-            System.out.println("Not enough money!");
+            PlayerInterface.printOut("Not enough money!", true);
         }
         return enoughMoney;
     }

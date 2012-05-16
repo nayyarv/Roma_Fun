@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -65,13 +66,13 @@ public class Nero extends CardBase {
 
         CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
-        System.out.println("Available Targets:");
+        PlayerInterface.printOut("Available Targets:", true);
         for(int i = 0; i < enemyCards.length; i++){
             if(enemyCards[i] != null && enemyCards[i].getType() == Card.BUILDING){
-                System.out.println((i + 1) + ") " + enemyCards[i].getName());
+                PlayerInterface.printOut((i + 1) + ") " + enemyCards[i].getName(), true);
                 validInput.add(i + 1);
             } else {
-                System.out.println((i + 1) + ") #");
+                PlayerInterface.printOut((i + 1) + ") #", true);
             }
         }
 

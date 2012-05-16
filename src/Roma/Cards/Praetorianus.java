@@ -2,6 +2,7 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class Praetorianus extends CardBase {
         BattleManager battleManager = playArea.getBattleManager();
         int targetDisc = -1;
 
-        System.out.println("Blocking...");
+        PlayerInterface.printOut("Blocking...", true);
         battleManager.block(otherPlayer(player.getPlayerID()), targetDisc);
 
         return activated;

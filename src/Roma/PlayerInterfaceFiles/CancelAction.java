@@ -8,6 +8,6 @@ package Roma.PlayerInterfaceFiles;
  */
 public class CancelAction extends Exception {
     public void message(){
-        System.out.println("Cancelling Action");
+        PlayerInterface.printOut("Cancelling Action", true);
     }
 }

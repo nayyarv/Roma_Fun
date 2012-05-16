@@ -8,6 +8,7 @@ package Roma.Cards;
  */
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,7 +67,7 @@ public class Mercator extends CardBase {
         //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
         int numTokensRead;
 
-        System.out.println(STR_PROMPT);
+        PlayerInterface.printOut(STR_PROMPT, true);
 
         while(!validInput){
             numTokensRead = input.nextInt();
@@ -79,7 +80,7 @@ public class Mercator extends CardBase {
                 validInput = true;
                 activated = false;
             } else {
-                System.out.println("Please give a valid number");
+                PlayerInterface.printOut("Please give a valid number", true);
             }
         }
 

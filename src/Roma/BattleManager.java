@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 /**
  * User: Andrew and Varun
@@ -79,19 +80,19 @@ public class BattleManager {
             defense--;
         }
 
-        System.out.println("Defense to beat: " + defense);
+        PlayerInterface.printOut("Defense to beat: " + defense, true);
         //TODO: Allow player to roll
         diceHolder.rollBattleDice();
         battleValue = diceHolder.getBattleValue();
 
         //TODO: Print battle die value
-        System.out.println("You rolled a: " + battleValue[0]);
+        PlayerInterface.printOut("You rolled a: " + battleValue[0], true);
         if(battleValue[0] >= defense){
             diceDiscs.discardTarget(targetPlayerID, target);
             kill = true;
-            System.out.println("Battle Victory!");
+            PlayerInterface.printOut("Battle Victory!", true);
         } else {
-            System.out.println("Battle Defeat!");
+            PlayerInterface.printOut("Battle Defeat!", true);
         }
 
         return kill;

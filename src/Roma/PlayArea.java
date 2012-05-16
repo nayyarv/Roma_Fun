@@ -114,25 +114,25 @@ public class PlayArea {
         String cardName;
 
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            System.out.println("-------------------------------------");
-            System.out.println("Player: " + players[player].getName());
-            System.out.println("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                    "  \tMoney: " + moneyManager.getPlayerMoney(player));
-            System.out.println("Cards in hand: " + players[player].handSize());
-            System.out.println("Cards in play: ");
+            PlayerInterface.printOut("-------------------------------------", true);
+            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+            PlayerInterface.printOut("Cards in play: ", true);
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
                 cardName = diceDiscs.getCardName(player, position);
                 if(position == 6){
-                    System.out.print("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
-                            " : Dice on disc: ");
+                    PlayerInterface.printOut("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ", false);
                 } else {
-                    System.out.print("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
-                            " : Dice on disc: ");
+                    PlayerInterface.printOut("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                            " : Dice on disc: ", false);
                 }
                 for(Dice die : diceDiscs.checkForDice(player, position)){
-                    System.out.print(die.getValue() + " ");
+                    PlayerInterface.printOut(die.getValue() + " ", false);
                 }
-                System.out.println();
+                PlayerInterface.printOut("", true);
             }
         }
     }

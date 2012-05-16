@@ -55,7 +55,7 @@ public class GamePlayerInterface extends PlayerInterface {
 
     private void showOptions(String title, String ... options){
         printLine();
-        printOut(title,true);
+        printOut(title, true);
         for(int i=0;i<options.length;i++){
             printOut((i+1)+") " + options[i], true);
         }
@@ -71,9 +71,9 @@ public class GamePlayerInterface extends PlayerInterface {
         if(input>0&&input<=max){
             inBounds = true;
         } else if(input==CANCEL){
-            System.out.println("Invalid Input");
+            PlayerInterface.printOut("Invalid Input", true);
         } else {
-            System.out.println("Out of range");
+            PlayerInterface.printOut("Out of range", true);
         }
         return inBounds;
     }
@@ -103,7 +103,7 @@ public class GamePlayerInterface extends PlayerInterface {
     }
 
     public String getPlayerName(int num){
-        printOut("Name of player" + (num + 1) + ": ", false);
+        printOut("Name of player" + (num + 1) + ": ", true);
         return readString();
     }
 
@@ -128,13 +128,13 @@ public class GamePlayerInterface extends PlayerInterface {
             } else {
                 name = enemyDisc.get(i).getName();
             }
-            printOut(name+"("+(i+1)+")", false);
+            printOut(name+"("+(i+1)+")", true);
 
             contains = ArrayContains(i, chosen);
 
             printFilter(myDiscs.get(i),type,contains);
         }
-        printOut((i+1)+") Cancel",true);
+        printOut((i+1)+") Cancel", true);
 
         int input;
         do {
@@ -155,15 +155,15 @@ public class GamePlayerInterface extends PlayerInterface {
 
         int i = 1;
         for(CardHolder card: cardList){
-            printOut(i+")", false);
+            printOut(i+")", true);
             contains = ArrayContains(i-1, chosen);
             printFilter(card, type, contains);
             i++;
         }
-        printOut(i+") Cancel",true);
+        printOut(i+") Cancel", true);
 
 
-        printOut("Which option: " , false);
+        printOut("Which option: ", true);
         int input;
         do {
             input = getIntegerInput(cardList.size()+1)-1;
@@ -182,9 +182,9 @@ public class GamePlayerInterface extends PlayerInterface {
 
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
-        System.out.println("-------------------------------------");
+        PlayerInterface.printOut("-------------------------------------", true);
         for(CardHolder card : cardList){
-            System.out.println(i + ") " + card.getName());
+            PlayerInterface.printOut(i + ") " + card.getName(), true);
             i++;
         }
     }
@@ -194,7 +194,7 @@ public class GamePlayerInterface extends PlayerInterface {
         // check's the chosen card is of the correct type
         if(!correct){
             printOut("Incorrect card chosen," +
-                    " expecting a "+ type +" card, instead received a", false);
+                    " expecting a "+ type +" card, instead received a", true);
             if (card==null){
                 printOut("n empty Card", true);
             } else if (contains){
@@ -227,11 +227,11 @@ public class GamePlayerInterface extends PlayerInterface {
 
     @Override
     public void printDiceList(ArrayList<Dice> diceList) {
-        System.out.println("Dice:");
+        PlayerInterface.printOut("Dice:", true);
         int i = 0;
         for(Dice dice : diceList){
             i++;
-            System.out.println(i + ") " + dice.getValue());
+            PlayerInterface.printOut(i + ") " + dice.getValue(), true);
         }
     }
 }

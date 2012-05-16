@@ -6,6 +6,8 @@
 
 package Roma;
 
+import Roma.PlayerInterfaceFiles.PlayerInterface;
+
 import java.util.*;
 
 public class DiceHolder {
@@ -18,7 +20,7 @@ public class DiceHolder {
 
     public DiceHolder() {
         if (DEBUG) {
-            System.out.println("Constructing DiceHolder: ");
+            PlayerInterface.printOut("Constructing DiceHolder: ", true);
         }
         playerDice = new Dice[Roma.MAX_PLAYERS][DICE_PER_PLAYER];
         battleDice = new Dice[MAX_BATTLE_DICE];
@@ -27,7 +29,7 @@ public class DiceHolder {
             for (int j = 0; j < DICE_PER_PLAYER; j++) {
                 playerDice[i][j] = new Dice(i);
                 if (DEBUG) {
-                    System.out.println("Dice constructed");
+                    PlayerInterface.printOut("Dice constructed", true);
                 }
             }
         }
@@ -35,12 +37,12 @@ public class DiceHolder {
         for (int i = 0; i < MAX_BATTLE_DICE; i++) {
             battleDice[i] = new Dice(-1);
             if (DEBUG) {
-                System.out.println("Dice constructed");
+                PlayerInterface.printOut("Dice constructed", true);
             }
         }
 
         if (DEBUG) {
-            System.out.println("DiceHolder constructed");
+            PlayerInterface.printOut("DiceHolder constructed", true);
         }
     }
 

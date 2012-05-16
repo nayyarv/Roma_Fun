@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,13 +67,13 @@ public class Scaenicus extends CardBase {
 
         CardHolder[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
-        System.out.println("Available Targets:");
+        PlayerInterface.printOut("Available Targets:", true);
         for(int i = 0; i < friendlyCards.length; i++){
             if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
-                System.out.println((i + 1) + ") " + friendlyCards[i].getName());
+                PlayerInterface.printOut((i + 1) + ") " + friendlyCards[i].getName(), true);
                 validInput.add(i + 1);
             } else {
-                System.out.println((i + 1) + ") #");
+                PlayerInterface.printOut((i + 1) + ") #", true);
             }
         }
 

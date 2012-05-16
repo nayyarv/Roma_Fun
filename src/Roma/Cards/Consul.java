@@ -81,14 +81,14 @@ public class Consul extends CardBase {
                     choice = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3);
                     if(choice == INCREASE){
                         if(chosenDice.getValue() == Dice.MAX_DIE_VALUE){
-                            System.out.println("Can't increase die value over" + Dice.MAX_DIE_VALUE + "!");
+                            PlayerInterface.printOut("Can't increase die value over" + Dice.MAX_DIE_VALUE + "!", true);
                         } else {
                             chosenDice.incrementValue();
                             validChoice = true;
                         }
                     } else if(choice == DECREASE){
                         if(chosenDice.getValue() == Dice.MIN_DIE_VALUE){
-                            System.out.println("Can't decrease die value over" + Dice.MIN_DIE_VALUE + "!");
+                            PlayerInterface.printOut("Can't decrease die value over" + Dice.MIN_DIE_VALUE + "!", true);
                         } else {
                             chosenDice.decrementValue();
                             validChoice = false;

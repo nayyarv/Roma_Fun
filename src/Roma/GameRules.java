@@ -52,10 +52,10 @@ public class GameRules {
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
             //extracts the first num-init-cards from the initial set
 
-            System.out.println(players[i].getName() +
-                    ", these are the " +Roma.NUM_INIT_CARDS+ " cards dealt to you.\n" +
+            PlayerInterface.printOut(players[i].getName() +
+                    ", these are the " + Roma.NUM_INIT_CARDS + " cards dealt to you.\n" +
                     "You must choose " + Roma.NUM_CARDS_SWAPPED + " to give to your opponent.\n" +
-                    "Choose the first Card");
+                    "Choose the first Card", true);
             //Prompt: move printing to player interface?
 
             int temp = PlayerInterface.CANCEL;
@@ -68,10 +68,10 @@ public class GameRules {
                         temp = players[i].getCardIndex(individualHand,"");
                         choices.add(individualHand.remove(temp));
                     } catch (CancelAction cancelAction) {
-                        System.out.println("You must choose a card: ");
+                        PlayerInterface.printOut("You must choose a card: ", true);
                     }
                 }
-                if(j!=Roma.NUM_CARDS_SWAPPED-1) System.out.println("Choose the next card:");
+                if(j!=Roma.NUM_CARDS_SWAPPED-1) PlayerInterface.printOut("Choose the next card:", true);
             }
             players[i].addCardListToHand(individualHand);
             players[(i+1)%Roma.MAX_PLAYERS].addCardListToHand(choices);
@@ -95,13 +95,13 @@ public class GameRules {
 
             while(!hand.isEmpty()){
                 playArea.printStats();
-                System.out.println(activePlayer.getName() + ", please lay all your cards");
+                PlayerInterface.printOut(activePlayer.getName() + ", please lay all your cards", true);
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){
                     try {
                         chosenCardIndex = activePlayer.getCardIndex(hand,"");
                     } catch (CancelAction cancelAction) {
-                        System.out.println("You must choose a card");
+                        PlayerInterface.printOut("You must choose a card", true);
                     }
                 }
                 targetDisc = CANCEL; // cancel value
@@ -109,7 +109,7 @@ public class GameRules {
                     try {
                         targetDisc = activePlayer.getDiceDiscIndex("");
                     } catch (CancelAction cancelAction) {
-                        System.out.println("You must choose a disc");
+                        PlayerInterface.printOut("You must choose a disc", true);
                     }
                 }
                 diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, hand.remove(chosenCardIndex));
@@ -128,7 +128,7 @@ public class GameRules {
                 countNull++;
             }
         }
-        System.out.println("There are " + countNull + " empty slots, losing that many players");
+        PlayerInterface.printOut("There are " + countNull + " empty slots, losing that many players", true);
         victoryTokens.playerToPool(playerID, countNull);
     }
 

@@ -3,6 +3,7 @@ package Roma.Cards;
 import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import Roma.Roma;
 
 import java.util.ArrayList;
@@ -69,18 +70,18 @@ public class Gladiator extends CardBase {
 
         CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 
-        System.out.println("Available Targets:");
+        PlayerInterface.printOut("Available Targets:", true);
         for(int i = 0; i < enemyCards.length; i++){
             if(enemyCards[i] != null && enemyCards[i].getType() == Card.CHARACTER){
-                System.out.println((i + 1) + ") " + enemyCards[i].getName());
+                PlayerInterface.printOut((i + 1) + ") " + enemyCards[i].getName(), true);
                 validInput.add(i + 1);
             } else {
-                System.out.println((i + 1) + ") #");
+                PlayerInterface.printOut((i + 1) + ") #", true);
             }
         }
 
         if(validInput.isEmpty()){
-            System.out.println("No valid targets!");
+            PlayerInterface.printOut("No valid targets!", true);
             inputValid = true;
             activated = false;
         }

@@ -63,13 +63,13 @@ public class Roma {
                         Desktop.getDesktop().open(myFile);
                     } catch (IOException ex) {
                         // no application registered for PDFs
-                        System.out.println("Roma.pdf not found!");
+                        PlayerInterface.printOut("Roma.pdf not found!", true);
                     }
                 }
             } else if (choice == 3) {  // quit game
                 exit = true;
-                System.out.println("Quitting Roma.\n" +
-                        "Good Bye~");
+                PlayerInterface.printOut("Quitting Roma.\n" +
+                        "Good Bye~", true);
                 try {
                     Thread.sleep(PAUSE_DURATION);
                 } catch (InterruptedException e) {
@@ -78,7 +78,7 @@ public class Roma {
             } else if (choice == 4) {  // debug choice
 
             } else {
-                System.out.println("Invalid choice. Please choose again.");
+                PlayerInterface.printOut("Invalid choice. Please choose again.", true);
             }
         }
     }

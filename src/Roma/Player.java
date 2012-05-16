@@ -128,7 +128,7 @@ public class Player {
                     reroll = false;
                     validChoice = true;
                 } else {
-                    System.out.println("Please choose either yes or no.");
+                    PlayerInterface.printOut("Please choose either yes or no.", true);
                 }
             }
             if(reroll){
@@ -257,7 +257,7 @@ public class Player {
             } else if(option == CANCEL_OPTION){
                 cancel();
             } else {
-                System.out.println("Please choose a valid action");
+                PlayerInterface.printOut("Please choose a valid action", true);
             }
         }
     }
@@ -331,19 +331,19 @@ public class Player {
                 action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
 
                 if(action == CHOOSE_CARDS){
-                    System.out.print("Card number: ");
+                    PlayerInterface.printOut("Card number: ", false);
                     choice = playerInterface.getIndex(cardList.size());
                     validChoice = true;
                 } else if(action == CHECK_DESC){
-                    System.out.print("Check which card number: ");
+                    PlayerInterface.printOut("Check which card number: ", false);
                     action = playerInterface.getIndex(cardList.size());
-                    System.out.println(cardList.get(action).toString());
+                    PlayerInterface.printOut(cardList.get(action).toString(), true);
                 } else if(action == PRINT_CARDS){
                     playerInterface.printCardList(cardList);
                 } else if(action == CANCEL){
                     cancel();
                 } else {
-                    System.out.println("Please choose a valid action");
+                    PlayerInterface.printOut("Please choose a valid action", true);
                 }
             }
         }
@@ -374,7 +374,7 @@ public class Player {
             } else if (option == CANCEL_OPTION) {
                 cancel();
             } else {
-                System.out.println("Please choose a valid action");
+                PlayerInterface.printOut("Please choose a valid action", true);
             }
         }
         option--;

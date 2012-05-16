@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class Legionarius extends CardBase {
         int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
 
         if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
-            System.out.println("No card to attack!");
+            PlayerInterface.printOut("No card to attack!", true);
             activated = false;
         } else {
             battleManager.battle(targetPlayerID, position);

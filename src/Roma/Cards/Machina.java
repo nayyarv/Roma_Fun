@@ -66,7 +66,7 @@ public class Machina extends CardBase {
             if (card ==null) { //i.e. cancelled
                 System.out.println("You must choose a card");
             } else {
-                int choice = player.chooseDiceDisc();
+                int choice = player.chooseDiceDiscIndex();
                 if (choice!=-1){//I.e not cancel
                     diceDiscs.layCard(player.getPlayerID(), choice, card);
                 } else {

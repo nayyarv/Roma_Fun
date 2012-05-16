@@ -56,7 +56,7 @@ public class Praetorianus extends CardBase {
     public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
         int targetDisc = -1;
         playArea.printStats();
-        targetDisc = player.chooseDiceDisc();
+        targetDisc = player.chooseDiceDiscIndex();
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

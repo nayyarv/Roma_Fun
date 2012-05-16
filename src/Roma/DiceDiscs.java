@@ -1,6 +1,7 @@
 package Roma;
 
 import Roma.Cards.*;
+import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -20,7 +21,7 @@ import java.util.Collections;
 
 public class DiceDiscs {
     private static final boolean DEBUG = true;
-    public static final int BRIBERY_POSITION = 6;
+    public static final int BRIBERY_INDEX = 6;
     public static final int CARD_POSITIONS = 7;
     public static final int TURRIS_LAID = 1;
     public static final int TURRIS_DISCARD = -1;
@@ -102,12 +103,10 @@ public class DiceDiscs {
         activeCards[playerID][position] = newCard;
     }
 
-    public ArrayList<Integer> gatherData(Player player, int position, int dieValue) throws CancelAction {
+    public boolean gatherData(Player player, int position) throws CancelAction {
         int playerID = player.getPlayerID();
         boolean activateEnabled = false;
         CardHolder targetCard = activeCards[playerID][position];
-        ArrayList<Integer> activationData = null;
-        position--;
 
         if(targetCard != null){
             // There is a card there
@@ -116,7 +115,7 @@ public class DiceDiscs {
             // Can it be activated(Eg Turris is passive) or is it blocked
 
             if(activateEnabled){
-                activationData = targetCard.gatherData(player, position);
+                targetCard.gatherData(player, position);
             } else {
                 playerInterface.printOut("That card can't be activated", true);
             }
@@ -124,18 +123,17 @@ public class DiceDiscs {
             playerInterface.printOut("No card there!", true);
         }
 
-        return activationData;
+        return activateEnabled;
     }
 
-    public ArrayList<Integer> useBriberyDisc(Player player, int dieValue) throws CancelAction{
-        ArrayList<Integer> activationData = null;
+    public boolean useBriberyDisc(Player player, int dieValue) throws CancelAction{
+        boolean activateEnabled = false;
         MoneyManager moneyManager = playArea.getMoneyManager();
-        int position = BRIBERY_POSITION;
+        int position = BRIBERY_INDEX;
         if(moneyManager.loseMoney(player.getPlayerID(), dieValue)){
-            activationData = gatherData(player, position, dieValue);
+            activateEnabled = gatherData(player, position);
         }
-
-        return activationData;
+        return activateEnabled;
     }
 
     public boolean activateCard(Player player, int position, Dice die) {

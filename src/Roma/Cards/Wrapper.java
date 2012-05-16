@@ -1,5 +1,6 @@
 package Roma.Cards;
 
+import Roma.History.ActionData;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 
@@ -126,8 +127,8 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public ArrayList<Integer> gatherData(Player player, int position) throws CancelAction {
-        return contents.gatherData(player, position);
+    public void gatherData(Player player, int position) throws CancelAction {
+        contents.gatherData(player, position);
     }
 
     @Override

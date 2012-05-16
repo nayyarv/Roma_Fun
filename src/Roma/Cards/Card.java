@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -24,7 +25,7 @@ public interface Card {
     public int getDefense();
     public boolean isWrapper();
     public String toString();
-    public abstract ArrayList<Integer> gatherData(Player player, int position) throws CancelAction;
+    public abstract void gatherData(Player player, int position) throws CancelAction;
     public abstract boolean activate(Player player, int position, ArrayList<Integer> activationData);
     public Card getContents();
     public void setContents(Card card);

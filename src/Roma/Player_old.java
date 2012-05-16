@@ -181,7 +181,7 @@ public class Player_old {
                     validChoice = false;
                 }
             } else if(option == MONEY){
-                diceDiscs.useMoneyDisc(playerID, chosenDie);
+                diceDiscs.planMoneyDisc(playerID, chosenDie);
                 chosenDie = null;
                 validChoice = true;
             } else if(option == DRAW_CARD){

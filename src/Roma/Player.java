@@ -361,6 +361,7 @@ public class Player {
     }
 
     //TODO: refactor this to include a filter
+    //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
     public int getDiceDiscIndex(String type, int... chosenIndices) throws CancelAction{
         final String strPrompt = "Which disc?";
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

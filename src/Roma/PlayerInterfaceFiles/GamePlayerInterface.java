@@ -37,6 +37,7 @@ public class GamePlayerInterface extends PlayerInterface {
         return integerInput;
     }
 
+    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0
     public int readIndex(String title, String ... choices){
         int integerInput;
         do {

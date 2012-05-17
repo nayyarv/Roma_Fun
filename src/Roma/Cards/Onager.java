@@ -100,9 +100,17 @@ public class Onager extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = player.getOtherPlayerID();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetIndex = activationData.remove(0);
+
+        diceDiscs.discardTarget(targetPlayerID, targetIndex);
+        diceDiscs.discardTarget(player.getPlayerID(), position);
     }
 
     @Override

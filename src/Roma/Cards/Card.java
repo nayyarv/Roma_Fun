@@ -25,11 +25,12 @@ public interface Card {
     public int getDefense();
     public boolean isWrapper();
     public String toString();
-    public abstract void gatherData(Player player, int position) throws CancelAction;
-    public abstract void activate(Player player, int position);
+    public void gatherData(Player player, int position) throws CancelAction;
+    public void activate(Player player, int position);
+    public void enterPlay(Player player, int position);
     public Card getContents();
     public void setContents(Card card);
     public Card getContainer();
     public void setContainer(Card holder);
-    public void discarded();
+    public void leavePlay();
 }

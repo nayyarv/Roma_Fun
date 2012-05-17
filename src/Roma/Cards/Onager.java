@@ -95,18 +95,32 @@ public class Onager extends CardBase {
 //        return activated;
 //    }
 
+    //TODO: refactor battle into currentAction values
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
         //TODO: fill in
     }
 
+    //activationData: [targetIndex]
+    //reads battle value from currentAction
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetPlayerID = player.getOtherPlayerID();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetIndex = activationData.remove(0);
+
+        battleManager.battle(targetPlayerID, targetIndex);
     }
 
     @Override
-    public void discarded() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 }

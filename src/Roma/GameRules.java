@@ -112,7 +112,7 @@ public class GameRules {
                         PlayerInterface.printOut("You must choose a disc", true);
                     }
                 }
-                diceDiscs.layCard(activePlayer.getPlayerID(), targetDisc, hand.remove(chosenCardIndex));
+                diceDiscs.layCard(activePlayer, targetDisc, hand.remove(chosenCardIndex));
             }
         }
     }

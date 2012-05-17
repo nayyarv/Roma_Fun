@@ -13,6 +13,10 @@ import java.util.ArrayList;
  * Desc: Architectus Card
  */
 public class Architectus extends CardBase {
+    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
+    private static int COST_SCALE = 0;
+    private static int DEFENSE_SHIFT = Wrapper.INITIAL_SHIFT;
+    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Architectus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
@@ -52,11 +56,6 @@ public class Architectus extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
-
-    private static int COST_SHIFT = 0;
-    private static int COST_SCALE = 0;
-    private static int DEFENSE_SHIFT = 0;
-    private static int DEFENSE_SCALE = 1;
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
@@ -140,7 +139,12 @@ public class Architectus extends CardBase {
     }
 
     @Override
-    public void discarded() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 }

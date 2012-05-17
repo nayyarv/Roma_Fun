@@ -14,22 +14,23 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Wrapper implements Card {
-    private final static int INITIAL_SHIFT = 0;
-    private final static int INITIAL_SCALE = 1;
+    public final static int INITIAL_SHIFT = 0;
+    public final static int INITIAL_SCALE = 1;
     private final boolean isWrapper = true;
 
     private Card container;
     private Card contents;
     private boolean activateEnabled;
-    private boolean playable;
     private int defenseShift = INITIAL_SHIFT;
     private int defenseScale = INITIAL_SCALE;
     private int costShift = INITIAL_SHIFT;
     private int costScale = INITIAL_SCALE;
 
-    public Wrapper(Card card, Card holder){
-        contents = card;
-        container = holder;
+    public Wrapper(Card card){
+        contents = card.getContents();
+        container = card;
+        contents.setContainer(this);
+        container.setContents(this);
         activateEnabled = contents.isActivateEnabled();
     }
 
@@ -47,11 +48,6 @@ public class Wrapper implements Card {
 
     public void setContainer(Card holder){
         container = holder;
-    }
-
-    @Override
-    public void discarded() {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void setDefenseShift(int defenseShift) {
@@ -141,6 +137,18 @@ public class Wrapper implements Card {
         if(container != null && contents != null){
             container.setContents(contents);
             contents.setContainer(container);
+            container = null;
+            contents = null;
         }
+    }
+
+    @Override
+    public void enterPlay(Player player, int position) {
+        contents.enterPlay(player, position);
+    }
+
+    @Override
+    public void leavePlay() {
+        container.leavePlay();
     }
 }

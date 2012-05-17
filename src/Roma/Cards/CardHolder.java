@@ -1,10 +1,7 @@
 package Roma.Cards;
 
-import Roma.History.ActionData;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
-
-import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,17 +42,6 @@ public class CardHolder implements Card{
 
     public void setContainer(Card holder){
         assert false;
-    }
-
-    @Override
-    public void discarded() {
-        Wrapper wrapper;
-        //remove all wrappers
-        while(!contents.isWrapper()){
-            wrapper = (Wrapper) contents;
-            wrapper.deleteThisWrapper();
-        }
-        contents.discarded();
     }
 
     public boolean isActivateEnabled() {
@@ -100,5 +86,21 @@ public class CardHolder implements Card{
     @Override
     public void activate(Player player, int position) {
         contents.activate(player, position);
+    }
+
+    @Override
+    public void enterPlay(Player player, int position) {
+        contents.enterPlay(player, position);
+    }
+
+    @Override
+    public void leavePlay() {
+        Wrapper wrapper;
+        //remove all wrappers
+        while(!contents.isWrapper()){
+            wrapper = (Wrapper) contents;
+            wrapper.deleteThisWrapper();
+        }
+        contents.leavePlay();
     }
 }

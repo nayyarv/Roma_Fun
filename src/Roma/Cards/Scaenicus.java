@@ -98,13 +98,25 @@ public class Scaenicus extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetIndex] + extra activation data for copied card
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(player.getPlayerID());
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetIndex = activationData.remove(0);
+
+        friendlyCards[targetIndex].activate(player, position);
     }
 
     @Override
-    public void discarded() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 }

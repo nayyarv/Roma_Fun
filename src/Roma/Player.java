@@ -6,6 +6,7 @@ import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Player {
@@ -212,7 +213,7 @@ public class Player {
         }
         diceValues[diceList.size()] = "Cancel";
 
-        diceIndex = playerInterface.readIndex(strPrompt, diceValues);
+        diceIndex = playerInterface.readIndex(strPrompt, false, diceValues);
 
         if(diceIndex == CANCEL) cancel();
 
@@ -318,6 +319,11 @@ public class Player {
 
     //TODO: refactor this to include a filter
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
+        return getCardIndex(cardList);
+    }
+
+
+    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
         final String
                 strPrompt = "Possible actions:",
                 strOption1 = "Choose a card",
@@ -333,7 +339,7 @@ public class Player {
         int action = 0;
         boolean validChoice = false;
 
-        playerInterface.printCardList(cardList);
+        playerInterface.printFilteredCardList(cardList);
 
         if(cardList.size() == 0){
             PlayerInterface.printOut("There are no cards!", true);
@@ -345,31 +351,100 @@ public class Player {
                     choice = playerInterface.getIndex(cardList.size());
                     validChoice = true;
                 } else if(action == CHECK_DESC){
-                    PlayerInterface.printOut("Check which card number: ", false);
-                    action = playerInterface.getIndex(cardList.size());
-                    PlayerInterface.printOut(cardList.get(action).toString(), true);
+                    checkDesc(cardList);
                 } else if(action == PRINT_CARDS){
-                    playerInterface.printCardList(cardList);
+                    playerInterface.printFilteredCardList(cardList);
                 } else if(action == CANCEL){
                     cancel();
                 } else {
                     PlayerInterface.printOut("Please choose a valid action", true);
                 }
+                //Now check their choice is valid
+
+                if(choice == CANCEL){
+                    //Cancelled
+                } else if (cardList.get(choice)==null){
+                    //Card is empty
+                    PlayerInterface.printOut("You have chosen an empty card", true);
+                } else if (!cardList.get(choice).getPlayable()){
+                    PlayerInterface.printOut("You have made an invalid card choice", true);
+                }
             }
         }
-
         return choice;
     }
 
+    private void checkDesc(ArrayList<CardHolder> cardList){
+        int action;
+        PlayerInterface.printOut("Check which card number: ", false);
+        action = playerInterface.getIndex(cardList.size());
+        PlayerInterface.printOut(cardList.get(action).toString(), true);
+    }
+
+
+
     //TODO: refactor this to include a filter
     //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
+    public int getDiceDiscsIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
+    throws CancelAction{
+        assert (diceDiscs[Roma.PLAYER_ONE].length==DiceDiscs.CARD_POSITIONS);
+        assert(diceDiscs[Roma.PLAYER_ONE].length == diceDiscs[Roma.PLAYER_TWO].length);
+
+        int other = getOtherPlayerID();
+
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPLayer= new ArrayList<CardHolder>();
+
+        Collections.addAll(currPlayer, diceDiscs[playerID]);
+        Collections.addAll(opposingPLayer, diceDiscs[other]);
+
+        int option = CANCEL;
+        final String
+                strPrompt = "Dice Discs:",
+                strOption[] = {"Check Description of your Cards",
+                        "Check Description of your Opponent's Card",
+                        "Choose Disc"};
+
+        final int
+                DESC_OWN = 1,
+                DESC_OPP = 2,
+                CHOOSE_DISC = 3;
+        boolean validChoice = false;
+        int choice = CANCEL;
+
+
+        while(!validChoice){
+            playerInterface.printFilteredDiceList(currPlayer, opposingPLayer,
+                    filterCurrent, filterOther);
+            //Print's out a nice version of the dice lists
+            option = playerInterface.readInput(strPrompt, true, strOption);
+            if (option == DESC_OWN){
+                checkDesc(currPlayer);
+            } else if (option == DESC_OPP){
+                checkDesc(opposingPLayer);
+            } else if(option == CHOOSE_DISC){
+                PlayerInterface.printOut("Which Disc: ",false);
+                choice = playerInterface.getIndex(DiceDiscs.CARD_POSITIONS);
+                validChoice = true;
+            } else if (option==CANCEL){
+                cancel();
+            } else {
+                PlayerInterface.printOut("Invalid Input, please try again.", true);
+            }
+
+            //TODO: Throw an error if they choose an invalid card
+        }
+        return choice;
+    }
+
+
     public int getDiceDiscIndex(String type, int... chosenIndices) throws CancelAction{
         final String strPrompt = "Which disc?";
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        final int NUM_OPTIONS = 7;
+        final int NUM_OPTIONS = DiceDiscs.CARD_POSITIONS;
         String [] dicePrompt = new String[NUM_OPTIONS];
 
-        for (int i=0; i<DiceDiscs.CARD_POSITIONS-1;i++){
+        for (int i=0; i<NUM_OPTIONS-1;i++){
             dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
         }
         dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc: " + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);

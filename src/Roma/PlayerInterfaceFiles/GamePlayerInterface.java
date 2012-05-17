@@ -1,6 +1,5 @@
 package Roma.PlayerInterfaceFiles;
 
-import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 import Roma.Dice;
 import Roma.DiceDiscs;
@@ -25,8 +24,6 @@ public class GamePlayerInterface extends PlayerInterface {
         input = new Scanner(System.in);
     }
 
-    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0?
-    //TODO: Remove the Cancel Option from the strings where it is used
     @Override
     public int readInput(String title, boolean cancelOn, String... choices){
         int integerInput;
@@ -43,13 +40,10 @@ public class GamePlayerInterface extends PlayerInterface {
         return integerInput;
     }
 
-    //TODO: Remove the Cancel Option from the strings where it is used
     @Override
-    public int readIndex(String title, String ... choices){
+    public int readIndex(String title, boolean cancelOn, String... choices){
         int indexInput;
-
-        indexInput = readInput(title, true, choices);
-
+        indexInput = readInput(title, cancelOn, choices);
         if(indexInput != CANCEL){
             indexInput--;
         }
@@ -66,11 +60,6 @@ public class GamePlayerInterface extends PlayerInterface {
 
     private void printLine(){
         printOut("-------------------------------------", true);
-    }
-
-
-    private boolean checkInBounds(int input, int max){
-        return checkIntegerInBounds(input, 0, max);
     }
 
     private boolean checkIntegerInBounds(int input, int min, int max) {
@@ -128,113 +117,62 @@ public class GamePlayerInterface extends PlayerInterface {
             return "Anon"; //Since we have no input
         }
     }
-
-    @Override
-    public int getDiscIndex(ArrayList<CardHolder> myDiscs, ArrayList<CardHolder> enemyDisc, String type, int ... chosen){
-        assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
-        boolean contains;
-        int i;
-        String name;
-
-        for(i=0; i< DiceDiscs.CARD_POSITIONS;i++){
-            if(enemyDisc.get(i)==null){
-                name = "Empty";
-            } else {
-                name = enemyDisc.get(i).getName();
-            }
-            printOut(name+"("+(i+1)+")", true);
-
-            contains = ArrayContains(i, chosen);
-
-            printFilter(myDiscs.get(i),type,contains);
-        }
-        printOut((i+1)+") Cancel", true);
-
-        int input;
-        do {
-            input = getIntegerInput(1, DiceDiscs.CARD_POSITIONS+1)-1;
-            contains = ArrayContains(input, chosen);
-        } while ((input!=DiceDiscs.CARD_POSITIONS)&&!chosenRightType(myDiscs.get(input), type ,contains));
-
-        if (input == DiceDiscs.CARD_POSITIONS) input = CANCEL;
-        return input;
-
-    }
-
-    //TODO: merge with player.getCardIndex
-    @Override
-    public int getCardIndexFiltered(ArrayList<CardHolder> cardList, String type, int... chosen) {
-        assert ((type.equalsIgnoreCase(Card.BUILDING))||(type.equalsIgnoreCase(Card.CHARACTER)));
-        boolean contains;
-
-        int i = 1;
-        for(CardHolder card: cardList){
-            printOut(i+")", true);
-            contains = ArrayContains(i-1, chosen);
-            printFilter(card, type, contains);
-            i++;
-        }
-        printOut(i+") Cancel", true);
-
-
-        printOut("Which option: ", true);
-        int input;
-        do {
-            input = getIntegerInput(1, cardList.size()+1)-1;
-            contains = ArrayContains(input, chosen);
-        } while ((input!= cardList.size())&&!chosenRightType(cardList.get(input),type, contains));
-
-        if (input== cardList.size()) input = CANCEL;
-        return input;
-    }
-
     //choose from list
     //input: ArrayList (of dice or of cards)
     //return int
     @Override
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
-        PlayerInterface.printOut("-------------------------------------", true);
+        printLine();
         for(CardHolder card : cardList){
             PlayerInterface.printOut(i + ") " + card.getName(), true);
             i++;
         }
     }
 
-    private boolean chosenRightType(CardHolder card, String type, boolean contains){
-        boolean correct = (card!=null)&&(card.getType().equalsIgnoreCase(type));
-        // check's the chosen card is of the correct type
-        if(!correct){
-            printOut("Incorrect card chosen," +
-                    " expecting a "+ type +" card, instead received a", true);
-            if (card==null){
-                printOut("n empty Card", true);
-            } else if (contains){
-                printOut("n already chosen card", true);
-            } else {
-                printOut(" "+ card.getType()+" card", true);
-            }
+    @Override
+    public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
+                                       boolean filterCurr, boolean filterOther){
+
+        printOut("DiceDiscs", true);
+        printOut(padLeft(padCentre("Current Player", 25),14) + padCentre("Opposing Player", 25), true);
+
+        String curr;
+        String opp;
+
+        for(int i = 0;i< DiceDiscs.CARD_POSITIONS-1;i++){
+            printOut(padRight((i+1)+") Dice Disc "+(i+1),2) + ":"  , false);
+            curr = Filter(currPlayer.get(i), filterCurr);
+            opp = Filter(opposingPlayer.get(i), filterOther);
+            printOut(padCentre(curr,25)+padCentre(opp, 25), true);
         }
-        return correct;
+
+        curr = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterCurr);
+        opp = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterOther);
+
+        printOut(("7) Bribery Disc: "+padCentre(curr,25)+padCentre(opp, 25)), true);
     }
 
-    private void printFilter(CardHolder card, String type, boolean contains){
+    @Override
+    public void printFilteredCardList(ArrayList<CardHolder> cardList){
+        int i = 1;
+        for(CardHolder card: cardList){
+            printOut(i+") ", false);
+            printOut(Filter(card, false), true);
+
+        }
+    }
+
+    private String Filter(CardHolder card, boolean applyFilter){
         if(card==null){
-            printOut("#Empty#", true);
-        } else if(card.getType().equalsIgnoreCase(type)&&!contains){
-            printOut(card.getName(), true);
+            return ("#Empty#");
+        } else if (!applyFilter){
+            return card.getName();
+        } else if(card.getPlayable()) {
+            return (card.getName());
         } else {
-            printOut("###"+card.getName()+"###", true);
+            return ("###"+card.getName()+"###");
         }
-    }
-
-    private boolean ArrayContains(int key, int ... chosen){
-        for (int num: chosen){
-            if (num==key){
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

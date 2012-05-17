@@ -50,25 +50,18 @@ public class TribunisPlebis extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-//    public boolean activate(Player player, int position) {
-//        boolean activated = true;
-//
-//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-//        int ID = player.getPlayerID();
-//
-//        victoryTokens.playerToPlayer(otherPlayer(ID), player.getPlayerID(), 1);
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        player.commit();
     }
 
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        int playerID = player.getPlayerID();
+        int targetPlayerID = player.getOtherPlayerID();
+
+        victoryTokens.playerToPlayer(targetPlayerID, playerID, 1);
     }
 
     @Override

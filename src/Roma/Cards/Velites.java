@@ -98,9 +98,17 @@ public class Velites extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetPlayerID = player.getOtherPlayerID();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetIndex = activationData.remove(0);
+
+        battleManager.battle(targetPlayerID, targetIndex);
     }
 
     @Override

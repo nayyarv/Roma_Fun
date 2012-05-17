@@ -73,8 +73,15 @@ public class DiceDiscs {
     }
 
     //This function allows a Card to be placed on a dice Disc
-    public void layCard(int playerID, int position, CardHolder newCard) {
+    public void layCard(Player player, int position, CardHolder newCard) {
+        ArrayList<WrapperMaker> enterPlayList = playArea.getEnterPlayList();
+        int playerID = player.getPlayerID();
+
         discardTarget(playerID, position);
+        for(WrapperMaker wrapperMaker : enterPlayList){
+            wrapperMaker.insertWrapper(newCard);
+        }
+        newCard.enterPlay(player, position);
         activeCards[playerID][position] = newCard;
     }
 
@@ -164,6 +171,7 @@ public class DiceDiscs {
         return activeCards[playerID][position];
     }
 
+    //TODO: refactor discard to discardPile into card
     public void discardTarget(int playerID, int position){
         CardManager cardManager = playArea.getCardManager();
         CardHolder card = activeCards[playerID][position];
@@ -215,8 +223,10 @@ public class DiceDiscs {
 
     public void returnTarget(int targetPlayerID, int position){
         Player targetPlayer = playArea.getPlayer(targetPlayerID);
+        CardHolder targetCard = activeCards[targetPlayerID][position];
 
-        targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
+        targetCard.leavePlay();
+        targetPlayer.addCardToHand(targetCard);
         activeCards[targetPlayerID][position] = null;
     }
 

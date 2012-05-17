@@ -156,6 +156,6 @@ public class ActionData {
     }
 
     public void setActivationData(ArrayList<Integer> activationData) {
-        this.activationData = activationData;
+        this.activationData.addAll(activationData);
     }
 }

@@ -94,8 +94,13 @@ public class Aesculapinum extends CardBase {
     }
 
     @Override
-    public void discarded() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 
 }

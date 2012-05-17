@@ -79,10 +79,13 @@ public class Legionarius extends CardBase {
             player.cancel();
         } else {
             player.commit();
+            //TODO: call new battle function here
         }
     }
 
+    //TODO: refactor battle into currentAction values
     //activationData: no data
+    //checks currentAction for battleValue
 
     @Override
     public void activate(Player player, int position) {
@@ -92,7 +95,12 @@ public class Legionarius extends CardBase {
     }
 
     @Override
-    public void discarded() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 }

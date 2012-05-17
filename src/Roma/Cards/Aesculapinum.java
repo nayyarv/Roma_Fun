@@ -77,6 +77,8 @@ public class Aesculapinum extends CardBase {
         player.setActivationData(activationData);
     }
 
+    //activationData: [cardIndex]
+
     @Override
     public void activate(Player player, int position) {
         ArrayList<Integer> activationData = player.getActivationData();

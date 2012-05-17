@@ -77,7 +77,18 @@ public class Mercatus extends CardBase {
 
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        int targetPlayerID = player.getOtherPlayerID();
+        CardHolder[] enemyCards= playArea.getDiceDiscs().getPlayerActives(targetPlayerID);
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        int forumCount = 0;
+
+        for(CardHolder card : enemyCards){
+            if(card != null && (card.getName().equalsIgnoreCase(Forum.NAME))){
+                forumCount++;
+            }
+        }
+
+        victoryTokens.playerToPlayer(targetPlayerID, player.getPlayerID(), forumCount);
     }
 
     @Override

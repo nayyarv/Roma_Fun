@@ -75,22 +75,13 @@ public class Forum extends CardBase {
 //            PlayerInterface.printOut("Please choose a second die to use", true);
 //            chosenDie = player.getDieIndex(freeDice);
 //            if(chosenDie != null){
-//                diceDiscs.addDiceToDisc(position, chosenDie);
 //                // check for adjacent Templum
 //                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
 //                    PlayerInterface.printOut("Would you like to use a 3rd die?", true);
-//                    chosenDie = null;
 //                    chosenDie = player.getDieIndex(freeDice);
 //                    if(chosenDie != null){
 //                        diceDiscs.addDiceToDisc(position, chosenDie);
 //                    }
-//                }
-//                // check for adjacent Basilicas
-//                if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
-//                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
-//                }
-//                if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
-//                    PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
 //                }
 //            } else {
 //                PlayerInterface.printOut("Card activation cancelled.", true);
@@ -105,7 +96,6 @@ public class Forum extends CardBase {
 //    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
 //        boolean activated = true;
 //        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
-//        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
 //
 //        return activated;
 //    }
@@ -115,9 +105,38 @@ public class Forum extends CardBase {
         //TODO: fill in
     }
 
+    //activation data: [freeDieIndex] ([freeDieIndex))
+    //2 if templum adjacent
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        int dieIndex = activationData.remove(0);
+        Dice chosenDie = freeDice.remove(dieIndex);
+
+        diceDiscs.addDiceToDisc(position, chosenDie);
+        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+
+        if(!activationData.isEmpty()){
+            dieIndex = activationData.remove(0);
+            chosenDie = freeDice.remove(0);
+            diceDiscs.addDiceToDisc(position, chosenDie);
+            victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
+        }
+
+        // check for adjacent Basilicas
+        if(diceDiscs.checkAdjacentDown(player.getPlayerID(), position, Basilica.NAME)){
+            PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
+            victoryTokens.playerFromPool(player.getPlayerID(), 2);
+        }
+        if(diceDiscs.checkAdjacentUp(player.getPlayerID(), position, Basilica.NAME)){
+            PlayerInterface.printOut("You get 2 extra victory tokens from your adjacent Basilica!", true);
+            victoryTokens.playerFromPool(player.getPlayerID(), 2);
+        }
     }
 
     @Override

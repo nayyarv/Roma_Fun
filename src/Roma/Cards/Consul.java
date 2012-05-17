@@ -110,9 +110,22 @@ public class Consul extends CardBase {
         //TODO: fill in
     }
 
+    //activation data: [diceIndex][+1/-1]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        ArrayList<Integer> activationData = player.getActivationData();
+        int diceIndex = activationData.remove(0);
+        int modValue = activationData.remove(0);
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        if(modValue == 1){
+            freeDice.get(diceIndex).incrementValue();
+        } else if (modValue == -1){
+            freeDice.get(diceIndex).decrementValue();
+        } else {
+            System.err.println("Error with Consul data");
+            assert(false);
+        }
     }
 
     @Override

@@ -214,6 +214,18 @@ public class PlayArea {
         endActionList.addAll(wrappers);
     }
 
+    public ArrayList<WrapperMaker> getEnterPlayList(){
+        return enterPlayList;
+    }
+
+    public void addToEnterPlayList(WrapperMaker wrapperMaker){
+        enterPlayList.add(wrapperMaker);
+    }
+
+    public void removeFromEnterPlayList(WrapperMaker wrapperMaker){
+        enterPlayList.remove(wrapperMaker);
+    }
+
     public void transferNextToThis(){
         endTurnList.addAll(endNextTurnList);
         endNextTurnList.clear();

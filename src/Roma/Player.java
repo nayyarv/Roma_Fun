@@ -413,7 +413,7 @@ public class Player {
         MoneyManager moneyManager = playArea.getMoneyManager();
 
         moneyManager.loseMoney(playerID, chosenCard.getCost());
-        diceDiscs.layCard(playerID, chosenPosition, chosenCard);
+        diceDiscs.layCard(this, chosenPosition, chosenCard);
     }
 
     private void useDice(ActionData actionData) {

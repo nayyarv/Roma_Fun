@@ -73,8 +73,15 @@ public class DiceDiscs {
     }
 
     //This function allows a Card to be placed on a dice Disc
-    public void layCard(int playerID, int position, CardHolder newCard) {
+    public void layCard(Player player, int position, CardHolder newCard) {
+        ArrayList<WrapperMaker> enterPlayList = playArea.getEnterPlayList();
+        int playerID = player.getPlayerID();
+
         discardTarget(playerID, position);
+        for(WrapperMaker wrapperMaker : enterPlayList){
+            wrapperMaker.insertWrapper(newCard);
+        }
+        newCard.enterPlay(player, position);
         activeCards[playerID][position] = newCard;
     }
 

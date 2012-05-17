@@ -77,6 +77,8 @@ public class Turris extends CardBase {
                 wrapperMaker.insertWrapper(friendlyCards[i]);
             }
         }
+
+        playArea.addToEnterPlayList(wrapperMaker);
     }
 
     @Override
@@ -86,6 +88,10 @@ public class Turris extends CardBase {
         for(Wrapper wrapper : wrapperList){
             wrapper.deleteThisWrapper();
         }
+
+        playArea.removeFromEnterPlayList(wrapperMaker);
+        wrapperMaker.clearWrapperList();
+        wrapperMaker = null;
     }
 
 }

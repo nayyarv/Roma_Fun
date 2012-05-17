@@ -19,8 +19,7 @@ public class DiceDiscs {
     private static final boolean DEBUG = true;
     public static final int BRIBERY_INDEX = 6;
     public static final int CARD_POSITIONS = 7;
-    public static final int TURRIS_LAID = 1;
-    public static final int TURRIS_DISCARD = -1;
+    public static final int FIRST_INDEX = 0;
 
     private final PlayArea playArea;
     private PlayerInterface playerInterface;
@@ -194,7 +193,7 @@ public class DiceDiscs {
 
     public boolean checkAdjacentDown(int playerID, int position, String cardName){
         boolean adjacent = false;
-        if(position > 0){
+        if(position > FIRST_INDEX){
             if(activeCards[playerID][position - 1] != null
                     && activeCards[playerID][position - 1].getName().equalsIgnoreCase(cardName)){
                 adjacent = true;
@@ -205,7 +204,7 @@ public class DiceDiscs {
 
     public boolean checkAdjacentUp(int playerID, int position, String cardName){
         boolean adjacent = false;
-        if(position < 6){
+        if(position < BRIBERY_INDEX){
             if(activeCards[playerID][position + 1] != null
                     && activeCards[playerID][position + 1].getName().equalsIgnoreCase(cardName)){
                 adjacent = true;

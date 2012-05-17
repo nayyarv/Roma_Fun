@@ -107,9 +107,16 @@ public class Gladiator extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetDiscIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int targetIndex = activationData.remove(0);
+
+        diceDiscs.returnTarget(targetPlayerID, targetIndex);
     }
 
     @Override

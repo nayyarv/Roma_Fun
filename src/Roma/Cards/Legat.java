@@ -64,7 +64,7 @@ public class Legat extends CardBase {
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        int targetPlayerID = player.getOtherPlayer();
+        int targetPlayerID = player.getOtherPlayerID();
         CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
         int emptySlotCount = 0;
 

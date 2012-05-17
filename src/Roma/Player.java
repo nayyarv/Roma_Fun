@@ -78,7 +78,7 @@ public class Player {
         return currentAction.getActivationData();
     }
 
-    public int getOtherPlayer(){
+    public int getOtherPlayerID(){
         return (getPlayerID() + 1) % Roma.MAX_PLAYERS;
     }
 

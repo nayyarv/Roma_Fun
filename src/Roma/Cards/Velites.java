@@ -64,7 +64,7 @@ public class Velites extends CardBase {
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 //        BattleManager battleManager = playArea.getBattleManager();
-//        int targetPlayerID = player.getOtherPlayer();
+//        int targetPlayerID = player.getOtherPlayerID();
 //
 //        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 //

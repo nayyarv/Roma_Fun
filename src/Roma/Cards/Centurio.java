@@ -61,7 +61,7 @@ public class Centurio extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         BattleManager battleManager = playArea.getBattleManager();
 
-        int targetPlayer = player.getOtherPlayer();
+        int targetPlayer = player.getOtherPlayerID();
         int chosenDieIndex = CANCEL;
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
@@ -101,7 +101,7 @@ public class Centurio extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         DiceHolder diceHolder = playArea.getDiceHolder();
 
-        int targetPlayer = player.getOtherPlayer();
+        int targetPlayer = player.getOtherPlayerID();
         int chosenDieIndex = CANCEL;
         Dice chosenDie = null;
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);

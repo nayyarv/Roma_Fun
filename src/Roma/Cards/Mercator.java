@@ -9,10 +9,8 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
-import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Mercator extends CardBase {
     public final static String NAME = "Mercator";
@@ -99,7 +97,7 @@ public class Mercator extends CardBase {
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         ArrayList<Integer> activationData = player.getActivationData();
         int numTokens = activationData.remove(0);
-        int targetPlayerID = player.getOtherPlayer();
+        int targetPlayerID = player.getOtherPlayerID();
 
         moneyManager.transferMoney(player.getPlayerID(), targetPlayerID, 2 * numTokens);
         victoryTokens.playerToPlayer(targetPlayerID, player.getPlayerID(), numTokens);

@@ -68,7 +68,7 @@ public class Essedum extends CardBase {
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
         Wrapper wrapper;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        int targetPlayerID = player.getOtherPlayer();
+        int targetPlayerID = player.getOtherPlayerID();
         CardHolder[] enemyActives = diceDiscs.getPlayerActives(targetPlayerID);
 
         for(CardHolder card : enemyActives){

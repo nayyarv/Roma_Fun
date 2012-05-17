@@ -95,7 +95,12 @@ public class Praetorianus extends CardBase {
     }
 
     @Override
-    public void clearWrappers() {
-        //do nothing when discarded
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
+
+    @Override
+    public void leavePlay() {
+        //do nothing when leaving play
     }
 }

@@ -101,6 +101,12 @@ public abstract class CardBase implements Card {
     @Override
     public abstract void activate(Player player, int position);
 
+    @Override
+    public abstract void enterPlay(Player player, int position);
+
+    @Override
+    public abstract void leavePlay();
+
     public abstract CardHolder makeOne(PlayArea playArea);
 
     public int otherPlayer(int player){

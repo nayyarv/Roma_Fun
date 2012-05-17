@@ -100,7 +100,7 @@ public class CardManager {
 
     public void discard(CardHolder theCard) {
         discardPile.add(0, theCard);
-        theCard.clearWrappers();
+        theCard.leavePlay();
         if (noMoreCards) {
             playingDeck.addAll(discardPile);
             discardPile.clear();

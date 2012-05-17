@@ -217,7 +217,7 @@ public class DiceDiscs {
         Player targetPlayer = playArea.getPlayer(targetPlayerID);
         CardHolder targetCard = activeCards[targetPlayerID][position];
 
-        targetCard.clearWrappers();
+        targetCard.leavePlay();
         targetPlayer.addCardToHand(targetCard);
         activeCards[targetPlayerID][position] = null;
     }

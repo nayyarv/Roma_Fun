@@ -44,17 +44,6 @@ public class CardHolder implements Card{
         assert false;
     }
 
-    @Override
-    public void clearWrappers() {
-        Wrapper wrapper;
-        //remove all wrappers
-        while(!contents.isWrapper()){
-            wrapper = (Wrapper) contents;
-            wrapper.deleteThisWrapper();
-        }
-        contents.clearWrappers();
-    }
-
     public boolean isActivateEnabled() {
         return contents.isActivateEnabled();
     }
@@ -97,5 +86,21 @@ public class CardHolder implements Card{
     @Override
     public void activate(Player player, int position) {
         contents.activate(player, position);
+    }
+
+    @Override
+    public void enterPlay(Player player, int position) {
+        contents.enterPlay(player, position);
+    }
+
+    @Override
+    public void leavePlay() {
+        Wrapper wrapper;
+        //remove all wrappers
+        while(!contents.isWrapper()){
+            wrapper = (Wrapper) contents;
+            wrapper.deleteThisWrapper();
+        }
+        contents.leavePlay();
     }
 }

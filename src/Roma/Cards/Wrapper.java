@@ -50,11 +50,6 @@ public class Wrapper implements Card {
         container = holder;
     }
 
-    @Override
-    public void clearWrappers() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     public void setDefenseShift(int defenseShift) {
         this.defenseShift = defenseShift;
     }
@@ -145,5 +140,15 @@ public class Wrapper implements Card {
             container = null;
             contents = null;
         }
+    }
+
+    @Override
+    public void enterPlay(Player player, int position) {
+        contents.enterPlay(player, position);
+    }
+
+    @Override
+    public void leavePlay() {
+        container.leavePlay();
     }
 }

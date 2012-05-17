@@ -63,7 +63,7 @@ public class Sicarius extends CardBase {
 //
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        int targetPlayerID = player.getOtherPlayer();
 //
 //        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 //

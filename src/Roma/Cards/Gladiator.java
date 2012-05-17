@@ -67,7 +67,7 @@ public class Gladiator extends CardBase {
 //
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        int targetPlayerID = player.getOtherPlayer();
 //
 //        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 //
@@ -113,7 +113,7 @@ public class Gladiator extends CardBase {
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int targetPlayerID = player.getOtherPlayer();
         int targetIndex = activationData.remove(0);
 
         diceDiscs.returnTarget(targetPlayerID, targetIndex);

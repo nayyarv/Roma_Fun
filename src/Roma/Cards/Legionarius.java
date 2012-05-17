@@ -57,7 +57,7 @@ public class Legionarius extends CardBase {
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 //        BattleManager battleManager = playArea.getBattleManager();
-//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        int targetPlayerID = player.getOtherPlayer();
 //
 //        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
 //            PlayerInterface.printOut("No card to attack!", true);
@@ -72,7 +72,7 @@ public class Legionarius extends CardBase {
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int targetPlayerID = player.getOtherPlayer();
 
         if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
             PlayerInterface.printOut("No card to attack!", true);
@@ -87,7 +87,7 @@ public class Legionarius extends CardBase {
     @Override
     public void activate(Player player, int position) {
         BattleManager battleManager = playArea.getBattleManager();
-        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        int targetPlayerID = player.getOtherPlayer();
         battleManager.battle(targetPlayerID, position);
     }
 

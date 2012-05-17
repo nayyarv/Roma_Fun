@@ -78,7 +78,7 @@ public class Essedum extends CardBase {
     }
 
     @Override
-    public void discarded() {
+    public void clearWrappers() {
         //do nothing when discarded
     }
 }

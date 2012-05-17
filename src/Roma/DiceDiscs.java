@@ -215,8 +215,10 @@ public class DiceDiscs {
 
     public void returnTarget(int targetPlayerID, int position){
         Player targetPlayer = playArea.getPlayer(targetPlayerID);
+        CardHolder targetCard = activeCards[targetPlayerID][position];
 
-        targetPlayer.addCardToHand(activeCards[targetPlayerID][position]);
+        targetCard.clearWrappers();
+        targetPlayer.addCardToHand(targetCard);
         activeCards[targetPlayerID][position] = null;
     }
 

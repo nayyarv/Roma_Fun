@@ -51,7 +51,7 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public void discarded() {
+    public void clearWrappers() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

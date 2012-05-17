@@ -9,7 +9,6 @@ package Roma;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class CardManager {
@@ -101,7 +100,7 @@ public class CardManager {
 
     public void discard(CardHolder theCard) {
         discardPile.add(0, theCard);
-        theCard.discarded();
+        theCard.clearWrappers();
         if (noMoreCards) {
             playingDeck.addAll(discardPile);
             discardPile.clear();

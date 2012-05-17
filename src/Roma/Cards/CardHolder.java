@@ -1,10 +1,7 @@
 package Roma.Cards;
 
-import Roma.History.ActionData;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
-
-import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,14 +45,14 @@ public class CardHolder implements Card{
     }
 
     @Override
-    public void discarded() {
+    public void clearWrappers() {
         Wrapper wrapper;
         //remove all wrappers
         while(!contents.isWrapper()){
             wrapper = (Wrapper) contents;
             wrapper.deleteThisWrapper();
         }
-        contents.discarded();
+        contents.clearWrappers();
     }
 
     public boolean isActivateEnabled() {

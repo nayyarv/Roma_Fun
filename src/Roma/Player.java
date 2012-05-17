@@ -314,10 +314,11 @@ public class Player {
 
     //TODO: refactor this to include a filter
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
-        final String strPrompt = "Possible actions:";
-        final String strOption1 = "Choose a card";
-        final String strOption2 = "Check description";
-        final String strOption3 = "Print card list";
+        final String
+                strPrompt = "Possible actions:",
+                strOption1 = "Choose a card",
+                strOption2 = "Check description",
+                strOption3 = "Print card list";
 
         final int
                 CHOOSE_CARDS = 1,
@@ -335,7 +336,6 @@ public class Player {
         } else {
             while(!validChoice){
                 action = playerInterface.readInput(strPrompt, true, strOption1, strOption2, strOption3);
-
                 if(action == CHOOSE_CARDS){
                     PlayerInterface.printOut("Card number: ", false);
                     choice = playerInterface.getIndex(cardList.size());
@@ -413,16 +413,16 @@ public class Player {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         Dice chosenDie = freeDice.remove(actionData.getActionDiceIndex());
 
-        if(actionData.getDiscType() == ActionData.DICE){
+        if(actionData.getDiscType().equalsIgnoreCase(ActionData.DICE)){
             diceDiscs.activateCard(this, actionData.getPosition(), chosenDie);
 
-        } else if(actionData.getDiscType() == ActionData.BRIBERY){
+        } else if(actionData.getDiscType().equalsIgnoreCase(ActionData.BRIBERY)){
             diceDiscs.useBriberyDisc(this, actionData.getPosition(), chosenDie);
 
-        } else if(actionData.getDiscType() == ActionData.MONEY){
+        } else if(actionData.getDiscType().equalsIgnoreCase(ActionData.MONEY)){
             diceDiscs.useMoneyDisc(playerID, chosenDie);
 
-        } else if(actionData.getDiscType() == ActionData.CARD){
+        } else if(actionData.getDiscType().equalsIgnoreCase(ActionData.CARD)){
             diceDiscs.useDrawDisc(playerID, chosenDie);
             drawCards(chosenDie.getValue(), actionData.getDrawCardIndex());
 
@@ -439,9 +439,6 @@ public class Player {
 
     //Or maybe just have a function that requests a number from the player?
     //With "autoResponse" values when in testing mode?
-
-
-
     public void drawCards(int value, int cardDrawIndex) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();

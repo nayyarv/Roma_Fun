@@ -14,10 +14,10 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Senator extends CardBase {
-    private static int COST_SHIFT = 0;
+    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
     private static int COST_SCALE = 0;
-    private static int DEFENSE_SHIFT = 0;
-    private static int DEFENSE_SCALE = 1;
+    private static int DEFENSE_SHIFT = Wrapper.INITIAL_SHIFT;
+    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Senator";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many character cards as " +
@@ -117,7 +117,7 @@ public class Senator extends CardBase {
         //wrap building cards in hand with costScale = 0 modifier
         for(int i = 0; i < hand.size(); i++){
             card = hand.get(i);
-            if(card.getType().equalsIgnoreCase(Card.BUILDING)){
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 wrapper = wrapperMaker.insertWrapper(card);
 
                 //add wrappers to endActionClear list

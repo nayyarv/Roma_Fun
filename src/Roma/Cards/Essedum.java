@@ -12,6 +12,10 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Essedum extends CardBase {
+    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
+    private static int COST_SCALE = Wrapper.INITIAL_SCALE;
+    private static int DEFENSE_SHIFT = -2;
+    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Essedum";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
@@ -50,11 +54,6 @@ public class Essedum extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
 
     }
-
-    private static int COST_SHIFT = 0;
-    private static int COST_SCALE = 1;
-    private static int DEFENSE_SHIFT = -2;
-    private static int DEFENSE_SCALE = 1;
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{

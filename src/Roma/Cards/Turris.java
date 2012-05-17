@@ -12,6 +12,10 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Turris extends CardBase {
+    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
+    private static int COST_SCALE = Wrapper.INITIAL_SCALE;
+    private static int DEFENSE_SHIFT = 1;
+    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Turris";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "As long as the Turris is face-up, the defence value of all the " +
@@ -63,7 +67,8 @@ public class Turris extends CardBase {
 
     @Override
     public void enterPlay(Player player, int position) {
-        //no enter play action
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        WrapperMaker wrapperMaker = new WrapperMaker(COST)
     }
 
     @Override

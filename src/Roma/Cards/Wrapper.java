@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Wrapper implements Card {
-    private final static int INITIAL_SHIFT = 0;
-    private final static int INITIAL_SCALE = 1;
+    public final static int INITIAL_SHIFT = 0;
+    public final static int INITIAL_SCALE = 1;
     private final boolean isWrapper = true;
 
     private Card container;

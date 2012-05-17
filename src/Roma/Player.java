@@ -322,11 +322,12 @@ public class Player {
 
     //TODO: refactor this to include a filter
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
+        //TODO: set playable here?
         return getCardIndex(cardList);
     }
 
     //TODO: doesn't filter selection correctly
-    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+    private int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
         final String
                 strPrompt = "Possible actions:",
                 strOption1 = "Choose a card",

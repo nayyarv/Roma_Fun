@@ -37,21 +37,16 @@ public class GamePlayerInterface extends PlayerInterface {
         return integerInput;
     }
 
-    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0
+    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0?
     public int readIndex(String title, String ... choices){
-        int integerInput;
-        do {
-            showOptions(title, choices);
-            integerInput = getIntegerInput();
-        } while (!checkInBounds(integerInput, choices.length));
+        int indexInput;
 
+        indexInput = readInput(title, choices);
 
-        if(integerInput == choices.length){
-            integerInput = CANCEL;
-        } else {
-            integerInput--;
+        if(indexInput != CANCEL){
+            indexInput--;
         }
-        return integerInput;
+        return indexInput;
     }
 
     private void showOptions(String title, String ... options){

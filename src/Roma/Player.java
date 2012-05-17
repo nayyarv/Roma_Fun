@@ -210,7 +210,7 @@ public class Player {
 
         diceIndex = playerInterface.readIndex(strPrompt, diceValues);
 
-        if(diceIndex == diceList.size() + 1) cancel();
+        if(diceIndex == CANCEL) cancel();
 
         return diceIndex;
     }

@@ -21,6 +21,7 @@ public class Wrapper implements Card {
     private Card container;
     private Card contents;
     private boolean activateEnabled;
+    private boolean playable;
     private int defenseShift = INITIAL_SHIFT;
     private int defenseScale = INITIAL_SCALE;
     private int costShift = INITIAL_SHIFT;

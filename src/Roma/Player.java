@@ -435,7 +435,7 @@ public class Player {
             if(filterCurrent){//Choosing from your own cards
                 validChoice = checkValid(currPlayer.get(choice));
             } else if (filterOther){
-                validChoice = checkValid(opposingPlayer.get(choice))
+                validChoice = checkValid(opposingPlayer.get(choice));
             }
 
             //TODO: Pop up an error if they choose an invalid card

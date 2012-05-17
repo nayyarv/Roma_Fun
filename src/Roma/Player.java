@@ -297,6 +297,9 @@ public class Player {
 
     private void viewHand() throws CancelAction{
         MoneyManager moneyManager = playArea.getMoneyManager();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
@@ -310,7 +313,7 @@ public class Player {
             cancel();
         }
 
-        chosenPosition = getDiceDiscIndex("");
+        chosenPosition = getDiceDiscIndex(activeCards, false, false);
         if(chosenPosition == CANCEL) cancel();
         currentAction.setTargetDisc(chosenPosition);
 
@@ -385,8 +388,8 @@ public class Player {
 
     //TODO: refactor this to include a filter
     //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
-    public int getDiceDiscsIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
-    throws CancelAction{
+    public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
+            throws CancelAction{
         assert (diceDiscs[Roma.PLAYER_ONE].length==DiceDiscs.CARD_POSITIONS);
         assert(diceDiscs[Roma.PLAYER_ONE].length == diceDiscs[Roma.PLAYER_TWO].length);
 
@@ -454,36 +457,6 @@ public class Player {
         }
         return valid;
 
-    }
-
-
-    public int getDiceDiscIndex(String type, int... chosenIndices) throws CancelAction{
-        final String strPrompt = "Which disc?";
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        final int NUM_OPTIONS = DiceDiscs.CARD_POSITIONS;
-        String [] dicePrompt = new String[NUM_OPTIONS];
-
-        for (int i=0; i<NUM_OPTIONS-1;i++){
-            dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
-        }
-        dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc: " + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
-
-        int option = CANCEL;
-
-        boolean validChoice = false;
-
-        while(!validChoice){
-            option = playerInterface.readInput(strPrompt, true, dicePrompt);
-            if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
-                validChoice = true;
-            } else if (option == CANCEL) {
-                cancel();
-            } else {
-                PlayerInterface.printOut("Please choose a valid action", true);
-            }
-        }
-        option--;
-        return option;
     }
 
     public void performActions(ActionData actionData){

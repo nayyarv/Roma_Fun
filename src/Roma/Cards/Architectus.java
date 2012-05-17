@@ -59,12 +59,14 @@ public class Architectus extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = new ArrayList<Integer>();
         ArrayList<CardHolder> hand = player.getHand();
         int[] handIndices = new int[hand.size()];
         int[] discIndices = new int[hand.size()];
         int handIndex = 0;
         int discIndex = 0;
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
 
         player.commit();
 
@@ -75,7 +77,7 @@ public class Architectus extends CardBase {
             try {
                 handIndex = player.getCardIndex(hand, Card.BUILDING, handIndices);
                 handIndices[i] = handIndex;
-                discIndex = player.getDiceDiscIndex("");
+                discIndex = player.getDiceDiscIndex(activeCards, false, false);
                 discIndices[i] = discIndex;
                 i++;
             } catch (CancelAction cancelAction) {

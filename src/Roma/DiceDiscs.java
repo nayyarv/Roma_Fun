@@ -52,6 +52,10 @@ public class DiceDiscs {
         return activeCards[playerID];
     }
 
+    public CardHolder[][] getActiveCards(){
+        return activeCards;
+    }
+
     //Gets all the cards of a certain type ~ Building or Character from the activeCards
     public ArrayList<CardHolder> setOfCards(Player player, String type){
         assert (type.equalsIgnoreCase(Card.BUILDING)||type.equalsIgnoreCase(Card.CHARACTER));

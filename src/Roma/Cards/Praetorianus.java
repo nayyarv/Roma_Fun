@@ -78,9 +78,20 @@ public class Praetorianus extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        ArrayList<Integer> activationData = player.getActivationData();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = player.getOtherPlayerID();
+        int targetIndex = activationData.remove(0);
+        CardHolder[] enemyActives = diceDiscs.getPlayerActives(targetPlayerID);
+        CardHolder targetCard = enemyActives[targetIndex];
+        Wrapper wrapper = new Wrapper(targetCard);
+
+        wrapper.disableActivate();
+        playArea.addToEndNextTurnList(wrapper);
     }
 
     @Override

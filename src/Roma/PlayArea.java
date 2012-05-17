@@ -28,6 +28,7 @@ public class PlayArea {
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
+    private ArrayList<Wrapper> endNextTurnList = new ArrayList<Wrapper>();
     private ArrayList<Wrapper> endActionList = new ArrayList<Wrapper>();
 
     //Variables
@@ -111,6 +112,7 @@ public class PlayArea {
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();
+        transferNextToThis();
     }
 
     //TODO: move to playerInterface
@@ -196,12 +198,25 @@ public class PlayArea {
         endTurnList.addAll(wrappers);
     }
 
+    public void addToEndNextTurnList(Wrapper wrappers){
+        endNextTurnList.add(wrappers);
+    }
+
+    public void addToEndNextTurnList(ArrayList<Wrapper> wrappers){
+        endNextTurnList.addAll(wrappers);
+    }
+
     public void addToEndActionList(Wrapper wrapper){
         endActionList.add(wrapper);
     }
 
     public void addToEndActionList(ArrayList<Wrapper> wrappers){
         endActionList.addAll(wrappers);
+    }
+
+    public void transferNextToThis(){
+        endTurnList.addAll(endNextTurnList);
+        endNextTurnList.clear();
     }
 
     private void clearEndTurnWrappers() {

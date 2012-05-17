@@ -20,10 +20,8 @@ public class WrapperMaker {
     }
 
     public Wrapper insertWrapper(CardHolder card){
-        Wrapper wrapper = new Wrapper(card.getContents(), card);
+        Wrapper wrapper = new Wrapper(card);
 
-        card.getContents().setContainer(wrapper);
-        card.setContents(wrapper);
         wrapper.setCostScale(costScale);
         wrapper.setCostShift(costShift);
         wrapper.setDefenseScale(defenseScale);

@@ -19,7 +19,7 @@ public abstract class PlayerInterface {
 
     abstract public int readIndex(String title, String ... choices);
 
-    abstract public int getIntegerInput(int bound);
+    abstract public int getIntegerInput(int min, int max);
 
     abstract public int getIndex(int bound);
 

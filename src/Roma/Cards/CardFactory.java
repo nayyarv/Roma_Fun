@@ -1,15 +1,12 @@
 package Roma.Cards;
 
 import Roma.PlayArea;
-
 import java.util.HashMap;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Andrew
  * Date: 16/05/12
  * Time: 6:59 PM
- * To change this template use File | Settings | File Templates.
  */
 public class CardFactory {
     private HashMap<String, CardBase> cardList = new HashMap<String, CardBase>();

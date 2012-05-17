@@ -18,26 +18,32 @@ import java.util.Scanner;
  */
 public class GamePlayerInterface extends PlayerInterface {
     private Scanner input;
+    private static final int INVALID_INPUT = -100;
 
 
     public GamePlayerInterface(){
         input = new Scanner(System.in);
     }
 
+    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0?
+    //TODO: Remove the Cancel Option from the strings where it is used
+    @Override
     public int readInput(String title, String ... choices){
         int integerInput;
         do {
             showOptions(title, choices);
+            printOut("0) Cancel", true);
             integerInput = getIntegerInput();
         } while (!checkInBounds(integerInput, choices.length));
 
-        if(integerInput == choices.length){
-            integerInput = CANCEL;
+        if(integerInput==0){
+            integerInput=CANCEL;
         }
         return integerInput;
     }
 
-    //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0?
+    //TODO: Remove the Cancel Option from the strings where it is used
+    @Override
     public int readIndex(String title, String ... choices){
         int indexInput;
 
@@ -63,29 +69,38 @@ public class GamePlayerInterface extends PlayerInterface {
 
 
     private boolean checkInBounds(int input, int max){
+        return checkIntegerInBounds(input, 0, max);
+    }
+
+    private boolean checkIntegerInBounds(int input, int min, int max) {
         boolean inBounds = false;
-        if(input>0&&input<=max){
+        if(input>=min&&input<max){
             inBounds = true;
-        } else if(input==CANCEL){
-            PlayerInterface.printOut("Invalid Input", true);
+        } else if (input ==INVALID_INPUT){
+            printOut("Must Input a number", true);
         } else {
-            PlayerInterface.printOut("Out of range", true);
+            printOut("Out of Range", true);
         }
         return inBounds;
     }
 
+
+
     //Keeps reading till valid input is recieved
-    public int getIntegerInput(int bound){
+    @Override
+    public int getIntegerInput(int min, int max){
         int read;
         do{
             read=getIntegerInput();
-        } while (!checkInBounds(read, bound));
+        } while (!checkIntegerInBounds(read, min,  max));
         return read;
     }
 
+
     //Keeps reading till valid input is recieved
+    @Override
     public int getIndex(int bound){
-        return (getIntegerInput(bound)-1);
+        return (getIntegerInput(1, bound)-1);
     }
 
     //Simply returns input
@@ -94,15 +109,17 @@ public class GamePlayerInterface extends PlayerInterface {
             return input.nextInt();
         } else {
             input.next(); //clear the current input
-            return CANCEL;
+            return (INVALID_INPUT); //a quick hack
         }
     }
 
+    @Override
     public String getPlayerName(int num){
         printOut("Name of player" + (num + 1) + ": ", true);
         return readString();
     }
 
+    @Override
     public String readString(){
         if(input.hasNextLine()){
             return input.nextLine();
@@ -134,7 +151,7 @@ public class GamePlayerInterface extends PlayerInterface {
 
         int input;
         do {
-            input = getIntegerInput(DiceDiscs.CARD_POSITIONS+1)-1;
+            input = getIntegerInput(1, DiceDiscs.CARD_POSITIONS+1)-1;
             contains = ArrayContains(input, chosen);
         } while ((input!=DiceDiscs.CARD_POSITIONS)&&!chosenRightType(myDiscs.get(input), type ,contains));
 
@@ -162,7 +179,7 @@ public class GamePlayerInterface extends PlayerInterface {
         printOut("Which option: ", true);
         int input;
         do {
-            input = getIntegerInput(cardList.size()+1)-1;
+            input = getIntegerInput(1, cardList.size()+1)-1;
             contains = ArrayContains(input, chosen);
         } while ((input!= cardList.size())&&!chosenRightType(cardList.get(input),type, contains));
 
@@ -174,8 +191,6 @@ public class GamePlayerInterface extends PlayerInterface {
     //input: ArrayList (of dice or of cards)
     //return int
     @Override
-
-
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
         PlayerInterface.printOut("-------------------------------------", true);

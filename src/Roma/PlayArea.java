@@ -13,6 +13,7 @@ public class PlayArea {
     //Object pointers
     private Roma mainProgram;
     private CardManager cardManager;
+    private ArrayList<CardHolder> playSet = new ArrayList<CardHolder>();
     private DiceHolder diceHolder;
     private MoneyManager moneyManager;
     private VictoryTokens victoryTokens;
@@ -37,6 +38,7 @@ public class PlayArea {
 
     public PlayArea(Roma mainProgram) {
         cardManager = new CardManager(this);
+        playSet.addAll(cardManager.getPlayingDeck());
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(this);
@@ -94,6 +96,9 @@ public class PlayArea {
                 //add actionData to turnHistory
                 clearEndActionWrappers();
             }
+            for(CardHolder card : playSet){
+                card.setPlayable(false);
+            }
         }
 
         clearEndTurnWrappers();
@@ -123,10 +128,10 @@ public class PlayArea {
             for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
                 cardName = diceDiscs.getCardName(player, position);
                 if(position == 6){
-                    PlayerInterface.printOut("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                    PlayerInterface.printOut("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s", cardName) +
                             " : Dice on disc: ", false);
                 } else {
-                    PlayerInterface.printOut("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s",cardName) +
+                    PlayerInterface.printOut("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s", cardName) +
                             " : Dice on disc: ", false);
                 }
                 for(Dice die : diceDiscs.checkForDice(player, position)){

@@ -96,7 +96,7 @@ public class Consiliarus extends CardBase {
         player.setActivationData(activationData);
     }
 
-    //activation data should be alternating between fromIndex toIndex
+    //activationData: ([fromIndex][toIndex])*repeated as desired
 
     @Override
     public void activate(Player player, int position) {

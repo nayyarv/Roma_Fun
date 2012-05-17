@@ -115,6 +115,9 @@ public class Forum extends CardBase {
         //TODO: fill in
     }
 
+    //activation data: [freeDieIndex] ([freeDieIndex))
+    //2 if templum adjacent
+
     @Override
     public void activate(Player player, int position) {
         //TODO: fill in

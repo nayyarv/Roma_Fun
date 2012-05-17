@@ -61,6 +61,8 @@ public class Essedum extends CardBase {
         player.commit();
     }
 
+    //activationData: no data
+
     @Override
     public void activate(Player player, int position) {
         WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);

@@ -88,10 +88,12 @@ public class Centurio extends CardBase {
                 activationData.add(chosenDieIndex);
             }
         }
-        // if size() == 0 then battleVictory was true
-        // else if value is -1 then dice selection was cancelled and the target survives
         player.setActivationData(activationData);
     }
+
+    // activationData: [freeDiceIndex]
+    // if size() == 0 then battleVictory was true
+    // else if value is -1 then dice selection was cancelled and the target survives
 
     @Override
     public void activate(Player player, int position) {

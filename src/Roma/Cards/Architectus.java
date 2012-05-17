@@ -93,6 +93,8 @@ public class Architectus extends CardBase {
         player.setActivationData(activationData);
     }
 
+    //activationData: ([cardHandIndex][positionIndex])*repeated as desired
+
     @Override
     public void activate(Player player, int position) {
         CardHolder card;

@@ -58,6 +58,8 @@ public class Basilica extends CardBase {
         System.err.println("Basilica activated somehow!");
     }
 
+    //activationData: no data
+
     @Override
     public void activate(Player player, int position) {
         System.err.println("Basilica activated somehow!");

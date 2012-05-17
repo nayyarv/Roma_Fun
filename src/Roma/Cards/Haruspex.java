@@ -72,9 +72,15 @@ public class Haruspex extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [cardIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        CardManager cardManager = playArea.getCardManager();
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
+        int cardIndex = activationData.remove(0);
+        player.addCardToHand(deck.remove(cardIndex));
     }
 
     @Override

@@ -4,11 +4,8 @@ import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
-import Roma.PlayerInterfaceFiles.PlayerInterface;
-import Roma.Roma;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * File Name:
@@ -67,7 +64,7 @@ public class Gladiator extends CardBase {
 //
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        int targetPlayerID = player.getOtherPlayerID();
 //
 //        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
 //
@@ -107,9 +104,16 @@ public class Gladiator extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: [targetDiscIndex]
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int targetPlayerID = player.getOtherPlayerID();
+        int targetIndex = activationData.remove(0);
+
+        diceDiscs.returnTarget(targetPlayerID, targetIndex);
     }
 
     @Override

@@ -64,7 +64,7 @@ public class Scaenicus extends CardBase {
 //
 //        boolean activated = true;
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+//        int targetPlayerID = player.getOtherPlayerID();
 //
 //        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
 //

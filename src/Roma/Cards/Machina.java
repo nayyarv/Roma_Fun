@@ -1,5 +1,6 @@
 package Roma.Cards;
 
+import Roma.CardManager;
 import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
@@ -87,9 +88,34 @@ public class Machina extends CardBase {
         //TODO: fill in
     }
 
+    //activationData: ([fromIndex][toIndex])*repeated as desired
+
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardManager cardManager = playArea.getCardManager();
+        CardHolder[] activeCards = diceDiscs.getPlayerActives(player.getPlayerID());
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Integer> fromIndices = new ArrayList<Integer>();
+        ArrayList<Integer> toIndices = new ArrayList<Integer>();
+        ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
+
+        while(!activationData.isEmpty()){
+            fromIndices.add(activationData.remove(0));
+            toIndices.add(activationData.remove(0));
+        }
+
+        for(int i : fromIndices){
+            cardList.add(activeCards[i]);
+            activeCards[i] = null;
+        }
+
+        for(int i : toIndices){
+            if(activeCards[i] != null){
+                cardManager.discard(activeCards[i]);
+            }
+            activeCards[i] = cardList.remove(0);
+        }
     }
 
     @Override

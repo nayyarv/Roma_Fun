@@ -95,15 +95,15 @@ public class Player {
 
     public void commit() throws CancelAction{
         final String strPrompt = "Commit to this action?";
-        final String strOption1 = "Yes";
-        final String strOption2 = "No";
+        final String strOption1 = "Ok";
+
         int option;
 
-        option = playerInterface.readInput(strPrompt, strOption1, strOption2);
+        option = playerInterface.readInput(strPrompt, true, strOption1);
 
         if(option == 1){
             currentAction.setCommit(true);
-        } else if(option == 2){
+        } else if(option == CANCEL){
             cancel();
         }
     }
@@ -127,7 +127,7 @@ public class Player {
         if(playArea.getDiceHolder().checkTriple(playerID)){
             while(!validChoice){
                 option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
-                        "Yes",
+                        false, "Yes",
                         "No");
                 if(option == YES){
                     reroll = true;
@@ -164,7 +164,7 @@ public class Player {
         currentAction = actionData;
 
         //choose an action
-        option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
+        option = playerInterface.readInput(strPrompt, false, strOption1, strOption2, strOption3, strOption4);
 
         if(option == VIEW_ACTION_DIE){
             currentAction.setUseDice(true);
@@ -201,7 +201,7 @@ public class Player {
     public int getDieIndex(ArrayList<Dice> diceList) throws CancelAction{
         final String strPrompt = "Which die do you want to use?";
         String[] diceValues = new String[diceList.size() + 1];
-        int diceIndex = -1;
+        int diceIndex = CANCEL;
 
         for(int i = 0; i < diceList.size(); i++){
             diceValues[i] = diceList.get(i).getValue().toString();
@@ -220,13 +220,11 @@ public class Player {
         final int BRIBERY = 2;
         final int MONEY = 3;
         final int DRAW_CARD = 4;
-        final int CANCEL_OPTION = 5;
         final String strPrompt = "Use on:";
         final String strOption1 = "Activate card";
         final String strOption2 = "Bribery Disc";
         final String strOption3 = "Money Disc";
         final String strOption4 = "Card Disc";
-        final String strOption5 = "Cancel";
 
         int option = CANCEL;
         boolean validChoice = false;
@@ -234,7 +232,7 @@ public class Player {
         int position = chosenDieValue - 1;
 
         while(!validChoice){
-            option = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4, strOption5);
+            option = playerInterface.readInput(strPrompt, true, strOption1, strOption2, strOption3, strOption4);
             if(option == ACTIVATE_CARD){
                 if(diceDiscs.gatherData(this, position)){
                     currentAction.setPosition(position);
@@ -263,7 +261,7 @@ public class Player {
                 currentAction.setDiscType(ActionData.CARD);
                 currentAction.setDrawCardIndex(drawCardIndex(chosenDieValue));
                 validChoice = true;
-            } else if(option == CANCEL_OPTION){
+            } else if(option == CANCEL){
                 cancel();
             } else {
                 PlayerInterface.printOut("Please choose a valid action", true);
@@ -320,7 +318,6 @@ public class Player {
         final String strOption1 = "Choose a card";
         final String strOption2 = "Check description";
         final String strOption3 = "Print card list";
-        final String strOption4 = "Cancel/End selection";
 
         final int
                 CHOOSE_CARDS = 1,
@@ -337,7 +334,7 @@ public class Player {
             PlayerInterface.printOut("There are no cards!", true);
         } else {
             while(!validChoice){
-                action = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3, strOption4);
+                action = playerInterface.readInput(strPrompt, true, strOption1, strOption2, strOption3);
 
                 if(action == CHOOSE_CARDS){
                     PlayerInterface.printOut("Card number: ", false);
@@ -365,23 +362,23 @@ public class Player {
     public int getDiceDiscIndex(String type, int... chosenIndices) throws CancelAction{
         final String strPrompt = "Which disc?";
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        final int CANCEL_OPTION = 8;
-        String [] dicePrompt = new String[8];
+        final int NUM_OPTIONS = 7;
+        String [] dicePrompt = new String[NUM_OPTIONS];
 
-        for (int i=0; i<6;i++){
+        for (int i=0; i<DiceDiscs.CARD_POSITIONS-1;i++){
             dicePrompt[i] = "Dice Disc " + (i+1) + ": " +diceDiscs.getCardName(playerID, i);
         }
-        dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc" + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
-        dicePrompt[CANCEL_OPTION - 1] = "Cancel";
+        dicePrompt[DiceDiscs.BRIBERY_INDEX] = "Bribery Disc: " + diceDiscs.getCardName(playerID, DiceDiscs.BRIBERY_INDEX);
 
-        int option = -1;
+        int option = CANCEL;
+
         boolean validChoice = false;
 
         while(!validChoice){
-            option = playerInterface.readInput(strPrompt, dicePrompt);
+            option = playerInterface.readInput(strPrompt, true, dicePrompt);
             if(option > 0 && option <= DiceDiscs.CARD_POSITIONS){
                 validChoice = true;
-            } else if (option == CANCEL_OPTION) {
+            } else if (option == CANCEL) {
                 cancel();
             } else {
                 PlayerInterface.printOut("Please choose a valid action", true);

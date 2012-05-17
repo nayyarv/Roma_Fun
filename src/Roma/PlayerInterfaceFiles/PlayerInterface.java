@@ -15,7 +15,7 @@ public abstract class PlayerInterface {
 
     public final static int CANCEL = -1;
 
-    abstract public int readInput(String title, String ... choices);
+    abstract public int readInput(String title, boolean cancelOn, String... choices);
 
     abstract public int readIndex(String title, String ... choices);
 

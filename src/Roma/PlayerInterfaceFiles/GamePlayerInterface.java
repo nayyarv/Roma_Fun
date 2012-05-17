@@ -28,13 +28,14 @@ public class GamePlayerInterface extends PlayerInterface {
     //TODO: Maybe refactor this to start at 0, 1, 2... but have CANCEL as 0?
     //TODO: Remove the Cancel Option from the strings where it is used
     @Override
-    public int readInput(String title, String ... choices){
+    public int readInput(String title, boolean cancelOn, String... choices){
         int integerInput;
+        int min = cancelOn ? 0 : 1;
         do {
             showOptions(title, choices);
-            printOut("0) Cancel", true);
+            if (cancelOn) printOut("0) Cancel", true);
             integerInput = getIntegerInput();
-        } while (!checkInBounds(integerInput, choices.length));
+        } while (!checkIntegerInBounds(integerInput, min, choices.length));
 
         if(integerInput==0){
             integerInput=CANCEL;
@@ -47,7 +48,7 @@ public class GamePlayerInterface extends PlayerInterface {
     public int readIndex(String title, String ... choices){
         int indexInput;
 
-        indexInput = readInput(title, choices);
+        indexInput = readInput(title, true, choices);
 
         if(indexInput != CANCEL){
             indexInput--;

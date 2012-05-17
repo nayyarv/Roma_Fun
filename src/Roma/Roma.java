@@ -45,7 +45,7 @@ public class Roma {
         //Program running loop
         while (!exit) {
             int choice = playerInterface.readInput("What would you like: ",
-                    "New Game",
+                    false, "New Game",
                     "Rules",
                     "Quit");
 

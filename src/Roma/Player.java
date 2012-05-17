@@ -393,10 +393,10 @@ public class Player {
         int other = getOtherPlayerID();
 
         ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
-        ArrayList<CardHolder> opposingPLayer= new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer= new ArrayList<CardHolder>();
 
         Collections.addAll(currPlayer, diceDiscs[playerID]);
-        Collections.addAll(opposingPLayer, diceDiscs[other]);
+        Collections.addAll(opposingPlayer, diceDiscs[other]);
 
         int option = CANCEL;
         final String
@@ -414,14 +414,14 @@ public class Player {
 
 
         while(!validChoice){
-            playerInterface.printFilteredDiceList(currPlayer, opposingPLayer,
+            playerInterface.printFilteredDiceList(currPlayer, opposingPlayer,
                     filterCurrent, filterOther);
             //Print's out a nice version of the dice lists
             option = playerInterface.readInput(strPrompt, true, strOption);
             if (option == DESC_OWN){
                 checkDesc(currPlayer);
             } else if (option == DESC_OPP){
-                checkDesc(opposingPLayer);
+                checkDesc(opposingPlayer);
             } else if(option == CHOOSE_DISC){
                 PlayerInterface.printOut("Which Disc: ",false);
                 choice = playerInterface.getIndex(DiceDiscs.CARD_POSITIONS);
@@ -432,9 +432,28 @@ public class Player {
                 PlayerInterface.printOut("Invalid Input, please try again.", true);
             }
 
-            //TODO: Throw an error if they choose an invalid card
+            if(filterCurrent){//Choosing from your own cards
+                validChoice = checkValid(currPlayer.get(choice));
+            } else if (filterOther){
+                validChoice = checkValid(opposingPlayer.get(choice))
+            }
+
+            //TODO: Pop up an error if they choose an invalid card
         }
         return choice;
+    }
+
+    private boolean checkValid(CardHolder card){
+        boolean valid = false;
+        if(card ==null){
+            PlayerInterface.printOut("Empty Disc Chosen", true);
+        } else if (!card.getPlayable()){
+            PlayerInterface.printOut("Chosen card, "+card.getName()+" is not playable", true);
+        } else {
+            valid = true;
+        }
+        return valid;
+
     }
 
 

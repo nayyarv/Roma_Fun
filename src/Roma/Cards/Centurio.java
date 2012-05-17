@@ -56,6 +56,7 @@ public class Centurio extends CardBase {
 
     }
 
+    //TODO: refactor battle into currentAction values
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

@@ -95,13 +95,14 @@ public class Onager extends CardBase {
 //        return activated;
 //    }
 
+    //TODO: refactor battle into currentAction values
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
         //TODO: fill in
     }
 
     //activationData: [targetIndex]
-
+    //reads battle value from currentAction
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

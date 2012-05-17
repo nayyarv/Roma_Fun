@@ -71,12 +71,24 @@ public class Legionarius extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+
+        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
+            PlayerInterface.printOut("No card to attack!", true);
+            player.cancel();
+        } else {
+            player.commit();
+        }
     }
+
+    //activationData: no data
 
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        BattleManager battleManager = playArea.getBattleManager();
+        int targetPlayerID = (player.getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        battleManager.battle(targetPlayerID, position);
     }
 
     @Override

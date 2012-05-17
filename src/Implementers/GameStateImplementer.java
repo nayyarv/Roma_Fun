@@ -1,10 +1,13 @@
 package Implementers;
 
-import Roma.PlayArea;
+import Roma.*;
+import Roma.Cards.*;
+import Roma.History.ActionData;
 import Roma.VictoryTokens;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getWhoseTurn() {
-        return 0;
+        return playArea.getTurn()%Roma.MAX_PLAYERS;
     }
 
     /**
@@ -46,7 +49,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setWhoseTurn(int player) {
-        //To change body of implemented methods use File | Settings | File Templates.
+       //Todo
     }
 
     /**
@@ -62,8 +65,10 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public List<Card> getDeck() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<CardHolder> deck = playArea.getCardManager().getPlayingDeck();
+        return convertToCardList(deck);
     }
+
 
     /**
      * Sets the GameState's current deck.
@@ -78,7 +83,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setDeck(List<Card> deck) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Implement
     }
 
     /**
@@ -94,7 +99,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public List<Card> getDiscard() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<CardHolder> discard = playArea.getCardManager().getDiscardPile();
+        return convertToCardList(discard);
     }
 
     /**
@@ -110,6 +116,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setDiscard(List<Card> discard) {
+        //TODO: Implement
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -128,6 +135,7 @@ public class GameStateImplementer implements GameState{
     @Override
     public int getPlayerSestertii(int playerNum) {
         return playArea.getMoneyManager().getPlayerMoney(playerNum);
+
     }
 
     /**
@@ -144,7 +152,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerSestertii(int playerNum, int amount) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        moneyManager.setStartingMoney(playerNum, amount);
     }
 
     /**
@@ -183,7 +192,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerVictoryPoints(int playerNum, int points) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        victoryTokens.setPlayerTokens(playerNum, points);
     }
 
     /**
@@ -200,7 +210,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public Collection<Card> getPlayerHand(int playerNum) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Player player= playArea.getPlayer(playerNum);
+        return convertToCardList(player.getHand());
     }
 
     /**
@@ -217,6 +228,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerHand(int playerNum, Collection<Card> hand) {
+        //TODO: Implement
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -237,7 +249,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public Card[] getPlayerCardsOnDiscs(int playerNum) {
-        return new Card[0];  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<CardHolder> myDiscs = playArea.getDiceDiscs().toList(playerNum);
+        return convertToCardArray(myDiscs);
     }
 
     /**
@@ -257,6 +270,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerCardsOnDiscs(int playerNum, Card[] discCards) {
+        //TODo: Implement
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -273,7 +287,18 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int[] getActionDice() {
-        return new int[0];  //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Get this sorted out
+        // currently implementing as get free die
+        int currPlayer = getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        ArrayList<Dice> diceList = player.getFreeDice();
+        int[] diceNums = new int[diceList.size()];
+        int i = 0;
+        for(Dice dice: diceList){
+            diceNums[i] = dice.getValue();
+            i++;
+        }
+        return diceNums;
     }
 
     /**
@@ -289,6 +314,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setActionDice(int[] dice) {
+        //todo: There is no function to do this
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -319,5 +345,25 @@ public class GameStateImplementer implements GameState{
     @Override
     public boolean isGameCompleted() {
         return playArea.isGameOver();
+    }
+
+    private Card[] convertToCardArray(ArrayList<CardHolder> cardDeck){
+        ArrayList<Card> converted = convertToCardList(cardDeck);
+        Card[] forReturn = new Card[converted.size()];
+        int i=0;
+        for(Card card: converted){
+            forReturn[i] = card;
+            i++;
+        }
+        return forReturn;
+    }
+
+    private ArrayList<Card> convertToCardList(ArrayList<CardHolder> cardDeck){
+        ArrayList<Card> forAnswer = new ArrayList<Card>();
+        for(CardHolder cardHolder: cardDeck){
+            Card card = Card.valueOf(cardHolder.getName().toUpperCase());
+            forAnswer.add(card);
+        }
+        return forAnswer;
     }
 }

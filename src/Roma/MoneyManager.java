@@ -11,6 +11,11 @@ public class MoneyManager {
 
     }
 
+    public void setStartingMoney(int player, int amount){
+        assert (player==Roma.PLAYER_ONE||player==Roma.PLAYER_TWO);
+        playerMoney[player] = amount;
+    }
+
     public void gainMoney(int playerID, int amount) {
         playerMoney[playerID] += amount;
     }

@@ -72,6 +72,18 @@ public class VictoryTokens {
         }
     }
 
+    public void setPlayerTokens(int playerID, int num) {
+        int currPlayerTokens = playerTokens[playerID];
+        if(num>currPlayerTokens) {
+            //i.e. he needs more
+            playerFromPool(playerID, num-currPlayerTokens);
+        } else {
+            //i.e it has more than the set
+            playerToPool(playerID, currPlayerTokens-num);
+        }
+        playerTokens[playerID] = num;
+    }
+
     public int getPlayerTokens(int playerID) {
         return playerTokens[playerID];
     }

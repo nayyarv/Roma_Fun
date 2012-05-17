@@ -7,8 +7,6 @@ import Roma.DiceDiscs;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//TODO: change all print statements throughout the project to reroute through player interface
-
 /**
  * File Name:
  * Creator: Varun Nayyar & Andrew Lem

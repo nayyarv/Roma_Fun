@@ -325,7 +325,7 @@ public class Player {
         return getCardIndex(cardList);
     }
 
-
+    //TODO: doesn't filter selection correctly
     public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
         final String
                 strPrompt = "Possible actions:",

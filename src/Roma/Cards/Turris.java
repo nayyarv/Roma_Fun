@@ -25,6 +25,7 @@ public class Turris extends CardBase {
     final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;
+    WrapperMaker wrapperMaker;
 
     @Override
     public CardHolder makeOne(PlayArea playArea){
@@ -68,12 +69,23 @@ public class Turris extends CardBase {
     @Override
     public void enterPlay(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        WrapperMaker wrapperMaker = new WrapperMaker(COST)
+        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(player.getPlayerID());
+        wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+
+        for(int i = 0; i < friendlyCards.length; i++){
+            if(i != position){
+                wrapperMaker.insertWrapper(friendlyCards[i]);
+            }
+        }
     }
 
     @Override
     public void leavePlay() {
-        //do nothing when leaving play
+        ArrayList<Wrapper> wrapperList = wrapperMaker.getWrapperList();
+
+        for(Wrapper wrapper : wrapperList){
+            wrapper.deleteThisWrapper();
+        }
     }
 
 }

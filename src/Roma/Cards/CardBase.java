@@ -21,11 +21,6 @@ public abstract class CardBase implements Card {
     private ArrayList<Integer> playerActions;
     private Card container;
 
-    //activated values
-    protected boolean cardActivated = false;
-    protected int playerID = -1;
-    protected Dice activatingDice = null;
-
     public CardBase(String name, String type, String description,
                 int cost, int defense, PlayArea playArea, boolean activateEnabled) {
         this.name = name;
@@ -83,13 +78,6 @@ public abstract class CardBase implements Card {
     public String toString() {
         return "Card Name: " + name + "; Type: " + type + "\nDescription: " + description + "\nCost: "
                 + cost + "; Defence: " + defence;
-    }
-
-    public void cancelActivate(){
-        if(cardActivated){
-            playArea.getPlayer(playerID).getFreeDice().add(activatingDice);
-            cardActivated = false;
-        }
     }
 
     public boolean isActivateEnabled() {

@@ -101,10 +101,29 @@ public class Consiliarus extends CardBase {
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardManager cardManager = playArea.getCardManager();
         CardHolder[] activeCards = diceDiscs.getPlayerActives(player.getPlayerID());
         ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Integer> fromIndices = new ArrayList<Integer>();
+        ArrayList<Integer> toIndices = new ArrayList<Integer>();
+        ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
 
-        //TODO: flesh out
+        while(!activationData.isEmpty()){
+            fromIndices.add(activationData.remove(0));
+            toIndices.add(activationData.remove(0));
+        }
+
+        for(int i : fromIndices){
+            cardList.add(activeCards[i]);
+            activeCards[i] = null;
+        }
+
+        for(int i : toIndices){
+            if(activeCards[i] != null){
+                cardManager.discard(activeCards[i]);
+            }
+            activeCards[i] = cardList.remove(0);
+        }
     }
 
     @Override

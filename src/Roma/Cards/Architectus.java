@@ -85,10 +85,9 @@ public class Architectus extends CardBase {
             }
         }
 
-        while(i > 0){
-            i--;
-            activationData.add(handIndices[i]);
-            activationData.add(discIndices[i]);
+        for(int j = 0; j < i; j++){
+            activationData.add(handIndices[j]);
+            activationData.add(discIndices[j]);
         }
 
         player.setActivationData(activationData);

@@ -21,6 +21,7 @@ public class BattleManager {
         this.diceHolder = playArea.getDiceHolder();
     }
 
+    //TODO: refactor into diceDiscs and split up functionality
     public boolean battle(int targetPlayerID, int target){
         boolean kill = false;
         int battleValue[];

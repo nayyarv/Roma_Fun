@@ -391,8 +391,8 @@ public class Player {
     //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
     public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
             throws CancelAction{
-        assert (diceDiscs[Roma.PLAYER_ONE].length==DiceDiscs.CARD_POSITIONS);
-        assert(diceDiscs[Roma.PLAYER_ONE].length == diceDiscs[Roma.PLAYER_TWO].length);
+        assert (diceDiscs[Roma.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);
+        assert (diceDiscs[Roma.PLAYER_ONE].length == diceDiscs[Roma.PLAYER_TWO].length);
 
         int other = getOtherPlayerID();
 

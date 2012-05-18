@@ -74,6 +74,7 @@ public class Legionarius extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = player.getOtherPlayerID();
 
+        PlayerInterface.printOut("Attack a directly opposite card", true);
         if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
             PlayerInterface.printOut("No card to attack!", true);
             player.cancel();

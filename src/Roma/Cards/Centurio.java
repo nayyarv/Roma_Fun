@@ -69,6 +69,7 @@ public class Centurio extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
 
+        PlayerInterface.printOut("Attack a card directly opposite", true);
         if(targetCard == null){
             PlayerInterface.printOut("No card directly opposite!", true);
             player.cancel();

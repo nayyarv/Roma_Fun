@@ -75,6 +75,11 @@ public class Haruspex extends CardBase {
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = CANCEL;
 
+        PlayerInterface.printOut("Get a card from deck", true);
+        if(deck.isEmpty()){
+            PlayerInterface.printOut("No cards in deck!", true);
+            player.cancel();
+        }
         player.commit();
 
         PlayerInterface.printOut("Choose a card to put into hand", true);

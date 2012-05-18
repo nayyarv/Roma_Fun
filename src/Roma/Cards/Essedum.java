@@ -2,6 +2,7 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,7 @@ public class Essedum extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
+        PlayerInterface.printOut("Reduce enemy active cards Defense by 2", true);
         player.commit();
     }
 

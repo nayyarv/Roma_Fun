@@ -59,6 +59,7 @@ public class Aesculapinum extends CardBase {
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex = CANCEL;
 
+        PlayerInterface.printOut("Get a character card from the discard pile", true);
         if(player.countType(discardPile, Card.CHARACTER) == 0){
             PlayerInterface.printOut("No character cards in Discard pile", true);
             player.cancel();

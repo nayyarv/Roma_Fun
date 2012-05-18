@@ -109,6 +109,7 @@ public class Forum extends CardBase {
         freeDice.addAll(player.getFreeDice());
         int dieIndex;
 
+        PlayerInterface.printOut("Get Victory Tokens by using free action dice", true);
         if(freeDice.isEmpty()){
             PlayerInterface.printOut("Not enough free action dice!", true);
             player.cancel();

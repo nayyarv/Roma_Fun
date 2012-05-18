@@ -19,10 +19,10 @@ public class TestGamePlayerInterface {
 
         playArea.testFillHand(0);
 
-        gameRules.layAllCardsInHand();
+        //gameRules.layAllCardsInHand();
 
 
-        playerInterface.printOut("Discs that are buildings", true);
+        //playerInterface.printOut("Discs that are buildings", true);
         //playerInterface.getCardIndexFiltered(playArea.getDiceDiscs().toList(0), Card.BUILDING);
 //
 //        playArea.getPlayer(0).printHand();

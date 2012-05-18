@@ -49,7 +49,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setWhoseTurn(int player) {
-       //Todo
+
     }
 
     /**

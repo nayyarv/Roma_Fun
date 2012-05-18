@@ -85,14 +85,29 @@ public class Mercator extends CardBase {
 //        return activated;
 //    }
 
+    private final int COST_PER_TOKEN = 2;
+
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        int numberOfTokens;
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int numberOfTokens = CANCEL;
         PlayerInterface playerInterface = playArea.getPlayerInterface();
+        boolean validInput = false;
+        int playerMoney = moneyManager.getPlayerMoney(player.getPlayerID());
 
         PlayerInterface.printOut("Buy tokens from your opponent for 2 money each", true);
-        numberOfTokens = playerInterface.getIntegerInput()
-        //TODO: fill in
+        while(!validInput){
+            PlayerInterface.printOut("You have " + playerMoney + " money, how many tokens do you want to buy?", true);
+            numberOfTokens = playerInterface.getIntegerInput(0);
+            if(moneyManager.enoughMoney(player.getPlayerID(), COST_PER_TOKEN * numberOfTokens)){
+                validInput = true;
+            } else {
+                PlayerInterface.printOut("Not enough money to buy that many tokens!", true);
+            }
+        }
+        player.commit();
+        activationData.add(numberOfTokens);
     }
 
     //activationData: [numberOfTokens]

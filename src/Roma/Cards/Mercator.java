@@ -91,7 +91,7 @@ public class Mercator extends CardBase {
         PlayerInterface playerInterface = playArea.getPlayerInterface();
 
         PlayerInterface.printOut("Buy tokens from your opponent for 2 money each", true);
-        numberOfTokens = playerInterface.getIntegerInput()
+        numberOfTokens = playerInterface.getIntegerInput();
         //TODO: fill in
     }
 

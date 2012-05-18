@@ -60,7 +60,7 @@ public class Architectus extends CardBase {
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<CardHolder> hand = player.getHand();
         int[] handIndices = new int[hand.size()];
         int[] discIndices = new int[hand.size()];
@@ -90,8 +90,6 @@ public class Architectus extends CardBase {
             activationData.add(handIndices[j]);
             activationData.add(discIndices[j]);
         }
-
-        player.setActivationData(activationData);
     }
 
     //activationData: ([cardHandIndex][positionIndex])*repeated as desired

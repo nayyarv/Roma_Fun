@@ -53,7 +53,7 @@ public class Consiliarus extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
         CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
@@ -99,8 +99,6 @@ public class Consiliarus extends CardBase {
             activationData.add(fromIndices[j]);
             activationData.add(toIndices[j]);
         }
-
-        player.setActivationData(activationData);
     }
 
     //activationData: ([fromIndex][toIndex])*repeated as desired

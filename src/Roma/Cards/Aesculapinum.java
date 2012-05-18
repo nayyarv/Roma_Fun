@@ -54,7 +54,7 @@ public class Aesculapinum extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex = CANCEL;
@@ -73,7 +73,6 @@ public class Aesculapinum extends CardBase {
             }
         }
         activationData.add(cardIndex);
-        player.setActivationData(activationData);
     }
 
     //activationData: [cardIndex]

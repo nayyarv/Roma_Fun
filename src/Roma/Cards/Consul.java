@@ -63,7 +63,7 @@ public class Consul extends CardBase {
         final String strOption1 = "increase die value?";
         final String strOption2 = "decrease die value?";
         PlayerInterface playerInterface = playArea.getPlayerInterface();
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Dice> freeDice = player.getFreeDice();
         int dieIndex;
         int option = CANCEL;

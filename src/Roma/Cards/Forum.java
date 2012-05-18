@@ -104,7 +104,7 @@ public class Forum extends CardBase {
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Dice> freeDice = new ArrayList<Dice>();
         freeDice.addAll(player.getFreeDice());
         int dieIndex;

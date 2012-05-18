@@ -24,7 +24,6 @@ public class PlayArea {
     private GameRules gameRules;
     private CardFactory cardFactory;
 
-    //TODO: Use these functions
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();

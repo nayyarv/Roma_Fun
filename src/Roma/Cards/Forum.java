@@ -53,53 +53,7 @@ public class Forum extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//
-//    }
-//
-//    //TODO: refactor incomplete
-//    @Override
-//    public ArrayList<Integer> gatherData(Player player, int position) {
-//
-//
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        ArrayList<Dice> freeDice = player.getFreeDice();
-//        Dice chosenDie = null;
-//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-//
-//        if(freeDice.isEmpty()){
-//            activationData = null;
-//            PlayerInterface.printOut("Not enough free action dice!", true);
-//        } else {
-//            PlayerInterface.printOut("Please choose a second die to use", true);
-//            chosenDie = player.getDieIndex(freeDice);
-//            if(chosenDie != null){
-//                // check for adjacent Templum
-//                if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME) && !freeDice.isEmpty()){
-//                    PlayerInterface.printOut("Would you like to use a 3rd die?", true);
-//                    chosenDie = player.getDieIndex(freeDice);
-//                    if(chosenDie != null){
-//                        diceDiscs.addDiceToDisc(position, chosenDie);
-//                    }
-//                }
-//            } else {
-//                PlayerInterface.printOut("Card activation cancelled.", true);
-//                activationData = null;
-//            }
-//        }
-//
-//        return activationData;
-//    }
-//
-//    @Override
-//    public boolean activate(Player player, int position, ArrayList<Integer> activationData) {
-//        boolean activated = true;
-//        victoryTokens.playerFromPool(player.getPlayerID(), chosenDie.getValue());
-//
-//        return activated;
-//    }
-
+    //TODO: remove used action die to activate forum from diceList
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

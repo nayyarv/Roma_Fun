@@ -9,6 +9,7 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -86,6 +87,11 @@ public class Mercator extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        int numberOfTokens;
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
+
+        PlayerInterface.printOut("Buy tokens from your opponent for 2 money each", true);
+        numberOfTokens = playerInterface.getIntegerInput()
         //TODO: fill in
     }
 

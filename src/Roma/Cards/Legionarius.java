@@ -80,19 +80,18 @@ public class Legionarius extends CardBase {
             player.cancel();
         } else {
             player.commit();
-            //TODO: call new battle function here
         }
     }
 
-    //TODO: refactor battle into currentAction values
     //activationData: no data
     //checks currentAction for battleValue
 
     @Override
     public void activate(Player player, int position) {
-        BattleManager battleManager = playArea.getBattleManager();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = player.getOtherPlayerID();
-        battleManager.battle(targetPlayerID, position);
+        int battleValue = player.getCurrentAction().getBattleDice();
+        diceDiscs.battle(targetPlayerID, position, battleValue);
     }
 
     @Override

@@ -380,10 +380,14 @@ public class Player {
     }
 
     private void checkDesc(ArrayList<CardHolder> cardList){
-        int action;
+        int cardIndex;
+        CardHolder card;
         PlayerInterface.printOut("Check which card number: ", false);
-        action = playerInterface.getIndex(cardList.size());
-        PlayerInterface.printOut(cardList.get(action).toString(), true);
+        cardIndex = playerInterface.getIndex(cardList.size());
+        card = cardList.get(cardIndex);
+        if(card != null){
+            PlayerInterface.printOut(cardList.get(cardIndex).toString(), true);
+        }
     }
 
 
@@ -405,14 +409,14 @@ public class Player {
         int option = CANCEL;
         final String
                 strPrompt = "Dice Discs:",
-                strOption[] = {"Check Description of your Cards",
-                        "Check Description of your Opponent's Card",
-                        "Choose Disc"};
+                strOption[] = {"Choose Disc",
+                        "Check Description of your Cards",
+                        "Check Description of your Opponent's Card"};
 
         final int
-                DESC_OWN = 1,
-                DESC_OPP = 2,
-                CHOOSE_DISC = 3;
+                CHOOSE_DISC = 1,
+                DESC_OWN = 2,
+                DESC_OPP = 3;
         boolean validChoice = false;
         int choice = CANCEL;
 

@@ -53,7 +53,6 @@ public class Forum extends CardBase {
 
     }
 
-    //TODO: remove used action die to activate forum from diceList
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
@@ -61,8 +60,9 @@ public class Forum extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Dice> freeDice = new ArrayList<Dice>();
         freeDice.addAll(player.getFreeDice());
-        int dieIndex;
+        int dieIndex = player.getCurrentAction().getActionDiceIndex();
 
+        freeDice.remove(dieIndex);
         PlayerInterface.printOut("Get Victory Tokens by using free action dice", true);
         if(freeDice.isEmpty()){
             PlayerInterface.printOut("Not enough free action dice!", true);

@@ -55,61 +55,40 @@ public class Consul extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        PlayerInterface playerInterface = player.getPlayerInterface();
-//        final String strPrompt = "Would you like to...";
-//        final String strOption1 = "Increase the die?";
-//        final String strOption2 = "Decrease the die?";
-//        final String strOption3 = "Cancel";
-//        final int INCREASE = 1;
-//        final int DECREASE = 2;
-//        final int CANCEL = 3;
-//
-//        int choice = 3;
-//        boolean validChoice = false;
-//
-//        boolean activated = true;
-//        ArrayList<Dice> freeDice = player.getFreeDice();
-//        Dice chosenDice = null;
-//
-//        if(freeDice.size() != 0){
-//            chosenDice = player.getDieIndex(freeDice);
-//            if(chosenDice == null){
-//                activated = false;
-//            } else {
-//                while(!validChoice){
-//                    choice = playerInterface.readInput(strPrompt, strOption1, strOption2, strOption3);
-//                    if(choice == INCREASE){
-//                        if(chosenDice.getValue() == Dice.MAX_DIE_VALUE){
-//                            PlayerInterface.printOut("Can't increase die value over" + Dice.MAX_DIE_VALUE + "!", true);
-//                        } else {
-//                            chosenDice.incrementValue();
-//                            validChoice = true;
-//                        }
-//                    } else if(choice == DECREASE){
-//                        if(chosenDice.getValue() == Dice.MIN_DIE_VALUE){
-//                            PlayerInterface.printOut("Can't decrease die value over" + Dice.MIN_DIE_VALUE + "!", true);
-//                        } else {
-//                            chosenDice.decrementValue();
-//                            validChoice = false;
-//                        }
-//                    } else if(choice == CANCEL){
-//                        validChoice = true;
-//                        activated = false;
-//                    }
-//                }
-//            }
-//        }
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        final int INCREASE = 1;
+        final int DECREASE = 2;
+        final String strPrompt = "Would you like to...";
+        final String strOption1 = "increase die value?";
+        final String strOption2 = "decrease die value?";
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
         ArrayList<Dice> freeDice = player.getFreeDice();
-        int dieIndex = player.getDieIndex(freeDice);
-        //TODO: fill in
+        int dieIndex;
+        int option = CANCEL;
+        int chosenDieValue;
+        boolean validInput = false;
+
+        PlayerInterface.printOut("Which die do you want to change?", true);
+        dieIndex = player.getDieIndex(freeDice);
+        chosenDieValue = freeDice.get(dieIndex).getValue();
+        while(!validInput){
+            option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
+            if(option == CANCEL){
+                player.cancel();
+            } else if(option == INCREASE && chosenDieValue < 6){
+                option = 1;
+            } else if(option == DECREASE && chosenDieValue > 1){
+                option = -1;
+            } else {
+                PlayerInterface.printOut("Dice values have to stay between 1 and 6", true);
+            }
+        }
+
+        activationData.add(dieIndex);
+        activationData.add(option);
+        player.commit();
     }
 
     //activation data: [dieIndex][+1/-1]

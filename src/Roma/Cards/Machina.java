@@ -1,9 +1,6 @@
 package Roma.Cards;
 
-import Roma.CardManager;
-import Roma.DiceDiscs;
-import Roma.PlayArea;
-import Roma.Player;
+import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -84,8 +81,53 @@ public class Machina extends CardBase {
 //    }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+    public void gatherData(Player player, int position) throws CancelAction{
+        ArrayList<Integer> activationData = player.getActivationData();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
+        CardHolder tempCard;
+        int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
+        int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
+        int fromIndex;
+        int toIndex;
+        boolean endSelection = false;
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            System.arraycopy(activeCards[i], 0, activeCardsPrime[i], 0, DiceDiscs.CARD_POSITIONS);
+        }
+
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            tempCard = activeCards[player.getPlayerID()][i];
+            if(tempCard.getType().equalsIgnoreCase(Card.BUILDING)){
+                tempCard.setPlayable(true);
+                activeCardsPrime[player.getPlayerID()][i] = null;
+            }
+        }
+
+        int i = 0;
+        PlayerInterface.printOut("Rearrange building cards...", true);
+        while(!endSelection){
+            try {
+                PlayerInterface.printOut("Select card to move:", true);
+                fromIndex = player.getDiceDiscIndex(activeCards, true, false);
+                fromIndices[i] = fromIndex;
+                PlayerInterface.printOut("Move to where:", true);
+                toIndex = player.getDiceDiscIndex(activeCardsPrime, false, false);
+                toIndices[i] = toIndex;
+                activeCardsPrime[player.getPlayerID()][toIndex] = activeCards[player.getPlayerID()][fromIndex];
+                i++;
+            } catch (CancelAction cancelAction) {
+                endSelection = true;
+            }
+        }
+
+        player.commit();
+
+        for(int j = 0; j < i; j++){
+            activationData.add(fromIndices[j]);
+            activationData.add(toIndices[j]);
+        }
     }
 
     //activationData: ([fromIndex][toIndex])*repeated as desired

@@ -152,12 +152,17 @@ public class GamePlayerInterface extends PlayerInterface {
     }
 
     @Override
-    public void printFilteredCardList(ArrayList<CardHolder> cardList){
-        int i = 1;
-        for(CardHolder card: cardList){
-            printOut(i+") ", false);
-            printOut(Filter(card, false), true);
+    public void printFilteredCardList(ArrayList<CardHolder> cardList, boolean  shouldFilter){
 
+        if (shouldFilter){
+            int i = 1;
+            for(CardHolder card: cardList){
+                printOut(i+") ", false);
+                printOut(Filter(card, false), true);
+
+            }
+        } else {
+            printCardList(cardList);
         }
     }
 

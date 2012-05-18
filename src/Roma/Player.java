@@ -319,14 +319,27 @@ public class Player {
         commit();
     }
 
-    //TODO: refactor this to include a filter
+
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
-        //TODO: set playable here?
-        return getCardIndex(cardList);
+        for(int i: chosenIndices){
+            cardList.get(i).setPlayable(false);
+        }
+
+        for(CardHolder cardHolder: cardList){
+            if(cardHolder.getType().equalsIgnoreCase(type)){
+                cardHolder.setPlayable(false);
+            }
+        }
+
+
+        return getCardIndex(cardList, true);
     }
 
-    //TODO: doesn't filter selection correctly
-    private int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+    public int getCardIndex(ArrayList<CardHolder> cardList) throws CancelAction{
+        return getCardIndex(cardList, false);
+    }
+
+    private int getCardIndex(ArrayList<CardHolder> cardList, boolean shouldFilter) throws CancelAction{
         final String
                 strPrompt = "Possible actions:",
                 strOption1 = "Choose a card",
@@ -342,7 +355,7 @@ public class Player {
         int action = 0;
         boolean validChoice = false;
 
-        playerInterface.printFilteredCardList(cardList);
+        playerInterface.printFilteredCardList(cardList, shouldFilter);
 
         if(cardList.size() == 0){
             PlayerInterface.printOut("There are no cards!", true);
@@ -356,7 +369,7 @@ public class Player {
                 } else if(action == CHECK_DESC){
                     checkDesc(cardList);
                 } else if(action == PRINT_CARDS){
-                    playerInterface.printFilteredCardList(cardList);
+                    playerInterface.printFilteredCardList(cardList, shouldFilter);
                 } else if(action == CANCEL){
                     cancel();
                 } else {

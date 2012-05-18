@@ -63,8 +63,8 @@ public abstract class PlayerInterface {
         return String.format("%1$#" + n + "s", s);
     }
 
-    public abstract void printFilteredCardList(ArrayList<CardHolder> cardList);
-
     public abstract void printFilteredDiceList(ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
                                                boolean filterCurr, boolean filterOther);
+
+    public abstract void printFilteredCardList(ArrayList<CardHolder> cardList, boolean filter);
 }

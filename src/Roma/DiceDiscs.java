@@ -5,6 +5,7 @@ import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -22,7 +23,6 @@ public class DiceDiscs {
     public static final int FIRST_INDEX = 0;
 
     private final PlayArea playArea;
-    private PlayerInterface playerInterface;
 
     private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
@@ -38,7 +38,6 @@ public class DiceDiscs {
 
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
-        playerInterface = playArea.getPlayerInterface();
         for(int i = 0; i < CARD_POSITIONS; i++){
                 for(int j = 0; j < Roma.MAX_PLAYERS; j++){
                     activeCards[j][i] = null;
@@ -54,6 +53,16 @@ public class DiceDiscs {
 
     public CardHolder[][] getActiveCards(){
         return activeCards;
+    }
+
+    public ArrayList<CardHolder> listActiveCards(){
+        ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            cardList.addAll(Arrays.asList(activeCards[i]));
+        }
+
+        return cardList;
     }
 
     //Gets all the cards of a certain type ~ Building or Character from the activeCards

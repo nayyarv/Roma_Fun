@@ -181,6 +181,7 @@ public class GamePlayerInterface extends PlayerInterface {
             for(CardHolder card: cardList){
                 printOut(i+") ", false);
                 printOut(Filter(card, false), true);
+                i++;
             }
         } else {
             printCardList(cardList);

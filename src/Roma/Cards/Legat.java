@@ -2,6 +2,7 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,8 @@ public class Legat extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        PlayerInterface.printOut("Get 1 victory point from the stockpile for every dice " +
+                "disc not occupied by the opponent", true);
         player.commit();
     }
 

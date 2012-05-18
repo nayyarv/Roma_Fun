@@ -89,7 +89,6 @@ public class GameRules {
             hand = activePlayer.getHand();
 
             while(!hand.isEmpty()){
-                playArea.printStats();
                 PlayerInterface.printOut(activePlayer.getName() + ", please lay all your cards", true);
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){

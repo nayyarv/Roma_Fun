@@ -2,6 +2,7 @@ package Roma.Cards;
 
 import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class TribunisPlebis extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        PlayerInterface.printOut("Take a victory token from your opponent", true);
         player.commit();
     }
 

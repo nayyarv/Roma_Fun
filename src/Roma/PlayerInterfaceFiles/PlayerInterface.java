@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public abstract class PlayerInterface {
+    public static final String BREAK_LINE = "-------------------------------------";
 
     public final static int CANCEL = -1;
 

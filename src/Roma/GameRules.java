@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * Desc: All the initial and regular global rules are run by this object
  */
 public class GameRules {
+    public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
 
     private static final int CANCEL = PlayerInterface.CANCEL;
 
@@ -50,6 +51,7 @@ public class GameRules {
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
             //extracts the first num-init-cards from the initial set
 
+            PlayerInterface.printOut(BREAK_LINE, true);
             PlayerInterface.printOut(players[i].getName() +
                     ", these are the " + Roma.NUM_INIT_CARDS + " cards dealt to you.\n" +
                     "You must choose " + Roma.NUM_CARDS_SWAPPED + " to give to your opponent.\n" +
@@ -89,6 +91,7 @@ public class GameRules {
             hand = activePlayer.getHand();
 
             while(!hand.isEmpty()){
+                PlayerInterface.printOut(BREAK_LINE, true);
                 PlayerInterface.printOut(activePlayer.getName() + ", please lay all your cards", true);
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){

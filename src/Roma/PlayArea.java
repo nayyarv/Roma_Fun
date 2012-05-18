@@ -7,6 +7,8 @@ import Roma.PlayerInterfaceFiles.*;
 import java.util.ArrayList;
 
 public class PlayArea {
+    public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
+
     //#defines
     private final int PAD_LENGTH = 20;
 
@@ -124,6 +126,7 @@ public class PlayArea {
 
 
     private void startTurnPhase(Player player) {
+        PlayerInterface.printOut(BREAK_LINE, true);
         PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
@@ -137,7 +140,7 @@ public class PlayArea {
         String cardName;
 
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            PlayerInterface.printOut("-------------------------------------", true);
+            PlayerInterface.printOut(BREAK_LINE, true);
             PlayerInterface.printOut("Player: " + players[player].getName(), true);
             PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
                     "  \tMoney: " + moneyManager.getPlayerMoney(player), true);

@@ -74,15 +74,13 @@ public class Haruspex extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = CANCEL;
-        boolean validInput = false;
 
         player.commit();
 
         PlayerInterface.printOut("Choose a card to put into hand", true);
-        while(!validInput){
+        while(cardIndex == CANCEL){
             try {
                 cardIndex = player.getCardIndex(deck, "");
-                validInput = true;
             } catch (CancelAction cancelAction) {
                 PlayerInterface.printOut("Have to choose a card", true);
             }

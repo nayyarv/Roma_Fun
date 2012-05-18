@@ -61,7 +61,7 @@ public class Forum extends CardBase {
 //    //TODO: refactor incomplete
 //    @Override
 //    public ArrayList<Integer> gatherData(Player player, int position) {
-//        ArrayList<Integer> activationData = new ArrayList<Integer>();
+//
 //
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 //        ArrayList<Dice> freeDice = player.getFreeDice();
@@ -102,7 +102,17 @@ public class Forum extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        int dieIndex;
+
+        PlayerInterface.printOut("Get victory tokens equal to the value of an unused Action Die:", true);
+        dieIndex = player.getDieIndex(freeDice);
+        activationData.add(dieIndex);
+
+        player.commit();
     }
 
     //activation data: [freeDieIndex] ([freeDieIndex))

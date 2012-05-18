@@ -67,7 +67,10 @@ public class GameRules {
                         PlayerInterface.printOut("You must choose a card: ", true);
                     }
                 }
-                if(j!=Roma.NUM_CARDS_SWAPPED-1) PlayerInterface.printOut("Choose the next card:", true);
+                if(j!=Roma.NUM_CARDS_SWAPPED-1){
+                    PlayerInterface.printOut(BREAK_LINE, true);
+                    PlayerInterface.printOut("Choose the next card:", true);
+                }
             }
             players[i].addCardListToHand(individualHand);
             players[(i+1)%Roma.MAX_PLAYERS].addCardListToHand(choices);

@@ -321,17 +321,16 @@ public class Player {
 
 
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
-        for(int i: chosenIndices){
-            cardList.get(i).setPlayable(false);
-        }
 
         for(CardHolder cardHolder: cardList){
-            if(cardHolder.getType().equalsIgnoreCase(type)){
-                cardHolder.setPlayable(false);
+            if(type.equalsIgnoreCase("")||cardHolder.getType().equalsIgnoreCase(type)){
+                cardHolder.setPlayable(true);
             }
         }
 
-
+        for(int i: chosenIndices){
+            cardList.get(i).setPlayable(false);
+        }
         return getCardIndex(cardList, true);
     }
 

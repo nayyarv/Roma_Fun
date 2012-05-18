@@ -106,7 +106,7 @@ public class Centurio extends CardBase {
         Dice chosenDie = null;
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
         ArrayList<Dice> freeDice = player.getFreeDice();
-        int battleValue = player.getCurrentAction().getBattleDice();
+        int battleValue = player.getBattleValue();
 
         //if empty then battleVictory == true
         if(activationData.isEmpty()){

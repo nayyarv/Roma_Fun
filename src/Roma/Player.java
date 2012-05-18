@@ -544,4 +544,8 @@ public class Player {
         }
         return count;
     }
+
+    public int getBattleValue(){
+        return currentAction.getBattleDice();
+    }
 }

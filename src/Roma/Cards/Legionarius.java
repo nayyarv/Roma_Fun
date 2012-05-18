@@ -90,7 +90,7 @@ public class Legionarius extends CardBase {
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = player.getOtherPlayerID();
-        int battleValue = player.getCurrentAction().getBattleDice();
+        int battleValue = player.getBattleValue();
         diceDiscs.battle(targetPlayerID, position, battleValue);
     }
 

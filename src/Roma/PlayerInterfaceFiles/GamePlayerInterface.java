@@ -66,7 +66,7 @@ public class GamePlayerInterface extends PlayerInterface {
         if(range.length > 1){
             min = range[0];
             max = range[1];
-            if(input >= min && input < max){
+            if(input >= min && input <= max){
                 inBounds = true;
             } else if (input == INVALID_INPUT){
                 printOut("Must Input a number", true);
@@ -181,6 +181,7 @@ public class GamePlayerInterface extends PlayerInterface {
             for(CardHolder card: cardList){
                 printOut(i+") ", false);
                 printOut(Filter(card, false), true);
+                i++;
             }
         } else {
             printCardList(cardList);

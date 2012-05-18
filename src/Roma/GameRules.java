@@ -60,7 +60,6 @@ public class GameRules {
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++){
                 while(temp == PlayerInterface.CANCEL){
-
                     try {
                         temp = players[i].getCardIndex(individualHand,"");
                         choices.add(individualHand.remove(temp));

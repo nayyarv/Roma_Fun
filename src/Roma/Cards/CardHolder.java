@@ -97,7 +97,7 @@ public class CardHolder implements Card{
     public void leavePlay() {
         Wrapper wrapper;
         //remove all wrappers
-        while(!contents.isWrapper()){
+        while(contents.isWrapper()){
             wrapper = (Wrapper) contents;
             wrapper.deleteThisWrapper();
         }

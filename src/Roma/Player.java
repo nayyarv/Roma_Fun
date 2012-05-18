@@ -374,16 +374,6 @@ public class Player {
                 } else {
                     PlayerInterface.printOut("Please choose a valid action", true);
                 }
-                //Now check their choice is valid
-
-                if(choice == CANCEL){
-                    //Cancelled
-                } else if (cardList.get(choice)==null){
-                    //Card is empty
-                    PlayerInterface.printOut("You have chosen an empty card", true);
-                } else if (!cardList.get(choice).getPlayable()){
-                    PlayerInterface.printOut("You have made an invalid card choice", true);
-                }
             }
         }
         return choice;

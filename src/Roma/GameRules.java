@@ -58,7 +58,6 @@ public class GameRules {
                     "Choose the first Card", true);
             //Prompt: move printing to player interface?
 
-
             for(int j = 0, input = PlayerInterface.CANCEL; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
                 while(input == PlayerInterface.CANCEL){
                     try {

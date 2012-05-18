@@ -355,7 +355,6 @@ public class Player {
         int action = 0;
         boolean validChoice = false;
 
-        PlayerInterface.printOut(BREAK_LINE, true);
         playerInterface.printFilteredCardList(cardList, shouldFilter);
 
         if(cardList.size() == 0){

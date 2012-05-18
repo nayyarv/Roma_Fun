@@ -107,21 +107,23 @@ public class Consul extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        int dieIndex = player.getDieIndex(freeDice);
         //TODO: fill in
     }
 
-    //activation data: [diceIndex][+1/-1]
+    //activation data: [dieIndex][+1/-1]
 
     @Override
     public void activate(Player player, int position) {
         ArrayList<Integer> activationData = player.getActivationData();
-        int diceIndex = activationData.remove(0);
+        int dieIndex = activationData.remove(0);
         int modValue = activationData.remove(0);
         ArrayList<Dice> freeDice = player.getFreeDice();
         if(modValue == 1){
-            freeDice.get(diceIndex).incrementValue();
+            freeDice.get(dieIndex).incrementValue();
         } else if (modValue == -1){
-            freeDice.get(diceIndex).decrementValue();
+            freeDice.get(dieIndex).decrementValue();
         } else {
             System.err.println("Error with Consul data");
             assert(false);

@@ -205,15 +205,14 @@ public class Player {
     //return int
     public int getDieIndex(ArrayList<Dice> diceList) throws CancelAction{
         final String strPrompt = "Which die do you want to use?";
-        String[] diceValues = new String[diceList.size() + 1];
+        String[] diceValues = new String[diceList.size()];
         int diceIndex = CANCEL;
 
         for(int i = 0; i < diceList.size(); i++){
             diceValues[i] = diceList.get(i).getValue().toString();
         }
-        diceValues[diceList.size()] = "Cancel";
 
-        diceIndex = playerInterface.readIndex(strPrompt, false, diceValues);
+        diceIndex = playerInterface.readIndex(strPrompt, true, diceValues);
 
         if(diceIndex == CANCEL) cancel();
 

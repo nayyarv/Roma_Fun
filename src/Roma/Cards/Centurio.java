@@ -106,6 +106,7 @@ public class Centurio extends CardBase {
         Dice chosenDie = null;
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
         ArrayList<Dice> freeDice = player.getFreeDice();
+        int battleValue = player.getCurrentAction().getBattleDice();
 
         //if empty then battleVictory == true
         if(activationData.isEmpty()){
@@ -116,9 +117,11 @@ public class Centurio extends CardBase {
             if(chosenDieIndex != CANCEL){
                 chosenDie = freeDice.remove(chosenDieIndex);
                 diceDiscs.addDiceToDisc(position, chosenDie);
-                if(targetCard.getDefense() <= chosenDie.getValue() + diceHolder.getBattleValue()[0]){
+                if(targetCard.getDefense() <= chosenDie.getValue() + battleValue){
                     diceDiscs.discardTarget(targetPlayer, position);
                     PlayerInterface.printOut("Victory!", true);
+                } else {
+                    PlayerInterface.printOut("You wasted an action die...", true);
                 }
             }
         }

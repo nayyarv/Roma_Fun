@@ -10,7 +10,8 @@ import java.util.Collections;
 
 
 public class Player {
-    public final int CANCEL = PlayerInterface.CANCEL;
+    public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
+    public static final int CANCEL = PlayerInterface.CANCEL;
     private final String name;
     private int playerID;
 
@@ -354,6 +355,7 @@ public class Player {
         int action = 0;
         boolean validChoice = false;
 
+        PlayerInterface.printOut(BREAK_LINE, true);
         playerInterface.printFilteredCardList(cardList, shouldFilter);
 
         if(cardList.size() == 0){
@@ -392,9 +394,6 @@ public class Player {
         }
     }
 
-
-
-    //TODO: add null pointer check
     public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
             throws CancelAction{
         assert (diceDiscs[Roma.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);
@@ -424,6 +423,7 @@ public class Player {
 
 
         while(!validChoice){
+            PlayerInterface.printOut(BREAK_LINE, true);
             playerInterface.printFilteredDiceList(currPlayer, opposingPlayer,
                     filterCurrent, filterOther);
             //Print's out a nice version of the dice lists

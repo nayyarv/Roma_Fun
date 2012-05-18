@@ -53,33 +53,6 @@ public class Machina extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        boolean activated = true;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        ArrayList<CardHolder> buildingCards = diceDiscs.setOfCards(player, Card.BUILDING);//all the cards
-//
-//        while (!buildingCards.isEmpty()){
-//            playArea.printStats();
-//            player.printCardList(buildingCards);
-//            CardHolder card = player.chooseCardIndex(buildingCards);
-//            //TODO: Allow players to see the dice discs while placing their cards
-//            if (card ==null) { //i.e. cancelled
-//                PlayerInterface.printOut("You must choose a card", true);
-//            } else {
-//                int choice = player.getDiceDiscIndex("");
-//                if (choice!=-1){//I.e not cancel
-//                    diceDiscs.layCard(player.getPlayerID(), choice, card);
-//                } else {
-//                    buildingCards.add(card);
-//                }
-//            }
-//        }
-//
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         ArrayList<Integer> activationData = player.getActivationData();

@@ -285,7 +285,7 @@ public class Player {
         tempHand.addAll(cardManager.viewTopCards(value));
         while(!validChoice){
             try {
-                chosenCardIndex = getCardIndex(tempHand,"");
+                chosenCardIndex = getCardIndex(tempHand);
                 validChoice = true;
             } catch (CancelAction cancelAction) {
                 PlayerInterface.printOut("Have to choose a card", true);
@@ -303,7 +303,7 @@ public class Player {
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
-        chosenCardIndex = getCardIndex(hand, "");
+        chosenCardIndex = getCardIndex(hand);
         if(chosenCardIndex == CANCEL) cancel();
         currentAction.setCardIndex(chosenCardIndex);
 

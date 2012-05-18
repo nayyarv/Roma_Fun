@@ -85,7 +85,7 @@ public class Haruspex extends CardBase {
         PlayerInterface.printOut("Choose a card to put into hand", true);
         while(cardIndex == CANCEL){
             try {
-                cardIndex = player.getCardIndex(deck, "");
+                cardIndex = player.getCardIndex(deck);
             } catch (CancelAction cancelAction) {
                 PlayerInterface.printOut("Have to choose a card", true);
             }

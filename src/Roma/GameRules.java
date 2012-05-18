@@ -62,7 +62,7 @@ public class GameRules {
             for(int j = 0, input = PlayerInterface.CANCEL; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
                 while(input == PlayerInterface.CANCEL){
                     try {
-                        input = players[i].getCardIndex(individualHand,"");
+                        input = players[i].getCardIndex(individualHand);
                         choices.add(individualHand.remove(input));
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a card: ", true);
@@ -96,7 +96,7 @@ public class GameRules {
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){
                     try {
-                        chosenCardIndex = activePlayer.getCardIndex(hand,"");
+                        chosenCardIndex = activePlayer.getCardIndex(hand);
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a card", true);
                     }

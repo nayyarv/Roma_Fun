@@ -54,12 +54,12 @@ public class Aesculapinum extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        ArrayList<Integer> activationData = player.getActivationData();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex = CANCEL;
 
+        PlayerInterface.printOut("Get a character card from the discard pile", true);
         if(player.countType(discardPile, Card.CHARACTER) == 0){
             PlayerInterface.printOut("No character cards in Discard pile", true);
             player.cancel();
@@ -74,7 +74,6 @@ public class Aesculapinum extends CardBase {
             }
         }
         activationData.add(cardIndex);
-        player.setActivationData(activationData);
     }
 
     //activationData: [cardIndex]

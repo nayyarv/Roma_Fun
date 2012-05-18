@@ -84,9 +84,9 @@ public class GameRules {
 
         Player activePlayer = null;
         ArrayList<CardHolder> hand = null;
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
 
         int chosenCardIndex = CANCEL;
-
         int targetDisc;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
@@ -107,7 +107,7 @@ public class GameRules {
                 targetDisc = CANCEL; // cancel value
                 while(targetDisc == CANCEL){
                     try {
-                        targetDisc = activePlayer.getDiceDiscIndex("");
+                        targetDisc = activePlayer.getDiceDiscIndex(activeCards, false, false);
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a disc", true);
                     }

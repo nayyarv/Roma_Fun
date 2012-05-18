@@ -66,9 +66,10 @@ public class Centurio extends CardBase {
         int chosenDieIndex = CANCEL;
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
 
+        PlayerInterface.printOut("Attack a card directly opposite", true);
         if(targetCard == null){
             PlayerInterface.printOut("No card directly opposite!", true);
             player.cancel();
@@ -89,7 +90,6 @@ public class Centurio extends CardBase {
                 activationData.add(chosenDieIndex);
             }
         }
-        player.setActivationData(activationData);
     }
 
     // activationData: [freeDiceIndex]

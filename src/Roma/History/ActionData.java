@@ -53,6 +53,7 @@ public class ActionData {
     //Called from playerInterface
     public ActionData(int playerID){
         this.playerID = playerID;
+        activationData = new ArrayList<Integer>();
     }
 
     public boolean isLayCard() {

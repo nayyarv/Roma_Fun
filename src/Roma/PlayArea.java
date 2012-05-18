@@ -13,7 +13,6 @@ public class PlayArea {
     //Object pointers
     private Roma mainProgram;
     private CardManager cardManager;
-    private ArrayList<CardHolder> playSet = new ArrayList<CardHolder>();
     private DiceHolder diceHolder;
     private MoneyManager moneyManager;
     private VictoryTokens victoryTokens;
@@ -39,7 +38,6 @@ public class PlayArea {
 
     public PlayArea(Roma mainProgram) {
         cardManager = new CardManager(this);
-        playSet.addAll(cardManager.getPlayingDeck());
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(this);
@@ -97,15 +95,35 @@ public class PlayArea {
                 //add actionData to turnHistory
                 clearEndActionWrappers();
             }
-            for(CardHolder card : playSet){
-                card.setPlayable(false);
-            }
+            resetAllPlayable();
         }
 
         clearEndTurnWrappers();
         //battleManager.clearDefenseModActive(); // reset temporary defense modifiers
         turn++;
     }
+
+    public void resetAllPlayable() {
+        ArrayList<CardHolder> cardList;
+
+        cardList = cardManager.getPlayingDeck();
+        resetPlayable(cardList);
+        cardList = cardManager.getDiscardPile();
+        resetPlayable(cardList);
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            cardList = players[i].getHand();
+            resetPlayable(cardList);
+        }
+        cardList = diceDiscs.listActiveCards();
+        resetPlayable(cardList);
+    }
+
+    private void resetPlayable(ArrayList<CardHolder> cardList) {
+        for(CardHolder card : cardList){
+            card.setPlayable(false);
+        }
+    }
+
 
     private void startTurnPhase(Player player) {
         PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);

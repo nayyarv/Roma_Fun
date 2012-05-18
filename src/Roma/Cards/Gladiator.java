@@ -4,6 +4,7 @@ import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -101,7 +102,24 @@ public class Gladiator extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        int targetPlayerID = player.getOtherPlayerID();
+        CardHolder card;
+        int targetIndex;
+
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            card = activeCards[targetPlayerID][i];
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+                card.setPlayable(true);
+            }
+        }
+        PlayerInterface.printOut("Return which character?", true);
+        targetIndex = player.getDiceDiscIndex(activeCards, false, true);
+
+        player.commit();
+        activationData.add(targetIndex);
     }
 
     //activationData: [targetDiscIndex]

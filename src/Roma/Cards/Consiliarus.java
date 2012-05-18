@@ -51,49 +51,54 @@ public class Consiliarus extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-    private static int FROM_TO_DIMENSIONS = 2;
-
-
-//    //TODO: refactor for testing reasons
-//    public void activate(Player player, int position) {
-//        boolean activated = true;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//
-//        ArrayList<CardHolder> characterCards = diceDiscs.setOfCards(player,CHARACTER);//all the cards
-//
-//        while (!characterCards.isEmpty()){
-//            playArea.printStats();
-//            playerInterface.printCardList(characterCards);
-//            CardHolder card = player.chooseCardIndex(characterCards);
-//            //TODO: Allow players to see the dice discs while placing their cards
-//            if (card ==null) { //i.e. cancelled
-//                PlayerInterface.printOut("You must choose a card", true);
-//            } else {
-//                int choice = player.getDiceDiscIndex("");
-//                if (choice!=-1){//I.e not cancel
-//                    diceDiscs.layCard(player.getPlayerID(), choice, card);
-//                } else {
-//                    characterCards.add(card);
-//                }
-//            }
-//        }
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
-        ArrayList<Integer> activationData = new ArrayList<Integer>();
+        ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
+        CardHolder tempCard;
         int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
         int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
+        int fromIndex;
+        int toIndex;
+        boolean endSelection = false;
 
-        //TODO: flesh out
-        //Maybe collect which cards player desires to move first
-        //then gather where to move the cards too?
-        //problem is how to show the changes to the player in progress...
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            System.arraycopy(activeCards[i], 0, activeCardsPrime[i], 0, DiceDiscs.CARD_POSITIONS);
+        }
+
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            tempCard = activeCards[player.getPlayerID()][i];
+            if(tempCard.getType().equalsIgnoreCase(Card.CHARACTER)){
+                tempCard.setPlayable(true);
+                activeCardsPrime[player.getPlayerID()][i] = null;
+            }
+        }
+
+        int i = 0;
+        PlayerInterface.printOut("Rearrange character cards...", true);
+        while(!endSelection){
+            try {
+                PlayerInterface.printOut("Select card to move:", true);
+                fromIndex = player.getDiceDiscIndex(activeCards, true, false);
+                fromIndices[i] = fromIndex;
+                PlayerInterface.printOut("Move to where:", true);
+                toIndex = player.getDiceDiscIndex(activeCardsPrime, false, false);
+                toIndices[i] = toIndex;
+                activeCardsPrime[player.getPlayerID()][toIndex] = activeCards[player.getPlayerID()][fromIndex];
+                i++;
+            } catch (CancelAction cancelAction) {
+                endSelection = true;
+            }
+        }
 
         player.commit();
 
-        player.setActivationData(activationData);
+        for(int j = 0; j < i; j++){
+            activationData.add(fromIndices[j]);
+            activationData.add(toIndices[j]);
+        }
     }
 
     //activationData: ([fromIndex][toIndex])*repeated as desired

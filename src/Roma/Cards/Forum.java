@@ -61,7 +61,7 @@ public class Forum extends CardBase {
 //    //TODO: refactor incomplete
 //    @Override
 //    public ArrayList<Integer> gatherData(Player player, int position) {
-//        ArrayList<Integer> activationData = new ArrayList<Integer>();
+//
 //
 //        DiceDiscs diceDiscs = playArea.getDiceDiscs();
 //        ArrayList<Dice> freeDice = player.getFreeDice();
@@ -101,8 +101,39 @@ public class Forum extends CardBase {
 //    }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+    public void gatherData(Player player, int position) throws CancelAction{
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
+        int dieIndex;
+
+        PlayerInterface.printOut("Get Victory Tokens by using free action dice", true);
+        if(freeDice.isEmpty()){
+            PlayerInterface.printOut("Not enough free action dice!", true);
+            player.cancel();
+        }
+        PlayerInterface.printOut("Forum requires a 2nd Action Die:", true);
+        dieIndex = player.getDieIndex(freeDice);
+        freeDice.remove(dieIndex);
+        activationData.add(dieIndex);
+
+        if(diceDiscs.checkAdjacent(player.getPlayerID(), position, Templum.NAME)){
+            if(freeDice.isEmpty()){
+                PlayerInterface.printOut("No free action dice to activate adjacent Templum", true);
+            } else {
+                PlayerInterface.printOut("Use a 3rd die to activate Templum?", true);
+                try {
+                    dieIndex = player.getDieIndex(freeDice);
+                    activationData.add(dieIndex);
+                } catch (CancelAction cancelAction) {
+                    PlayerInterface.printOut("Not using a 3rd die...", true);
+                }
+            }
+        }
+
+        player.commit();
     }
 
     //activation data: [freeDieIndex] ([freeDieIndex))

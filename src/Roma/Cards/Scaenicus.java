@@ -54,48 +54,26 @@ public class Scaenicus extends CardBase {
 
     }
 
-//    //TODO: handle infinite loop selecting self
-//    public boolean activate(Player player, int position) {
-//        //TODO: refactor input to interface or player
-//        Scanner input = new Scanner(System.in);
-//        ArrayList<Integer> validInput = new ArrayList<Integer>();
-//        boolean inputValid = false;
-//        int chosenInput = -1;
-//
-//        boolean activated = true;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = player.getOtherPlayerID();
-//
-//        CardHolder[] friendlyCards = diceDiscs.getPlayerActives(targetPlayerID);
-//
-//        PlayerInterface.printOut("Available Targets:", true);
-//        for(int i = 0; i < friendlyCards.length; i++){
-//            if(friendlyCards[i] != null && friendlyCards[i].getType() == Card.CHARACTER){
-//                PlayerInterface.printOut((i + 1) + ") " + friendlyCards[i].getName(), true);
-//                validInput.add(i + 1);
-//            } else {
-//                PlayerInterface.printOut((i + 1) + ") #", true);
-//            }
-//        }
-//
-//        while(!inputValid){
-//            chosenInput = input.nextInt();
-//            for(int number : validInput){
-//                if(chosenInput == number){
-//                    inputValid = true;
-//                }
-//            }
-//        }
-//        chosenInput--;
-//
-//        friendlyCards[chosenInput].activate(player, position);
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        int playerID = player.getPlayerID();
+        CardHolder card;
+        int targetIndex;
+
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            card = activeCards[playerID][i];
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+                card.setPlayable(true);
+            }
+        }
+        PlayerInterface.printOut("Imitate which other character card of yours in play?", true);
+        targetIndex = player.getDiceDiscIndex(activeCards, true, false);
+
+        player.commit();
+        activationData.add(targetIndex);
     }
 
     //activationData: [targetIndex] + extra activation data for copied card

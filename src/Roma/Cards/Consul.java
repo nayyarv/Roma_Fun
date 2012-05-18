@@ -72,6 +72,10 @@ public class Consul extends CardBase {
 
         freeDice.remove(dieIndex);
         PlayerInterface.printOut("Which die do you want to change?", true);
+        if(freeDice.isEmpty()){
+            PlayerInterface.printOut("No free action dice!", true);
+            player.cancel();
+        }
         dieIndex = player.getDieIndex(freeDice);
         chosenDieValue = freeDice.get(dieIndex).getValue();
         while(!validInput){

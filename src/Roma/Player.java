@@ -388,8 +388,7 @@ public class Player {
 
 
 
-    //TODO: refactor this to include a filter
-    //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
+    //TODO: add null pointer check
     public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
             throws CancelAction{
         assert (diceDiscs[Roma.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);

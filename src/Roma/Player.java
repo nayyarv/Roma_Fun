@@ -387,6 +387,8 @@ public class Player {
         card = cardList.get(cardIndex);
         if(card != null){
             PlayerInterface.printOut(cardList.get(cardIndex).toString(), true);
+        } else {
+            PlayerInterface.printOut("No card there!", true);
         }
     }
 

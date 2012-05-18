@@ -65,9 +65,7 @@ public class Consiliarus extends CardBase {
         boolean endSelection = false;
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
-            for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
-                activeCardsPrime[i][j] = activeCards[i][j];
-            }
+            System.arraycopy(activeCards[i], 0, activeCardsPrime[i], 0, DiceDiscs.CARD_POSITIONS);
         }
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){

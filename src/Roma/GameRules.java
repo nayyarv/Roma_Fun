@@ -56,22 +56,17 @@ public class GameRules {
                     "Choose the first Card", true);
             //Prompt: move printing to player interface?
 
-            int input = PlayerInterface.CANCEL;
 
-            for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
+            for(int j = 0, input = PlayerInterface.CANCEL; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
                 while(input == PlayerInterface.CANCEL){
+
                     try {
-                        input = players[i].getCardIndex(individualHand);
+                        input = players[i].getCardIndex(individualHand,"");
                         choices.add(individualHand.remove(input));
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a card: ", true);
-                        input = PlayerInterface.CANCEL;
                     }
-                    //System.err.println("Input: "+input);
-
-
                 }
-
                 if(j!=Roma.NUM_CARDS_SWAPPED-1) PlayerInterface.printOut("Choose the next card:", true);
             }
             players[i].addCardListToHand(individualHand);

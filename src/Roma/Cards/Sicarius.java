@@ -53,49 +53,26 @@ public class Sicarius extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        //TODO: refactor input to interface or player
-//        Scanner input = new Scanner(System.in);
-//        ArrayList<Integer> validInput = new ArrayList<Integer>();
-//        boolean inputValid = false;
-//        int chosenInput = -1;
-//
-//        boolean activated = true;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        int targetPlayerID = player.getOtherPlayerID();
-//
-//        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
-//
-//        PlayerInterface.printOut("Available Targets:", true);
-//        for(int i = 0; i < enemyCards.length; i++){
-//            if(enemyCards[i] != null && enemyCards[i].getType() == Card.CHARACTER){
-//                PlayerInterface.printOut((i + 1) + ") " + enemyCards[i].getName(), true);
-//                validInput.add(i + 1);
-//            } else {
-//                PlayerInterface.printOut((i + 1) + ") #", true);
-//            }
-//        }
-//
-//        while(!inputValid){
-//            chosenInput = input.nextInt();
-//            for(int number : validInput){
-//                if(chosenInput == number){
-//                    inputValid = true;
-//                }
-//            }
-//        }
-//        chosenInput--;
-//
-//        diceDiscs.discardTarget(targetPlayerID, chosenInput);
-//        diceDiscs.discardTarget(player.getPlayerID(), position);
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        int targetPlayerID = player.getOtherPlayerID();
+        CardHolder card;
+        int targetIndex;
+
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            card = activeCards[targetPlayerID][i];
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+                card.setPlayable(true);
+            }
+        }
+        PlayerInterface.printOut("Destroy which enemy Character? (Sicarius is also discarded)", true);
+        targetIndex = player.getDiceDiscIndex(activeCards, false, true);
+
+        player.commit();
+        activationData.add(targetIndex);
     }
 
     //activationData: [targetIndex]

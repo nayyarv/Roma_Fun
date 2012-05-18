@@ -64,7 +64,7 @@ public class Sicarius extends CardBase {
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
             card = activeCards[targetPlayerID][i];
-            if(card.getType().equalsIgnoreCase(Card.BUILDING)){
+            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 card.setPlayable(true);
             }
         }

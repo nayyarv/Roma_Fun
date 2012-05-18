@@ -68,7 +68,7 @@ public class Nero extends CardBase {
                 card.setPlayable(true);
             }
         }
-        PlayerInterface.printOut("Destroy which building? (Nero is also discarded)", true);
+        PlayerInterface.printOut("Destroy which enemy building? (Nero is also discarded)", true);
         targetIndex = player.getDiceDiscIndex(activeCards, false, true);
 
         player.commit();

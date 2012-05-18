@@ -59,7 +59,6 @@ public class GameRules {
 
             for(int j = 0, input = PlayerInterface.CANCEL; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
                 while(input == PlayerInterface.CANCEL){
-
                     try {
                         input = players[i].getCardIndex(individualHand,"");
                         choices.add(individualHand.remove(input));

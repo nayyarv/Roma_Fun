@@ -20,8 +20,6 @@ public abstract class PlayerInterface {
 
     abstract public int readIndex(String title, boolean cancelOn, String... choices);
 
-    abstract public int getIntegerInput(int min, int max);
-
     abstract public int getIndex(int bound);
 
     abstract public String getPlayerName(int num);
@@ -67,4 +65,7 @@ public abstract class PlayerInterface {
                                                boolean filterCurr, boolean filterOther);
 
     public abstract void printFilteredCardList(ArrayList<CardHolder> cardList, boolean filter);
+
+    //Keeps reading till valid input is recieved
+    public abstract int getIntegerInput(int... range);
 }

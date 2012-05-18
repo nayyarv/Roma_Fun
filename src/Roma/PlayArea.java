@@ -18,7 +18,6 @@ public class PlayArea {
     private VictoryTokens victoryTokens;
     private DiceDiscs diceDiscs;
     private Player players[];
-    private BattleManager battleManager;
     private PlayerInterface playerInterface;
     private GameRules gameRules;
     private CardFactory cardFactory;
@@ -43,7 +42,6 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
-        battleManager = new BattleManager(this);
         this.mainProgram = mainProgram;
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
@@ -204,10 +202,6 @@ public class PlayArea {
         return playerInterface;
     }
 
-    public BattleManager getBattleManager() {
-        return battleManager;
-    }
-
     public void addToEndTurnList(Wrapper wrappers){
         endTurnList.add(wrappers);
     }
@@ -284,7 +278,6 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
-        battleManager = new BattleManager(this);
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
         cardFactory = new CardFactory(this);

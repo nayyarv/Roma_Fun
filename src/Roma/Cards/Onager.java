@@ -106,12 +106,12 @@ public class Onager extends CardBase {
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        BattleManager battleManager = playArea.getBattleManager();
         int targetPlayerID = player.getOtherPlayerID();
         ArrayList<Integer> activationData = player.getActivationData();
         int targetIndex = activationData.remove(0);
+        int battleValue = player.getBattleValue();
 
-        battleManager.battle(targetPlayerID, targetIndex);
+        diceDiscs.battle(targetPlayerID, targetIndex, battleValue);
     }
 
     @Override

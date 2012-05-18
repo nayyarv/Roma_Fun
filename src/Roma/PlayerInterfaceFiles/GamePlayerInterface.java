@@ -60,14 +60,28 @@ public class GamePlayerInterface extends PlayerInterface {
         printOut("-------------------------------------", true);
     }
 
-    private boolean checkIntegerInBounds(int input, int min, int max) {
+    private boolean checkIntegerInBounds(int input, int ... range) {
+        int min, max;
         boolean inBounds = false;
-        if(input>=min&&input<max){
-            inBounds = true;
-        } else if (input ==INVALID_INPUT){
-            printOut("Must Input a number", true);
-        } else {
-            printOut("Out of Range", true);
+        if(range.length > 1){
+            min = range[0];
+            max = range[1];
+            if(input >= min && input < max){
+                inBounds = true;
+            } else if (input == INVALID_INPUT){
+                printOut("Must Input a number", true);
+            } else {
+                printOut("Out of Range", true);
+            }
+        } else if(range.length == 1){
+            min = range[0];
+            if(input >= min){
+                inBounds = true;
+            } else if (input == INVALID_INPUT){
+                printOut("Must Input a number", true);
+            } else {
+                printOut("Out of Range", true);
+            }
         }
         return inBounds;
     }
@@ -76,11 +90,20 @@ public class GamePlayerInterface extends PlayerInterface {
 
     //Keeps reading till valid input is recieved
     @Override
-    public int getIntegerInput(int min, int max){
-        int read;
-        do{
-            read=getIntegerInput();
-        } while (!checkIntegerInBounds(read, min,  max));
+    public int getIntegerInput(int ... range){
+        int min, max, read = CANCEL;
+        if(range.length > 1){
+            min = range[0];
+            max = range[1];
+            do{
+                read=getIntegerInput();
+            } while (!checkIntegerInBounds(read, min,  max));
+        } else if(range.length == 1) {
+            min = range[0];
+            do{
+                read=getIntegerInput();
+            } while (!checkIntegerInBounds(read, min));
+        }
         return read;
     }
 
@@ -153,13 +176,11 @@ public class GamePlayerInterface extends PlayerInterface {
 
     @Override
     public void printFilteredCardList(ArrayList<CardHolder> cardList, boolean  shouldFilter){
-
         if (shouldFilter){
             int i = 1;
             for(CardHolder card: cardList){
                 printOut(i+") ", false);
                 printOut(Filter(card, false), true);
-
             }
         } else {
             printCardList(cardList);

@@ -53,46 +53,29 @@ public class Mercator extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-//    public boolean activate(Player player, int position) {
-//        final String STR_PROMPT = "How many Victory Points would you like from your opponent? (max 3 or 0 to cancel): ";
-//        final int MAX_PURCHASE = 3;
-//        final int MIN_PURCHASE = 1;
-//
-//        boolean activated = true;
-//        Scanner input = new Scanner(System.in);
-//        MoneyManager moneyManager = playArea.getMoneyManager();
-//        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-//        boolean validInput = false;
-//
-//        //playArea.getMoneyManager().loseMoney(player, COST);//or super.getCost;
-//        int numTokensRead;
-//
-//        PlayerInterface.printOut(STR_PROMPT, true);
-//
-//        while(!validInput){
-//            numTokensRead = input.nextInt();
-//            if(numTokensRead <= MAX_PURCHASE && numTokensRead >= MIN_PURCHASE){
-//                if (
-//                }
-//            } else if (numTokensRead == 0) {
-//                validInput = true;
-//                activated = false;
-//            } else {
-//                PlayerInterface.printOut("Please give a valid number", true);
-//            }
-//        }
-//
-//        return activated;
-//    }
+    private final int COST_PER_TOKEN = 2;
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        int numberOfTokens;
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int numberOfTokens = CANCEL;
         PlayerInterface playerInterface = playArea.getPlayerInterface();
+        boolean validInput = false;
+        int playerMoney = moneyManager.getPlayerMoney(player.getPlayerID());
 
         PlayerInterface.printOut("Buy tokens from your opponent for 2 money each", true);
-        numberOfTokens = playerInterface.getIntegerInput()
-        //TODO: fill in
+        while(!validInput){
+            PlayerInterface.printOut("You have " + playerMoney + " money, how many tokens do you want to buy?", true);
+            numberOfTokens = playerInterface.getIntegerInput(0);
+            if(moneyManager.enoughMoney(player.getPlayerID(), COST_PER_TOKEN * numberOfTokens)){
+                validInput = true;
+            } else {
+                PlayerInterface.printOut("Not enough money to buy that many tokens!", true);
+            }
+        }
+        player.commit();
+        activationData.add(numberOfTokens);
     }
 
     //activationData: [numberOfTokens]

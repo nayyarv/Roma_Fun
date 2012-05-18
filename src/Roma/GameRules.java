@@ -28,8 +28,6 @@ public class GameRules {
     public void getAndSwapCards(){
         CardManager cardManager = playArea.getCardManager();
 
-
-
         ArrayList<CardHolder> initialSet = new ArrayList<CardHolder>();
         //stores the initial cards for the game
 
@@ -62,7 +60,6 @@ public class GameRules {
 
             for(int j = 0; j<Roma.NUM_CARDS_SWAPPED;j++){
                 while(temp == PlayerInterface.CANCEL){
-
 
                     try {
                         temp = players[i].getCardIndex(individualHand,"");

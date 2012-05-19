@@ -23,10 +23,6 @@ public class PlayArea {
     private PlayerInterface playerInterface;
     private GameRules gameRules;
 
-    //Todo: is this used?
-    private CardFactory cardFactory;
-
-    //TODO: Use these enter HandList
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
@@ -49,7 +45,6 @@ public class PlayArea {
         this.mainProgram = mainProgram;
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
-        cardFactory = new CardFactory(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             players[i] = Player.makeRealPlayer(i, this);
@@ -289,7 +284,6 @@ public class PlayArea {
         players = new Player[Roma.MAX_PLAYERS];
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
-        cardFactory = new CardFactory(this);
 
         for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             players[i] = Player.makeDummyPlayer(i, this);

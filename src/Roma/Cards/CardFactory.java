@@ -46,8 +46,8 @@ public class CardFactory {
         cardList.put(Velites.NAME, new Velites(playArea));
 
         cardList.put(Kat.NAME, new Kat(playArea));
-        cardList.put(GrimReaper.NAME, new Kat(playArea));
-        cardList.put(TelephoneBox.NAME, new Kat(playArea));
+        cardList.put(GrimReaper.NAME, new GrimReaper(playArea));
+        cardList.put(TelephoneBox.NAME, new TelephoneBox(playArea));
     }
 
     public CardHolder getCard(String cardName) {

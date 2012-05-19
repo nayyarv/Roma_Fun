@@ -40,18 +40,10 @@ public abstract class PlayerInterface {
     }
 
     public static String padCentre(String input, int outputLength){
-        if(input.length()>=outputLength){
-            return input;
-        } else {
-            int side = (outputLength-input.length())/2;
-            int rem = (outputLength-input.length())%2;
-            if (rem==1){
-                return padRight(padLeft(input, side),side+1);
-            } else {
-                return padRight(padLeft(input, side),side);
-            }
-        }
-
+        String output = input;
+        int side1 = outputLength/2;
+        int side2 = outputLength - side1;
+        return padRight(padLeft(input, side1),side2);
     }
 
     public static String padRight(String input, int outputLength) {

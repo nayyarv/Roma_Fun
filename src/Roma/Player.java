@@ -443,12 +443,14 @@ public class Player {
 
             if(filterCurrent){//Choosing from your own cards
                 validChoice = checkValid(currPlayer.get(choice));
+                if(!validChoice){
+                    PlayerInterface.printOut("Not a valid choice!", true);
+                }
             } else if (filterOther){
                 validChoice = checkValid(opposingPlayer.get(choice));
-            }
-
-            if(!validChoice){
-                PlayerInterface.printOut("Not a valid choice!", true);
+                if(!validChoice){
+                    PlayerInterface.printOut("Not a valid choice!", true);
+                }
             }
         }
         return choice;

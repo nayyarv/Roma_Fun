@@ -70,7 +70,7 @@ public class GrimReaper extends CardBase {
     public void enterPlay(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[] friendlyCards = diceDiscs.getPlayerActives(player.getPlayerID());
-        grimWrapperMaker = new GrimWrapperMaker();
+        grimWrapperMaker = new GrimWrapperMaker(player.getPlayerID());
 
         for (int i = 0; i < friendlyCards.length; i++) {
             if (i != position && friendlyCards[i] != null) {
@@ -110,6 +110,10 @@ public class GrimReaper extends CardBase {
     }
 
     private class GrimWrapperMaker extends WrapperMaker {
+        public GrimWrapperMaker(int playerID) {
+            super(playerID);
+        }
+
         @Override
         public Wrapper insertWrapper(CardHolder card) {
             Wrapper wrapper = new GrimWrapper(card);

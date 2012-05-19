@@ -92,7 +92,9 @@ public class DiceDiscs {
 
         goingToDiscard(player.getPlayerID(), position);
         for(WrapperMaker wrapperMaker : enterPlayList){
-            wrapperMaker.insertWrapper(newCard);
+            if(wrapperMaker.getOwnerID() == player.getPlayerID()){
+                wrapperMaker.insertWrapper(newCard);
+            }
         }
         newCard.enterPlay(player, position);
         activeCards[playerID][position] = newCard;

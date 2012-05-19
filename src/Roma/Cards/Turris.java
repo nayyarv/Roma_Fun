@@ -69,7 +69,7 @@ public class Turris extends CardBase {
     public void enterPlay(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[] friendlyCards = diceDiscs.getPlayerActives(player.getPlayerID());
-        wrapperMaker = new WrapperMaker();
+        wrapperMaker = new WrapperMaker(player.getPlayerID());
         wrapperMaker.setDefenseShift(DEFENSE_SHIFT);
 
         for (int i = 0; i < friendlyCards.length; i++) {

@@ -65,7 +65,7 @@ public class Essedum extends CardBase {
 
     @Override
     public void activate(Player player, int position) {
-        WrapperMaker wrapperMaker = new WrapperMaker();
+        WrapperMaker wrapperMaker = new WrapperMaker(player.getPlayerID());
         wrapperMaker.setDefenseShift(DEFENSE_SHIFT);
         Wrapper wrapper;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();

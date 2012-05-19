@@ -14,8 +14,14 @@ public class WrapperMaker {
     private int defenseShift = Wrapper.INITIAL_SHIFT;
     private int defenseScale = Wrapper.INITIAL_SCALE;
     private ArrayList<Wrapper> wrapperList = new ArrayList<Wrapper>();
+    private int ownerID;
 
-    public WrapperMaker() {
+    public WrapperMaker(int playerID) {
+        ownerID = playerID;
+    }
+
+    public int getOwnerID(){
+        return ownerID;
     }
 
     public void setCostShift(int costShift) {

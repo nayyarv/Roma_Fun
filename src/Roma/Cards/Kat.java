@@ -46,7 +46,7 @@ public class Kat extends CardBase {
 
     @Override
     public void enterPlay(Player player, int position) {
-        KatWrapperMaker katWrapperMaker = new KatWrapperMaker();
+        KatWrapperMaker katWrapperMaker = new KatWrapperMaker(player.getPlayerID());
 
         for (int i = 0; i < NUMBER_OF_LIVES; i++) {
             katWrapperMaker.insertWrapper(cardHolder);
@@ -114,6 +114,10 @@ public class Kat extends CardBase {
     }
 
     private class KatWrapperMaker extends WrapperMaker {
+        public KatWrapperMaker(int playerID) {
+            super(playerID);
+        }
+
         @Override
         public Wrapper insertWrapper(CardHolder card) {
             Wrapper wrapper = new KatWrapper(card);

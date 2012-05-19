@@ -29,7 +29,7 @@ public class PlayArea {
     private GameRules gameRules;
 
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
-    private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>(); //TODO: add playerID to wrapper maker?
+    private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
     private ArrayList<Wrapper> endNextTurnList = new ArrayList<Wrapper>();
     private ArrayList<Wrapper> endActionList = new ArrayList<Wrapper>();

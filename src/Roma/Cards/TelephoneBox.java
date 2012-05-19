@@ -25,10 +25,9 @@ public class TelephoneBox extends CardBase {
 
     public final static int OCCURENCES = 1;
 
-    public TelephoneBox(PlayArea playArea){
+    public TelephoneBox(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
-
 
 
     @Override
@@ -43,22 +42,24 @@ public class TelephoneBox extends CardBase {
 
     @Override
     public CardHolder makeOne(PlayArea playArea) {
-        Card card = new TelephoneBox(playArea);
+        CardBase card = new TelephoneBox(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new TelephoneBox(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 

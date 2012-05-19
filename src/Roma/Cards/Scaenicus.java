@@ -27,23 +27,25 @@ public class Scaenicus extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Scaenicus(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Scaenicus(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Scaenicus(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -64,9 +66,9 @@ public class Scaenicus extends CardBase {
         CardHolder card;
         int targetIndex;
 
-        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+        for (int i = 0; i < DiceDiscs.CARD_POSITIONS; i++) {
             card = activeCards[playerID][i];
-            if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            if (card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)) {
                 card.setPlayable(true);
             }
         }

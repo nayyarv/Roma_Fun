@@ -24,23 +24,24 @@ public class Aesculapinum extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Aesculapinum(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Aesculapinum(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
-
+        card.setCardHolder(cardHolder);
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Aesculapinum(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -53,20 +54,20 @@ public class Aesculapinum extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         ArrayList<Integer> activationData = player.getActivationData();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
         int cardIndex = CANCEL;
 
         PlayerInterface.printOut("Get a character card from the discard pile", true);
-        if(player.countType(discardPile, Card.CHARACTER) == 0){
+        if (player.countType(discardPile, Card.CHARACTER) == 0) {
             PlayerInterface.printOut("No character cards in Discard pile", true);
             player.cancel();
         }
         player.commit();
 
-        while(cardIndex == CANCEL){
+        while (cardIndex == CANCEL) {
             try {
                 cardIndex = player.getCardIndex(discardPile, Card.CHARACTER);
             } catch (CancelAction cancelAction) {
@@ -86,7 +87,7 @@ public class Aesculapinum extends CardBase {
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
 
         //retrieve cardIndex from activationData
-        if(cardIndex != CANCEL){
+        if (cardIndex != CANCEL) {
             player.addCardToHand(discardPile.get(cardIndex));
             discardPile.remove(cardIndex);
         }

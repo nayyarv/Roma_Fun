@@ -17,7 +17,7 @@ public class Mercatus extends CardBase {
     public final static String NAME = "Mercatus";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "The player gets 1 victory point from the opponent " +
-                    " for every face-up Forum that the opponent has.";
+            " for every face-up Forum that the opponent has.";
     final static int COST = 6;
     final static int DEFENCE = 3;
     final static boolean ACTIVATE_ENABLED = true;
@@ -25,23 +25,25 @@ public class Mercatus extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Mercatus(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Mercatus(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Mercatus(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -62,12 +64,12 @@ public class Mercatus extends CardBase {
     @Override
     public void activate(Player player, int position) {
         int targetPlayerID = player.getOtherPlayerID();
-        CardHolder[] enemyCards= playArea.getDiceDiscs().getPlayerActives(targetPlayerID);
+        CardHolder[] enemyCards = playArea.getDiceDiscs().getPlayerActives(targetPlayerID);
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         int forumCount = 0;
 
-        for(CardHolder card : enemyCards){
-            if(card != null && (card.getName().equalsIgnoreCase(Forum.NAME))){
+        for (CardHolder card : enemyCards) {
+            if (card != null && (card.getName().equalsIgnoreCase(Forum.NAME))) {
                 forumCount++;
             }
         }

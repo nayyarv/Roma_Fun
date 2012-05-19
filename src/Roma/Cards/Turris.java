@@ -25,23 +25,25 @@ public class Turris extends CardBase {
     WrapperMaker wrapperMaker;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Turris(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Turris(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Turris(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -70,8 +72,8 @@ public class Turris extends CardBase {
         wrapperMaker = new WrapperMaker();
         wrapperMaker.setDefenseShift(DEFENSE_SHIFT);
 
-        for(int i = 0; i < friendlyCards.length; i++){
-            if(i != position && friendlyCards[i] != null){
+        for (int i = 0; i < friendlyCards.length; i++) {
+            if (i != position && friendlyCards[i] != null) {
                 wrapperMaker.insertWrapper(friendlyCards[i]);
             }
         }
@@ -83,7 +85,7 @@ public class Turris extends CardBase {
     public void leavePlay() {
         ArrayList<Wrapper> wrapperList = wrapperMaker.getWrapperList();
 
-        for(Wrapper wrapper : wrapperList){
+        for (Wrapper wrapper : wrapperList) {
             wrapper.deleteThisWrapper();
         }
 

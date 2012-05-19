@@ -15,7 +15,7 @@ public class WrapperMaker {
     private int defenseScale = Wrapper.INITIAL_SCALE;
     private ArrayList<Wrapper> wrapperList = new ArrayList<Wrapper>();
 
-    public WrapperMaker(){
+    public WrapperMaker() {
     }
 
     public void setCostShift(int costShift) {
@@ -34,7 +34,7 @@ public class WrapperMaker {
         this.defenseScale = defenseScale;
     }
 
-    public Wrapper insertWrapper(CardHolder card){
+    public Wrapper insertWrapper(CardHolder card) {
         Wrapper wrapper = new Wrapper(card);
 
         wrapper.setCostScale(costScale);
@@ -47,11 +47,11 @@ public class WrapperMaker {
         return wrapper;
     }
 
-    public ArrayList<Wrapper> getWrapperList(){
+    public ArrayList<Wrapper> getWrapperList() {
         return wrapperList;
     }
 
-    public void clearWrapperList(){
+    public void clearWrapperList() {
         wrapperList.clear();
     }
 }

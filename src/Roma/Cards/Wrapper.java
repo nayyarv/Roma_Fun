@@ -25,7 +25,7 @@ public class Wrapper implements Card {
     private int costShift = INITIAL_SHIFT;
     private int costScale = INITIAL_SCALE;
 
-    public Wrapper(Card card){
+    public Wrapper(Card card) {
         contents = card.getContents();
         container = card;
         contents.setContainer(this);
@@ -38,15 +38,15 @@ public class Wrapper implements Card {
         return contents;
     }
 
-    public void setContents(Card card){
+    public void setContents(Card card) {
         contents = card;
     }
 
-    public Card getContainer(){
+    public Card getContainer() {
         return container;
     }
 
-    public void setContainer(Card holder){
+    public void setContainer(Card holder) {
         container = holder;
     }
 
@@ -66,11 +66,11 @@ public class Wrapper implements Card {
         this.costScale = costScale;
     }
 
-    public void enableActivate(){
+    public void enableActivate() {
         activateEnabled = true;
     }
 
-    public void disableActivate(){
+    public void disableActivate() {
         activateEnabled = false;
     }
 
@@ -119,7 +119,7 @@ public class Wrapper implements Card {
 
     public String toString() {
         return "Card Name: " + getName() + "; Type: " + getType() +
-               "\nDescription: " + getDescription() +
+                "\nDescription: " + getDescription() +
                 "\nCost: " + getCost() + "; Defence: " + getDefense();
     }
 
@@ -133,8 +133,8 @@ public class Wrapper implements Card {
         contents.activate(player, position);
     }
 
-    public void deleteThisWrapper(){
-        if(container != null && contents != null){
+    public void deleteThisWrapper() {
+        if (container != null && contents != null) {
             container.setContents(contents);
             contents.setContainer(container);
             container = null;
@@ -153,11 +153,11 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public void discarded(CardHolder[] playerActiveCards, int position){
+    public void discarded(CardHolder[] playerActiveCards, int position) {
         contents.discarded(playerActiveCards, position);
     }
 
-    public void leavePlay(){
+    public void leavePlay() {
         contents.leavePlay();
     }
 }

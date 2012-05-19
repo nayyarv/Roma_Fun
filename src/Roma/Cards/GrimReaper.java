@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-public class GrimReaper extends CardBase{
+public class GrimReaper extends CardBase {
     public final static String NAME = "Grim Reaper";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Once placed on a disc this card provides a chance to cheat death. " +
@@ -24,7 +24,7 @@ public class GrimReaper extends CardBase{
 
     public final static int OCCURENCES = 1;
 
-    public GrimReaper(PlayArea playArea){
+    public GrimReaper(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
@@ -39,23 +39,25 @@ public class GrimReaper extends CardBase{
     }
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new GrimReaper(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new GrimReaper(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new GrimReaper(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 

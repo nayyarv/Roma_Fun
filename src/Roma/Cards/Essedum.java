@@ -24,23 +24,25 @@ public class Essedum extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Essedum(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Essedum(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Essedum(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -54,7 +56,7 @@ public class Essedum extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         PlayerInterface.printOut("Reduce enemy active cards Defense by 2", true);
         player.commit();
     }
@@ -70,8 +72,8 @@ public class Essedum extends CardBase {
         int targetPlayerID = player.getOtherPlayerID();
         CardHolder[] enemyActives = diceDiscs.getPlayerActives(targetPlayerID);
 
-        for(CardHolder card : enemyActives){
-            if(card != null){
+        for (CardHolder card : enemyActives) {
+            if (card != null) {
                 wrapper = wrapperMaker.insertWrapper(card);
                 playArea.addToEndTurnList(wrapper);
             }

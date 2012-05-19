@@ -24,23 +24,25 @@ public class Legionarius extends CardBase {
     public final static int OCCURENCES = 3;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Legionarius(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Legionarius(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Legionarius(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -58,7 +60,7 @@ public class Legionarius extends CardBase {
         int targetPlayerID = player.getOtherPlayerID();
 
         PlayerInterface.printOut("Attack a directly opposite card", true);
-        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
+        if (diceDiscs.getTargetCard(targetPlayerID, position) == null) {
             PlayerInterface.printOut("No card to attack!", true);
             player.cancel();
         } else {

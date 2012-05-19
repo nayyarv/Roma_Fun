@@ -15,21 +15,38 @@ public interface Card {
     public final static String BUILDING = "Building";
 
     public boolean isActivateEnabled();
+
     public String getName();
+
     public String getType();
+
     public String getDescription();
+
     public int getCost();
+
     public int getDefense();
+
     public boolean isWrapper();
+
     public String toString();
+
     public void gatherData(Player player, int position) throws CancelAction;
+
     public void activate(Player player, int position);
+
     public void enterPlay(Player player, int position);
+
     public Card getContents();
+
     public void setContents(Card card);
+
     public Card getContainer();
+
     public void setContainer(Card holder);
+
     public void discarded(CardHolder[] playerActiveCards, int position);
+
     public void goingToDiscard(CardHolder[] playerActiveCards, int position);
+
     public void leavePlay();
 }

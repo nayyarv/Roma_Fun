@@ -26,23 +26,25 @@ public class Mercator extends CardBase {
     public final static int OCCURENCES = 1;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Mercator(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Mercator(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Mercator(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -65,10 +67,10 @@ public class Mercator extends CardBase {
         int playerMoney = moneyManager.getPlayerMoney(player.getPlayerID());
 
         PlayerInterface.printOut("Buy tokens from your opponent for 2 money each", true);
-        while(!validInput){
+        while (!validInput) {
             PlayerInterface.printOut("You have " + playerMoney + " money, how many tokens do you want to buy?", true);
             numberOfTokens = playerInterface.getIntegerInput(0);
-            if(moneyManager.enoughMoney(player.getPlayerID(), COST_PER_TOKEN * numberOfTokens)){
+            if (moneyManager.enoughMoney(player.getPlayerID(), COST_PER_TOKEN * numberOfTokens)) {
                 validInput = true;
             } else {
                 PlayerInterface.printOut("Not enough money to buy that many tokens!", true);

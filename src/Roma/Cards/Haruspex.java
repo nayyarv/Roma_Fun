@@ -24,23 +24,25 @@ public class Haruspex extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Haruspex(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Haruspex(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Haruspex(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -54,21 +56,21 @@ public class Haruspex extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         CardManager cardManager = playArea.getCardManager();
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = CANCEL;
 
         PlayerInterface.printOut("Get a card from deck", true);
-        if(deck.isEmpty()){
+        if (deck.isEmpty()) {
             PlayerInterface.printOut("No cards in deck!", true);
             player.cancel();
         }
         player.commit();
 
         PlayerInterface.printOut("Choose a card to put into hand", true);
-        while(cardIndex == CANCEL){
+        while (cardIndex == CANCEL) {
             try {
                 cardIndex = player.getCardIndex(deck);
             } catch (CancelAction cancelAction) {

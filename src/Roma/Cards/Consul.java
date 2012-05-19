@@ -26,23 +26,25 @@ public class Consul extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Consul(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Consul(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Consul(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -72,19 +74,19 @@ public class Consul extends CardBase {
 
         freeDice.remove(dieIndex);
         PlayerInterface.printOut("Which die do you want to change?", true);
-        if(freeDice.isEmpty()){
+        if (freeDice.isEmpty()) {
             PlayerInterface.printOut("No free action dice!", true);
             player.cancel();
         }
         dieIndex = player.getDieIndex(freeDice);
         chosenDieValue = freeDice.get(dieIndex).getValue();
-        while(!validInput){
+        while (!validInput) {
             option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
-            if(option == CANCEL){
+            if (option == CANCEL) {
                 player.cancel();
-            } else if(option == INCREASE && chosenDieValue < 6){
+            } else if (option == INCREASE && chosenDieValue < 6) {
                 option = 1;
-            } else if(option == DECREASE && chosenDieValue > 1){
+            } else if (option == DECREASE && chosenDieValue > 1) {
                 option = -1;
             } else {
                 PlayerInterface.printOut("Dice values have to stay between 1 and 6", true);
@@ -104,13 +106,13 @@ public class Consul extends CardBase {
         int dieIndex = activationData.remove(0);
         int modValue = activationData.remove(0);
         ArrayList<Dice> freeDice = player.getFreeDice();
-        if(modValue == 1){
+        if (modValue == 1) {
             freeDice.get(dieIndex).incrementValue();
-        } else if (modValue == -1){
+        } else if (modValue == -1) {
             freeDice.get(dieIndex).decrementValue();
         } else {
             System.err.println("Error with Consul data");
-            assert(false);
+            assert (false);
         }
     }
 }

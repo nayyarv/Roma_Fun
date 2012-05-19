@@ -28,23 +28,25 @@ public class Senator extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Senator(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Senator(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Senator(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -57,7 +59,7 @@ public class Senator extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<CardHolder> hand = player.getHand();
@@ -68,13 +70,13 @@ public class Senator extends CardBase {
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
 
         PlayerInterface.printOut("Play character cards from your hand for free", true);
-        if(player.countType(hand, CHARACTER) == 0){
+        if (player.countType(hand, CHARACTER) == 0) {
             PlayerInterface.printOut("No characters in hand!", true);
             player.cancel();
         }
         player.commit();
 
-        for(int i = 0; i < hand.size(); i++){
+        for (int i = 0; i < hand.size(); i++) {
             handIndices[i] = CANCEL;
             discIndices[i] = CANCEL;
         }
@@ -82,7 +84,7 @@ public class Senator extends CardBase {
         //get player input for which cards to lay
         //collect player input
         int i = 0;
-        while(handIndex != CANCEL || discIndex != CANCEL){
+        while (handIndex != CANCEL || discIndex != CANCEL) {
             try {
                 handIndex = player.getCardIndex(hand, Card.CHARACTER, handIndices);
                 handIndices[i] = handIndex;
@@ -95,7 +97,7 @@ public class Senator extends CardBase {
             }
         }
 
-        for(int j = 0; j < i; j++){
+        for (int j = 0; j < i; j++) {
             activationData.add(handIndices[j]);
             activationData.add(discIndices[j]);
         }
@@ -117,9 +119,9 @@ public class Senator extends CardBase {
         int discIndex;
 
         //wrap building cards in hand with costScale = 0 modifier
-        for(int i = 0; i < hand.size(); i++){
+        for (int i = 0; i < hand.size(); i++) {
             card = hand.get(i);
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            if (card.getType().equalsIgnoreCase(Card.CHARACTER)) {
                 wrapper = wrapperMaker.insertWrapper(card);
 
                 //add wrappers to endActionClear list
@@ -128,20 +130,20 @@ public class Senator extends CardBase {
         }
 
         //retrieve data from activationData
-        while(!activationData.isEmpty()){
+        while (!activationData.isEmpty()) {
             handIndices.add(activationData.remove(0));
             discIndices.add(activationData.remove(0));
         }
 
         //get cards from hand without removing to preserve indices
-        for(int i : handIndices){
+        for (int i : handIndices) {
             cards.add(hand.get(i));
         }
 
         //remove cards chosen from hand
         hand.removeAll(cards);
 
-        for(int i = 0; i < cards.size(); i++){
+        for (int i = 0; i < cards.size(); i++) {
             card = cards.get(i);
             discIndex = discIndices.get(i);
             player.layCard(card, discIndex);

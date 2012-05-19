@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.PlayArea;
+
 import java.util.HashMap;
 
 /**
@@ -12,7 +13,7 @@ public class CardFactory {
     private HashMap<String, CardBase> cardList = new HashMap<String, CardBase>();
     private PlayArea playArea;
 
-    public CardFactory(PlayArea playArea){
+    public CardFactory(PlayArea playArea) {
         this.playArea = playArea;
         cardList.put(Aesculapinum.NAME, new Aesculapinum(playArea));
         cardList.put(Architectus.NAME, new Architectus(playArea));
@@ -47,10 +48,10 @@ public class CardFactory {
         cardList.put(Kat.NAME, new Kat(playArea));
     }
 
-    public CardHolder getCard(String cardName){
+    public CardHolder getCard(String cardName) {
         CardBase cardBase = cardList.get(cardName);
         CardHolder cardHolder = null;
-        if(cardBase != null){
+        if (cardBase != null) {
             cardHolder = cardBase.makeOne(playArea);
             //assert(cardHolder.getName().equalsIgnoreCase(cardName));
         }

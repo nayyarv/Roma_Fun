@@ -21,9 +21,10 @@ public abstract class CardBase implements Card {
     final PlayArea playArea;
     private ArrayList<Integer> playerActions;
     Card container;
+    CardHolder cardHolder;
 
     public CardBase(String name, String type, String description,
-                int cost, int defense, PlayArea playArea, boolean activateEnabled) {
+                    int cost, int defense, PlayArea playArea, boolean activateEnabled) {
         this.name = name;
         this.type = type;
         this.description = description;
@@ -33,11 +34,16 @@ public abstract class CardBase implements Card {
         this.activateEnabled = activateEnabled;
     }
 
-    public Card getContents(){
+    void setCardHolder(CardHolder cardHolder) {
+        this.cardHolder = cardHolder;
+    }
+
+    public Card getContents() {
         return null;
     }
-    public void setContents(Card card){
-        assert(false);
+
+    public void setContents(Card card) {
+        assert (false);
     }
 
     public Card getContainer() {
@@ -48,7 +54,7 @@ public abstract class CardBase implements Card {
         container = holder;
     }
 
-    public boolean isWrapper(){
+    public boolean isWrapper() {
         return wrapper;
     }
 
@@ -87,6 +93,7 @@ public abstract class CardBase implements Card {
 
     @Override
     public abstract void gatherData(Player player, int position) throws CancelAction;
+
     @Override
     public abstract void activate(Player player, int position);
 
@@ -107,11 +114,11 @@ public abstract class CardBase implements Card {
 
     public abstract CardHolder makeOne(PlayArea playArea);
 
-    public int otherPlayer(int player){
-        return ((player==Roma.PLAYER_ONE)? Roma.PLAYER_TWO: Roma.PLAYER_ONE);
+    public int otherPlayer(int player) {
+        return ((player == Roma.PLAYER_ONE) ? Roma.PLAYER_TWO : Roma.PLAYER_ONE);
     }
 
-    public void leavePlay(){
+    public void leavePlay() {
         //no leave play action by default
     }
 }

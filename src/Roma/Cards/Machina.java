@@ -25,23 +25,25 @@ public class Machina extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Machina(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Machina(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Machina(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -54,7 +56,7 @@ public class Machina extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
@@ -66,13 +68,13 @@ public class Machina extends CardBase {
         int toIndex;
         boolean endSelection = false;
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
             System.arraycopy(activeCards[i], 0, activeCardsPrime[i], 0, DiceDiscs.CARD_POSITIONS);
         }
 
-        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+        for (int i = 0; i < DiceDiscs.CARD_POSITIONS; i++) {
             card = activeCards[player.getPlayerID()][i];
-            if(card != null && card.getType().equalsIgnoreCase(Card.BUILDING)){
+            if (card != null && card.getType().equalsIgnoreCase(Card.BUILDING)) {
                 card.setPlayable(true);
                 activeCardsPrime[player.getPlayerID()][i] = null;
             }
@@ -80,7 +82,7 @@ public class Machina extends CardBase {
 
         int i = 0;
         PlayerInterface.printOut("Rearrange building cards...", true);
-        while(!endSelection){
+        while (!endSelection) {
             try {
                 PlayerInterface.printOut("Select card to move:", true);
                 fromIndex = player.getDiceDiscIndex(activeCards, true, false);
@@ -97,7 +99,7 @@ public class Machina extends CardBase {
 
         player.commit();
 
-        for(int j = 0; j < i; j++){
+        for (int j = 0; j < i; j++) {
             activationData.add(fromIndices[j]);
             activationData.add(toIndices[j]);
         }
@@ -115,18 +117,18 @@ public class Machina extends CardBase {
         ArrayList<Integer> toIndices = new ArrayList<Integer>();
         ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
 
-        while(!activationData.isEmpty()){
+        while (!activationData.isEmpty()) {
             fromIndices.add(activationData.remove(0));
             toIndices.add(activationData.remove(0));
         }
 
-        for(int i : fromIndices){
+        for (int i : fromIndices) {
             cardList.add(activeCards[i]);
             activeCards[i] = null;
         }
 
-        for(int i : toIndices){
-            if(activeCards[i] != null){
+        for (int i : toIndices) {
+            if (activeCards[i] != null) {
                 cardManager.discard(activeCards[i]);
             }
             activeCards[i] = cardList.remove(0);

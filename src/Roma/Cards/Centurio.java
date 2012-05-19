@@ -27,23 +27,25 @@ public class Centurio extends CardBase {
     public final static int OCCURENCES = 2;
 
     @Override
-    public CardHolder makeOne(PlayArea playArea){
-        Card card = new Centurio(playArea);
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new Centurio(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
 
         return cardHolder;
     }
 
-    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
         ArrayList<CardHolder> set = new ArrayList<CardHolder>();
         CardHolder cardHolder;
-        Card card;
+        CardBase card;
 
-        for(int i = 0; i < OCCURENCES; i++){
+        for (int i = 0; i < OCCURENCES; i++) {
             card = new Centurio(playArea);
             cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
             set.add(cardHolder);
         }
 
@@ -57,7 +59,7 @@ public class Centurio extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction{
+    public void gatherData(Player player, int position) throws CancelAction {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
         int targetPlayer = player.getOtherPlayerID();
@@ -69,14 +71,14 @@ public class Centurio extends CardBase {
         int battleValue = player.getCurrentAction().getBattleDice();
 
         PlayerInterface.printOut("Attack a card directly opposite", true);
-        if(targetCard == null){
+        if (targetCard == null) {
             PlayerInterface.printOut("No card directly opposite!", true);
             player.cancel();
         } else {
             player.commit();
             battleVictory = diceDiscs.battle(targetPlayer, position, battleValue);
-            if(!battleVictory){
-                if(freeDice.size() != 0){
+            if (!battleVictory) {
+                if (freeDice.size() != 0) {
                     try {
                         PlayerInterface.printOut("Add an action die value to battle value...", true);
                         chosenDieIndex = player.getDieIndex(freeDice);
@@ -109,15 +111,15 @@ public class Centurio extends CardBase {
         int battleValue = player.getBattleValue();
 
         //if empty then battleVictory == true
-        if(activationData.isEmpty()){
+        if (activationData.isEmpty()) {
             diceDiscs.discardTarget(targetPlayer, position);
         } else {
             chosenDieIndex = activationData.remove(0);
             //if chosenDieIndex isn't cancel then add die value to battle value and check defense again
-            if(chosenDieIndex != CANCEL){
+            if (chosenDieIndex != CANCEL) {
                 chosenDie = freeDice.remove(chosenDieIndex);
                 diceDiscs.addDiceToDisc(position, chosenDie);
-                if(targetCard.getDefense() <= chosenDie.getValue() + battleValue){
+                if (targetCard.getDefense() <= chosenDie.getValue() + battleValue) {
                     diceDiscs.discardTarget(targetPlayer, position);
                     PlayerInterface.printOut("Victory!", true);
                 } else {

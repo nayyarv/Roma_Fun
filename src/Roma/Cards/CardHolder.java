@@ -12,27 +12,27 @@ import Roma.PlayerInterfaceFiles.CancelAction;
  * Time: 6:26 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CardHolder implements Card{
+public class CardHolder implements Card {
     private final boolean isWrapper = false;
 
     private boolean playable = false;
     private Card contents;
     private PlayArea playArea;
 
-    public CardHolder(Card card, PlayArea playArea){
+    public CardHolder(Card card, PlayArea playArea) {
         contents = card;
         this.playArea = playArea;
     }
 
-    public void setPlayable(boolean playable){
+    public void setPlayable(boolean playable) {
         this.playable = playable;
     }
 
-    public boolean getPlayable(){
+    public boolean getPlayable() {
         return playable;
     }
 
-    public Card getContents(){
+    public Card getContents() {
         return contents;
     }
 
@@ -40,11 +40,11 @@ public class CardHolder implements Card{
         this.contents = contents;
     }
 
-    public Card getContainer(){
+    public Card getContainer() {
         return null;
     }
 
-    public void setContainer(Card holder){
+    public void setContainer(Card holder) {
         assert false;
     }
 
@@ -97,7 +97,7 @@ public class CardHolder implements Card{
         contents.enterPlay(player, position);
     }
 
-    public void discarded(CardHolder[] playerActiveCards, int position){
+    public void discarded(CardHolder[] playerActiveCards, int position) {
         contents.discarded(playerActiveCards, position);
     }
 
@@ -109,15 +109,15 @@ public class CardHolder implements Card{
         leavePlay();
     }
 
-    public void leavePlay(){
+    public void leavePlay() {
         contents.leavePlay();
         deleteAllWrappers();
     }
 
-    public void deleteAllWrappers(){
+    public void deleteAllWrappers() {
         Wrapper wrapper;
         //remove all wrappers
-        while(contents.isWrapper()){
+        while (contents.isWrapper()) {
             wrapper = (Wrapper) contents;
             wrapper.deleteThisWrapper();
         }

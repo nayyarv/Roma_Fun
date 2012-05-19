@@ -127,7 +127,7 @@ public class GameRules {
                 countNull++;
             }
         }
-        PlayerInterface.printOut("There are " + countNull + " empty slots, losing that many players", true);
+        PlayerInterface.printOut("There are " + countNull + " empty slots, losing that many Victory Tokens", true);
         victoryTokens.playerToPool(playerID, countNull);
     }
 

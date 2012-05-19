@@ -73,7 +73,7 @@ public class CardHolder implements Card {
     }
 
     public boolean isWrapper() {
-        return isWrapper();
+        return isWrapper;
     }
 
     public String toString() {

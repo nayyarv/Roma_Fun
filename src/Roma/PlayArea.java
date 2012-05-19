@@ -20,9 +20,11 @@ public class PlayArea {
     private Player players[];
     private PlayerInterface playerInterface;
     private GameRules gameRules;
+
+    //Todo: is this used?
     private CardFactory cardFactory;
 
-    //TODO: Use these functions
+    //TODO: Use these enter HandList
     private ArrayList<WrapperMaker> enterHandList = new ArrayList<WrapperMaker>();
     private ArrayList<WrapperMaker> enterPlayList = new ArrayList<WrapperMaker>();
     private ArrayList<Wrapper> endTurnList = new ArrayList<Wrapper>();
@@ -164,6 +166,10 @@ public class PlayArea {
     //All the getters
     public int getTurn(){
         return turn;
+    }
+
+    public void setTurn(int playerID) {
+        this.turn = playerID;
     }
 
     public boolean isGameOver() {

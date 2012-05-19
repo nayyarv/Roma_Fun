@@ -49,7 +49,12 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setWhoseTurn(int player) {
-
+        //how should this be done?
+        //Todo : can we implement as end of turn instead?
+        //Note endTurn in moveMaker
+        if(getWhoseTurn()!=player){
+            playArea.setTurn(player);
+        }
     }
 
     /**
@@ -83,7 +88,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setDeck(List<Card> deck) {
-        //TODO: Implement
+        ArrayList<CardHolder> newDeck = convertToCardHolderList(deck);
+        playArea.getCardManager().setPlayingDeck(newDeck);
     }
 
     /**
@@ -116,8 +122,8 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setDiscard(List<Card> discard) {
-        //TODO: Implement
-        //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<CardHolder> newDiscard = convertToCardHolderList(discard);
+        playArea.getCardManager().setDiscardPile(newDiscard);
     }
 
     /**
@@ -228,8 +234,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerHand(int playerNum, Collection<Card> hand) {
-        //TODO: Implement
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     /**
@@ -287,8 +292,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int[] getActionDice() {
-        //TODO: Get this sorted out
-        // currently implementing as get free die
+        //Todo: Currently modifying freeDice. Good enough?
         int currPlayer = getWhoseTurn();
         Player player = playArea.getPlayer(currPlayer);
         ArrayList<Dice> diceList = player.getFreeDice();
@@ -366,4 +370,16 @@ public class GameStateImplementer implements GameState{
         }
         return forAnswer;
     }
+
+    private ArrayList<CardHolder> convertToCardHolderList(List<Card> cardList){
+        CardFactory cardFactory = new CardFactory(playArea);
+        ArrayList<CardHolder> newDeck = new ArrayList<CardHolder>();
+        for(Card card:cardList){
+            CardHolder cardHolder = cardFactory.getCard(card.toString());
+            assert (cardHolder!=null);
+            newDeck.add(cardHolder);
+        }
+        return newDeck;
+    }
+
 }

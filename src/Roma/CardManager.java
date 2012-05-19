@@ -14,8 +14,8 @@ import java.util.Collections;
 public class CardManager {
     private static final int CARDS_IN_DECK = 52;
     //Objects
-    private final ArrayList<CardHolder> playingDeck = new ArrayList<CardHolder>();
-    private final ArrayList<CardHolder> discardPile = new ArrayList<CardHolder>();
+    private ArrayList<CardHolder> playingDeck = new ArrayList<CardHolder>();
+    private ArrayList<CardHolder> discardPile = new ArrayList<CardHolder>();
 
     private PlayArea playArea;
 
@@ -150,6 +150,14 @@ public class CardManager {
 
     public ArrayList<CardHolder> getDiscardPile() {
         return discardPile;
+    }
+
+    public void setPlayingDeck(ArrayList<CardHolder> newDeck) {
+        this.playingDeck = playingDeck;
+    }
+
+    public void setDiscardPile(ArrayList<CardHolder> newDiscard) {
+        this.discardPile = discardPile;
     }
 
     public ArrayList<CardHolder> viewTopCards(int value) {

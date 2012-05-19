@@ -10,8 +10,10 @@ import java.util.HashMap;
  */
 public class CardFactory {
     private HashMap<String, CardBase> cardList = new HashMap<String, CardBase>();
+    private PlayArea playArea;
 
     public CardFactory(PlayArea playArea){
+        this.playArea = playArea;
         cardList.put(Aesculapinum.NAME, new Aesculapinum(playArea));
         cardList.put(Architectus.NAME, new Architectus(playArea));
         cardList.put(Basilica.NAME, new Basilica(playArea));
@@ -43,7 +45,7 @@ public class CardFactory {
         cardList.put(Velites.NAME, new Velites(playArea));
     }
 
-    public CardHolder getCard(String cardName, PlayArea playArea){
+    public CardHolder getCard(String cardName){
         CardBase cardBase = cardList.get(cardName);
         CardHolder cardHolder = null;
         if(cardBase != null){

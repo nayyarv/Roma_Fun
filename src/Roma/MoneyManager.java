@@ -27,7 +27,7 @@ public class MoneyManager {
 
     public boolean enoughMoney(int playerID, int amount) {
         boolean enoughMoney = false;
-        if (playerMoney[playerID] > amount){
+        if (playerMoney[playerID] >= amount){
             enoughMoney = true;
         } else {
             PlayerInterface.printOut("Not enough money!", true);

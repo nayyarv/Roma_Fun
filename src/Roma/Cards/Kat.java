@@ -24,7 +24,7 @@ public class Kat extends CardBase {
     final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
-    private static final int NUMBER_OF_LIVES = 9;
+    private static final int NUMBER_OF_LIVES = 8;
 
     public Kat(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);

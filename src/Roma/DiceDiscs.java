@@ -100,6 +100,8 @@ public class DiceDiscs {
 
     private void goingToDiscard(CardHolder[] playerActives, int position) {
         //TODO: check if this null check is ok
+        //ONly sends to discard if not empty : I think this is Ok :) - VN
+//        assert playerActives[position]!=null;
         if (playerActives[position]!=null){
             playerActives[position].goingToDiscard(playerActives, position);
         }

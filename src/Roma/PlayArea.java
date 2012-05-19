@@ -36,6 +36,8 @@ public class PlayArea {
     private boolean gameOver = false;
 
 
+
+
     public PlayArea(Roma mainProgram) {
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
@@ -120,6 +122,10 @@ public class PlayArea {
         for(CardHolder card : cardList){
             if(card != null) card.setPlayable(false);
         }
+    }
+
+    private void setDiceValues(int[] Dice){
+
     }
 
 

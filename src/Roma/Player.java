@@ -72,6 +72,10 @@ public class Player {
         return freeDice;
     }
 
+    public void setFreeDice(ArrayList<Dice> freeDice) {
+        this.freeDice = freeDice;
+    }
+
     public ActionData getCurrentAction() {
         return currentAction;
     }

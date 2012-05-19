@@ -184,14 +184,11 @@ public class DiceDiscs {
         return activeCards[playerID][position];
     }
 
-    //TODO: refactor discard to discardPile into card
     public void discardTarget(int playerID, int position){
-        CardManager cardManager = playArea.getCardManager();
         CardHolder card = activeCards[playerID][position];
 
         if(card != null){
-            cardManager.discard(activeCards[playerID][position]);
-            activeCards[playerID][position] = null;
+            card.discarded(activeCards[playerID], position);
         }
     }
 

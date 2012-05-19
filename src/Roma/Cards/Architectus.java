@@ -13,10 +13,7 @@ import java.util.ArrayList;
  * Desc: Architectus Card
  */
 public class Architectus extends CardBase {
-    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
     private static int COST_SCALE = 0;
-    private static int DEFENSE_SHIFT = Wrapper.INITIAL_SHIFT;
-    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Architectus";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many building cards as they wish free " +
@@ -99,7 +96,8 @@ public class Architectus extends CardBase {
     public void activate(Player player, int position) {
         CardHolder card;
         ArrayList<CardHolder> hand = player.getHand();
-        WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+        WrapperMaker wrapperMaker = new WrapperMaker();
+        wrapperMaker.setCostScale(COST_SCALE);
         Wrapper wrapper = null;
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Integer> handIndices = new ArrayList<Integer>();
@@ -137,15 +135,5 @@ public class Architectus extends CardBase {
             discIndex = discIndices.get(i);
             player.layCard(card, discIndex);
         }
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

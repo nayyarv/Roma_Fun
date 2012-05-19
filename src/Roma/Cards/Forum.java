@@ -123,14 +123,4 @@ public class Forum extends CardBase {
             victoryTokens.playerFromPool(player.getPlayerID(), 2);
         }
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

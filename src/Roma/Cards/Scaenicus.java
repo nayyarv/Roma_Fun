@@ -87,14 +87,4 @@ public class Scaenicus extends CardBase {
 
         friendlyCards[targetIndex].activate(player, position);
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

@@ -91,14 +91,4 @@ public class Mercator extends CardBase {
         moneyManager.transferMoney(player.getPlayerID(), targetPlayerID, 2 * numTokens);
         victoryTokens.playerToPlayer(targetPlayerID, player.getPlayerID(), numTokens);
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

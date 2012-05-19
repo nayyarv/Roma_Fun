@@ -151,4 +151,9 @@ public class Wrapper implements Card {
     public void leavePlay() {
         container.leavePlay();
     }
+
+    @Override
+    public void discarded(CardHolder[] playerActiveCards, int position){
+        contents.discarded(playerActiveCards, position);
+    }
 }

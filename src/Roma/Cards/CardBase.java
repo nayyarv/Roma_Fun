@@ -19,7 +19,7 @@ public abstract class CardBase implements Card {
 
     final PlayArea playArea;
     private ArrayList<Integer> playerActions;
-    private Card container;
+    Card container;
 
     public CardBase(String name, String type, String description,
                 int cost, int defense, PlayArea playArea, boolean activateEnabled) {
@@ -90,10 +90,22 @@ public abstract class CardBase implements Card {
     public abstract void activate(Player player, int position);
 
     @Override
-    public abstract void enterPlay(Player player, int position);
+    public void enterPlay(Player player, int position) {
+        //no enter play action
+    }
 
     @Override
-    public abstract void leavePlay();
+    public void discarded(CardHolder[] playerActiveCards, int position) {
+        CardManager cardManager = playArea.getCardManager();
+        cardManager.discard(playerActiveCards[position]);
+        playerActiveCards[position] = null;
+        leavePlay();
+    }
+
+    @Override
+    public void leavePlay() {
+        container.leavePlay();
+    }
 
     public abstract CardHolder makeOne(PlayArea playArea);
 

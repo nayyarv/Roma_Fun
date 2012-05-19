@@ -13,10 +13,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Essedum extends CardBase {
-    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
-    private static int COST_SCALE = Wrapper.INITIAL_SCALE;
     private static int DEFENSE_SHIFT = -2;
-    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Essedum";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The defence value of the opponent's face-up cards is reduced by 2.";
@@ -66,7 +63,8 @@ public class Essedum extends CardBase {
 
     @Override
     public void activate(Player player, int position) {
-        WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+        WrapperMaker wrapperMaker = new WrapperMaker();
+        wrapperMaker.setDefenseShift(DEFENSE_SHIFT);
         Wrapper wrapper;
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int targetPlayerID = player.getOtherPlayerID();
@@ -76,15 +74,5 @@ public class Essedum extends CardBase {
             wrapper = wrapperMaker.insertWrapper(card);
             playArea.addToEndTurnList(wrapper);
         }
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

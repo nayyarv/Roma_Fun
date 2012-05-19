@@ -132,14 +132,4 @@ public class Machina extends CardBase {
             activeCards[i] = cardList.remove(0);
         }
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

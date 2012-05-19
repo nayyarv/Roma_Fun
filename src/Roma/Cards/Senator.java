@@ -101,7 +101,8 @@ public class Senator extends CardBase {
     public void activate(Player player, int position) {
         CardHolder card;
         ArrayList<CardHolder> hand = player.getHand();
-        WrapperMaker wrapperMaker = new WrapperMaker(COST_SHIFT, COST_SCALE, DEFENSE_SHIFT, DEFENSE_SCALE);
+        WrapperMaker wrapperMaker = new WrapperMaker();
+        wrapperMaker.setCostScale(COST_SCALE);
         Wrapper wrapper = null;
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<Integer> handIndices = new ArrayList<Integer>();
@@ -139,15 +140,5 @@ public class Senator extends CardBase {
             discIndex = discIndices.get(i);
             player.layCard(card, discIndex);
         }
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

@@ -52,23 +52,6 @@ public class Legionarius extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        boolean activated = true;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//        BattleManager battleManager = playArea.getBattleManager();
-//        int targetPlayerID = player.getOtherPlayerID();
-//
-//        if(diceDiscs.getTargetCard(targetPlayerID, position) == null){
-//            PlayerInterface.printOut("No card to attack!", true);
-//            activated = false;
-//        } else {
-//            battleManager.battle(targetPlayerID, position);
-//        }
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
@@ -92,15 +75,5 @@ public class Legionarius extends CardBase {
         int targetPlayerID = player.getOtherPlayerID();
         int battleValue = player.getBattleValue();
         diceDiscs.battle(targetPlayerID, position, battleValue);
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

@@ -280,7 +280,7 @@ public class PlayArea {
     public PlayArea(String testing){
         assert testing.equalsIgnoreCase("testing");
         this.testing = true;
-        System.err.println("In Testing phase");
+        //System.err.println("In Testing phase");
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();

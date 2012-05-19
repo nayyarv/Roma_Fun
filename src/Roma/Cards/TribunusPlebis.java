@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * Desc:
  */
 
-public class TribunisPlebis extends CardBase {
-    public final static String NAME = "Tribunis Plebis";
+public class TribunusPlebis extends CardBase {
+    public final static String NAME = "Tribunus Plebis";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player gets 1 victory point from their opponent.";
     final static int COST = 5;
@@ -25,7 +25,7 @@ public class TribunisPlebis extends CardBase {
 
     @Override
     public CardHolder makeOne(PlayArea playArea){
-        Card card = new TribunisPlebis(playArea);
+        Card card = new TribunusPlebis(playArea);
         CardHolder cardHolder = new CardHolder(card);
         card.setContainer(cardHolder);
 
@@ -38,7 +38,7 @@ public class TribunisPlebis extends CardBase {
         Card card;
 
         for(int i = 0; i < OCCURENCES; i++){
-            card = new TribunisPlebis(playArea);
+            card = new TribunusPlebis(playArea);
             cardHolder = new CardHolder(card);
             card.setContainer(cardHolder);
             set.add(cardHolder);
@@ -47,7 +47,7 @@ public class TribunisPlebis extends CardBase {
         return set;
     }
 
-    TribunisPlebis(PlayArea playArea) {
+    TribunusPlebis(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

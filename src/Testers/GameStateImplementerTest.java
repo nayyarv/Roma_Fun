@@ -5,6 +5,7 @@ import framework.cards.Card;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,11 +30,18 @@ public class GameStateImplementerTest extends TestCase {
     public void testSetDeck() throws Exception {
         System.out.println("Testing setDeck and getDeck");
         List<Card> cardList= new ArrayList<Card>();
-        for(Card c: Card.values()){
-            cardList.add(c);
-        }
+        Collections.addAll(cardList, Card.values());
+        cardList.remove(Card.GRIMREAPER);
+        cardList.remove(Card.TELEPHONEBOX);
+        cardList.remove(Card.KAT);
+
         gameStateImplementer.setDeck(cardList);
-        System.out.println(gameStateImplementer.getDeck());
+
+        List<Card> deck = gameStateImplementer.getDeck();
+
+        System.out.println("Cardlist size = "+cardList.size()+" deck size = "+deck.size());
+
+        assert (deck.size()==cardList.size());
 
     }
 

@@ -40,7 +40,7 @@ public class CardFactory {
 
         cardList.put(Sicarius.NAME, new Sicarius(playArea));
         cardList.put(Templum.NAME, new Templum(playArea));
-        cardList.put(TribunisPlebis.NAME, new TribunisPlebis(playArea));
+        cardList.put(TribunusPlebis.NAME.replaceAll("\\sP", "p"), new TribunusPlebis(playArea));
         cardList.put(Turris.NAME, new Turris(playArea));
         cardList.put(Velites.NAME, new Velites(playArea));
     }
@@ -50,9 +50,8 @@ public class CardFactory {
         CardHolder cardHolder = null;
         if(cardBase != null){
             cardHolder = cardBase.makeOne(playArea);
-            assert(cardHolder.getName().equalsIgnoreCase(cardName));
+            //assert(cardHolder.getName().equalsIgnoreCase(cardName));
         }
-
         return cardHolder;
     }
 }

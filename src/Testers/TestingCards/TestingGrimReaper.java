@@ -17,9 +17,7 @@ public class TestingGrimReaper {
         ArrayList<Card> hand = new ArrayList<Card>();
         hand.add(Card.ONAGER);
 
-
-
-        GameStateImplementer gameStateImplementer = new GameStateImplementer();
+        GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");
 
         gameStateImplementer.setPlayerHand(0, hand);
         int[] num = {1,1,1};

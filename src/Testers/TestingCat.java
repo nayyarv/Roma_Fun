@@ -12,11 +12,12 @@ import framework.cards.Card;
 public class TestingCat {
 
     public static void main(String []args){
-        GameStateImplementer gameStateImplementer = new GameStateImplementer();
+        GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");
         int[] num = {1,1};
         gameStateImplementer.setWhoseTurn(0);
         //Set action dice not working
         gameStateImplementer.setActionDice(num);
+
         Card[] diceDiscs = {Card.KAT, Card.CONSUL, Card.NOT_A_CARD, Card.NOT_A_CARD,
                 Card.NOT_A_CARD, Card.NOT_A_CARD, Card.NOT_A_CARD};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs);

@@ -20,7 +20,19 @@ import java.util.List;
  * Desc:
  */
 public class GameStateImplementer implements GameState{
-    PlayArea playArea = new PlayArea("testing");
+    PlayArea playArea;
+
+    public GameStateImplementer (PlayArea playArea){
+        this.playArea = playArea;
+    }
+
+    @Deprecated
+    public GameStateImplementer(String testing){
+        assert (testing.equalsIgnoreCase("testing"));
+        playArea = new PlayArea("testing");
+    }
+
+
 
     /**
      * Get the current turn's player number

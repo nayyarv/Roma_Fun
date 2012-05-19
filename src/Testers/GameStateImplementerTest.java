@@ -1,7 +1,6 @@
 package Testers;
 
 import Implementers.GameStateImplementer;
-import Roma.PlayerInterfaceFiles.PlayerInterface;
 import framework.Rules;
 import framework.cards.Card;
 import junit.framework.TestCase;
@@ -16,7 +15,7 @@ import java.util.*;
  */
 public class GameStateImplementerTest extends TestCase {
 
-    GameStateImplementer gameStateImplementer = new GameStateImplementer();
+    GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");
 
     public void testSetWhoseTurn() throws Exception {
         System.out.println("Testing setWhoseturn");

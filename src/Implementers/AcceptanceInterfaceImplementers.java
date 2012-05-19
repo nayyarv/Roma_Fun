@@ -1,5 +1,6 @@
 package Implementers;
 
+import Roma.PlayArea;
 import framework.interfaces.AcceptanceInterface;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
@@ -25,6 +26,7 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
      * @param state the GameState that the mover will apply changes to
      * @return a MoveMaker that will modify the given GameState
      */
+    PlayArea playArea = new PlayArea("testing");
     @Override
     public MoveMaker getMover(GameState state) {
         return new MoveMakerImplementer(state);
@@ -47,6 +49,6 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
      */
     @Override
     public GameState getInitialState() {
-        return new GameStateImplementer();  //To change body of implemented methods use File | Settings | File Templates.
+        return new GameStateImplementer(playArea);  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -13,9 +13,10 @@ import framework.interfaces.activators.CardActivator;
  */
 public class MoveMakerImplementer implements MoveMaker{
 
+    GameState gameState;
 
     public MoveMakerImplementer(GameState state) {
-
+        gameState = state;
     }
 
     /**
@@ -42,7 +43,9 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public CardActivator chooseCardToActivate(int disc) throws UnsupportedOperationException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        int currPlayer = gameState.getWhoseTurn();
+
+        return null;
     }
 
     /**

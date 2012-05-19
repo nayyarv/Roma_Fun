@@ -91,6 +91,14 @@ public class GameStateImplementer implements GameState{
     @Override
     public void setDeck(List<Card> deck) {
         ArrayList<CardHolder> newDeck = convertToCardHolderList(deck);
+/*        for(CardHolder cardHolder: newDeck) {
+            if(cardHolder!=null) {
+                System.out.println(cardHolder.getName());
+            } else {
+                System.out.println(Card.NOT_A_CARD);
+            }
+        } */
+
         playArea.getCardManager().setPlayingDeck(newDeck);
     }
 
@@ -236,6 +244,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerHand(int playerNum, Collection<Card> hand) {
+        //TODO
 
     }
 
@@ -376,8 +385,12 @@ public class GameStateImplementer implements GameState{
     private ArrayList<Card> convertToCardList(ArrayList<CardHolder> cardDeck){
         ArrayList<Card> forAnswer = new ArrayList<Card>();
         for(CardHolder cardHolder: cardDeck){
-            Card card = Card.valueOf(cardHolder.getName().toUpperCase());
-            forAnswer.add(card);
+            if(cardHolder == null){
+                forAnswer.add(Card.NOT_A_CARD);
+            } else {
+                Card card = Card.valueOf(cardHolder.getName().replaceAll("\\s","").toUpperCase());
+                forAnswer.add(card);
+            }
         }
         return forAnswer;
     }
@@ -389,8 +402,10 @@ public class GameStateImplementer implements GameState{
             if (card.toString().equalsIgnoreCase(Card.NOT_A_CARD.toString())){
                 newList.add(null);
             } else {
+                //System.out.println(card.toString());
                 CardHolder cardHolder = cardFactory.getCard(card.toString());
-//                assert (cardHolder!=null);
+                assert (cardHolder!=null);
+
                 newList.add(cardHolder);
             }
         }

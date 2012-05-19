@@ -51,7 +51,7 @@ public class CardManager {
 
         playingDeck.addAll(Sicarius.playSet(playArea));
         playingDeck.addAll(Templum.playSet(playArea));
-        playingDeck.addAll(TribunisPlebis.playSet(playArea));
+        playingDeck.addAll(TribunusPlebis.playSet(playArea));
         playingDeck.addAll(Turris.playSet(playArea));
         playingDeck.addAll(Velites.playSet(playArea));
 
@@ -153,11 +153,11 @@ public class CardManager {
     }
 
     public void setPlayingDeck(ArrayList<CardHolder> newDeck) {
-        this.playingDeck = playingDeck;
+        playingDeck = newDeck;
     }
 
     public void setDiscardPile(ArrayList<CardHolder> newDiscard) {
-        this.discardPile = discardPile;
+        discardPile = newDiscard;
     }
 
     public ArrayList<CardHolder> viewTopCards(int value) {

@@ -124,17 +124,14 @@ public class PlayArea {
         }
     }
 
-    private void setDiceValues(int[] Dice){
 
-    }
-
-
-    private void startTurnPhase(Player player) {
+    public void startTurnPhase(Player player) {
         PlayerInterface.printOut(BREAK_LINE, true);
         PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
         player.rollActionDice();
+
         transferNextToThis();
     }
 

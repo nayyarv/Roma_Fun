@@ -29,7 +29,7 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
     PlayArea playArea = new PlayArea("testing");
     @Override
     public MoveMaker getMover(GameState state) {
-        return new MoveMakerImplementer(state);
+        return new MoveMakerImplementer(state, playArea);
     }
 
     /**

@@ -111,6 +111,7 @@ public class CardHolder implements Card{
 
     public void leavePlay(){
         contents.leavePlay();
+        deleteAllWrappers();
     }
 
     public void deleteAllWrappers(){

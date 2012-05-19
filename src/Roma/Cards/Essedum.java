@@ -71,8 +71,10 @@ public class Essedum extends CardBase {
         CardHolder[] enemyActives = diceDiscs.getPlayerActives(targetPlayerID);
 
         for(CardHolder card : enemyActives){
-            wrapper = wrapperMaker.insertWrapper(card);
-            playArea.addToEndTurnList(wrapper);
+            if(card != null){
+                wrapper = wrapperMaker.insertWrapper(card);
+                playArea.addToEndTurnList(wrapper);
+            }
         }
     }
 }

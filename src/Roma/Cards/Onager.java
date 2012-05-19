@@ -66,7 +66,7 @@ public class Onager extends CardBase {
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
             card = activeCards[targetPlayerID][i];
-            if(card.getType().equalsIgnoreCase(Card.BUILDING)){
+            if(card != null && card.getType().equalsIgnoreCase(Card.BUILDING)){
                 card.setPlayable(true);
             }
         }

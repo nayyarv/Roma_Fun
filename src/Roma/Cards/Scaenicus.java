@@ -65,7 +65,7 @@ public class Scaenicus extends CardBase {
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
             card = activeCards[playerID][i];
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 card.setPlayable(true);
             }
         }

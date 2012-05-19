@@ -59,7 +59,7 @@ public class Machina extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
         CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
-        CardHolder tempCard;
+        CardHolder card;
         int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
         int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
         int fromIndex;
@@ -71,9 +71,9 @@ public class Machina extends CardBase {
         }
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
-            tempCard = activeCards[player.getPlayerID()][i];
-            if(tempCard.getType().equalsIgnoreCase(Card.BUILDING)){
-                tempCard.setPlayable(true);
+            card = activeCards[player.getPlayerID()][i];
+            if(card != null && card.getType().equalsIgnoreCase(Card.BUILDING)){
+                card.setPlayable(true);
                 activeCardsPrime[player.getPlayerID()][i] = null;
             }
         }

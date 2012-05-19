@@ -15,10 +15,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class Senator extends CardBase {
-    private static int COST_SHIFT = Wrapper.INITIAL_SHIFT;
     private static int COST_SCALE = 0;
-    private static int DEFENSE_SHIFT = Wrapper.INITIAL_SHIFT;
-    private static int DEFENSE_SCALE = Wrapper.INITIAL_SCALE;
     public final static String NAME = "Senator";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Enables the player to lay as many character cards as " +

@@ -56,6 +56,8 @@ public class CardManager {
         playingDeck.addAll(Velites.playSet(playArea));
 
         playingDeck.addAll(Kat.playSet(playArea));
+        playingDeck.addAll(GrimReaper.playSet(playArea));
+        playingDeck.addAll(TelephoneBox.playSet(playArea));
 
         shuffle();
     }

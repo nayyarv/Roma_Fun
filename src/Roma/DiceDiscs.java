@@ -246,12 +246,10 @@ public class DiceDiscs {
         for(int i = 0; i < CARD_POSITIONS; i++){
             disc = discs.get(i);
             if(!disc.isEmpty()){
-                int j = 0;
                 for(Dice die : disc){
                     if(die.getPlayerID() == playerID){
-                        disc.remove(j);
+                        disc.remove(die);
                     }
-                    j++;
                 }
             }
         }

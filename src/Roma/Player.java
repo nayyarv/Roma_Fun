@@ -378,7 +378,7 @@ public class Player {
                     PlayerInterface.printOut("Please choose a valid action", true);
                 }
 
-                if(shouldFilter){
+                if(validChoice && shouldFilter){
                     validChoice = checkValid(cardList.get(choice));
                     if(!validChoice){
                         PlayerInterface.printOut("Not a valid choice!", true);

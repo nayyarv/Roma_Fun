@@ -191,7 +191,7 @@ public class GamePlayerInterface extends PlayerInterface {
             int i = 1;
             for(CardHolder card: cardList){
                 printOut(i+") ", false);
-                printOut(Filter(card, false), true);
+                printOut(Filter(card, true), true);
                 i++;
             }
         } else {

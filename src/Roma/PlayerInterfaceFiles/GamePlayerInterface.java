@@ -161,7 +161,7 @@ public class GamePlayerInterface extends PlayerInterface {
         String discNumber;
 
         printOut(padCentre("Current Player", COLUMN_ONE_WIDTH) + " | "
-                + padCentre("DiceDiscs", COLUMN_TWO_WIDTH) + " | "
+                + padCentre("Dice Discs", COLUMN_TWO_WIDTH) + " | "
                 + padCentre("Opposing Player", COLUMN_THREE_WIDTH), true);
 
         String curr;

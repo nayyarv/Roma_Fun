@@ -92,6 +92,7 @@ public class Kat extends CardBase {
             if (container.getName().equalsIgnoreCase(KatWrapper.NAME)) {
                 count++;
             }
+            container = container.getContainer();
         }
         return count;
     }

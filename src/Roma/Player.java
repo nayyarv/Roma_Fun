@@ -403,7 +403,7 @@ public class Player {
         cardIndex = playerInterface.getIndex(cardList.size());
         card = cardList.get(cardIndex);
         if(card != null){
-            PlayerInterface.printOut(cardList.get(cardIndex).toString(), true);
+            PlayerInterface.printOut(card.toString(), true);
         } else {
             PlayerInterface.printOut("No card there!", true);
         }
@@ -417,7 +417,7 @@ public class Player {
         int other = getOtherPlayerID();
 
         ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
-        ArrayList<CardHolder> opposingPlayer= new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
 
         Collections.addAll(currPlayer, diceDiscs[playerID]);
         Collections.addAll(opposingPlayer, diceDiscs[other]);

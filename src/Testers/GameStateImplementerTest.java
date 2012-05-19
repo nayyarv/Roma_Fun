@@ -85,6 +85,7 @@ public class GameStateImplementerTest extends TestCase {
 
         gameStateImplementer.setPlayerSestertii(1,10020);
         assert (gameStateImplementer.getPlayerSestertii(1)==10020);
+        gameStateImplementer.gameStats();
         System.out.println("Money functions passed!!!\n");
 
     }

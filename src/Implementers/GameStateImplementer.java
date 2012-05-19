@@ -3,6 +3,7 @@ package Implementers;
 import Roma.*;
 import Roma.Cards.*;
 import Roma.History.ActionData;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import Roma.VictoryTokens;
 import framework.cards.Card;
 import framework.interfaces.GameState;
@@ -367,9 +368,31 @@ public class GameStateImplementer implements GameState{
     @Override
     public boolean isGameCompleted() {
         return playArea.isGameOver();
+
     }
 
+    public void gameStats(){
+        Player[] players = playArea.getAllPlayers();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+        }
 
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(0));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(1));
+        playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+    }
     //Functions used to convert between
     private Card[] convertToCardArray(ArrayList<CardHolder> cardDeck){
         ArrayList<Card> converted = convertToCardList(cardDeck);
@@ -424,5 +447,4 @@ public class GameStateImplementer implements GameState{
         cardList.addAll(cardCollection);
         return convertToCardHolderList(cardList);
     }
-
 }

@@ -29,6 +29,7 @@ public class GameStateImplementer implements GameState{
     @Deprecated
     public GameStateImplementer(String testing){
         assert (testing.equalsIgnoreCase("testing"));
+        System.err.println("Testing GameStateImplementer");
         playArea = new PlayArea("testing");
     }
 

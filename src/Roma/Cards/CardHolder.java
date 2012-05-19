@@ -105,6 +105,5 @@ public class CardHolder implements Card{
             wrapper = (Wrapper) contents;
             wrapper.deleteThisWrapper();
         }
-        contents.leavePlay();
     }
 }

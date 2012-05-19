@@ -33,12 +33,12 @@ public class TelephoneBox extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: fill in
     }
 
     @Override
     public void activate(Player player, int position) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: fill in
     }
 
     @Override

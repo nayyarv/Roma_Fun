@@ -314,11 +314,19 @@ public class GameStateImplementer implements GameState{
         int currPlayer = getWhoseTurn();
         Player player = playArea.getPlayer(currPlayer);
         ArrayList<Dice> diceList = player.getFreeDice();
-        int[] diceNums = new int[diceList.size()];
-        int i = 0;
-        for(Dice dice: diceList){
-            diceNums[i] = dice.getValue();
-            i++;
+        int[] diceNums = new int[0];
+
+        try {
+            diceNums = new int[diceList.size()];
+            int i = 0;
+            for (Dice dice : diceList) {
+                diceNums[i] = dice.getValue();
+                i++;
+            }
+
+        } catch (NullPointerException nu) {
+            System.err.println("Tried to read player dice before s/he threw them/set them");
+
         }
         return diceNums;
     }
@@ -337,12 +345,15 @@ public class GameStateImplementer implements GameState{
     @Override
     public void setActionDice(int[] dice) {
         //Modify the free dice.
+        ArrayList<Dice> newActionDice = new ArrayList<Dice>();
         int currPlayer = getWhoseTurn();
         Player player = playArea.getPlayer(currPlayer);
-        ArrayList<Dice> diceList = player.getFreeDice();
-        for(int i=0; i< diceList.size();i++){
-            diceList.get(i).setValue(dice[i]);
+        for (int value : dice) {
+            Dice newDice = new Dice(currPlayer);
+            newDice.setValue(value);
+            newActionDice.add(newDice);
         }
+        player.setFreeDice(newActionDice);
     }
 
     /**

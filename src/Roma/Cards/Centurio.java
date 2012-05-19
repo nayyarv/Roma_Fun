@@ -29,7 +29,7 @@ public class Centurio extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Centurio(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -42,7 +42,7 @@ public class Centurio extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Centurio(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }

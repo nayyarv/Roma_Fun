@@ -1,11 +1,12 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * File Name:
@@ -28,7 +29,7 @@ public class Scaenicus extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Scaenicus(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -41,7 +42,7 @@ public class Scaenicus extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Scaenicus(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }

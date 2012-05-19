@@ -4,6 +4,8 @@ import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -39,9 +41,24 @@ public class GrimReaper extends CardBase{
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new GrimReaper(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
+    }
+
+    public static ArrayList<CardHolder> playSet(PlayArea playArea){
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
+        CardHolder cardHolder;
+        Card card;
+
+        for(int i = 0; i < OCCURENCES; i++){
+            card = new GrimReaper(playArea);
+            cardHolder = new CardHolder(card, playArea);
+            card.setContainer(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
     }
 }

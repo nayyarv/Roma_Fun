@@ -27,7 +27,7 @@ public class Praetorianus extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Praetorianus(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -40,7 +40,7 @@ public class Praetorianus extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Praetorianus(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }

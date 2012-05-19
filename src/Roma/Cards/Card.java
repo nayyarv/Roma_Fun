@@ -1,11 +1,8 @@
 package Roma.Cards;
 
-import Roma.*;
-import Roma.History.ActionData;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
-
-import java.util.ArrayList;
 
 /**
  * User: Andrew Lem and Varun Nayyar
@@ -33,5 +30,6 @@ public interface Card {
     public Card getContainer();
     public void setContainer(Card holder);
     public void discarded(CardHolder[] playerActiveCards, int position);
+    public void goingToDiscard(CardHolder[] playerActiveCards, int position);
     public void leavePlay();
 }

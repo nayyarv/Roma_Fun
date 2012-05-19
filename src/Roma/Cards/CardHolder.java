@@ -1,5 +1,7 @@
 package Roma.Cards;
 
+import Roma.CardManager;
+import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 
@@ -15,9 +17,11 @@ public class CardHolder implements Card{
 
     private boolean playable = false;
     private Card contents;
+    private PlayArea playArea;
 
-    public CardHolder(Card card){
+    public CardHolder(Card card, PlayArea playArea){
         contents = card;
+        this.playArea = playArea;
     }
 
     public void setPlayable(boolean playable){
@@ -98,7 +102,18 @@ public class CardHolder implements Card{
     }
 
     @Override
-    public void leavePlay() {
+    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
+        CardManager cardManager = playArea.getCardManager();
+        cardManager.discard(playerActiveCards[position]);
+        playerActiveCards[position] = null;
+        leavePlay();
+    }
+
+    public void leavePlay(){
+        contents.leavePlay();
+    }
+
+    public void deleteAllWrappers(){
         Wrapper wrapper;
         //remove all wrappers
         while(contents.isWrapper()){

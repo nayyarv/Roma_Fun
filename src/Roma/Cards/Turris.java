@@ -27,7 +27,7 @@ public class Turris extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Turris(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -40,7 +40,7 @@ public class Turris extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Turris(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }
@@ -90,7 +90,6 @@ public class Turris extends CardBase {
         playArea.removeFromEnterPlayList(wrapperMaker);
         wrapperMaker.clearWrapperList();
         wrapperMaker = null;
-        container.leavePlay();
     }
 
 }

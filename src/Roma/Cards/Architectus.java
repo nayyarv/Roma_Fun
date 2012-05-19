@@ -27,7 +27,7 @@ public class Architectus extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Architectus(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -40,7 +40,7 @@ public class Architectus extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Architectus(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }

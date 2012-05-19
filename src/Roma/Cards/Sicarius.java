@@ -1,11 +1,12 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * File NAME:
@@ -27,7 +28,7 @@ public class Sicarius extends CardBase {
     @Override
     public CardHolder makeOne(PlayArea playArea){
         Card card = new Sicarius(playArea);
-        CardHolder cardHolder = new CardHolder(card);
+        CardHolder cardHolder = new CardHolder(card, playArea);
         card.setContainer(cardHolder);
 
         return cardHolder;
@@ -40,7 +41,7 @@ public class Sicarius extends CardBase {
 
         for(int i = 0; i < OCCURENCES; i++){
             card = new Sicarius(playArea);
-            cardHolder = new CardHolder(card);
+            cardHolder = new CardHolder(card, playArea);
             card.setContainer(cardHolder);
             set.add(cardHolder);
         }

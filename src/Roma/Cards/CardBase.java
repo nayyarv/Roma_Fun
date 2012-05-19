@@ -1,9 +1,10 @@
 package Roma.Cards;
 
-import Roma.*;
-import Roma.History.ActionData;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
+import Roma.Roma;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,7 @@ public abstract class CardBase implements Card {
     }
 
     public String toString() {
-        return "Card Name: " + name + "; Type: " + type + "\nDescription: " + description + "\nCost: "
+        return "Card Name: " + name + "; Type: " + type + "\nDescription: " + getDescription() + "\nCost: "
                 + cost + "; Defence: " + defence;
     }
 
@@ -96,20 +97,21 @@ public abstract class CardBase implements Card {
 
     @Override
     public void discarded(CardHolder[] playerActiveCards, int position) {
-        CardManager cardManager = playArea.getCardManager();
-        cardManager.discard(playerActiveCards[position]);
-        playerActiveCards[position] = null;
-        leavePlay();
+        goingToDiscard(playerActiveCards, position);
     }
 
     @Override
-    public void leavePlay() {
-        container.leavePlay();
+    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
+        container.goingToDiscard(playerActiveCards, position);
     }
 
     public abstract CardHolder makeOne(PlayArea playArea);
 
     public int otherPlayer(int player){
         return ((player==Roma.PLAYER_ONE)? Roma.PLAYER_TWO: Roma.PLAYER_ONE);
+    }
+
+    public void leavePlay(){
+        //no leave play action by default
     }
 }

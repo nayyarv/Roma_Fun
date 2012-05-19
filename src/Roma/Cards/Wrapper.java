@@ -1,10 +1,7 @@
 package Roma.Cards;
 
-import Roma.History.ActionData;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
-
-import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +11,12 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Wrapper implements Card {
+    public final static String NAME = "Blank Wrapper";
     public final static int INITIAL_SHIFT = 0;
     public final static int INITIAL_SCALE = 1;
     private final boolean isWrapper = true;
 
+    String name;
     private Card container;
     private Card contents;
     private boolean activateEnabled;
@@ -32,6 +31,7 @@ public class Wrapper implements Card {
         contents.setContainer(this);
         container.setContents(this);
         activateEnabled = contents.isActivateEnabled();
+        name = NAME;
     }
 
     public Card getContents() {
@@ -148,12 +148,16 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public void leavePlay() {
-        container.leavePlay();
+    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
+        container.goingToDiscard(playerActiveCards, position);
     }
 
     @Override
     public void discarded(CardHolder[] playerActiveCards, int position){
         contents.discarded(playerActiveCards, position);
+    }
+
+    public void leavePlay(){
+        contents.leavePlay();
     }
 }

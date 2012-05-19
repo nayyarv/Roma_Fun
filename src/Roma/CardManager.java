@@ -55,7 +55,8 @@ public class CardManager {
         playingDeck.addAll(Turris.playSet(playArea));
         playingDeck.addAll(Velites.playSet(playArea));
 
-        assert(playingDeck.size() == CARDS_IN_DECK);
+        playingDeck.addAll(Kat.playSet(playArea));
+
         shuffle();
     }
 
@@ -100,7 +101,6 @@ public class CardManager {
 
     public void discard(CardHolder theCard) {
         discardPile.add(0, theCard);
-        theCard.leavePlay();
         if (noMoreCards) {
             playingDeck.addAll(discardPile);
             discardPile.clear();

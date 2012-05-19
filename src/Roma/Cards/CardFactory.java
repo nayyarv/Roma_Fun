@@ -43,6 +43,8 @@ public class CardFactory {
         cardList.put(TribunusPlebis.NAME.replaceAll("\\sP", "p"), new TribunusPlebis(playArea));
         cardList.put(Turris.NAME, new Turris(playArea));
         cardList.put(Velites.NAME, new Velites(playArea));
+
+        cardList.put(Kat.NAME, new Kat(playArea));
     }
 
     public CardHolder getCard(String cardName){

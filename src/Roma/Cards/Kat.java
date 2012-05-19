@@ -87,9 +87,11 @@ public class Kat extends CardBase {
     private int countLives() {
         int count = 0;
         Card container = getContainer();
+        Wrapper wrapper;
 
         while (container.isWrapper()) {
-            if (container.getName().equalsIgnoreCase(KatWrapper.NAME)) {
+            wrapper = (Wrapper) container;
+            if (wrapper.getWrapperName().equalsIgnoreCase(KatWrapper.NAME)) {
                 count++;
             }
             container = container.getContainer();

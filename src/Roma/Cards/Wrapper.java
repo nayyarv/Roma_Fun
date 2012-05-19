@@ -84,6 +84,11 @@ public class Wrapper implements Card {
         return contents.getName();
     }
 
+    public String getWrapperName(){
+        return name;
+    }
+
+
     @Override
     public String getType() {
         return contents.getType();

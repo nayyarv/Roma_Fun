@@ -1,12 +1,12 @@
 package Testers;
 
 import Implementers.GameStateImplementer;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
+import framework.Rules;
 import framework.cards.Card;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * File Name:
@@ -85,7 +85,7 @@ public class GameStateImplementerTest extends TestCase {
 
         gameStateImplementer.setPlayerSestertii(1,10020);
         assert (gameStateImplementer.getPlayerSestertii(1)==10020);
-        gameStateImplementer.gameStats();
+        gameStateImplementer.printStats();
         System.out.println("Money functions passed!!!\n");
 
     }
@@ -110,19 +110,39 @@ public class GameStateImplementerTest extends TestCase {
         System.out.println("VP functions passed!!!\n");
     }
 
-    public void testGetPlayerHand() throws Exception {
 
-    }
 
-    public void testSetPlayerHand() throws Exception {
 
-    }
+    public void testPlayerCardsOnDiscs() throws Exception {
+        System.out.println("Testing Victory Points");
+        Card[] discs = new Card[Rules.NUM_DICE_DISCS];
+        for(int i =0; i<Rules.NUM_DICE_DISCS;i++){
+            discs[i]=Card.NOT_A_CARD;
+        }
+        Card[] recievedDiscs = gameStateImplementer.getPlayerCardsOnDiscs(0);
+        System.out.println("Discs: "+Arrays.toString(discs));
+        System.out.println("RecievedDiscs: "+ Arrays.toString(recievedDiscs));
 
-    public void testGetPlayerCardsOnDiscs() throws Exception {
+        assert (Arrays.equals(discs, recievedDiscs));
 
-    }
+        discs[0] = Card.VELITES;
+        discs[1] = Card.FORUM;
+        discs[2] = Card.TRIBUNUSPLEBIS;
+        discs[3] = Card.AESCULAPINUM;
+        discs[4] = Card.TEMPLUM;
+        discs[5] = Card.CONSUL;
+        discs[6] = Card.NOT_A_CARD;
 
-    public void testSetPlayerCardsOnDiscs() throws Exception {
+        gameStateImplementer.setPlayerCardsOnDiscs(0, discs);
+        gameStateImplementer.printStats();
+
+        recievedDiscs = gameStateImplementer.getPlayerCardsOnDiscs(0);
+
+        System.out.println(Arrays.toString(recievedDiscs));
+
+        assert (Arrays.equals(discs, recievedDiscs));
+
+        System.out.println("DiceDiscs functions passed!!!\n");
 
     }
 
@@ -131,10 +151,26 @@ public class GameStateImplementerTest extends TestCase {
     }
 
     public void testIsGameCompleted() throws Exception {
-
+        System.out.println("Testing GameCOmpleted");
         assert !(gameStateImplementer.isGameCompleted());
         gameStateImplementer.setPlayerVictoryPoints(0, 40);
         assert (gameStateImplementer.isGameCompleted());
+        System.out.println("Game Completed works!!!");
 
+
+    }
+
+    public void testPlayerHand() throws Exception {
+        System.out.println("Testing Player Hand");
+        ArrayList<Card> newHand = new ArrayList<Card>();
+        newHand.add(Card.CONSUL);
+        newHand.add((Card.ONAGER));
+        newHand.add(Card.PRAETORIANUS);
+        newHand.add(Card.NERO);
+
+        gameStateImplementer.setPlayerHand(0, newHand);
+        gameStateImplementer.printCardList(0);
+
+        System.out.println("PLayer Hand works!!");
     }
 }

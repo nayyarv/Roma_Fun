@@ -60,6 +60,10 @@ public class Player {
         return hand;
     }
 
+    public void setHand(ArrayList<CardHolder> hand) {
+        this.hand = hand;
+    }
+
     public PlayerInterface getPlayerInterface() {
         return playerInterface;
     }
@@ -320,6 +324,9 @@ public class Player {
         commit();
     }
 
+    public void printHand(){
+        playerInterface.printCardList(hand);
+    }
 
     public int getCardIndex(ArrayList<CardHolder> cardList, String type, int... chosenIndices) throws CancelAction{
 

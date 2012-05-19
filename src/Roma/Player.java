@@ -21,6 +21,8 @@ public class Player {
     private PlayerInterface playerInterface;
     private ActionData currentAction;
 
+    private boolean presets;
+
 
     //static constructors
     public static Player makeRealPlayer(int playerID, PlayArea playArea){
@@ -74,6 +76,7 @@ public class Player {
 
     public void setFreeDice(ArrayList<Dice> freeDice) {
         this.freeDice = freeDice;
+        presets = true;
     }
 
     public ActionData getCurrentAction() {
@@ -135,7 +138,7 @@ public class Player {
         boolean validChoice = false;
         int option = CANCEL;
 
-        freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+        if (!presets) freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
         playerInterface.printDiceList(freeDice);
 
         if(playArea.getDiceHolder().checkTriple(playerID)){
@@ -190,6 +193,7 @@ public class Player {
             printStats();
         } else if(option == END_TURN){
             endTurn = true;
+            presets = false;
         } else {
             PlayerInterface.printOut("Please choose a valid option.", true);
         }

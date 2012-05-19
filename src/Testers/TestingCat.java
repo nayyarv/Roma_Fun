@@ -13,7 +13,7 @@ public class TestingCat {
 
     public static void main(String []args){
         GameStateImplementer gameStateImplementer = new GameStateImplementer();
-        int[] num = {1,1,1};
+        int[] num = {1,1};
         gameStateImplementer.setWhoseTurn(0);
         //Set action dice not working
         gameStateImplementer.setActionDice(num);
@@ -21,6 +21,9 @@ public class TestingCat {
                 Card.NOT_A_CARD, Card.NOT_A_CARD, Card.NOT_A_CARD};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs);
         gameStateImplementer.printStats();
+
+        System.err.println(gameStateImplementer.getDiscard());
+
         gameStateImplementer.runGame();
 
     }

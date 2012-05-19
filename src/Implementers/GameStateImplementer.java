@@ -244,7 +244,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerHand(int playerNum, Collection<Card> hand) {
-        //TODO
+        ArrayList<CardHolder> thing = convertToCardHolderList(hand);
 
     }
 
@@ -415,6 +415,13 @@ public class GameStateImplementer implements GameState{
     private ArrayList<CardHolder> convertToCardHolderList(Card[] cardArray){
         ArrayList<Card> cardList = new ArrayList<Card>();
         Collections.addAll(cardList, cardArray);
+        return convertToCardHolderList(cardList);
+    }
+
+
+    private ArrayList<CardHolder> convertToCardHolderList(Collection cardCollection){
+        ArrayList<Card> cardList = new ArrayList<Card>();
+        cardList.addAll(cardCollection);
         return convertToCardHolderList(cardList);
     }
 

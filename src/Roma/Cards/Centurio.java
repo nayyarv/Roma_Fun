@@ -101,7 +101,6 @@ public class Centurio extends CardBase {
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
         int targetPlayer = player.getOtherPlayerID();
         int chosenDieIndex = CANCEL;

@@ -246,15 +246,17 @@ public class DiceDiscs {
 
     public void clearPlayerDice(int playerID){
         ArrayList<Dice> disc;
+        ArrayList<Dice> removeDice = new ArrayList<Dice>();
 
         for(int i = 0; i < CARD_POSITIONS; i++){
             disc = discs.get(i);
             if(!disc.isEmpty()){
                 for(Dice die : disc){
                     if(die.getPlayerID() == playerID){
-                        disc.remove(die);
+                        removeDice.add(die);
                     }
                 }
+                disc.removeAll(removeDice);
             }
         }
     }

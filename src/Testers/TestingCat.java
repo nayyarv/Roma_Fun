@@ -3,6 +3,8 @@ package Testers;
 import Implementers.GameStateImplementer;
 import framework.cards.Card;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -15,6 +17,7 @@ public class TestingCat {
         GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");
         int[] num = {1,1};
         gameStateImplementer.setWhoseTurn(0);
+        gameStateImplementer.setPlayerSestertii(0, 100);
         //Set action dice not working
         gameStateImplementer.setActionDice(num);
 
@@ -22,10 +25,9 @@ public class TestingCat {
                 Card.NOT_A_CARD, Card.NOT_A_CARD, Card.NOT_A_CARD};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs);
         gameStateImplementer.printStats();
-
         System.err.println(gameStateImplementer.getDiscard());
-
         gameStateImplementer.runGame();
+        System.err.println(gameStateImplementer.getDiscard());
 
     }
 

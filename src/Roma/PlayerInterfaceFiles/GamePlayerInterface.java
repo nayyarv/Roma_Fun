@@ -151,9 +151,9 @@ public class GamePlayerInterface extends PlayerInterface {
         }
     }
 
-    private static int COLUMN_ONE_WIDTH = 20;
-    private static int COLUMN_TWO_WIDTH = 10;
-    private static int COLUMN_THREE_WIDTH = 20;
+    private static int COLUMN_ONE_WIDTH = 30;
+    private static int COLUMN_TWO_WIDTH = 24;
+    private static int COLUMN_THREE_WIDTH = 30;
 
     @Override
     public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,

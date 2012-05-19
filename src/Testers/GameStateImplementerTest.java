@@ -96,9 +96,16 @@ public class GameStateImplementerTest extends TestCase {
         System.out.println(gameStateImplementer.getPlayerVictoryPoints(0));
         assert (gameStateImplementer.getPlayerVictoryPoints(1)==10);
         assert (gameStateImplementer.getPoolVictoryPoints()==16);
+
         gameStateImplementer.setPlayerVictoryPoints(0, 5);
+        assert (gameStateImplementer.getPlayerVictoryPoints(0)==5);
+        assert (gameStateImplementer.getPlayerVictoryPoints(1)==10);
+        assert (gameStateImplementer.getPoolVictoryPoints()==21);
 
-
+        gameStateImplementer.setPlayerVictoryPoints(1, 20);
+        assert (gameStateImplementer.getPlayerVictoryPoints(0)==5);
+        assert (gameStateImplementer.getPlayerVictoryPoints(1)==20);
+        assert (gameStateImplementer.getPoolVictoryPoints()==11);
 
         System.out.println("VP functions passed!!!\n");
     }
@@ -124,6 +131,10 @@ public class GameStateImplementerTest extends TestCase {
     }
 
     public void testIsGameCompleted() throws Exception {
+
+        assert !(gameStateImplementer.isGameCompleted());
+        gameStateImplementer.setPlayerVictoryPoints(0, 40);
+        assert (gameStateImplementer.isGameCompleted());
 
     }
 }

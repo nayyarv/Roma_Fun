@@ -70,6 +70,11 @@ public class Senator extends CardBase {
         PlayerInterface.printOut("Play character cards from your hand for free", true);
         player.commit();
 
+        for(int i = 0; i < hand.size(); i++){
+            handIndices[i] = CANCEL;
+            discIndices[i] = CANCEL;
+        }
+
         //get player input for which cards to lay
         //collect player input
         int i = 0;

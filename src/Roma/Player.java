@@ -330,7 +330,9 @@ public class Player {
         }
 
         for(int i: chosenIndices){
-            cardList.get(i).setPlayable(false);
+            if(i != CANCEL){
+                cardList.get(i).setPlayable(false);
+            }
         }
         return getCardIndex(cardList, true);
     }
@@ -374,6 +376,13 @@ public class Player {
                     cancel();
                 } else {
                     PlayerInterface.printOut("Please choose a valid action", true);
+                }
+
+                if(shouldFilter){
+                    validChoice = checkValid(cardList.get(choice));
+                    if(!validChoice){
+                        PlayerInterface.printOut("Not a valid choice!", true);
+                    }
                 }
             }
         }

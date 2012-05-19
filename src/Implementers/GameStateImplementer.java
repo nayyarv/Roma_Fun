@@ -465,4 +465,8 @@ public class GameStateImplementer implements GameState{
         cardList.addAll(cardCollection);
         return convertToCardHolderList(cardList);
     }
+
+    public void runGame(){
+        playArea.runGame();
+    }
 }

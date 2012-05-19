@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TelephoneBox extends CardBase {
 
-    public final static String NAME = "TelephoneBox";
+    public final static String NAME = "Telephonebox";
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "When activated by an action die the telephone Box card sends one of the " +
             "owner's cards already on the board forwards or backwards in time.  " +

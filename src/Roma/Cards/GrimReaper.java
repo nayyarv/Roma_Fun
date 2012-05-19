@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Desc:
  */
 public class GrimReaper extends CardBase {
-    public final static String NAME = "Grim Reaper";
+    public final static String NAME = "Grimreaper";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Once placed on a disc this card provides a chance to cheat death. " +
             "The player's other character cards are returned to the player's hand rather than to the discard pile " +

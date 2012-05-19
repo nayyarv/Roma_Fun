@@ -1,7 +1,6 @@
 package Testers;
 
 import Implementers.GameStateImplementer;
-import framework.Rules;
 import framework.cards.Card;
 import junit.framework.TestCase;
 

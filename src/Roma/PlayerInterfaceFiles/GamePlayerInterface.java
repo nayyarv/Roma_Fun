@@ -3,10 +3,8 @@ package Roma.PlayerInterfaceFiles;
 import Roma.Cards.CardHolder;
 import Roma.Dice;
 import Roma.DiceDiscs;
-import Roma.Roma;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -180,7 +178,7 @@ public class GamePlayerInterface extends PlayerInterface {
         }
 
         curr = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterCurr);
-        opp = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterOther);
+        opp = Filter(opposingPlayer.get(DiceDiscs.BRIBERY_INDEX), filterOther);
 
         printOut(padLeft(curr,COLUMN_ONE_WIDTH) + " | "
                 + padCentre("(7) Bribery Disc (7) ", COLUMN_TWO_WIDTH) + " | "

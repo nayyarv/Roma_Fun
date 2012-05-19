@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * Desc: All the initial and regular global rules are run by this object
  */
 public class GameRules {
+    public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
 
     private static final int CANCEL = PlayerInterface.CANCEL;
 
@@ -50,23 +51,26 @@ public class GameRules {
                     (i * Roma.NUM_INIT_CARDS), (i + 1) * Roma.NUM_INIT_CARDS));
             //extracts the first num-init-cards from the initial set
 
+            PlayerInterface.printOut(BREAK_LINE, true);
             PlayerInterface.printOut(players[i].getName() +
                     ", these are the " + Roma.NUM_INIT_CARDS + " cards dealt to you.\n" +
                     "You must choose " + Roma.NUM_CARDS_SWAPPED + " to give to your opponent.\n" +
                     "Choose the first Card", true);
             //Prompt: move printing to player interface?
 
-
             for(int j = 0, input = PlayerInterface.CANCEL; j<Roma.NUM_CARDS_SWAPPED;j++, input = PlayerInterface.CANCEL){
                 while(input == PlayerInterface.CANCEL){
                     try {
-                        input = players[i].getCardIndex(individualHand,"");
+                        input = players[i].getCardIndex(individualHand);
                         choices.add(individualHand.remove(input));
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a card: ", true);
                     }
                 }
-                if(j!=Roma.NUM_CARDS_SWAPPED-1) PlayerInterface.printOut("Choose the next card:", true);
+                if(j!=Roma.NUM_CARDS_SWAPPED-1){
+                    PlayerInterface.printOut(BREAK_LINE, true);
+                    PlayerInterface.printOut("Choose the next card:", true);
+                }
             }
             players[i].addCardListToHand(individualHand);
             players[(i+1)%Roma.MAX_PLAYERS].addCardListToHand(choices);
@@ -89,12 +93,12 @@ public class GameRules {
             hand = activePlayer.getHand();
 
             while(!hand.isEmpty()){
-                playArea.printStats();
+                PlayerInterface.printOut(BREAK_LINE, true);
                 PlayerInterface.printOut(activePlayer.getName() + ", please lay all your cards", true);
                 chosenCardIndex = CANCEL;
                 while(chosenCardIndex == CANCEL){
                     try {
-                        chosenCardIndex = activePlayer.getCardIndex(hand,"");
+                        chosenCardIndex = activePlayer.getCardIndex(hand);
                     } catch (CancelAction cancelAction) {
                         PlayerInterface.printOut("You must choose a card", true);
                     }

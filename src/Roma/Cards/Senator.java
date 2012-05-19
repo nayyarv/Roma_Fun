@@ -4,6 +4,7 @@ import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -58,46 +59,40 @@ public class Senator extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        boolean activated = true;
-//
-//        ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
-//        ArrayList<CardHolder> hand = player.getHand();
-//        boolean endSelection = false;
-//        CardHolder chosenCard = null;
-//        int targetPosition;
-//        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-//
-//        for(CardHolder card : hand){
-//            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
-//                if(hand.remove(card)){
-//                    tempHand.add(card);
-//                }
-//            }
-//        }
-//
-//        if(tempHand.isEmpty()){
-//            activated = false;
-//        } else {
-//            while(!endSelection){
-//                playArea.printStats();
-//                chosenCard = player.chooseCardIndex(tempHand);
-//                if(chosenCard == null){
-//                    endSelection = true;
-//                } else {
-//                    targetPosition = player.getDiceDiscIndex("");
-//                    diceDiscs.layCard(player.getPlayerID(), targetPosition, chosenCard);
-//                }
-//            }
-//        }
-//
-//        return activated;
-//    }
-
     @Override
-    public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+    public void gatherData(Player player, int position) throws CancelAction{
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<CardHolder> hand = player.getHand();
+        int[] handIndices = new int[hand.size()];
+        int[] discIndices = new int[hand.size()];
+        int handIndex = 0;
+        int discIndex = 0;
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+
+        PlayerInterface.printOut("Play character cards from your hand for free", true);
+        player.commit();
+
+        //get player input for which cards to lay
+        //collect player input
+        int i = 0;
+        while(handIndex != CANCEL || discIndex != CANCEL){
+            try {
+                handIndex = player.getCardIndex(hand, Card.CHARACTER, handIndices);
+                handIndices[i] = handIndex;
+                discIndex = player.getDiceDiscIndex(activeCards, false, false);
+                discIndices[i] = discIndex;
+                i++;
+            } catch (CancelAction cancelAction) {
+                handIndex = CANCEL;
+                discIndex = CANCEL;
+            }
+        }
+
+        for(int j = 0; j < i; j++){
+            activationData.add(handIndices[j]);
+            activationData.add(discIndices[j]);
+        }
     }
 
     //activationData: ([cardHandIndex][positionIndex])*repeated as desired

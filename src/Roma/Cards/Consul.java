@@ -18,8 +18,7 @@ public class Consul extends CardBase {
     public final static String NAME = "Consul";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The score on an action die which has not yet been " +
-            "used can be " +
-            "increased or decreased by 1 point.";
+            "used can be increased or decreased by 1 point.";
     final static int COST = 3;
     final static int DEFENCE = 3;
     final static boolean ACTIVATE_ENABLED = true;
@@ -64,13 +63,19 @@ public class Consul extends CardBase {
         final String strOption2 = "decrease die value?";
         PlayerInterface playerInterface = playArea.getPlayerInterface();
         ArrayList<Integer> activationData = player.getActivationData();
-        ArrayList<Dice> freeDice = player.getFreeDice();
-        int dieIndex;
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
+        int dieIndex = player.getCurrentAction().getActionDiceIndex();
         int option = CANCEL;
         int chosenDieValue;
         boolean validInput = false;
 
+        freeDice.remove(dieIndex);
         PlayerInterface.printOut("Which die do you want to change?", true);
+        if(freeDice.isEmpty()){
+            PlayerInterface.printOut("No free action dice!", true);
+            player.cancel();
+        }
         dieIndex = player.getDieIndex(freeDice);
         chosenDieValue = freeDice.get(dieIndex).getValue();
         while(!validInput){

@@ -10,7 +10,8 @@ import java.util.Collections;
 
 
 public class Player {
-    public final int CANCEL = PlayerInterface.CANCEL;
+    public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
+    public static final int CANCEL = PlayerInterface.CANCEL;
     private final String name;
     private int playerID;
 
@@ -284,7 +285,7 @@ public class Player {
         tempHand.addAll(cardManager.viewTopCards(value));
         while(!validChoice){
             try {
-                chosenCardIndex = getCardIndex(tempHand,"");
+                chosenCardIndex = getCardIndex(tempHand);
                 validChoice = true;
             } catch (CancelAction cancelAction) {
                 PlayerInterface.printOut("Have to choose a card", true);
@@ -302,7 +303,7 @@ public class Player {
         int chosenCardIndex = CANCEL;
         int chosenPosition = CANCEL;
 
-        chosenCardIndex = getCardIndex(hand, "");
+        chosenCardIndex = getCardIndex(hand);
         if(chosenCardIndex == CANCEL) cancel();
         currentAction.setCardIndex(chosenCardIndex);
 
@@ -380,16 +381,18 @@ public class Player {
     }
 
     private void checkDesc(ArrayList<CardHolder> cardList){
-        int action;
+        int cardIndex;
+        CardHolder card;
         PlayerInterface.printOut("Check which card number: ", false);
-        action = playerInterface.getIndex(cardList.size());
-        PlayerInterface.printOut(cardList.get(action).toString(), true);
+        cardIndex = playerInterface.getIndex(cardList.size());
+        card = cardList.get(cardIndex);
+        if(card != null){
+            PlayerInterface.printOut(cardList.get(cardIndex).toString(), true);
+        } else {
+            PlayerInterface.printOut("No card there!", true);
+        }
     }
 
-
-
-    //TODO: refactor this to include a filter
-    //TODO: refactor to take in a 2D array of CardHolders diceDiscs <- needed for cards that rearrange
     public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
             throws CancelAction{
         assert (diceDiscs[Roma.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);
@@ -406,19 +409,20 @@ public class Player {
         int option = CANCEL;
         final String
                 strPrompt = "Dice Discs:",
-                strOption[] = {"Check Description of your Cards",
-                        "Check Description of your Opponent's Card",
-                        "Choose Disc"};
+                strOption[] = {"Choose Disc",
+                        "Check Description of your Cards",
+                        "Check Description of your Opponent's Card"};
 
         final int
-                DESC_OWN = 1,
-                DESC_OPP = 2,
-                CHOOSE_DISC = 3;
+                CHOOSE_DISC = 1,
+                DESC_OWN = 2,
+                DESC_OPP = 3;
         boolean validChoice = false;
         int choice = CANCEL;
 
 
         while(!validChoice){
+            PlayerInterface.printOut(BREAK_LINE, true);
             playerInterface.printFilteredDiceList(currPlayer, opposingPlayer,
                     filterCurrent, filterOther);
             //Print's out a nice version of the dice lists

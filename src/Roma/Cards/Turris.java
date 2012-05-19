@@ -71,7 +71,7 @@ public class Turris extends CardBase {
         wrapperMaker.setDefenseShift(DEFENSE_SHIFT);
 
         for(int i = 0; i < friendlyCards.length; i++){
-            if(i != position){
+            if(i != position && friendlyCards[i] != null){
                 wrapperMaker.insertWrapper(friendlyCards[i]);
             }
         }

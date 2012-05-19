@@ -99,7 +99,9 @@ public class DiceDiscs {
     }
 
     private void goingToDiscard(CardHolder[] playerActives, int position) {
-        playerActives[position].goingToDiscard(playerActives, position);
+        if(playerActives[position] != null){
+            playerActives[position].goingToDiscard(playerActives, position);
+        }
     }
 
     public boolean gatherData(Player player, int position) throws CancelAction {

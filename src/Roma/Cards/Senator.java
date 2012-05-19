@@ -68,6 +68,10 @@ public class Senator extends CardBase {
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
 
         PlayerInterface.printOut("Play character cards from your hand for free", true);
+        if(player.countType(hand, CHARACTER) == 0){
+            PlayerInterface.printOut("No characters in hand!", true);
+            player.cancel();
+        }
         player.commit();
 
         for(int i = 0; i < hand.size(); i++){

@@ -66,6 +66,10 @@ public class Architectus extends CardBase {
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
 
         PlayerInterface.printOut("Play building cards from your hand for free", true);
+        if(player.countType(hand, BUILDING) == 0){
+            PlayerInterface.printOut("No characters in hand!", true);
+            player.cancel();
+        }
         player.commit();
 
         //get player input for which cards to lay

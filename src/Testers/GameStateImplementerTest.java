@@ -146,9 +146,6 @@ public class GameStateImplementerTest extends TestCase {
 
     }
 
-    public void testGetActionDice() throws Exception {
-
-    }
 
     public void testIsGameCompleted() throws Exception {
         System.out.println("Testing GameCOmpleted");
@@ -172,5 +169,24 @@ public class GameStateImplementerTest extends TestCase {
         gameStateImplementer.printCardList(0);
 
         System.out.println("PLayer Hand works!!");
+    }
+
+
+    public void testActionDice() throws Exception {
+        System.out.println("Testing Action Dice");
+        int[] num = {1,2,3};
+
+        System.out.println("Setting: " + Arrays.toString(num));
+
+        gameStateImplementer.setActionDice(num);
+
+
+        int [] get =  gameStateImplementer.getActionDice();
+        System.out.println("Returned: " + Arrays.toString(num));
+
+        assert (Arrays.equals(num, get));
+
+        System.out.println("Action Dice work!!");
+
     }
 }

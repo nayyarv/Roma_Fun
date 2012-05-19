@@ -63,7 +63,7 @@ public class DiceHolder {
         boolean triple = true;
 
         for(int i = 0; triple && (i < DICE_PER_PLAYER - 1); i++){
-            if((playerDice[player][i].getValue()) != (playerDice[player][i + 1].getValue())){
+            if((playerDice[player][i]).getValue() != (playerDice[player][i + 1]).getValue()){
                 triple = false;
             }
         }

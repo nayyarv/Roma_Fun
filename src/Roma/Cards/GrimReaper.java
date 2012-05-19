@@ -95,7 +95,7 @@ public class GrimReaper extends CardBase {
     }
 
     private class GrimWrapper extends Wrapper {
-        public final static String NAME = "Kat Wrapper";
+        public final static String NAME = "Grim Wrapper";
 
         public GrimWrapper(Card card) {
             super(card);

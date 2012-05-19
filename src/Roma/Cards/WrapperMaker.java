@@ -9,16 +9,28 @@ import java.util.ArrayList;
  * Desc:
  */
 public class WrapperMaker {
-    private final int costShift;
-    private final int costScale;
-    private final int defenseShift;
-    private final int defenseScale;
+    private int costShift = Wrapper.INITIAL_SHIFT;
+    private int costScale = Wrapper.INITIAL_SCALE;
+    private int defenseShift = Wrapper.INITIAL_SHIFT;
+    private int defenseScale = Wrapper.INITIAL_SCALE;
     private ArrayList<Wrapper> wrapperList = new ArrayList<Wrapper>();
 
-    public WrapperMaker(int costShift, int costScale, int defenseShift, int defenseScale){
+    public WrapperMaker(){
+    }
+
+    public void setCostShift(int costShift) {
         this.costShift = costShift;
+    }
+
+    public void setCostScale(int costScale) {
         this.costScale = costScale;
+    }
+
+    public void setDefenseShift(int defenseShift) {
         this.defenseShift = defenseShift;
+    }
+
+    public void setDefenseScale(int defenseScale) {
         this.defenseScale = defenseScale;
     }
 

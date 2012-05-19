@@ -93,6 +93,10 @@ public class CardHolder implements Card{
         contents.enterPlay(player, position);
     }
 
+    public void discarded(CardHolder[] playerActiveCards, int position){
+        contents.discarded(playerActiveCards, position);
+    }
+
     @Override
     public void leavePlay() {
         Wrapper wrapper;
@@ -101,6 +105,5 @@ public class CardHolder implements Card{
             wrapper = (Wrapper) contents;
             wrapper.deleteThisWrapper();
         }
-        contents.leavePlay();
     }
 }

@@ -53,21 +53,6 @@ public class Haruspex extends CardBase {
 
     }
 
-
-//    public boolean activate(Player player, int position) {
-//        boolean activated = true;
-//        CardManager cardManager = playArea.getCardManager();
-//        ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
-//        CardHolder chosenCard;
-//
-//        chosenCard = player.chooseCardIndex(deck);
-//        player.addCardToHand(chosenCard);
-//
-//        cardManager.shuffle();
-//
-//        return activated;
-//    }
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction{
         CardManager cardManager = playArea.getCardManager();
@@ -103,15 +88,5 @@ public class Haruspex extends CardBase {
         int cardIndex = activationData.remove(0);
         player.addCardToHand(deck.remove(cardIndex));
         cardManager.shuffle();
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

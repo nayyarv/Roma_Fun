@@ -64,7 +64,7 @@ public class Sicarius extends CardBase {
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
             card = activeCards[targetPlayerID][i];
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 card.setPlayable(true);
             }
         }
@@ -86,15 +86,5 @@ public class Sicarius extends CardBase {
 
         diceDiscs.discardTarget(targetPlayerID, targetIndex);
         diceDiscs.discardTarget(player.getPlayerID(), position);
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

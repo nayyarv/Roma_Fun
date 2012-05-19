@@ -65,7 +65,7 @@ public class Scaenicus extends CardBase {
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
             card = activeCards[playerID][i];
-            if(card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
                 card.setPlayable(true);
             }
         }
@@ -86,15 +86,5 @@ public class Scaenicus extends CardBase {
         int targetIndex = activationData.remove(0);
 
         friendlyCards[targetIndex].activate(player, position);
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

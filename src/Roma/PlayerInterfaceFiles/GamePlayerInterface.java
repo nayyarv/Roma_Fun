@@ -3,8 +3,10 @@ package Roma.PlayerInterfaceFiles;
 import Roma.Cards.CardHolder;
 import Roma.Dice;
 import Roma.DiceDiscs;
+import Roma.Roma;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -151,27 +153,38 @@ public class GamePlayerInterface extends PlayerInterface {
         }
     }
 
+    private static int COLUMN_ONE_WIDTH = 30;
+    private static int COLUMN_TWO_WIDTH = 24;
+    private static int COLUMN_THREE_WIDTH = 30;
+
     @Override
     public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
                                        boolean filterCurr, boolean filterOther){
+        String discNumber;
 
-        printOut("DiceDiscs", true);
-        printOut(padLeft(padCentre("Current Player", 25),14) + padCentre("Opposing Player", 25), true);
+        PlayerInterface.printOut(BREAK_LINE, true);
+        printOut(padCentre("Current Player", COLUMN_ONE_WIDTH) + " | "
+                + padCentre("Dice Discs", COLUMN_TWO_WIDTH) + " | "
+                + padCentre("Opposing Player", COLUMN_THREE_WIDTH), true);
 
         String curr;
         String opp;
 
         for(int i = 0;i< DiceDiscs.CARD_POSITIONS-1;i++){
-            printOut(padRight((i+1)+") Dice Disc "+(i+1),2) + ":"  , false);
             curr = Filter(currPlayer.get(i), filterCurr);
             opp = Filter(opposingPlayer.get(i), filterOther);
-            printOut(padCentre(curr,25)+padCentre(opp, 25), true);
+            discNumber = "(" + (i+1)+") Dice Disc (" + (i+1) + ")";
+            printOut(padLeft(curr,COLUMN_ONE_WIDTH) + " | "
+                    + padCentre(discNumber,COLUMN_TWO_WIDTH) + " | "
+                    + padRight(opp, COLUMN_THREE_WIDTH) , true);
         }
 
         curr = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterCurr);
         opp = Filter(currPlayer.get(DiceDiscs.BRIBERY_INDEX), filterOther);
 
-        printOut(("7) Bribery Disc: "+padCentre(curr,25)+padCentre(opp, 25)), true);
+        printOut(padLeft(curr,COLUMN_ONE_WIDTH) + " | "
+                + padCentre("(7) Bribery Disc (7) ", COLUMN_TWO_WIDTH) + " | "
+                + padRight(opp, COLUMN_THREE_WIDTH), true);
     }
 
     @Override

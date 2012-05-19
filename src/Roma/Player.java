@@ -179,7 +179,7 @@ public class Player {
             currentAction.setLayCard(true);
             viewHand();
         } else if(option == SHOW_GAME_STATS){
-            playArea.printStats();
+            printStats();
         } else if(option == END_TURN){
             endTurn = true;
         } else {
@@ -447,7 +447,9 @@ public class Player {
                 validChoice = checkValid(opposingPlayer.get(choice));
             }
 
-            //TODO: Pop up an error if they choose an invalid card
+            if(!validChoice){
+                PlayerInterface.printOut("Not a valid choice!", true);
+            }
         }
         return choice;
     }
@@ -553,5 +555,50 @@ public class Player {
 
     public int getBattleValue(){
         return currentAction.getBattleDice();
+    }
+
+    public void printStats() {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Player[] players = playArea.getAllPlayers();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+
+        final String
+                strPrompt = "Dice Discs:",
+                strOption[] = {"Check Description of your Cards",
+                        "Check Description of your Opponent's Card"};
+
+        final int
+                DESC_OWN = 1,
+                DESC_OPP = 2;
+        int option = 0;
+        int otherID = getOtherPlayerID();
+
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
+
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            PlayerInterface.printOut(BREAK_LINE, true);
+            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+        }
+        //Print's out a nice version of the dice lists
+        while(option != CANCEL){
+            playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+            option = playerInterface.readInput(strPrompt, true, strOption);
+            if (option == DESC_OWN){
+                checkDesc(currPlayer);
+            } else if (option == DESC_OPP){
+                checkDesc(opposingPlayer);
+            } else if (option==CANCEL){
+            } else {
+                PlayerInterface.printOut("Invalid Input, please try again.", true);
+            }
+        }
     }
 }

@@ -32,5 +32,6 @@ public interface Card {
     public void setContents(Card card);
     public Card getContainer();
     public void setContainer(Card holder);
+    public void discarded(CardHolder[] playerActiveCards, int position);
     public void leavePlay();
 }

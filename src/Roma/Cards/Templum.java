@@ -64,14 +64,4 @@ public class Templum extends CardBase {
         System.err.println("Templum being activated somehow!");
     }
 
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
-
 }

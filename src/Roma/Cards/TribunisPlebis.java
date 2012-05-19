@@ -65,14 +65,4 @@ public class TribunisPlebis extends CardBase {
 
         victoryTokens.playerToPlayer(targetPlayerID, playerID, 1);
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

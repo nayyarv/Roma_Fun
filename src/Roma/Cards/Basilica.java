@@ -64,14 +64,4 @@ public class Basilica extends CardBase {
     public void activate(Player player, int position) {
         System.err.println("Basilica activated somehow!");
     }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
-    }
 }

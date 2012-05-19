@@ -57,7 +57,7 @@ public class Consiliarius extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
         CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
-        CardHolder tempCard;
+        CardHolder card;
         int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
         int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
         int fromIndex;
@@ -69,9 +69,9 @@ public class Consiliarius extends CardBase {
         }
 
         for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
-            tempCard = activeCards[player.getPlayerID()][i];
-            if(tempCard.getType().equalsIgnoreCase(Card.CHARACTER)){
-                tempCard.setPlayable(true);
+            card = activeCards[player.getPlayerID()][i];
+            if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
+                card.setPlayable(true);
                 activeCardsPrime[player.getPlayerID()][i] = null;
             }
         }
@@ -129,15 +129,5 @@ public class Consiliarius extends CardBase {
             }
             activeCards[i] = cardList.remove(0);
         }
-    }
-
-    @Override
-    public void enterPlay(Player player, int position) {
-        //no enter play action
-    }
-
-    @Override
-    public void leavePlay() {
-        //do nothing when leaving play
     }
 }

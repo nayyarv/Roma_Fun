@@ -44,9 +44,9 @@ public interface Card {
 
     public void setContainer(Card holder);
 
-    public void discarded(CardHolder[] playerActiveCards, int position);
+    public void discarded(int targetPlayerID, int position);
 
-    public void goingToDiscard(CardHolder[] playerActiveCards, int position);
+    public void goingToDiscard(int targetPlayerID, int position);
 
     public void leavePlay();
 }

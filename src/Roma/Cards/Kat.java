@@ -108,7 +108,7 @@ public class Kat extends CardBase {
         }
 
         @Override
-        public void discarded(CardHolder[] playerActiveCards, int position) {
+        public void discarded(int targetPlayerID, int position) {
             deleteThisWrapper();
         }
     }

@@ -103,13 +103,13 @@ public abstract class CardBase implements Card {
     }
 
     @Override
-    public void discarded(CardHolder[] playerActiveCards, int position) {
-        goingToDiscard(playerActiveCards, position);
+    public void discarded(int targetPlayerID, int position) {
+        goingToDiscard(targetPlayerID, position);
     }
 
     @Override
-    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
-        container.goingToDiscard(playerActiveCards, position);
+    public void goingToDiscard(int targetPlayerID, int position) {
+        container.goingToDiscard(targetPlayerID, position);
     }
 
     public abstract CardHolder makeOne(PlayArea playArea);

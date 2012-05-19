@@ -153,13 +153,13 @@ public class Wrapper implements Card {
     }
 
     @Override
-    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
-        container.goingToDiscard(playerActiveCards, position);
+    public void goingToDiscard(int targetPlayerID, int position) {
+        container.goingToDiscard(targetPlayerID, position);
     }
 
     @Override
-    public void discarded(CardHolder[] playerActiveCards, int position) {
-        contents.discarded(playerActiveCards, position);
+    public void discarded(int targetPlayerID, int position) {
+        contents.discarded(targetPlayerID, position);
     }
 
     public void leavePlay() {

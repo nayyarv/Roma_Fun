@@ -22,7 +22,7 @@ public class Turris extends CardBase {
     final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;
-    WrapperMaker wrapperMaker;
+    private WrapperMaker wrapperMaker;
 
     @Override
     public CardHolder makeOne(PlayArea playArea) {
@@ -93,5 +93,4 @@ public class Turris extends CardBase {
         wrapperMaker.clearWrapperList();
         wrapperMaker = null;
     }
-
 }

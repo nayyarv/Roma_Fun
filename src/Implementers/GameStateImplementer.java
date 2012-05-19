@@ -3,6 +3,7 @@ package Implementers;
 import Roma.*;
 import Roma.Cards.*;
 import Roma.History.ActionData;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import Roma.VictoryTokens;
 import framework.cards.Card;
 import framework.interfaces.GameState;
@@ -244,8 +245,10 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerHand(int playerNum, Collection<Card> hand) {
-        ArrayList<CardHolder> thing = convertToCardHolderList(hand);
-
+        assert !(hand.contains(Card.NOT_A_CARD));
+        ArrayList<CardHolder> newHand = convertToCardHolderList(hand);
+        Player player = playArea.getPlayer(playerNum);
+        player.setHand(newHand);
     }
 
     /**
@@ -286,15 +289,15 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setPlayerCardsOnDiscs(int playerNum, Card[] discCards) {
-        //TODo: Implement
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         Player player = playArea.getPlayer(playerNum);
         ArrayList<CardHolder> discCardsList = convertToCardHolderList(discCards);
         for(int i=0; i<discCardsList.size();i++){
-            diceDiscs.layCard(player, i, discCardsList.get(i));
+            if(discCardsList.get(i)!=null) diceDiscs.layCard(player, i, discCardsList.get(i));
         }
     }
 
+    //TODO: Check how to fix action dice.
     /**
      * Gets the current player's action dice values.
      * <p/>
@@ -308,7 +311,6 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int[] getActionDice() {
-        //Todo: Currently modifying freeDice. Good enough?
         int currPlayer = getWhoseTurn();
         Player player = playArea.getPlayer(currPlayer);
         ArrayList<Dice> diceList = player.getFreeDice();
@@ -334,10 +336,13 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setActionDice(int[] dice) {
-        //Todo: How the hell do I implement?
-        //No way to sneak in and change the values?
-        //Refactor?
-
+        //Modify the free dice.
+        int currPlayer = getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        ArrayList<Dice> diceList = player.getFreeDice();
+        for(int i=0; i< diceList.size();i++){
+            diceList.get(i).setValue(dice[i]);
+        }
     }
 
     /**
@@ -367,9 +372,35 @@ public class GameStateImplementer implements GameState{
     @Override
     public boolean isGameCompleted() {
         return playArea.isGameOver();
+
     }
 
+    public void printStats(){
+        Player[] players = playArea.getAllPlayers();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        PlayerInterface playerInterface = playArea.getPlayerInterface();
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+        }
 
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(0));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(1));
+        playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+    }
+
+    public void printCardList(int playerID){
+        playArea.getPlayer(playerID).printHand();
+    }
     //Functions used to convert between
     private Card[] convertToCardArray(ArrayList<CardHolder> cardDeck){
         ArrayList<Card> converted = convertToCardList(cardDeck);
@@ -418,11 +449,9 @@ public class GameStateImplementer implements GameState{
         return convertToCardHolderList(cardList);
     }
 
-
     private ArrayList<CardHolder> convertToCardHolderList(Collection cardCollection){
         ArrayList<Card> cardList = new ArrayList<Card>();
         cardList.addAll(cardCollection);
         return convertToCardHolderList(cardList);
     }
-
 }

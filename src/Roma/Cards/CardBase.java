@@ -91,7 +91,7 @@ public abstract class CardBase implements Card {
 
     @Override
     public void enterPlay(Player player, int position) {
-        //no enter play action
+        //no enter play action by default
     }
 
     @Override

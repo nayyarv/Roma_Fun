@@ -90,6 +90,7 @@ public class Turris extends CardBase {
         playArea.removeFromEnterPlayList(wrapperMaker);
         wrapperMaker.clearWrapperList();
         wrapperMaker = null;
+        container.leavePlay();
     }
 
 }

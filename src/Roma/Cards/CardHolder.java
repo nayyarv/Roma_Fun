@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.CardManager;
+import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -97,15 +98,17 @@ public class CardHolder implements Card {
         contents.enterPlay(player, position);
     }
 
-    public void discarded(CardHolder[] playerActiveCards, int position) {
-        contents.discarded(playerActiveCards, position);
+    public void discarded(int targetPlayerID, int position) {
+        contents.discarded(targetPlayerID, position);
     }
 
     @Override
-    public void goingToDiscard(CardHolder[] playerActiveCards, int position) {
+    public void goingToDiscard(int targetPlayerID, int position) {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardManager cardManager = playArea.getCardManager();
-        cardManager.discard(playerActiveCards[position]);
-        playerActiveCards[position] = null;
+        CardHolder[] playerActives = diceDiscs.getPlayerActives(targetPlayerID);
+        cardManager.discard(playerActives[position]);
+        playerActives[position] = null;
         leavePlay();
     }
 

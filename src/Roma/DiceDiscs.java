@@ -90,16 +90,20 @@ public class DiceDiscs {
         ArrayList<WrapperMaker> enterPlayList = playArea.getEnterPlayList();
         int playerID = player.getPlayerID();
 
-        goingToDiscard(getPlayerActives(player.getPlayerID()), position);
+        goingToDiscard(player.getPlayerID(), position);
         for(WrapperMaker wrapperMaker : enterPlayList){
-            wrapperMaker.insertWrapper(newCard);
+            if(wrapperMaker.getOwnerID() == player.getPlayerID()){
+                wrapperMaker.insertWrapper(newCard);
+            }
         }
         newCard.enterPlay(player, position);
         activeCards[playerID][position] = newCard;
     }
 
-    private void goingToDiscard(CardHolder[] playerActives, int position) {
-        playerActives[position].goingToDiscard(playerActives, position);
+    private void goingToDiscard(int targetPlayerID, int position) {
+        if(activeCards[targetPlayerID][position] != null){
+            activeCards[targetPlayerID][position].goingToDiscard(targetPlayerID, position);
+        }
     }
 
     public boolean gatherData(Player player, int position) throws CancelAction {
@@ -192,7 +196,7 @@ public class DiceDiscs {
         CardHolder card = activeCards[playerID][position];
 
         if(card != null){
-            card.discarded(activeCards[playerID], position);
+            card.discarded(playerID, position);
         }
     }
 

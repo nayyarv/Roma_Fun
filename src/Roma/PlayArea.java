@@ -5,6 +5,7 @@ import Roma.History.*;
 import Roma.PlayerInterfaceFiles.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PlayArea {
     public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
@@ -117,7 +118,7 @@ public class PlayArea {
 
     private void resetPlayable(ArrayList<CardHolder> cardList) {
         for(CardHolder card : cardList){
-            card.setPlayable(false);
+            if(card != null) card.setPlayable(false);
         }
     }
 
@@ -130,36 +131,6 @@ public class PlayArea {
         player.rollActionDice();
         transferNextToThis();
     }
-
-    //TODO: move to playerInterface
-    //TODO: add display last card discarded
-    public void printStats() {
-        String cardName;
-
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            PlayerInterface.printOut(BREAK_LINE, true);
-            PlayerInterface.printOut("Player: " + players[player].getName(), true);
-            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
-            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
-            PlayerInterface.printOut("Cards in play: ", true);
-            for(int position = 0; position < DiceDiscs.CARD_POSITIONS; position++){
-                cardName = diceDiscs.getCardName(player, position);
-                if(position == 6){
-                    PlayerInterface.printOut("Bribery) " + String.format("%1$-" + PAD_LENGTH + "s", cardName) +
-                            " : Dice on disc: ", false);
-                } else {
-                    PlayerInterface.printOut("      " + (position + 1) + ") " + String.format("%1$-" + PAD_LENGTH + "s", cardName) +
-                            " : Dice on disc: ", false);
-                }
-                for(Dice die : diceDiscs.checkForDice(player, position)){
-                    PlayerInterface.printOut(die.getValue() + " ", false);
-                }
-                PlayerInterface.printOut("", true);
-            }
-        }
-    }
-
 
     //All the getters
     public int getTurn(){

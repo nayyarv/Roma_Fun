@@ -3,8 +3,10 @@ package Roma.PlayerInterfaceFiles;
 import Roma.Cards.CardHolder;
 import Roma.Dice;
 import Roma.DiceDiscs;
+import Roma.Roma;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -160,6 +162,7 @@ public class GamePlayerInterface extends PlayerInterface {
                                        boolean filterCurr, boolean filterOther){
         String discNumber;
 
+        PlayerInterface.printOut(BREAK_LINE, true);
         printOut(padCentre("Current Player", COLUMN_ONE_WIDTH) + " | "
                 + padCentre("Dice Discs", COLUMN_TWO_WIDTH) + " | "
                 + padCentre("Opposing Player", COLUMN_THREE_WIDTH), true);

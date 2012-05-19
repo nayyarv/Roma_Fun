@@ -1,6 +1,5 @@
 package Roma.Cards;
 
-import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -47,7 +46,6 @@ public class Kat extends CardBase {
 
     @Override
     public void enterPlay(Player player, int position) {
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         KatWrapperMaker katWrapperMaker = new KatWrapperMaker();
 
         for (int i = 0; i < NUMBER_OF_LIVES; i++) {

@@ -9,6 +9,7 @@ import framework.interfaces.GameState;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,7 +51,8 @@ public class GameStateImplementer implements GameState{
     @Override
     public void setWhoseTurn(int player) {
         //how should this be done?
-        //Todo : can we implement as end of turn instead?
+        //Todo : can we implement as end of turn instead? i.e. from Movemaker?
+
         //Note endTurn in moveMaker
         if(getWhoseTurn()!=player){
             playArea.setTurn(player);
@@ -276,7 +278,10 @@ public class GameStateImplementer implements GameState{
     @Override
     public void setPlayerCardsOnDiscs(int playerNum, Card[] discCards) {
         //TODo: Implement
-        //To change body of implemented methods use File | Settings | File Templates.
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Player player = playArea.getPlayer(playerNum);
+        ArrayList<CardHolder> discCardsList = convertToCardHolderList(discCards);
+
     }
 
     /**
@@ -318,8 +323,10 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public void setActionDice(int[] dice) {
-        //todo: There is no function to do this
-        //To change body of implemented methods use File | Settings | File Templates.
+        //Todo: How the hell do I implement?
+        //No way to sneak in and change the values?
+        //Refactor?
+
     }
 
     /**
@@ -373,13 +380,19 @@ public class GameStateImplementer implements GameState{
 
     private ArrayList<CardHolder> convertToCardHolderList(List<Card> cardList){
         CardFactory cardFactory = new CardFactory(playArea);
-        ArrayList<CardHolder> newDeck = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> newList = new ArrayList<CardHolder>();
         for(Card card:cardList){
             CardHolder cardHolder = cardFactory.getCard(card.toString());
             assert (cardHolder!=null);
-            newDeck.add(cardHolder);
+            newList.add(cardHolder);
         }
-        return newDeck;
+        return newList;
+    }
+
+    private ArrayList<CardHolder> convertToCardHolderList(Card[] cardArray){
+        ArrayList<Card> cardList = new ArrayList<Card>();
+        Collections.addAll(cardList, cardArray);
+        return convertToCardHolderList(cardList);
     }
 
 }

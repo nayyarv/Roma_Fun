@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * Date: 11/04/12
  * Desc:
  */
-public class Consiliarus extends CardBase {
-    public final static String NAME = "Consiliarus";
+public class Consiliarius extends CardBase {
+    public final static String NAME = "Consiliarius";
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "The player picks up their character cards and can then lay them again " +
             "on any dice disc. Buildings can be covered.";
@@ -25,7 +25,7 @@ public class Consiliarus extends CardBase {
 
     @Override
     public CardHolder makeOne(PlayArea playArea){
-        Card card = new Consiliarus(playArea);
+        Card card = new Consiliarius(playArea);
         CardHolder cardHolder = new CardHolder(card);
         card.setContainer(cardHolder);
 
@@ -38,7 +38,7 @@ public class Consiliarus extends CardBase {
         Card card;
 
         for(int i = 0; i < OCCURENCES; i++){
-            card = new Consiliarus(playArea);
+            card = new Consiliarius(playArea);
             cardHolder = new CardHolder(card);
             card.setContainer(cardHolder);
             set.add(cardHolder);
@@ -47,7 +47,7 @@ public class Consiliarus extends CardBase {
         return set;
     }
 
-    Consiliarus(PlayArea playArea) {
+    Consiliarius(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 

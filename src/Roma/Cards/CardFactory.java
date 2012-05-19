@@ -18,7 +18,7 @@ public class CardFactory {
         cardList.put(Architectus.NAME, new Architectus(playArea));
         cardList.put(Basilica.NAME, new Basilica(playArea));
         cardList.put(Centurio.NAME, new Centurio(playArea));
-        cardList.put(Consiliarus.NAME, new Consiliarus(playArea));
+        cardList.put(Consiliarius.NAME, new Consiliarius(playArea));
 
         cardList.put(Consul.NAME, new Consul(playArea));
         cardList.put(Essedum.NAME, new Essedum(playArea));

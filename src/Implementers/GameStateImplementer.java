@@ -281,7 +281,9 @@ public class GameStateImplementer implements GameState{
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         Player player = playArea.getPlayer(playerNum);
         ArrayList<CardHolder> discCardsList = convertToCardHolderList(discCards);
-
+        for(int i=0; i<discCardsList.size();i++){
+            diceDiscs.layCard(player, i, discCardsList.get(i));
+        }
     }
 
     /**
@@ -358,6 +360,8 @@ public class GameStateImplementer implements GameState{
         return playArea.isGameOver();
     }
 
+
+    //Functions used to convert between
     private Card[] convertToCardArray(ArrayList<CardHolder> cardDeck){
         ArrayList<Card> converted = convertToCardList(cardDeck);
         Card[] forReturn = new Card[converted.size()];
@@ -382,9 +386,13 @@ public class GameStateImplementer implements GameState{
         CardFactory cardFactory = new CardFactory(playArea);
         ArrayList<CardHolder> newList = new ArrayList<CardHolder>();
         for(Card card:cardList){
-            CardHolder cardHolder = cardFactory.getCard(card.toString());
-            assert (cardHolder!=null);
-            newList.add(cardHolder);
+            if (card.toString().equalsIgnoreCase(Card.NOT_A_CARD.toString())){
+                newList.add(null);
+            } else {
+                CardHolder cardHolder = cardFactory.getCard(card.toString());
+//                assert (cardHolder!=null);
+                newList.add(cardHolder);
+            }
         }
         return newList;
     }

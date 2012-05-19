@@ -13,8 +13,8 @@
 //
 //    public static void main(String[] args){
 //        PlayArea playArea = new PlayArea();
-//        Card temp = new Consiliarus(playArea);
-//        System.err.println("The card is a Consiliarus: " + temp.equals("Consiliarus"));
+//        Card temp = new Consiliarius(playArea);
+//        System.err.println("The card is a Consiliarius: " + temp.equals("Consiliarius"));
 //
 //
 //

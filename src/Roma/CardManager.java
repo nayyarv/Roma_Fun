@@ -29,7 +29,7 @@ public class CardManager {
         playingDeck.addAll(Architectus.playSet(playArea));
         playingDeck.addAll(Basilica.playSet(playArea));
         playingDeck.addAll(Centurio.playSet(playArea));
-        playingDeck.addAll(Consiliarus.playSet(playArea));
+        playingDeck.addAll(Consiliarius.playSet(playArea));
 
         playingDeck.addAll(Consul.playSet(playArea));
         playingDeck.addAll(Essedum.playSet(playArea));

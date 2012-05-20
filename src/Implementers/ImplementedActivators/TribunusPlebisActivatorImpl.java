@@ -1,5 +1,6 @@
 package Implementers.ImplementedActivators;
 
+import Roma.Cards.CardHolder;
 import framework.interfaces.activators.TribunusPlebisActivator;
 
 /**
@@ -20,6 +21,12 @@ public class TribunusPlebisActivatorImpl implements TribunusPlebisActivator {
      * complete method is called. This is really important.
      * </p>
      */
+    CardHolder tribunusPlebis;
+
+    public TribunusPlebisActivatorImpl(CardHolder tribunusPlebis) {
+        this.tribunusPlebis = tribunusPlebis;
+    }
+
     @Override
     public void complete() {
 

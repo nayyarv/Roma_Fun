@@ -57,6 +57,15 @@ public class MoveMakerImplementer implements MoveMaker{
         Player player = playArea.getPlayer(currPlayer);
         ActionData currentAction = new ActionData(currPlayer);
 
+        int chosenDieIndex = diceReqdIndex(disc);
+
+        currentAction.setUseDice(true);
+
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(disc);
+
+
+
         return null;
     }
 

@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * Desc:
  */
 
-//TODO: implement test
-
 public class TestingConsul {
 
     public static void main(String []args){

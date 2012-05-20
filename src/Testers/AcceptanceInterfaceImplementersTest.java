@@ -40,7 +40,7 @@ public class AcceptanceInterfaceImplementersTest extends TestCase {
         gameState.isGameCompleted();
 
         assert (gameState.getPlayerSestertii(0)==114);
-        System.out.println("Testing money discs passsed!!\n");
+        System.out.println("Testing money discs passed !!\n");
     }
 
     public void testCardDisc() throws Exception{

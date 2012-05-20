@@ -394,15 +394,14 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public boolean isGameCompleted() {
+
+        //Adding some statistics in the printing
         Player curr = playArea.getPlayer(getWhoseTurn());
-        curr.printStats();
+        curr.printStats("testing");
         curr.printHand();
         return playArea.isGameOver();
 
     }
-
-
-
 
     public void printCardList(int playerID){
         playArea.getPlayer(playerID).printHand();

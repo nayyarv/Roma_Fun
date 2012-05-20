@@ -583,6 +583,38 @@ public class Player {
         return currentAction.getBattleDice();
     }
 
+    public void printStats(String testing){
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Player[] players = playArea.getAllPlayers();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        CardHolder topDiscard = playArea.getCardManager().getTopDiscard();
+
+        int otherID = getOtherPlayerID();
+
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
+
+        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+            PlayerInterface.printOut(BREAK_LINE, true);
+            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+
+        }
+        String name = (topDiscard==null)? "Empty":topDiscard.getName();
+        PlayerInterface.printOut("Top Card in Discard: "+ name, true);
+        //Print's out a nice version of the dice lists
+
+        playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+
+    }
+
+
     public void printStats() {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         Player[] players = playArea.getAllPlayers();

@@ -518,6 +518,7 @@ public class Player {
 
         moneyManager.loseMoney(playerID, chosenCard.getCost());
         diceDiscs.layCard(this, chosenPosition, chosenCard);
+        printDiceDiscs(diceDiscs.getActiveCards());
     }
 
     private void useDice(ActionData actionData) {

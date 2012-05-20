@@ -62,21 +62,23 @@ public class Centurio extends CardBase {
     public void gatherData(Player player, int position) throws CancelAction {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
-        int targetPlayer = player.getOtherPlayerID();
-        int chosenDieIndex = CANCEL;
+        int targetPlayerID = player.getOtherPlayerID();
         boolean battleVictory = false;
         ArrayList<Dice> freeDice = player.getFreeDice();
         ArrayList<Integer> activationData = player.getActivationData();
-        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, position);
         int battleValue = player.getCurrentAction().getBattleDice();
+        int chosenDieIndex = player.getCurrentAction().getActionDiceIndex();
+        CardHolder[] targetActives = diceDiscs.getPlayerActives(targetPlayerID);
 
+        freeDice.remove(chosenDieIndex);
         PlayerInterface.printOut("Attack a card directly opposite", true);
         if (targetCard == null) {
             PlayerInterface.printOut("No card directly opposite!", true);
             player.cancel();
         } else {
             player.commit();
-            battleVictory = diceDiscs.battle(targetPlayer, position, battleValue);
+            battleVictory = (battleValue >= targetActives[position].getDefense());
             if (!battleVictory) {
                 if (freeDice.size() != 0) {
                     try {
@@ -102,22 +104,23 @@ public class Centurio extends CardBase {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
 
-        int targetPlayer = player.getOtherPlayerID();
+        int targetPlayerID = player.getOtherPlayerID();
         int chosenDieIndex = CANCEL;
         Dice chosenDie = null;
-        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayer, position);
+        CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, position);
         ArrayList<Dice> freeDice = player.getFreeDice();
         int battleValue = player.getBattleValue();
+        boolean battleVictory = diceDiscs.battle(targetPlayerID, position, battleValue);;
 
         //if empty then battleVictory == true
-        if (!activationData.isEmpty()){
+        if (!battleVictory){
             chosenDieIndex = activationData.remove(0);
             //if chosenDieIndex isn't cancel then add die value to battle value and check defense again
             if (chosenDieIndex != CANCEL) {
                 chosenDie = freeDice.remove(chosenDieIndex);
                 diceDiscs.addDiceToDisc(position, chosenDie);
                 if (targetCard.getDefense() <= chosenDie.getValue() + battleValue) {
-                    diceDiscs.discardTarget(targetPlayer, position);
+                    diceDiscs.discardTarget(targetPlayerID, position);
                     PlayerInterface.printOut("Victory!", true);
                 } else {
                     PlayerInterface.printOut("You wasted an action die...", true);

@@ -26,12 +26,12 @@ public class TestingGrimReaper {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,1,1};
+        int[] num = {1,3,6};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);
-        gameStateImplementer.setPlayerVictoryPoints(0, 1000);
-        gameStateImplementer.setPlayerVictoryPoints(1, 1000);
+        gameStateImplementer.setPlayerVictoryPoints(0, 17);
+        gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
         Card[] diceDiscs1 = {Card.CENTURIO, Card.CENTURIO, Card.CENTURIO, Card.CENTURIO,
                 Card.CENTURIO, Card.CENTURIO, Card.CENTURIO};

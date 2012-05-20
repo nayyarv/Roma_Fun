@@ -412,6 +412,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.ESSEDUM)){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.FORUM)){
+            //TODO: Later
 
         } else if (chosen.equals(Card.GLADIATOR)){
             activator = new Assassin(player);
@@ -430,7 +431,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.NERO)){
             activator = new Assassin(player);
         } else if (chosen.equals(Card.ONAGER)){
-
+            activator = new FighterImpl(player);
         } else if (chosen.equals(Card.PRAETORIANUS)){
             activator = new Assassin(player);
         } else if (chosen.equals(Card.SCAENICUS)){
@@ -444,7 +445,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){
             activator =  new simpleActivator(player);
         } else if (chosen.equals(Card.VELITES)){
-
+            activator = new FighterImpl(player);
         } else {
             throw new UnsupportedOperationException();
         }

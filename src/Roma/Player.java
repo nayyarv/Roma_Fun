@@ -81,6 +81,11 @@ public class Player {
         return currentAction;
     }
 
+    //For use in my MoveMaker
+    public void setCurrentAction(ActionData currentAction) {
+        this.currentAction = currentAction;
+    }
+
     public void setActivationData(ArrayList<Integer> activationData){
         currentAction.setActivationData(activationData);
     }
@@ -513,6 +518,10 @@ public class Player {
         }
     }
 
+    public void performActions(){
+        performActions(currentAction);
+    }
+
     public void layCard(CardHolder chosenCard, int chosenPosition){
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
@@ -600,7 +609,7 @@ public class Player {
 
         PlayerInterface.printOut(PlayerInterface.padRight("Size of Playing Deck: "+
                 playArea.getCardManager().getPlayingSize(), 45), false);
-        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: "+
+        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: " +
                 playArea.getCardManager().getDiscardSize(), 45), true);
 
         String topDiscardName = (topDiscard==null)? "Empty":topDiscard.getName();

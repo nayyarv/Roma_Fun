@@ -106,6 +106,10 @@ public class DiceDiscs {
         }
     }
 
+    public CardHolder getTargetCard(Player player, int position){
+        return activeCards[player.getPlayerID()][position];
+    }
+
     public boolean gatherData(Player player, int position) throws CancelAction {
         int playerID = player.getPlayerID();
         boolean activateEnabled = false;

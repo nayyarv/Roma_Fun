@@ -168,7 +168,7 @@ public class Player {
         final String strPrompt = "Select Option:";
         final String strOption1 = "View action dice";
         final String strOption2 = "View Hand";
-        final String strOption3 = "Show game stats";
+        final String strOption3 = "Show game stats and check description of cards in play";
         final String strOption4 = "End turn";
         final int VIEW_ACTION_DIE = 1;
         final int VIEW_HAND = 2;

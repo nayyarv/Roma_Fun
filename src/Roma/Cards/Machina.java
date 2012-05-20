@@ -60,7 +60,7 @@ public class Machina extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
-        CardHolder[][] activeCardsPrime = diceDiscs.getActiveCards();
+        CardHolder[][] activeCardsPrime = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
         CardHolder card;
         int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
         int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
@@ -76,7 +76,6 @@ public class Machina extends CardBase {
             card = activeCards[player.getPlayerID()][i];
             if (card != null && card.getType().equalsIgnoreCase(Card.BUILDING)) {
                 card.setPlayable(true);
-                activeCardsPrime[player.getPlayerID()][i] = null;
             }
         }
 
@@ -90,7 +89,10 @@ public class Machina extends CardBase {
                 PlayerInterface.printOut("Move to where:", true);
                 toIndex = player.getDiceDiscIndex(activeCardsPrime, false, false);
                 toIndices[i] = toIndex;
+                activeCardsPrime[player.getPlayerID()][fromIndex] = null;
                 activeCardsPrime[player.getPlayerID()][toIndex] = activeCards[player.getPlayerID()][fromIndex];
+                activeCards[player.getPlayerID()][fromIndex].setPlayable(false);
+                PlayerInterface.printOut("New card positions: ", true);
                 player.printDiceDiscs(activeCardsPrime);
                 i++;
             } catch (CancelAction cancelAction) {

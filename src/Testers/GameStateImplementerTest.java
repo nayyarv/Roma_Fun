@@ -84,7 +84,7 @@ public class GameStateImplementerTest extends TestCase {
 
         gameStateImplementer.setPlayerSestertii(1,10020);
         assert (gameStateImplementer.getPlayerSestertii(1)==10020);
-        gameStateImplementer.printStats();
+        gameStateImplementer.isGameCompleted();
         System.out.println("Money functions passed!!!\n");
 
     }
@@ -134,7 +134,7 @@ public class GameStateImplementerTest extends TestCase {
         //discs[6] = Card.NOT_A_CARD;
 
         gameStateImplementer.setPlayerCardsOnDiscs(0, discs);
-        gameStateImplementer.printStats();
+        //gameStateImplementer.printStats();
 
         recievedDiscs = gameStateImplementer.getPlayerCardsOnDiscs(0);
 
@@ -169,7 +169,7 @@ public class GameStateImplementerTest extends TestCase {
         newHand.add(Card.NERO);
 
         gameStateImplementer.setPlayerHand(0, newHand);
-        gameStateImplementer.printCardList(0);
+
 
         System.out.println("PLayer Hand works!!");
     }

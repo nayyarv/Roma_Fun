@@ -333,6 +333,7 @@ public class Player {
     }
 
     public void printHand(){
+        PlayerInterface.printOut("Hand Contents: ", true);
         playerInterface.printCardList(hand);
     }
 
@@ -576,6 +577,53 @@ public class Player {
         return currentAction.getBattleDice();
     }
 
+    public void printStats(String testing){
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Player[] players = playArea.getAllPlayers();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        CardHolder topDiscard = playArea.getCardManager().getTopDiscard();
+
+        int otherID = getOtherPlayerID();
+
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        PlayerInterface.printOut(PlayerInterface.padRight("Turn: "+ playArea.getTurn(), 45), false);
+
+        String name = (topDiscard==null)? "Empty":topDiscard.getName();
+        name = "Last Discard: " + name;
+        PlayerInterface.printOut(PlayerInterface.padLeft(name, 45), true);
+
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        playerInterface.printFormatted("Players",
+                players[playerID].getName(), players[otherID].getName());
+
+        playerInterface.printFormatted("Victory Tokens",
+                victoryTokens.getPlayerTokens(playerID), victoryTokens.getPlayerTokens(otherID));
+
+        playerInterface.printFormatted("Money",
+                moneyManager.getPlayerMoney(playerID), moneyManager.getPlayerMoney(otherID));
+
+        playerInterface.printFormatted("Cards in Hand",
+                players[playerID].handSize(), players[otherID].handSize());
+
+
+
+        //Print's out a nice version of the dice lists
+
+        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
+
+    }
+
+
     public void printStats() {
         final String
                 strPrompt = "Dice Discs:",
@@ -609,6 +657,7 @@ public class Player {
         while(option != CANCEL){
             printDiceDiscs(activeCards);
             option = playerInterface.readInput(strPrompt, true, strOption);
+
             if (option == DESC_OWN){
                 checkDesc(activeCards[playerID]);
             } else if (option == DESC_OPP){

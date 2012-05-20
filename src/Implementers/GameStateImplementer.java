@@ -394,35 +394,13 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public boolean isGameCompleted() {
-        printStats();
-        printCardList(getWhoseTurn());
+
+        //Adding some statistics in the printing
+        Player curr = playArea.getPlayer(getWhoseTurn());
+        curr.printStats("testing");
+        curr.printHand();
         return playArea.isGameOver();
 
-    }
-
-
-    //My printStats function -
-    public void printStats(){
-        Player[] players = playArea.getAllPlayers();
-        MoneyManager moneyManager = playArea.getMoneyManager();
-        VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        PlayerInterface playerInterface = playArea.getPlayerInterface();
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
-            PlayerInterface.printOut("Player: " + players[player].getName(), true);
-            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
-            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
-        }
-
-        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
-        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
-
-
-        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(0));
-        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(1));
-        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
     }
 
     public void printCardList(int playerID){

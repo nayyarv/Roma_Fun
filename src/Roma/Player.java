@@ -492,7 +492,7 @@ public class Player {
         if(card ==null){
             PlayerInterface.printOut("Empty Disc Chosen", true);
         } else if (!card.getPlayable()){
-            PlayerInterface.printOut("Chosen card, "+card.getName()+" is not playable", true);
+            PlayerInterface.printOut("Chosen card, "+card.getName()+" is not a valid target", true);
         } else {
             valid = true;
         }

@@ -40,6 +40,8 @@ public class TestingArchitectus {
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
+        System.err.println("Cards in deck: \n" + gameStateImplementer.getDeck());
+        System.err.println("Cards in discard: \n" + gameStateImplementer.getDiscard());
 
         gameStateImplementer.printStats();
         gameStateImplementer.runGame();

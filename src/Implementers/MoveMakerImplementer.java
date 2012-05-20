@@ -1,15 +1,16 @@
 package Implementers;
 
-import Roma.Dice;
 import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
+
 import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * File Name:
@@ -58,95 +59,6 @@ public class MoveMakerImplementer implements MoveMaker{
     }
 
     /**
-     * Activate the cards disc with the given action die, and choose
-     * to keep the given card.
-     * <p/>
-     * <p>
-     * After this method is called:
-     * <ul>
-     * <li>the appropriate number of cards will be removed from the
-     * deck</li>
-     * <li>an instance of the card given will be in the player's
-     * hand</li>
-     * <li>the other cards removed from the deck will be present at the
-     * top of the discard pile in unspecified order</li>
-     * <li>the appropriate action die will have been used</li>
-     * </ul>
-     * </p>
-     * <p/>
-     * <p/>
-     * This will never be called if:
-     * <ul>
-     * <li>if the user does not have an unused action die of the given
-     * value</li>
-     * <li>the cards drawn from the deck do not include the given
-     * card</li>
-     * </ul>
-     *
-     * @param diceToUse which value dice to use to activate the disc
-     * @param chosen    which card to keep from the group drawn from the
-     *                  deck
-     * @throws UnsupportedOperationException if the move is not yet
-     *                                       implemented
-     */
-    @Override
-    public void activateCardsDisc(int diceToUse, Card chosen) throws UnsupportedOperationException {
-        //Todo:
-    }
-
-    /**
-     * Activate the Money Disc with the given action die.
-     * <p/>
-     * <p>
-     * After this method is called:
-     * <ul>
-     * <li>the appropriate action die will have been used</li>
-     * <li>the correct amount of sestertii will have been added to the
-     * player's Sestertii</li>
-     * </ul>
-     * </p>
-     * <p/>
-     * <p/>
-     * This will never be called if:
-     * <ul>
-     * <li>if the user does not have an unused action die of the given
-     * value</li>
-     * </ul>
-     *
-     * @param diceToUse which value dice to activate the disc with
-     * @throws UnsupportedOperationException if the move is not yet
-     *                                       implemented
-     */
-    @Override
-    public void activateMoneyDisc(int diceToUse) throws UnsupportedOperationException {
-        int chosenDieIndex = diceReqdIndex(diceToUse);
-        Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
-        ActionData currentAction = new ActionData(gameState.getWhoseTurn());
-
-
-        assert (currentAction!=null); //World's worst warning lol
-                                      //Not really, if you're out of RAM it will be null lol
-
-        //We're using a dice
-        currentAction.setUseDice(true);
-
-        //Set the dice data
-        currentAction.setActionDiceIndex(chosenDieIndex);
-        currentAction.setDiceValue(diceToUse);
-
-        //Set the target
-        currentAction.setDiscType(ActionData.MONEY);
-
-        //Ensure that we can make the action
-        //Necessary?
-        currentAction.setCommit(true);
-        currPlayer.performActions(currentAction);
-
-
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    /**
      * Activate the Bribe Disc with the given action die.
      * <p/>
      * <p>
@@ -179,33 +91,6 @@ public class MoveMakerImplementer implements MoveMaker{
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    /**
-     * End the turn of the current player.
-     * <p/>
-     * <p>
-     * After this method is called:
-     * <ul>
-     * <li>The old next player is now the current player</li>
-     * <li>the appropriate number of dice will have been rolled</li>
-     * <li>the appropriate number of victory points will have been
-     * removed for vacant dice discs</li>
-     * </ul>
-     * </p>
-     * <p/>
-     * <p>
-     * There are no restrictions on the calling of this method.
-     * </p>
-     *
-     * @throws UnsupportedOperationException if the move is not yet
-     *                                       implemented
-     */
-    @Override
-    public void endTurn() throws UnsupportedOperationException {
-
-
-        int nextPlayer = (gameState.getWhoseTurn()+1)%2;
-        playArea.startTurnPhase(playArea.getPlayer(nextPlayer));
-    }
 
     /**
      * Place a card from the current player's hand on to the selected
@@ -242,8 +127,188 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void placeCard(Card toPlace, int discToPlaceOn) throws UnsupportedOperationException {
+        int currPlayer = gameState.getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        ActionData currentAction = new ActionData(currPlayer);
+
+        //TODO:         transferNextToThis();
+
+        int chosenCardIndex = handIndex(toPlace);
+
+        //Set action we are making
+        currentAction.setLayCard(true);
+
+        //Which card are we choosing?
+        currentAction.setCardIndex(chosenCardIndex);
+
+        //Which disc
+        currentAction.setTargetDisc(discToPlaceOn);
+
+        //
+        player.performActions(currentAction);
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
+
+
+    }
+
+
+    /**
+     * Activate the cards disc with the given action die, and choose
+     * to keep the given card.
+     * <p/>
+     * <p>
+     * After this method is called:
+     * <ul>
+     * <li>the appropriate number of cards will be removed from the
+     * deck</li>
+     * <li>an instance of the card given will be in the player's
+     * hand</li>
+     * <li>the other cards removed from the deck will be present at the
+     * top of the discard pile in unspecified order</li>
+     * <li>the appropriate action die will have been used</li>
+     * </ul>
+     * </p>
+     * <p/>
+     * <p/>
+     * This will never be called if:
+     * <ul>
+     * <li>if the user does not have an unused action die of the given
+     * value</li>
+     * <li>the cards drawn from the deck do not include the given
+     * card</li>
+     * </ul>
+     *
+     * @param diceToUse which value dice to use to activate the disc
+     * @param chosen    which card to keep from the group drawn from the
+     *                  deck
+     * @throws UnsupportedOperationException if the move is not yet
+     *                                       implemented
+     */
+    @Override
+    public void activateCardsDisc(int diceToUse, Card chosen) throws UnsupportedOperationException {
+        int chosenDieIndex = diceReqdIndex(diceToUse);
+        Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
+        ActionData currentAction = new ActionData(currPlayer.getPlayerID());
+
+        //TODO:         transferNextToThis();
+        currentAction.setUseDice(true);
+
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(diceToUse);
+
+
+        currentAction.setDiscType(ActionData.CARD);
+
+        // Now find the cardIndex of card chosen
+
+        int cardIndex = cardIndex(chosen,diceToUse);
+
+        currentAction.setDrawCardIndex(cardIndex);
+
+        currentAction.setCommit(true);
+        currPlayer.performActions(currentAction);
+
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
+
+
+    }
+
+    /**
+     * Activate the Money Disc with the given action die.
+     * <p/>
+     * <p>
+     * After this method is called:
+     * <ul>
+     * <li>the appropriate action die will have been used</li>
+     * <li>the correct amount of sestertii will have been added to the
+     * player's Sestertii</li>
+     * </ul>
+     * </p>
+     * <p/>
+     * <p/>
+     * This will never be called if:
+     * <ul>
+     * <li>if the user does not have an unused action die of the given
+     * value</li>
+     * </ul>
+     *
+     * @param diceToUse which value dice to activate the disc with
+     * @throws UnsupportedOperationException if the move is not yet
+     *                                       implemented
+     */
+    @Override
+    public void activateMoneyDisc(int diceToUse) throws UnsupportedOperationException {
+        int chosenDieIndex = diceReqdIndex(diceToUse);
+        Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
+        ActionData currentAction = new ActionData(gameState.getWhoseTurn());
+        //as the creation is not done in PlayArea - i have to create my own
+
+        assert (currentAction!=null); //World's worst warning lol
+                                      //Not really, if you're out of RAM it will be null lol
+
+        //TODO:         transferNextToThis();
+
+        //We're using a dice
+        currentAction.setUseDice(true);
+
+        //Set the dice data
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(diceToUse);
+
+        //Set the target
+        currentAction.setDiscType(ActionData.MONEY);
+
+        //Ensure that we can make the action
+        //Necessary?
+        currentAction.setCommit(true);
+        currPlayer.performActions(currentAction);
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
+
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+
+    /**
+     * End the turn of the current player.
+     * <p/>
+     * <p>
+     * After this method is called:
+     * <ul>
+     * <li>The old next player is now the current player</li>
+     * <li>the appropriate number of dice will have been rolled</li>
+     * <li>the appropriate number of victory points will have been
+     * removed for vacant dice discs</li>
+     * </ul>
+     * </p>
+     * <p/>
+     * <p>
+     * There are no restrictions on the calling of this method.
+     * </p>
+     *
+     * @throws UnsupportedOperationException if the move is not yet
+     *                                       implemented
+     */
+    @Override
+    public void endTurn() throws UnsupportedOperationException {
+        //TODO: clearEndTurnWrappers();
+
+        int nextPlayer = (gameState.getWhoseTurn()+1)%2;
+        gameState.setWhoseTurn(nextPlayer);
+        playArea.startTurnPhase(playArea.getPlayer(nextPlayer));
+
+
+    }
+
+    //TODO:Can i just throw unsupported operationException
+    //TODO: Opinion Andrew?
+    //TODO:
+    //TODO:
 
     //Get's the index required
     private int diceReqdIndex(int diceToUse)throws UnsupportedOperationException{
@@ -253,6 +318,36 @@ public class MoveMakerImplementer implements MoveMaker{
             if(dice[i]==diceToUse) return i;
         }
         //we didn't find the dice - so i throw unsupported Operation
+        throw new UnsupportedOperationException();
+    }
+
+    private int cardIndex(Card chosen, int maxVal) throws UnsupportedOperationException{
+        List<Card> deck = gameState.getDeck();
+        for (int i = 0; i<maxVal;i++){
+            if (chosen.toString().equalsIgnoreCase(deck.get(i).toString())){
+                return i;
+            }
+        }
+        //Not found
+        throw new UnsupportedOperationException();
+    }
+
+    private int handIndex(Card chosen) throws UnsupportedOperationException{
+        Collection<Card> hand = gameState.getPlayerHand(gameState.getWhoseTurn());
+        int i = 0;
+        for (Card card: hand){
+            if(card.toString().equalsIgnoreCase(chosen.toString())){
+                return i;
+            }
+            i++;
+        }
+        //haven't found the card
+        throw new UnsupportedOperationException();
+    }
+
+
+    //Should I use this instead?
+    private void invalidAction() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 }

@@ -150,6 +150,15 @@ public class CardManager {
 
     }
 
+    public CardHolder getTopDiscard(){
+        if (discardPile.isEmpty()){
+            return null;
+        } else {
+            return discardPile.get(0);
+        }
+
+    }
+
     public ArrayList<CardHolder> getDiscardPile() {
         return discardPile;
     }

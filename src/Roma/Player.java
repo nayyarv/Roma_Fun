@@ -81,6 +81,11 @@ public class Player {
         return currentAction;
     }
 
+    //For use in my MoveMaker
+    public void setCurrentAction(ActionData currentAction) {
+        this.currentAction = currentAction;
+    }
+
     public void setActivationData(ArrayList<Integer> activationData){
         currentAction.setActivationData(activationData);
     }
@@ -492,7 +497,7 @@ public class Player {
         if(card ==null){
             PlayerInterface.printOut("Empty Disc Chosen", true);
         } else if (!card.getPlayable()){
-            PlayerInterface.printOut("Chosen card, "+card.getName()+" is not a valid target", true);
+            PlayerInterface.printOut("Chosen card, "+card.getName()+" is not playable", true);
         } else {
             valid = true;
         }
@@ -511,6 +516,10 @@ public class Player {
             System.err.println("WTF action data error!");
             assert(false);
         }
+    }
+
+    public void performActions(){
+        performActions(currentAction);
     }
 
     public void layCard(CardHolder chosenCard, int chosenPosition){
@@ -600,7 +609,7 @@ public class Player {
 
         PlayerInterface.printOut(PlayerInterface.padRight("Size of Playing Deck: "+
                 playArea.getCardManager().getPlayingSize(), 45), false);
-        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: "+
+        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: " +
                 playArea.getCardManager().getDiscardSize(), 45), true);
 
         String topDiscardName = (topDiscard==null)? "Empty":topDiscard.getName();

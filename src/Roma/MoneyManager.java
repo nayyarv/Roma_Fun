@@ -21,7 +21,7 @@ public class MoneyManager {
     }
 
     public void loseMoney(int playerID, int amount) {
-        assert (playerMoney[playerID] > amount);
+        assert (playerMoney[playerID] >= amount);
         playerMoney[playerID] -= amount;
     }
 

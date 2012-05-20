@@ -1,5 +1,10 @@
 package Implementers;
 
+import Implementers.ImplementedActivators.MercatorActivatorImpl;
+import Implementers.ImplementedActivators.dummyActivator;
+import Implementers.ImplementedActivators.simpleActivator;
+import Roma.Cards.CardHolder;
+import Roma.DiceDiscs;
 import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
@@ -8,6 +13,7 @@ import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
+import framework.interfaces.activators.SicariusActivator;
 
 import java.util.Collection;
 import java.util.List;
@@ -54,7 +60,11 @@ public class MoveMakerImplementer implements MoveMaker{
     @Override
     public CardActivator chooseCardToActivate(int disc) throws UnsupportedOperationException {
         int currPlayer = gameState.getWhoseTurn();
+        int discIndex = disc-1;
         Player player = playArea.getPlayer(currPlayer);
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+
+
         ActionData currentAction = new ActionData(currPlayer);
 
         int chosenDieIndex = diceReqdIndex(disc);
@@ -66,7 +76,22 @@ public class MoveMakerImplementer implements MoveMaker{
 
 
 
-        return null;
+        CardHolder target = diceDiscs.getTargetCard(currPlayer, discIndex);
+        Card chosen = gameState.getPlayerCardsOnDiscs(currPlayer)[discIndex];
+
+        assert (target!=null);
+
+
+        if(target.isActivateEnabled()){
+            currentAction.setPosition(discIndex);
+            currentAction.setDiscType(ActionData.DICE);
+            currentAction.setCardName(target.getName());
+            player.setCurrentAction(currentAction);
+
+            return getCorrectActivator(chosen, player);
+        } else {
+            return new dummyActivator();
+        }
     }
 
     /**
@@ -149,11 +174,13 @@ public class MoveMakerImplementer implements MoveMaker{
         //Set action we are making
         currentAction.setLayCard(true);
 
+
+
         //Which card are we choosing?
         currentAction.setCardIndex(chosenCardIndex);
 
         //Which disc
-        currentAction.setTargetDisc(discToPlaceOn);
+        currentAction.setTargetDisc(discToPlaceOn-1);
 
         //
         player.performActions(currentAction);
@@ -356,9 +383,64 @@ public class MoveMakerImplementer implements MoveMaker{
         throw new UnsupportedOperationException();
     }
 
-
     //Should I use this instead?
     private void invalidAction() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
+    }
+
+    private CardActivator getCorrectActivator(Card chosen, Player player){
+        CardActivator correct = new dummyActivator();
+        if (chosen.equals(Card.AESCULAPINUM)){
+
+        } else if (chosen.equals(Card.ARCHITECTUS)){
+
+        } else if (chosen.equals(Card.CENTURIO)){
+
+        } else if (chosen.equals(Card.CONSILIARIUS)){
+
+        } else if (chosen.equals(Card.CONSUL)){
+
+        } else if (chosen.equals(Card.ESSEDUM)){
+            correct = new simpleActivator(player);
+        } else if (chosen.equals(Card.FORUM)){
+
+        } else if (chosen.equals(Card.GLADIATOR)){
+
+        } else if (chosen.equals(Card.HARUSPEX)){
+
+        } else if (chosen.equals(Card.LEGAT) ){
+            correct = new simpleActivator(player);
+        } else if (chosen.equals(Card.LEGIONARIUS)){
+
+        } else if (chosen.equals(Card.MACHINA)){
+
+        } else if (chosen.equals(Card.MERCATOR)){
+            correct = new MercatorActivatorImpl(player);
+        } else if (chosen.equals(Card.MERCATUS)){
+            correct = new simpleActivator(player);
+        } else if (chosen.equals(Card.NERO)){
+
+        } else if (chosen.equals(Card.NERO)){
+
+        } else if (chosen.equals(Card.ONAGER)){
+
+        } else if (chosen.equals(Card.PRAETORIANUS)){
+
+        } else if (chosen.equals(Card.SCAENICUS)){
+
+        } else if (chosen.equals(Card.SENATOR)){
+
+        } else if (chosen.equals(Card.SICARIUS)){
+
+        } else if (chosen.equals(Card.TELEPHONEBOX)){
+
+        } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){
+            correct =  new simpleActivator(player);
+        } else if (chosen.equals(Card.VELITES)){
+
+        } else {
+            throw new UnsupportedOperationException();
+        }
+        return correct;
     }
 }

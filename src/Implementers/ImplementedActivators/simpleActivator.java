@@ -1,6 +1,10 @@
 package Implementers.ImplementedActivators;
 
 import Roma.Cards.CardHolder;
+import Roma.Player;
+import framework.interfaces.activators.CardActivator;
+import framework.interfaces.activators.EssedumActivator;
+import framework.interfaces.activators.LegatActivator;
 import framework.interfaces.activators.TribunusPlebisActivator;
 
 /**
@@ -9,7 +13,9 @@ import framework.interfaces.activators.TribunusPlebisActivator;
  * Date: 20/05/12
  * Desc:
  */
-public class TribunusPlebisActivatorImpl implements TribunusPlebisActivator {
+public class simpleActivator implements
+        CardActivator
+{
     /**
      * Mark the pending activation as complete.
      * <p/>
@@ -21,14 +27,17 @@ public class TribunusPlebisActivatorImpl implements TribunusPlebisActivator {
      * complete method is called. This is really important.
      * </p>
      */
-    CardHolder tribunusPlebis;
+    Player player;
 
-    public TribunusPlebisActivatorImpl(CardHolder tribunusPlebis) {
-        this.tribunusPlebis = tribunusPlebis;
+    public simpleActivator(Player player) {
+        this.player = player;
     }
 
     @Override
     public void complete() {
+        player.performActions();
 
     }
+
+
 }

@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * Desc:
  */
 
-//TODO: implement test
-
 public class TestingMachina {
 
     public static void main(String []args){

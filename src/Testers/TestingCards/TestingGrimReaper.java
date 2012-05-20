@@ -29,6 +29,9 @@ public class TestingGrimReaper {
         int[] num = {1,1,1};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
+        gameStateImplementer.setPlayerSestertii(1, 1000);
+        gameStateImplementer.setPlayerVictoryPoints(0, 1000);
+        gameStateImplementer.setPlayerVictoryPoints(1, 1000);
 
         Card[] diceDiscs1 = {Card.CENTURIO, Card.CENTURIO, Card.CENTURIO, Card.CENTURIO,
                 Card.CENTURIO, Card.CENTURIO, Card.CENTURIO};

@@ -36,11 +36,11 @@ public class TestingMercatus {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
+        Card[] diceDiscs1 = {Card.MERCATUS, Card.NERO, Card.NERO, Card.NERO,
                 Card.NERO, Card.NERO, Card.NERO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
-                Card.CONSUL, Card.CONSUL, Card.SICARIUS};
+        Card[] diceDiscs2 = {Card.KAT, Card.FORUM, Card.FORUM, Card.FORUM,
+                Card.FORUM, Card.FORUM, Card.FORUM};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
         gameStateImplementer.isGameCompleted();

@@ -57,7 +57,17 @@ public class Mercatus extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        PlayerInterface.printOut("Get a victory token from your opponent for every Forum he has in play", true);
+        int targetPlayerID = player.getOtherPlayerID();
+        CardHolder[] enemyCards = playArea.getDiceDiscs().getPlayerActives(targetPlayerID);
+        int forumCount = 0;
+
+        for (CardHolder card : enemyCards) {
+            if (card != null && (card.getName().equalsIgnoreCase(Forum.NAME))) {
+                forumCount++;
+            }
+        }
+        PlayerInterface.printOut("Get a victory token from your opponent for every Forum they have in play", true);
+        PlayerInterface.printOut("Your opponent has " + forumCount + " forums", true);
         player.commit();
     }
 

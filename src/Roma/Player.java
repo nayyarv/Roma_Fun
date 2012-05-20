@@ -46,8 +46,6 @@ public class Player {
         playerInterface = playArea.getPlayerInterface();
         this.name = "dummyPlayer" + playerID;
     }
-
-
     //Simple Getters
 
     public String getName() {
@@ -138,26 +136,28 @@ public class Player {
         boolean validChoice = false;
         int option = CANCEL;
 
-        if (!presets) freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
-        playerInterface.printDiceList(freeDice);
+        if (!presets) {
+            freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
+            playerInterface.printDiceList(freeDice);
 
-        if(playArea.getDiceHolder().checkTriple(playerID)){
-            while(!validChoice){
-                option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
-                        false, "Yes",
-                        "No");
-                if(option == YES){
-                    reroll = true;
-                    validChoice = true;
-                } else if (option == NO){
-                    reroll = false;
-                    validChoice = true;
-                } else {
-                    PlayerInterface.printOut("Please choose either yes or no.", true);
+            if(playArea.getDiceHolder().checkTriple(playerID)){
+                while(!validChoice){
+                    option = playerInterface.readInput("You rolled a triple, would you like to reroll?",
+                            false, "Yes",
+                            "No");
+                    if(option == YES){
+                        reroll = true;
+                        validChoice = true;
+                    } else if (option == NO){
+                        reroll = false;
+                        validChoice = true;
+                    } else {
+                        PlayerInterface.printOut("Please choose either yes or no.", true);
+                    }
                 }
-            }
-            if(reroll){
-                rollActionDice();
+                if(reroll){
+                    rollActionDice();
+                }
             }
         }
     }

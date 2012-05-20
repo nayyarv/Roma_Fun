@@ -394,10 +394,14 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public boolean isGameCompleted() {
+        printStats();
+        printCardList(getWhoseTurn());
         return playArea.isGameOver();
 
     }
 
+
+    //My printStats function -
     public void printStats(){
         Player[] players = playArea.getAllPlayers();
         MoneyManager moneyManager = playArea.getMoneyManager();
@@ -478,6 +482,7 @@ public class GameStateImplementer implements GameState{
         return convertToCardHolderList(cardList);
     }
 
+    //For manual testing of scenarios
     public void runGame(){
         playArea.runGame();
     }

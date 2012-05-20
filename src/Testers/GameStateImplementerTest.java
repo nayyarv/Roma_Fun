@@ -113,7 +113,7 @@ public class GameStateImplementerTest extends TestCase {
 
 
     public void testPlayerCardsOnDiscs() throws Exception {
-        System.out.println("Testing Victory Points");
+        System.out.println("Testing Player Cards on Dicsc");
         Card[] discs = new Card[Rules.NUM_DICE_DISCS];
         for(int i =0; i<Rules.NUM_DICE_DISCS;i++){
             discs[i]=Card.NOT_A_CARD;
@@ -130,7 +130,8 @@ public class GameStateImplementerTest extends TestCase {
         discs[3] = Card.AESCULAPINUM;
         discs[4] = Card.TEMPLUM;
         discs[5] = Card.CONSUL;
-        discs[6] = Card.NOT_A_CARD;
+        discs[6] = Card.PRAETORIANUS;
+        //discs[6] = Card.NOT_A_CARD;
 
         gameStateImplementer.setPlayerCardsOnDiscs(0, discs);
         gameStateImplementer.printStats();

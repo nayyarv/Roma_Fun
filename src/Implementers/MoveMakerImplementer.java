@@ -1,9 +1,15 @@
 package Implementers;
 
+import Roma.Dice;
+import Roma.History.ActionData;
+import Roma.PlayArea;
+import Roma.Player;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
+
+import java.util.ArrayList;
 
 /**
  * File Name:
@@ -14,9 +20,12 @@ import framework.interfaces.activators.CardActivator;
 public class MoveMakerImplementer implements MoveMaker{
 
     GameState gameState;
+    PlayArea playArea;
 
-    public MoveMakerImplementer(GameState state) {
+
+    public MoveMakerImplementer(GameState state, PlayArea playArea) {
         gameState = state;
+        this.playArea = playArea;
     }
 
     /**
@@ -37,13 +46,13 @@ public class MoveMakerImplementer implements MoveMaker{
      * </p>
      *
      * @param disc       the disc where the card to be activated is
-     * @param parameters the ActivateData needed by that specific card
+     //* @param ActivateData needed by that specific card
      * @throws UnsupportedOperationException if the move is not yet
      *                                       implemented
      */
     @Override
     public CardActivator chooseCardToActivate(int disc) throws UnsupportedOperationException {
-        int currPlayer = gameState.getWhoseTurn();
+        //TODO: FML todo :'(
 
         return null;
     }
@@ -110,6 +119,29 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void activateMoneyDisc(int diceToUse) throws UnsupportedOperationException {
+        int chosenDieIndex = diceReqdIndex(diceToUse);
+        Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
+        ActionData currentAction = new ActionData(gameState.getWhoseTurn());
+
+
+        assert (currentAction!=null); //World's worst warning lol
+
+        //We're using a dice
+        currentAction.setUseDice(true);
+
+        //Set the dice data
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(diceToUse);
+
+        //Set the target
+        currentAction.setDiscType(ActionData.MONEY);
+
+        //Ensure that we can make the action
+        //Necessary?
+        currentAction.setCommit(true);
+        currPlayer.performActions(currentAction);
+
+
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -168,7 +200,10 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void endTurn() throws UnsupportedOperationException {
-        //To change body of implemented methods use File | Settings | File Templates.
+
+
+        int nextPlayer = (gameState.getWhoseTurn()+1)%2;
+        playArea.startTurnPhase(playArea.getPlayer(nextPlayer));
     }
 
     /**
@@ -207,5 +242,16 @@ public class MoveMakerImplementer implements MoveMaker{
     @Override
     public void placeCard(Card toPlace, int discToPlaceOn) throws UnsupportedOperationException {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    //Get's the index required
+    private int diceReqdIndex(int diceToUse)throws UnsupportedOperationException{
+        int currPlayer = gameState.getWhoseTurn();
+        int [] dice = gameState.getActionDice();
+        for (int i=0; i<dice.length;i++){
+            if(dice[i]==diceToUse) return i;
+        }
+        //we didn't find the dice - so i throw unsupported Operation
+        throw new UnsupportedOperationException();
     }
 }

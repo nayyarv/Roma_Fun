@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * Desc:
  */
 
-//TODO: implement test
-
 public class TestingLegat {
 
     public static void main(String []args){
@@ -29,7 +27,7 @@ public class TestingLegat {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,2,1};
+        int[] num = {1,2,3};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);

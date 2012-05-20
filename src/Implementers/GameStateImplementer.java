@@ -70,7 +70,6 @@ public class GameStateImplementer implements GameState{
         if(getWhoseTurn()!=player){
             playArea.setTurn(player);
         }
-
     }
 
     /**

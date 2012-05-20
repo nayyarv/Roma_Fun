@@ -57,12 +57,10 @@ public class Turris extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        System.err.println("Turris being activated somehow!");
     }
 
     @Override
     public void activate(Player player, int position) {
-        System.err.println("Turris being activated somehow!");
     }
 
     @Override

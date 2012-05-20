@@ -83,11 +83,12 @@ public class Nero extends CardBase {
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[] playerActives = diceDiscs.getPlayerActives(player.getPlayerID());
         int targetPlayerID = player.getOtherPlayerID();
         ArrayList<Integer> activationData = player.getActivationData();
         int targetIndex = activationData.remove(0);
 
         diceDiscs.discardTarget(targetPlayerID, targetIndex);
-        diceDiscs.discardTarget(player.getPlayerID(), position);
+        playerActives[position].goingToDiscard(player.getPlayerID(), targetIndex);
     }
 }

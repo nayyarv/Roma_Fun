@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * Desc:
  */
 
-//TODO: implement test
-
 public class TestingScaenicus {
 
     public static void main(String []args){
@@ -36,8 +34,8 @@ public class TestingScaenicus {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
-                Card.NERO, Card.NERO, Card.NERO};
+        Card[] diceDiscs1 = {Card.SCAENICUS, Card.SICARIUS, Card.NERO, Card.VELITES,
+                Card.LEGIONARIUS, Card.LEGAT, Card.GRIMREAPER};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};

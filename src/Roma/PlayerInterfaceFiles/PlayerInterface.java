@@ -13,7 +13,8 @@ import java.util.ArrayList;
  */
 
 public abstract class PlayerInterface {
-    public static final String BREAK_LINE = "-------------------------------------";
+    public static final String BREAK_LINE = "-------------------------------------" +
+            "-----------------------------------------------------";
 
     public final static int CANCEL = -1;
 
@@ -65,5 +66,6 @@ public abstract class PlayerInterface {
     //Keeps reading till valid input is recieved
     public abstract int getIntegerInput(int... range);
 
-    public abstract void printFormatted(String centrePrompt, String... toDisplay);
+
+    public abstract void printFormatted(String centrePrompt, Object... toDisplay);
 }

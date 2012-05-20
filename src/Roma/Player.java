@@ -333,6 +333,7 @@ public class Player {
     }
 
     public void printHand(){
+        PlayerInterface.printOut("Hand Contents: ", true);
         playerInterface.printCardList(hand);
     }
 
@@ -598,16 +599,31 @@ public class Player {
         Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
         Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
 
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            PlayerInterface.printOut(BREAK_LINE, true);
-            PlayerInterface.printOut("Player: " + players[player].getName(), true);
-            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
-            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
 
-        }
+        PlayerInterface.printOut(PlayerInterface.padRight("Turn: "+ playArea.getTurn(), 45), false);
+
         String name = (topDiscard==null)? "Empty":topDiscard.getName();
-        PlayerInterface.printOut("Top Card in Discard: "+ name, true);
+        name = "Last Discard: " + name;
+        PlayerInterface.printOut(PlayerInterface.padLeft(name, 45), true);
+
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        playerInterface.printFormatted("Players",
+                players[playerID].getName(), players[otherID].getName());
+
+        playerInterface.printFormatted("Victory Tokens",
+                victoryTokens.getPlayerTokens(playerID), victoryTokens.getPlayerTokens(otherID));
+
+        playerInterface.printFormatted("Money",
+                moneyManager.getPlayerMoney(playerID), moneyManager.getPlayerMoney(otherID));
+
+        playerInterface.printFormatted("Cards in Hand",
+                players[playerID].handSize(), players[otherID].handSize());
+
+
+
         //Print's out a nice version of the dice lists
 
         playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
@@ -640,14 +656,6 @@ public class Player {
         Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
 
 
-        StringBuilder
-                playerNames,
-                victoryTokenAmount,
-                moneyAmount,
-                numCards;
-
-
-
 //        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
 //            PlayerInterface.printOut(BREAK_LINE, true);
 //
@@ -657,6 +665,24 @@ public class Player {
 //            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
 //
 //        }
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        String name = (topDiscard==null)? "Empty":topDiscard.getName();
+        PlayerInterface.printOut("Last Discard: "+name, true);
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        playerInterface.printFormatted("Players",
+                players[playerID].getName(), players[otherID].getName());
+
+        playerInterface.printFormatted("Victory Tokens",
+                victoryTokens.getPlayerTokens(playerID), victoryTokens.getPlayerTokens(otherID));
+
+        playerInterface.printFormatted("Money",
+                moneyManager.getPlayerMoney(playerID), moneyManager.getPlayerMoney(otherID));
+
+        playerInterface.printFormatted("Cards in Hand",
+                players[playerID].handSize(), players[otherID].handSize());
 
 
         PlayerInterface.printOut("Top Card in Discard: "+ topDiscard.getName(), true);

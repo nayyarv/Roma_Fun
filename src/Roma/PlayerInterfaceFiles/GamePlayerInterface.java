@@ -57,7 +57,7 @@ public class GamePlayerInterface extends PlayerInterface {
     }
 
     private void printLine(){
-        printOut("-------------------------------------", true);
+        printOut(BREAK_LINE, true);
     }
 
     private boolean checkIntegerInBounds(int input, int ... range) {
@@ -144,7 +144,7 @@ public class GamePlayerInterface extends PlayerInterface {
     @Override
     public void printCardList(ArrayList<CardHolder> cardList){
         int i = 1;
-        printLine();
+
         for(CardHolder card : cardList){
             PlayerInterface.printOut(i + ") " + card.getName(), true);
             i++;
@@ -152,23 +152,18 @@ public class GamePlayerInterface extends PlayerInterface {
     }
 
     @Override
-    public void printFormatted(String centrePrompt, String ... toDisplay){
+    public void printFormatted(String centrePrompt, Object ... toDisplay){
         assert (toDisplay.length==2);
         printOut(
-                padLeft(toDisplay[0], COLUMN_ONE_WIDTH) + " | "
+                padLeft(toDisplay[0].toString(), COLUMN_ONE_WIDTH) + " | "
                 + padCentre(centrePrompt, COLUMN_TWO_WIDTH) + " | "
-                + padRight(toDisplay[1], COLUMN_THREE_WIDTH), true);
+                + padRight(toDisplay[1].toString(), COLUMN_THREE_WIDTH), true);
     }
 
     @Override
     public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
                                        boolean filterCurr, boolean filterOther){
         String discNumber;
-
-        PlayerInterface.printOut(BREAK_LINE, true);
-        printOut(padCentre("Current Player", COLUMN_ONE_WIDTH) + " | "
-                + padCentre("Dice Discs", COLUMN_TWO_WIDTH) + " | "
-                + padCentre("Opposing Player", COLUMN_THREE_WIDTH), true);
 
         String curr;
         String opp;

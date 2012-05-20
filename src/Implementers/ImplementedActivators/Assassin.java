@@ -1,6 +1,7 @@
 package Implementers.ImplementedActivators;
 
 import Roma.Player;
+import framework.interfaces.activators.CardActivator;
 import framework.interfaces.activators.Targeted;
 
 /**
@@ -9,11 +10,30 @@ import framework.interfaces.activators.Targeted;
  * Date: 21/05/12
  * Desc:
  */
-public class Assassin extends simpleActivator implements Targeted {
+public class Assassin implements Targeted, CardActivator {
 
+    Player player;
 
     public Assassin(Player player) {
-        super(player);
+        this.player = player;
+    }
+
+
+
+    /**
+     * Mark the pending activation as complete.
+     * <p/>
+     * <p>
+     * This method must be called when an activation is complete.
+     * This method cannot be called until all required activation
+     * methods have been called. No other methods in the move maker can
+     * be called after a CardActivator has been received until after its
+     * complete method is called. This is really important.
+     * </p>
+     */
+    @Override
+    public void complete() {
+        player.performActions();
     }
 
     /**
@@ -28,6 +48,7 @@ public class Assassin extends simpleActivator implements Targeted {
      */
     @Override
     public void chooseDiceDisc(int diceDisc) {
+        //Do i need to set playable?
         player.getActivationData().add(diceDisc-1);
 
     }

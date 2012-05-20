@@ -225,14 +225,14 @@ public class PlayArea {
         endNextTurnList.clear();
     }
 
-    private void clearEndTurnWrappers() {
+    public void clearEndTurnWrappers() {
         for(Wrapper wrapper : endTurnList){
             wrapper.deleteThisWrapper();
         }
         endTurnList.clear();
     }
 
-    private void clearEndActionWrappers(){
+    public void clearEndActionWrappers(){
         for(Wrapper wrapper : endActionList){
             wrapper.deleteThisWrapper();
         }

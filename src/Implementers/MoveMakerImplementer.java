@@ -1,9 +1,6 @@
 package Implementers;
 
-import Implementers.ImplementedActivators.ConsulActivatorImpl;
-import Implementers.ImplementedActivators.MercatorActivatorImpl;
-import Implementers.ImplementedActivators.dummyActivator;
-import Implementers.ImplementedActivators.simpleActivator;
+import Implementers.ImplementedActivators.*;
 import Roma.Cards.CardHolder;
 import Roma.DiceDiscs;
 import Roma.History.ActionData;
@@ -29,6 +26,13 @@ public class MoveMakerImplementer implements MoveMaker{
 
     GameState gameState;
     PlayArea playArea;
+
+    private void setUp(){
+        //TODO: check this
+        playArea.clearEndActionWrappers();
+        playArea.resetAllPlayable();
+        playArea.transferNextToThis();
+    }
 
 
     public MoveMakerImplementer(GameState state, PlayArea playArea) {
@@ -65,6 +69,7 @@ public class MoveMakerImplementer implements MoveMaker{
         Player player = playArea.getPlayer(currPlayer);
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
 
+        setUp();
 
         ActionData currentAction = new ActionData(currPlayer);
 
@@ -168,7 +173,8 @@ public class MoveMakerImplementer implements MoveMaker{
         Player player = playArea.getPlayer(currPlayer);
         ActionData currentAction = new ActionData(currPlayer);
 
-        //TODO:         transferNextToThis();
+        setUp();
+
 
         int chosenCardIndex = handIndex(toPlace);
 
@@ -186,8 +192,7 @@ public class MoveMakerImplementer implements MoveMaker{
         //
         player.performActions(currentAction);
 
-        //TODO:clearEndActionWrappers();
-        //TODO: resetAllPlayable()
+
 
 
     }
@@ -231,7 +236,8 @@ public class MoveMakerImplementer implements MoveMaker{
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
         ActionData currentAction = new ActionData(currPlayer.getPlayerID());
 
-        //TODO:         transferNextToThis();
+        setUp();
+
         currentAction.setUseDice(true);
 
         currentAction.setActionDiceIndex(chosenDieIndex);
@@ -252,6 +258,7 @@ public class MoveMakerImplementer implements MoveMaker{
 
         //TODO:clearEndActionWrappers();
         //TODO: resetAllPlayable()
+
 
 
     }
@@ -285,6 +292,7 @@ public class MoveMakerImplementer implements MoveMaker{
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
         ActionData currentAction = new ActionData(gameState.getWhoseTurn());
         //as the creation is not done in PlayArea - i have to create my own
+        setUp();
 
         assert (currentAction!=null); //World's worst warning lol
                                       //Not really, if you're out of RAM it will be null lol
@@ -308,6 +316,7 @@ public class MoveMakerImplementer implements MoveMaker{
 
         //TODO:clearEndActionWrappers();
         //TODO: resetAllPlayable()
+
 
         //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -335,7 +344,7 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void endTurn() throws UnsupportedOperationException {
-        //TODO: clearEndTurnWrappers();
+        playArea.clearEndTurnWrappers();
 
         int nextPlayer = (gameState.getWhoseTurn()+1)%2;
         gameState.setWhoseTurn(nextPlayer);
@@ -420,9 +429,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.MERCATUS)){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.NERO)){
-
-        } else if (chosen.equals(Card.NERO)){
-
+            activator = new NeroActivatorImpl(player);
         } else if (chosen.equals(Card.ONAGER)){
 
         } else if (chosen.equals(Card.PRAETORIANUS)){

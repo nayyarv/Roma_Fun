@@ -89,6 +89,6 @@ public class Nero extends CardBase {
         int targetIndex = activationData.remove(0);
 
         diceDiscs.discardTarget(targetPlayerID, targetIndex);
-        playerActives[position].goingToDiscard(player.getPlayerID(), targetIndex);
+        playerActives[position].goingToDiscard(player.getPlayerID(), position);
     }
 }

@@ -465,7 +465,7 @@ public class Player {
                 PlayerInterface.printOut("Invalid Input, please try again.", true);
             }
 
-            if(filterCurrent){//Choosing from your own cards
+            if(filterCurrent && choice != CANCEL){//Choosing from your own cards
                 validChoice = checkValid(currPlayer.get(choice));
                 if(!validChoice){
                     PlayerInterface.printOut("Not a valid choice!", true);

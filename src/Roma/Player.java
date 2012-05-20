@@ -588,6 +588,7 @@ public class Player {
         Player[] players = playArea.getAllPlayers();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         MoneyManager moneyManager = playArea.getMoneyManager();
+        CardManager cardManager = playArea.getCardManager();
 
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
         int option = 0;
@@ -600,6 +601,10 @@ public class Player {
                     "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
             PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
         }
+        PlayerInterface.printOut(BREAK_LINE, true);
+        PlayerInterface.printOut("Victory Tokens left in pool: " + victoryTokens.getPoolTokens(), true);
+        PlayerInterface.printOut("Cards in deck: " + cardManager.getPlayingSize()
+                + " \tCards in discard pile: " + cardManager.getDiscardSize(), true);
         //Print's out a nice version of the dice lists
         while(option != CANCEL){
             printDiceDiscs(activeCards);

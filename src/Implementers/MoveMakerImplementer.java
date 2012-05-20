@@ -125,6 +125,7 @@ public class MoveMakerImplementer implements MoveMaker{
 
 
         assert (currentAction!=null); //World's worst warning lol
+                                      //Not really, if you're out of RAM it will be null lol
 
         //We're using a dice
         currentAction.setUseDice(true);

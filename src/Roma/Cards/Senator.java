@@ -80,7 +80,6 @@ public class Senator extends CardBase {
             PlayerInterface.printOut("No characters in hand!", true);
             player.cancel();
         }
-        player.commit();
 
         for (int i = 0; i < hand.size(); i++) {
             handIndices[i] = CANCEL;
@@ -108,6 +107,7 @@ public class Senator extends CardBase {
             activationData.add(handIndices[j]);
             activationData.add(discIndices[j]);
         }
+        player.commit();
     }
 
     //activationData: ([cardHandIndex][positionIndex])*repeated as desired

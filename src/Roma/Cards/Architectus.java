@@ -77,7 +77,6 @@ public class Architectus extends CardBase {
             PlayerInterface.printOut("No characters in hand!", true);
             player.cancel();
         }
-        player.commit();
 
         //get player input for which cards to lay
         //collect player input
@@ -100,6 +99,7 @@ public class Architectus extends CardBase {
             activationData.add(handIndices[j]);
             activationData.add(discIndices[j]);
         }
+        player.commit();
     }
 
     //activationData: ([cardHandIndex][positionIndex])*repeated as desired

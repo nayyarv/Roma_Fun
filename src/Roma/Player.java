@@ -470,7 +470,7 @@ public class Player {
                 if(!validChoice){
                     PlayerInterface.printOut("Not a valid choice!", true);
                 }
-            } else if (filterOther){
+            } else if (filterOther && choice != CANCEL){
                 validChoice = checkValid(opposingPlayer.get(choice));
                 if(!validChoice){
                     PlayerInterface.printOut("Not a valid choice!", true);

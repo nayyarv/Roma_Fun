@@ -64,7 +64,8 @@ public class Centurio extends CardBase {
 
         int targetPlayerID = player.getOtherPlayerID();
         boolean battleVictory = false;
-        ArrayList<Dice> freeDice = player.getFreeDice();
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
         ArrayList<Integer> activationData = player.getActivationData();
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, position);
         int battleValue = player.getCurrentAction().getBattleDice();
@@ -105,13 +106,14 @@ public class Centurio extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
 
         int targetPlayerID = player.getOtherPlayerID();
-        int chosenDieIndex = CANCEL;
+        int chosenDieIndex = player.getCurrentAction().getActionDiceIndex();
         Dice chosenDie = null;
         CardHolder targetCard = diceDiscs.getTargetCard(targetPlayerID, position);
         ArrayList<Dice> freeDice = player.getFreeDice();
         int battleValue = player.getBattleValue();
         boolean battleVictory = diceDiscs.battle(targetPlayerID, position, battleValue);;
 
+        freeDice.remove(chosenDieIndex);
         //if empty then battleVictory == true
         if (!battleVictory){
             chosenDieIndex = activationData.remove(0);

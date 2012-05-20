@@ -665,7 +665,13 @@ public class Player {
         PlayerInterface.printOut("Victory Tokens left in pool: " + victoryTokens.getPoolTokens(), true);
         PlayerInterface.printOut("Cards in deck: " + cardManager.getPlayingSize()
                 + " \tCards in discard pile: " + cardManager.getDiscardSize(), true);
-        PlayerInterface.printOut("Top Card in Discard: "+ topDiscard.getName(), true);
+        PlayerInterface.printOut("Top Card in Discard: ", false);
+        if(topDiscard != null){
+            PlayerInterface.printOut(topDiscard.getName(), true);
+        } else {
+            PlayerInterface.printOut("No cards in Discard Pile", true);
+        }
+        PlayerInterface.printOut(BREAK_LINE, true);
         //Print's out a nice version of the dice lists
         while(option != CANCEL){
             printDiceDiscs(activeCards);

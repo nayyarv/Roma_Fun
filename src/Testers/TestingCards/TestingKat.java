@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-public class TestingCat {
+public class TestingKat {
 
     public static void main(String []args){
         GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");

@@ -9,7 +9,8 @@ import framework.interfaces.activators.*;
  * Date: 21/05/12
  * Desc:
  */
-public class Assassin implements Targeted, CardActivator, NeroActivator, SicariusActivator, PraetorianusActivator {
+public class Assassin implements Targeted, CardActivator,
+        NeroActivator, SicariusActivator, PraetorianusActivator, GladiatorActivator {
 
     Player player;
 

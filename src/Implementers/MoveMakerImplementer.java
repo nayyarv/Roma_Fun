@@ -414,7 +414,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.FORUM)){
 
         } else if (chosen.equals(Card.GLADIATOR)){
-
+            activator = new Assassin(player);
         } else if (chosen.equals(Card.HARUSPEX)){
             activator = new SelectorImpl(player);
         } else if (chosen.equals(Card.LEGAT) ){

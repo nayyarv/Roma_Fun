@@ -13,4 +13,6 @@ package framework.interfaces.activators;
 public interface VelitesActivator 
                extends Targeted, Attacker, CardActivator{
 
+
+
 }

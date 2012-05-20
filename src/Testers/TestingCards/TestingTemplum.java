@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * Desc:
  */
 
-//TODO: implement test
-
 public class TestingTemplum {
 
     public static void main(String []args){
@@ -29,15 +27,15 @@ public class TestingTemplum {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,1,1};
+        int[] num = {1,3,5};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
-                Card.NERO, Card.NERO, Card.NERO};
+        Card[] diceDiscs1 = {Card.FORUM, Card.TEMPLUM, Card.FORUM, Card.TEMPLUM,
+                Card.FORUM, Card.NERO, Card.NERO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};

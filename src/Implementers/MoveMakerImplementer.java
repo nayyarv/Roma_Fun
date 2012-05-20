@@ -1,5 +1,6 @@
 package Implementers;
 
+import Implementers.ImplementedActivators.ConsulActivatorImpl;
 import Implementers.ImplementedActivators.MercatorActivatorImpl;
 import Implementers.ImplementedActivators.dummyActivator;
 import Implementers.ImplementedActivators.simpleActivator;
@@ -389,7 +390,7 @@ public class MoveMakerImplementer implements MoveMaker{
     }
 
     private CardActivator getCorrectActivator(Card chosen, Player player){
-        CardActivator correct = new dummyActivator();
+        CardActivator activator = new dummyActivator();
         if (chosen.equals(Card.AESCULAPINUM)){
 
         } else if (chosen.equals(Card.ARCHITECTUS)){
@@ -399,9 +400,9 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.CONSILIARIUS)){
 
         } else if (chosen.equals(Card.CONSUL)){
-
+            activator = new ConsulActivatorImpl(player);
         } else if (chosen.equals(Card.ESSEDUM)){
-            correct = new simpleActivator(player);
+            activator = new simpleActivator(player);
         } else if (chosen.equals(Card.FORUM)){
 
         } else if (chosen.equals(Card.GLADIATOR)){
@@ -409,15 +410,15 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.HARUSPEX)){
 
         } else if (chosen.equals(Card.LEGAT) ){
-            correct = new simpleActivator(player);
+            activator = new simpleActivator(player);
         } else if (chosen.equals(Card.LEGIONARIUS)){
 
         } else if (chosen.equals(Card.MACHINA)){
 
         } else if (chosen.equals(Card.MERCATOR)){
-            correct = new MercatorActivatorImpl(player);
+            activator = new MercatorActivatorImpl(player);
         } else if (chosen.equals(Card.MERCATUS)){
-            correct = new simpleActivator(player);
+            activator = new simpleActivator(player);
         } else if (chosen.equals(Card.NERO)){
 
         } else if (chosen.equals(Card.NERO)){
@@ -435,12 +436,12 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.TELEPHONEBOX)){
 
         } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){
-            correct =  new simpleActivator(player);
+            activator =  new simpleActivator(player);
         } else if (chosen.equals(Card.VELITES)){
 
         } else {
             throw new UnsupportedOperationException();
         }
-        return correct;
+        return activator;
     }
 }

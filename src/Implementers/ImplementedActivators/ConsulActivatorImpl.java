@@ -39,7 +39,8 @@ public class ConsulActivatorImpl  implements ConsulActivator {
     @Override
     public void chooseWhichDiceChanges(int originalRoll) {
         //get the die index
-        ArrayList<Dice> freeDice = player.getFreeDice();
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
         int currActionIndex = player.getCurrentAction().getActionDiceIndex();
 
         freeDice.remove(currActionIndex);
@@ -50,6 +51,7 @@ public class ConsulActivatorImpl  implements ConsulActivator {
         for(i=0; i<freeDice.size()&&dice.getValue()!=originalRoll;i++){
             dice = freeDice.get(i);
         }
+        System.out.println("Found "+ originalRoll+" at "+ i);
         dieIndex = i;
 
     }

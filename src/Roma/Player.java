@@ -68,6 +68,10 @@ public class Player {
         return playerInterface;
     }
 
+    public ArrayList<CardHolder> getDiceDiscsList(){
+        return playArea.getDiceDiscs().toList(playerID);
+    }
+
     public ArrayList<Dice> getFreeDice() {
         return freeDice;
     }

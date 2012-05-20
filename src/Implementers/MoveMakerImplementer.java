@@ -7,6 +7,7 @@ import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
 
+import framework.Rules;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
@@ -129,7 +130,37 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public CardActivator activateBribeDisc(int diceToUse) throws UnsupportedOperationException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        int currPlayer = gameState.getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int chosenDieIndex = diceReqdIndex(diceToUse);
+
+        setUp();
+
+        ActionData currentAction = new ActionData(currPlayer);
+
+        currentAction.setUseDice(true);
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(diceToUse);
+
+
+        CardHolder target = diceDiscs.getTargetCard(currPlayer, Rules.BRIBE_DISC-1);
+        Card chosen = gameState.getPlayerCardsOnDiscs(currPlayer)[Rules.BRIBE_DISC-1];
+
+        assert (target!=null);
+
+
+
+        if(target.isActivateEnabled()){
+            currentAction.setPosition(Rules.BRIBE_DISC-1);
+            currentAction.setDiscType(ActionData.BRIBERY);
+            currentAction.setCardName(target.getName());
+            player.setCurrentAction(currentAction);
+
+            return getCorrectActivator(chosen, player);
+        } else {
+            return new dummyActivator();
+        }
     }
 
 
@@ -291,6 +322,7 @@ public class MoveMakerImplementer implements MoveMaker{
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
         ActionData currentAction = new ActionData(gameState.getWhoseTurn());
         //as the creation is not done in PlayArea - i have to create my own
+
         setUp();
 
         assert (currentAction!=null); //World's worst warning lol
@@ -406,7 +438,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.CENTURIO)){
 
         } else if (chosen.equals(Card.CONSILIARIUS)){
-
+            activator = new RearrangerImpl(player);
         } else if (chosen.equals(Card.CONSUL)){
             activator = new ConsulActivatorImpl(player);
         } else if (chosen.equals(Card.ESSEDUM)){
@@ -421,9 +453,9 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.LEGAT) ){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.LEGIONARIUS)){
-
+            activator = new LegionariusActivatorImpl(player);
         } else if (chosen.equals(Card.MACHINA)){
-
+            activator = new RearrangerImpl(player);
         } else if (chosen.equals(Card.MERCATOR)){
             activator = new MercatorActivatorImpl(player);
         } else if (chosen.equals(Card.MERCATUS)){

@@ -63,6 +63,10 @@ public class Architectus extends CardBase {
         ArrayList<CardHolder> hand = player.getHand();
         int[] handIndices = new int[hand.size()];
         int[] discIndices = new int[hand.size()];
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            handIndices[i] = CANCEL;
+            discIndices[i] = CANCEL;
+        }
         int handIndex = 0;
         int discIndex = 0;
         CardHolder[][] activeCards = diceDiscs.getActiveCards();

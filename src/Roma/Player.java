@@ -588,6 +588,7 @@ public class Player {
         Player[] players = playArea.getAllPlayers();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         MoneyManager moneyManager = playArea.getMoneyManager();
+        CardHolder topDiscard = playArea.getCardManager().getTopDiscard();
 
         final String
                 strPrompt = "Dice Discs:",
@@ -612,11 +613,14 @@ public class Player {
             PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
                     "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
             PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+
         }
+        PlayerInterface.printOut("Top Card in Discard: "+ topDiscard.getName(), true);
         //Print's out a nice version of the dice lists
         while(option != CANCEL){
             playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
             option = playerInterface.readInput(strPrompt, true, strOption);
+
             if (option == DESC_OWN){
                 checkDesc(currPlayer);
             } else if (option == DESC_OPP){

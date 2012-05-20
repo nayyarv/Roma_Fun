@@ -10,6 +10,7 @@ import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * File Name:
@@ -91,7 +92,33 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void activateCardsDisc(int diceToUse, Card chosen) throws UnsupportedOperationException {
-        //Todo:
+        int chosenDieIndex = diceReqdIndex(diceToUse);
+        Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
+        ActionData currentAction = new ActionData(currPlayer.getPlayerID());
+
+        //TODO:         transferNextToThis();
+        currentAction.setUseDice(true);
+
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(diceToUse);
+
+
+        currentAction.setDiscType(ActionData.CARD);
+
+        // Now find the cardIndex of card chosen
+
+        int cardIndex = cardIndex(chosen,diceToUse);
+
+        currentAction.setDrawCardIndex(cardIndex);
+
+        currentAction.setCommit(true);
+        currPlayer.performActions(currentAction);
+
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
+
+
     }
 
     /**
@@ -122,9 +149,11 @@ public class MoveMakerImplementer implements MoveMaker{
         int chosenDieIndex = diceReqdIndex(diceToUse);
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
         ActionData currentAction = new ActionData(gameState.getWhoseTurn());
-
+        //as the creation is not done in PlayArea - i have to create my own
 
         assert (currentAction!=null); //World's worst warning lol
+
+        //TODO:         transferNextToThis();
 
         //We're using a dice
         currentAction.setUseDice(true);
@@ -140,6 +169,9 @@ public class MoveMakerImplementer implements MoveMaker{
         //Necessary?
         currentAction.setCommit(true);
         currPlayer.performActions(currentAction);
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
 
 
         //To change body of implemented methods use File | Settings | File Templates.
@@ -200,10 +232,12 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public void endTurn() throws UnsupportedOperationException {
-
+        //TODO: clearEndTurnWrappers();
 
         int nextPlayer = (gameState.getWhoseTurn()+1)%2;
         playArea.startTurnPhase(playArea.getPlayer(nextPlayer));
+
+
     }
 
     /**
@@ -252,6 +286,17 @@ public class MoveMakerImplementer implements MoveMaker{
             if(dice[i]==diceToUse) return i;
         }
         //we didn't find the dice - so i throw unsupported Operation
+        throw new UnsupportedOperationException();
+    }
+
+    private int cardIndex(Card chosen, int maxVal){
+        List<Card> deck = gameState.getDeck();
+        for (int i = 0; i<maxVal;i++){
+            if (chosen.toString().equalsIgnoreCase(deck.get(i).toString())){
+                return i;
+            }
+        }
+        //Not found
         throw new UnsupportedOperationException();
     }
 }

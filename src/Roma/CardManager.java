@@ -150,6 +150,10 @@ public class CardManager {
 
     }
 
+    public CardHolder getTopDiscard(){
+        return discardPile.get(0);
+    }
+
     public ArrayList<CardHolder> getDiscardPile() {
         return discardPile;
     }

@@ -86,8 +86,10 @@ public class Consul extends CardBase {
                 player.cancel();
             } else if (option == INCREASE && chosenDieValue < 6) {
                 option = 1;
+                validInput = true;
             } else if (option == DECREASE && chosenDieValue > 1) {
                 option = -1;
+                validInput = true;
             } else {
                 PlayerInterface.printOut("Dice values have to stay between 1 and 6", true);
             }

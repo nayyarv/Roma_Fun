@@ -29,15 +29,15 @@ public class TestingConsul {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,1,1};
+        int[] num = {1,3,6};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
-                Card.NERO, Card.NERO, Card.NERO};
+        Card[] diceDiscs1 = {Card.CONSUL, Card.CONSUL, Card.CONSUL, Card.CONSUL,
+                Card.CONSUL, Card.CONSUL, Card.CONSUL};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};

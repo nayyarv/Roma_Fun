@@ -11,9 +11,6 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-
-//TODO: implement test
-
 public class TestingNero {
 
     public static void main(String []args){

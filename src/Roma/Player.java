@@ -577,7 +577,7 @@ public class Player {
         return currentAction.getBattleDice();
     }
 
-    public void printStats() {
+    public void printStats(String testing){
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         Player[] players = playArea.getAllPlayers();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
@@ -585,6 +585,55 @@ public class Player {
         CardHolder topDiscard = playArea.getCardManager().getTopDiscard();
         CardManager cardManager = playArea.getCardManager();
 
+        int otherID = getOtherPlayerID();
+
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+
+        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
+        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        PlayerInterface.printOut(PlayerInterface.padRight("Turn: "+ playArea.getTurn(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft(getName()+"'s Turn", 45), true);
+
+        PlayerInterface.printOut(PlayerInterface.padRight("Size of Playing Deck: "+
+                playArea.getCardManager().getPlayingSize(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: "+
+                playArea.getCardManager().getDiscardSize(), 45), true);
+
+        String topDiscardName = (topDiscard==null)? "Empty":topDiscard.getName();
+        topDiscardName = "Last Discard: " + topDiscardName;
+
+        PlayerInterface.printOut(PlayerInterface.padRight("Victory Tokens in Pool: "
+                + victoryTokens.getPoolTokens(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft(topDiscardName, 45), true);
+
+        PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
+
+        playerInterface.printFormatted("Players",
+                players[playerID].getName(), players[otherID].getName());
+
+        playerInterface.printFormatted("Victory Tokens",
+                victoryTokens.getPlayerTokens(playerID), victoryTokens.getPlayerTokens(otherID));
+
+        playerInterface.printFormatted("Money",
+                moneyManager.getPlayerMoney(playerID), moneyManager.getPlayerMoney(otherID));
+
+        playerInterface.printFormatted("Cards in Hand",
+                players[playerID].handSize(), players[otherID].handSize());
+
+
+
+        //Print's out a nice version of the dice lists
+
+        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
+
+    }
+
+
+    public void printStats() {
         final String
                 strPrompt = "Dice Discs:",
                 strOption[] = {"Check Description of your Cards",

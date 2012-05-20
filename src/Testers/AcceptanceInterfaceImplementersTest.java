@@ -34,10 +34,10 @@ public class AcceptanceInterfaceImplementersTest extends TestCase {
         moveMaker.activateMoneyDisc(6);
         gameState.isGameCompleted();
 
-        moveMaker.activateMoneyDisc(3);
+        moveMaker.activateMoneyDisc(5);
         gameState.isGameCompleted();
 
-        moveMaker.activateMoneyDisc(5);
+        moveMaker.activateMoneyDisc(3);
         gameState.isGameCompleted();
 
         assert (gameState.getPlayerSestertii(0)==114);
@@ -112,9 +112,8 @@ public class AcceptanceInterfaceImplementersTest extends TestCase {
         gameState.isGameCompleted();
 
         System.out.println("Testing Card laying passed!!\n");
-
-
-
     }
+
+
 
 }

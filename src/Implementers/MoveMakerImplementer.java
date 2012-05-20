@@ -53,7 +53,18 @@ public class MoveMakerImplementer implements MoveMaker{
      */
     @Override
     public CardActivator chooseCardToActivate(int disc) throws UnsupportedOperationException {
-        //TODO: FML todo :'(
+        int currPlayer = gameState.getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        ActionData currentAction = new ActionData(currPlayer);
+
+        int chosenDieIndex = diceReqdIndex(disc);
+
+        currentAction.setUseDice(true);
+
+        currentAction.setActionDiceIndex(chosenDieIndex);
+        currentAction.setDiceValue(disc);
+
+
 
         return null;
     }

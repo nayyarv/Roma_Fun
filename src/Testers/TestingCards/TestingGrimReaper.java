@@ -33,11 +33,11 @@ public class TestingGrimReaper {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.CENTURIO, Card.CENTURIO, Card.CENTURIO, Card.CENTURIO,
-                Card.CENTURIO, Card.CENTURIO, Card.CENTURIO};
+        Card[] diceDiscs1 = {Card.SICARIUS, Card.SICARIUS, Card.SICARIUS, Card.SICARIUS,
+                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.CONSUL,
-                Card.CONSUL, Card.CONSUL, Card.SICARIUS};
+        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.SICARIUS,
+                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
         gameStateImplementer.printStats();

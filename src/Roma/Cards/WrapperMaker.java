@@ -13,7 +13,7 @@ public class WrapperMaker {
     private int costScale = Wrapper.INITIAL_SCALE;
     private int defenseShift = Wrapper.INITIAL_SHIFT;
     private int defenseScale = Wrapper.INITIAL_SCALE;
-    private ArrayList<Wrapper> wrapperList = new ArrayList<Wrapper>();
+    ArrayList<Wrapper> wrapperList = new ArrayList<Wrapper>();
     private int ownerID;
 
     public WrapperMaker(int playerID) {

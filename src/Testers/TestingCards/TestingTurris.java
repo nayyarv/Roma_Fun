@@ -29,9 +29,12 @@ public class TestingTurris {
         int[] num = {1,1,1};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
+        gameStateImplementer.setPlayerSestertii(1, 1000);
+        gameStateImplementer.setPlayerVictoryPoints(0, 17);
+        gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.CENTURIO, Card.CENTURIO, Card.CENTURIO, Card.CENTURIO,
-                Card.CENTURIO, Card.CENTURIO, Card.CENTURIO};
+        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
+                Card.NERO, Card.NERO, Card.NERO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};

@@ -21,7 +21,7 @@ public class TestCardActivators extends TestCase {
 
     AcceptanceInterface acceptance = new AcceptanceInterfaceImplementers();
     GameState gameState= acceptance.getInitialState();
-    MoveMaker moveMaker = acceptance.getMover(gameState);
+    MoveMaker move = acceptance.getMover(gameState);
 
 
     private int getIndexFromPile (Card toFind, List<Card> pile) {
@@ -54,9 +54,9 @@ public class TestCardActivators extends TestCase {
         gameState.setPlayerHand(0, hand);
 
         // Place the Tribunus Plebis on disc 3 and activate it
-        moveMaker.placeCard(Card.TRIBUNUSPLEBIS, 3);
+        move.placeCard(Card.TRIBUNUSPLEBIS, 3);
         gameState.isGameCompleted();
-        moveMaker.chooseCardToActivate(3).complete();
+        move.chooseCardToActivate(3).complete();
 
 
         // Check that player 0 has gained a victory point, but player
@@ -117,8 +117,8 @@ public class TestCardActivators extends TestCase {
         gameState.setPlayerHand(0, hand);
 
         // Place the Legat on disc 3 and activate it
-        moveMaker.placeCard(Card.LEGAT, 3);
-        moveMaker.chooseCardToActivate(3).complete();
+        move.placeCard(Card.LEGAT, 3);
+        move.chooseCardToActivate(3).complete();
 //        for (Card currentCard : gameState.getPlayerHand(0)) {
 //        	System.out.println(currentCard);
 //        }
@@ -131,13 +131,13 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPlayerSestertii(0) == 0);
         assert(gameState.getPlayerSestertii(1) == 100);
 
-        moveMaker.endTurn();
-        moveMaker.placeCard(Card.LEGIONARIUS, Rules.DICE_DISC_1);
-        moveMaker.placeCard(Card.AESCULAPINUM, Rules.DICE_DISC_2);
-        moveMaker.placeCard(Card.CONSUL, Rules.DICE_DISC_4);
-        moveMaker.placeCard(Card.ESSEDUM, Rules.DICE_DISC_6);
-        moveMaker.placeCard(Card.MACHINA, Rules.BRIBE_DISC);
-        moveMaker.endTurn();
+        move.endTurn();
+        move.placeCard(Card.LEGIONARIUS, Rules.DICE_DISC_1);
+        move.placeCard(Card.AESCULAPINUM, Rules.DICE_DISC_2);
+        move.placeCard(Card.CONSUL, Rules.DICE_DISC_4);
+        move.placeCard(Card.ESSEDUM, Rules.DICE_DISC_6);
+        move.placeCard(Card.MACHINA, Rules.BRIBE_DISC);
+        move.endTurn();
         gameState.setActionDice(new int [] {3, 3, 4});
 
         assert(gameState.getPlayerVictoryPoints(0) == 11);
@@ -146,7 +146,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPlayerSestertii(1) == 100 - 4 - 5 - 3 - 6 - 4);
 
         // Activate the Legat again
-        moveMaker.chooseCardToActivate(3).complete();
+        move.chooseCardToActivate(3).complete();
 
         // Check that player 0 has gained 2 victory points, but player
         // 1's score has not changed
@@ -204,7 +204,7 @@ public class TestCardActivators extends TestCase {
 
         gameState.setActionDice(new int[] {1,1,1});
 
-        moveMaker.placeCard(Card.MERCATOR, Rules.DICE_DISC_1);
+        move.placeCard(Card.MERCATOR, Rules.DICE_DISC_1);
 
         //the correct amount of money should be deducted
         //game removed from hand and get placed on the field
@@ -217,7 +217,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPoolVictoryPoints() == 36 - 2 - 6);
         assert(!gameState.isGameCompleted());
 
-        MercatorActivator activator = (MercatorActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        MercatorActivator activator = (MercatorActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
 
         activator.chooseMercatorBuyNum(1);
         activator.complete();
@@ -227,7 +227,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPlayerSestertii(1) == 100 + 2*1);
         assert(gameState.getPoolVictoryPoints() == 36 - 2 - 6);
 
-        activator = (MercatorActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (MercatorActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
 
         activator.chooseMercatorBuyNum(5);
         activator.complete();
@@ -287,7 +287,7 @@ public class TestCardActivators extends TestCase {
 
         gameState.setActionDice(new int[] {1,2,1});
 
-        moveMaker.placeCard(Card.CONSUL, Rules.DICE_DISC_1);
+        move.placeCard(Card.CONSUL, Rules.DICE_DISC_1);
 
         assert(gameState.getPlayerSestertii(1) == 100);
         assert(gameState.getPlayerHand(0).size() == 2);
@@ -303,7 +303,7 @@ public class TestCardActivators extends TestCase {
 
         System.out.println(Arrays.toString(gameState.getActionDice()));
 
-        ConsulActivator activator = (ConsulActivator) moveMaker.chooseCardToActivate(1);
+        ConsulActivator activator = (ConsulActivator) move.chooseCardToActivate(1);
 
         System.out.println(Arrays.toString(gameState.getActionDice()));
 
@@ -316,7 +316,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getActionDice().length == 2);
         assert(gameState.getActionDice()[0] == 1);
         assert(gameState.getActionDice()[1] == 1);
-        activator = (ConsulActivator) moveMaker.chooseCardToActivate(1);
+        activator = (ConsulActivator) move.chooseCardToActivate(1);
 
         activator.chooseWhichDiceChanges(1);
         activator.chooseConsulChangeAmount(1);
@@ -357,7 +357,7 @@ public class TestCardActivators extends TestCase {
         gameState.setActionDice(new int[] {1,3,4});
 
         //place the Nero here
-        moveMaker.placeCard(Card.NERO, Rules.DICE_DISC_1);
+        move.placeCard(Card.NERO, Rules.DICE_DISC_1);
 
         assert(gameState.getPlayerSestertii(0) == 16);
         assert(gameState.getPlayerHand(0).size() == 2);
@@ -367,7 +367,7 @@ public class TestCardActivators extends TestCase {
         assert(field[0] == Card.NERO);
 
         //kill the Forum
-        NeroActivator activator = (NeroActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        NeroActivator activator = (NeroActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseDiceDisc(Rules.DICE_DISC_1);
         activator.complete();
 
@@ -382,7 +382,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getDiscard().contains(Card.FORUM));
 
         //place another Nero
-        moveMaker.placeCard(Card.NERO, Rules.DICE_DISC_3);
+        move.placeCard(Card.NERO, Rules.DICE_DISC_3);
 
         assert(gameState.getPlayerSestertii(0) == 8);
         assert(gameState.getPlayerHand(0).size() == 1);
@@ -393,7 +393,7 @@ public class TestCardActivators extends TestCase {
 
         gameState.isGameCompleted();
         //kill the OnagerBehaviour
-        activator = (NeroActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_3);
+        activator = (NeroActivator) move.chooseCardToActivate(Rules.DICE_DISC_3);
         activator.chooseDiceDisc(Rules.DICE_DISC_4);
         activator.complete();
 
@@ -410,7 +410,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getDiscard().contains(Card.ONAGER));
 
         //place another Nero
-        moveMaker.placeCard(Card.NERO, Rules.DICE_DISC_4);
+        move.placeCard(Card.NERO, Rules.DICE_DISC_4);
 
         assert(gameState.getPlayerSestertii(0) == 0);
         assert(gameState.getPlayerHand(0).size() == 0);
@@ -450,7 +450,7 @@ public class TestCardActivators extends TestCase {
         gameState.setActionDice(new int[] {1,3,1});
 
         //place the Sicarius here
-        moveMaker.placeCard(Card.SICARIUS, Rules.DICE_DISC_1);
+        move.placeCard(Card.SICARIUS, Rules.DICE_DISC_1);
 
         assert(gameState.getPlayerSestertii(0) == 18);
         assert(gameState.getPlayerHand(0).size() == 2);
@@ -460,7 +460,7 @@ public class TestCardActivators extends TestCase {
         assert(field[0] == Card.SICARIUS);
 
         //kill the gladiator
-        SicariusActivator activator = (SicariusActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        SicariusActivator activator = (SicariusActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseDiceDisc(Rules.DICE_DISC_3);
         activator.complete();
 
@@ -475,7 +475,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getDiscard().contains(Card.GLADIATOR));
 
         //place another sicarius
-        moveMaker.placeCard(Card.SICARIUS, Rules.DICE_DISC_3);
+        move.placeCard(Card.SICARIUS, Rules.DICE_DISC_3);
 
         assert(gameState.getPlayerSestertii(0) == 9);
         assert(gameState.getPlayerHand(0).size() == 1);
@@ -485,7 +485,7 @@ public class TestCardActivators extends TestCase {
         assert(field[2] == Card.SICARIUS);
 
         //kill the nero
-        activator = (SicariusActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_3);
+        activator = (SicariusActivator) move.chooseCardToActivate(Rules.DICE_DISC_3);
         activator.chooseDiceDisc(Rules.DICE_DISC_6);
         activator.complete();
 
@@ -500,7 +500,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getDiscard().contains(Card.NERO));
 
         //place another Sicarius
-        moveMaker.placeCard(Card.SICARIUS, Rules.DICE_DISC_4);
+        move.placeCard(Card.SICARIUS, Rules.DICE_DISC_4);
 
         assert(gameState.getPlayerSestertii(0) == 0);
         assert(gameState.getPlayerHand(0).size() == 0);
@@ -510,12 +510,12 @@ public class TestCardActivators extends TestCase {
         assert(field[3] == Card.SICARIUS);
 
         //advance to next player's turn
-        moveMaker.endTurn();
+        move.endTurn();
 
         gameState.setActionDice(new int[] {1,1,1});
 
         //kill the opponent Sicarius
-        activator = (SicariusActivator)moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (SicariusActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseDiceDisc(Rules.DICE_DISC_4);
         activator.complete();
 
@@ -587,7 +587,7 @@ public class TestCardActivators extends TestCase {
 
         gameState.setActionDice(new int[] {1,1,1});
 
-        moveMaker.placeCard(Card.AESCULAPINUM, Rules.DICE_DISC_1);
+        move.placeCard(Card.AESCULAPINUM, Rules.DICE_DISC_1);
 
         //the correct amount of money should be deducted
         //game removed from hand and get placed on the field
@@ -601,7 +601,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPoolVictoryPoints() == 36 - 15*Rules.NUM_PLAYERS);
         assert(!gameState.isGameCompleted());
 
-        AesculapinumActivator activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        AesculapinumActivator activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.CENTURIO, gameState.getDiscard()));
         activator.complete();
         assert(gameState.getPlayerHand(0).contains(Card.CENTURIO));
@@ -609,7 +609,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getActionDice()[0] == 1);
         assert(gameState.getActionDice()[1] == 1);
 
-        activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.SICARIUS, gameState.getDiscard()));
         activator.complete();
 
@@ -617,7 +617,7 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getActionDice().length == 1);
         assert(gameState.getActionDice()[0] == 1);
 
-        activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.CENTURIO, gameState.getDiscard()));
         activator.complete();
         assert(gameState.getPlayerHand(0).contains(Card.CENTURIO));
@@ -626,16 +626,16 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getPoolVictoryPoints() == 36 - 15*Rules.NUM_PLAYERS);
         assert(!gameState.isGameCompleted());
 
-        moveMaker.endTurn();
+        move.endTurn();
         assert(gameState.getPlayerVictoryPoints(1) == 8);
         assert(gameState.getPlayerSestertii(1) == 100);
         assert(gameState.getPlayerHand(1).contains(Card.AESCULAPINUM));
         assert(gameState.getPlayerHand(0).contains(Card.SICARIUS));
         assert(gameState.getPlayerHand(0).contains(Card.CENTURIO));
-        moveMaker.endTurn();
+        move.endTurn();
 
         gameState.setActionDice(new int[] {1,1,1});
-        activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.CONSILIARIUS, gameState.getDiscard()));
         activator.complete();
         assert(gameState.getPlayerHand(0).contains(Card.CONSILIARIUS));
@@ -643,14 +643,14 @@ public class TestCardActivators extends TestCase {
         assert(gameState.getActionDice()[0] == 1);
         assert(gameState.getActionDice()[1] == 1);
 
-        activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.CONSUL, gameState.getDiscard()));
         activator.complete();
         assert(gameState.getPlayerHand(0).contains(Card.CONSUL));
         assert(gameState.getActionDice().length == 1);
         assert(gameState.getActionDice()[0] == 1);
 
-        activator = (AesculapinumActivator) moveMaker.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator = (AesculapinumActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
         activator.chooseCardFromPile(getIndexFromPile(Card.SCAENICUS, gameState.getDiscard()));
         activator.complete();
         assert(gameState.getPlayerHand(0).contains(Card.SCAENICUS));
@@ -665,11 +665,163 @@ public class TestCardActivators extends TestCase {
     }
 
 
+    public void testArchit() throws Exception {
+        System.out.println("Testing Archit\n");
+
+        gameState.setWhoseTurn(0);
+
+        List<Card> discard = new ArrayList<Card>();
+        gameState.setDiscard(discard);
+
+        Collection<Card> hand = new ArrayList<Card>();
+        hand.add(Card.ARCHITECTUS);
+        hand.add(Card.TURRIS);
+        hand.add(Card.MACHINA);
+        hand.add(Card.FORUM);
+        hand.add(Card.LEGAT);
+        hand.add(Card.ONAGER);
+
+        gameState.setPlayerHand(0, hand);
+
+        //no cards on the field
+        Card[] field = new Card[Rules.NUM_DICE_DISCS];
+        for(int i = 0; i < field.length; i++) {
+            field[i] = Card.NOT_A_CARD;
+        }
+
+        //player has enough Sestertiis to lay cards
+        gameState.setPlayerSestertii(0, 30);
+
+        gameState.setActionDice(new int[] {1,1,5});
+
+        //===================== test1 ======================
+        move.placeCard(Card.ARCHITECTUS, Rules.DICE_DISC_1);
+
+        //the correct amount of money should be deducted
+        //game removed from hand and get placed on the field
+        assert(gameState.getPlayerSestertii(0) == 27);
+        assert(gameState.getPlayerHand(0).size() == 5);
+        assert(!gameState.getPlayerHand(0).contains(Card.ARCHITECTUS));
+
+        field = gameState.getPlayerCardsOnDiscs(0);
+        assert(field[0] == Card.ARCHITECTUS);
+
+        //if you lay a building card now, it should still cost you money
+        move.placeCard(Card.FORUM, Rules.DICE_DISC_3);
+        assert(gameState.getPlayerSestertii(0) == 22);
+        assert(gameState.getPlayerHand(0).size() == 4);
+        assert(!gameState.getPlayerHand(0).contains(Card.FORUM));
+
+        field = gameState.getPlayerCardsOnDiscs(0);
+        assert(field[2] == Card.FORUM);
+
+        //activate Architectus
+        ArchitectusActivator activator = (ArchitectusActivator) move.chooseCardToActivate(Rules.DICE_DISC_1);
+        activator.layCard(Card.MACHINA, 5);
+        // activator.layCard(Card.LEGAT, 7);
+        activator.layCard(Card.ONAGER, 3);
+        activator.complete();
+
+        //cards shouldn't have cost money to lay
+        assert(gameState.getPlayerSestertii(0) == 22);
+
+        field = gameState.getPlayerCardsOnDiscs(0);
+        assert(field[0] == Card.ARCHITECTUS);
+        assert(field[2] == Card.ONAGER);
+        assert(field[4] == Card.MACHINA);
+        assert(field[6] == Card.NOT_A_CARD);
+
+        hand = gameState.getPlayerHand(0);
+        assert(!hand.contains(Card.ONAGER));
+        assert(!hand.contains(Card.MACHINA));
+        assert(hand.contains(Card.LEGAT));
+
+        discard = gameState.getDiscard();
+        assert(discard.contains(Card.FORUM));
+
+        //building cards should cost money to lay again
+        move.placeCard(Card.TURRIS, 6);
+
+        assert(gameState.getPlayerSestertii(0) == 22 - 6);
+
+        field = gameState.getPlayerCardsOnDiscs(0);
+        assert(field[5] == Card.TURRIS);
+
+        hand = gameState.getPlayerHand(0);
+        assert(!hand.contains(Card.TURRIS));
+
+
+        System.out.println("Testing Archit passed!!\n");
+
+    }
+
+    public void testSen() throws Exception {
+        System.out.println("Testing Senator\n");
+        // Set up the player stats
+        gameState.setPlayerVictoryPoints(0, 10);
+        gameState.setPlayerVictoryPoints(1, 10);
+        gameState.setPlayerSestertii(0, 3);
+        gameState.setPlayerSestertii(1, 0);
+
+        // Set up the game state for the test
+        gameState.setWhoseTurn(0);
+        gameState.setActionDice(new int [] {3, 3, 4});
+        Collection<Card> hand = new ArrayList<Card> ();
+        Collections.addAll(hand, Card.SENATOR,
+                Card.VELITES,
+                Card.PRAETORIANUS,
+                Card.ESSEDUM,
+                Card.CENTURIO,
+                Card.SICARIUS,
+                Card.ARCHITECTUS);
+        gameState.setPlayerHand(0, hand);
+
+
+
+        // Place the Tribunus Plebis on disc 3 and activate it
+        move.placeCard(Card.SENATOR, 3);
+        //This test is a stub and needs card activation testing
+        SenatorActivator activator = (SenatorActivator) move.chooseCardToActivate(Rules.DICE_DISC_3);
+
+        activator.layCard(Card.CENTURIO, 1);
+        activator.layCard(Card.VELITES, Rules.DICE_DISC_2);
+
+        System.out.println(Arrays.toString(gameState.getPlayerCardsOnDiscs(0)));
+
+        activator.complete();
+        assert (gameState.getPlayerCardsOnDiscs(0)[0].equals(Card.CENTURIO));
+        assert (gameState.getPlayerCardsOnDiscs(0)[1].equals(Card.VELITES));
+        assert (gameState.getPlayerCardsOnDiscs(0)[2].equals(Card.SENATOR));
+
+
+
+        gameState.isGameCompleted();
+
+        // Check that player has lost the necessary sestertii from laying
+        // these cards
+        assert(gameState.getPlayerVictoryPoints(0) == 10);
+        assert(gameState.getPlayerVictoryPoints(1) == 10);
+        assert(gameState.getPlayerSestertii(0) == 0);
+        assert(gameState.getPlayerSestertii(1) == 0);
+
+
+
+
+        activator = (SenatorActivator) move.chooseCardToActivate(Rules.DICE_DISC_3);
+        activator.layCard(Card.SICARIUS, 3);
+        activator.complete();
+
+        assert (gameState.getPlayerCardsOnDiscs(0)[2].equals(Card.SICARIUS));
+
+        System.out.println("Testing Senator passed!!\n");
+
+    }
+
     public void testXXX() throws Exception {
-        System.out.println("Testing Sicarius\n");
+        System.out.println("Testing x\n");
 
 
-        System.out.println("Testing Sicarius passed!!\n");
+        System.out.println("Testing x passed!!\n");
 
     }
 }

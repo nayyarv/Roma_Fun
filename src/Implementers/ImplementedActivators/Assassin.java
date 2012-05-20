@@ -1,8 +1,7 @@
 package Implementers.ImplementedActivators;
 
 import Roma.Player;
-import framework.interfaces.activators.CardActivator;
-import framework.interfaces.activators.Targeted;
+import framework.interfaces.activators.*;
 
 /**
  * File Name:
@@ -10,7 +9,7 @@ import framework.interfaces.activators.Targeted;
  * Date: 21/05/12
  * Desc:
  */
-public class Assassin implements Targeted, CardActivator {
+public class Assassin implements Targeted, CardActivator, NeroActivator, SicariusActivator, PraetorianusActivator {
 
     Player player;
 

@@ -1,7 +1,9 @@
 package Implementers.ImplementedActivators;
 
 import Roma.Player;
+import framework.interfaces.activators.AesculapinumActivator;
 import framework.interfaces.activators.CardSelector;
+import framework.interfaces.activators.HaruspexActivator;
 
 /**
  * File Name:
@@ -9,7 +11,7 @@ import framework.interfaces.activators.CardSelector;
  * Date: 21/05/12
  * Desc:
  */
-public class SelectorImpl extends simpleActivator implements CardSelector {
+public class SelectorImpl extends simpleActivator implements CardSelector, AesculapinumActivator, HaruspexActivator {
 
     public SelectorImpl(Player player) {
         super(player);

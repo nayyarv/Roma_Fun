@@ -11,7 +11,6 @@ import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
-import Implementers.ImplementedActivators.SicariusActivatorImpl;
 
 import java.util.Collection;
 import java.util.List;
@@ -401,10 +400,9 @@ public class MoveMakerImplementer implements MoveMaker{
     private CardActivator getCorrectActivator(Card chosen, Player player){
         CardActivator activator = new dummyActivator();
         if (chosen.equals(Card.AESCULAPINUM)){
-            activator = new AesculapinumActivatorImpl(player);
-
+            activator = new SelectorImpl(player);
         } else if (chosen.equals(Card.ARCHITECTUS)){
-
+            activator = new layerImpl(player);
         } else if (chosen.equals(Card.CENTURIO)){
 
         } else if (chosen.equals(Card.CONSILIARIUS)){
@@ -418,7 +416,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.GLADIATOR)){
 
         } else if (chosen.equals(Card.HARUSPEX)){
-            activator = new HaruspexActivatorImpl(player);
+            activator = new SelectorImpl(player);
         } else if (chosen.equals(Card.LEGAT) ){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.LEGIONARIUS)){
@@ -430,17 +428,17 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.MERCATUS)){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.NERO)){
-            activator = new NeroActivatorImpl(player);
+            activator = new Assassin(player);
         } else if (chosen.equals(Card.ONAGER)){
 
         } else if (chosen.equals(Card.PRAETORIANUS)){
-            activator = new PraetorianusActivatorImpl(player);
+            activator = new Assassin(player);
         } else if (chosen.equals(Card.SCAENICUS)){
 
         } else if (chosen.equals(Card.SENATOR)){
-
+            activator = new layerImpl(player);
         } else if (chosen.equals(Card.SICARIUS)){
-            activator = new SicariusActivatorImpl(player);
+            activator = new Assassin(player);
         } else if (chosen.equals(Card.TELEPHONEBOX)){
 
         } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){

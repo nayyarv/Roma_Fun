@@ -1,15 +1,15 @@
 package Implementers;
 
-import Roma.Dice;
 import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
+
 import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -57,6 +57,102 @@ public class MoveMakerImplementer implements MoveMaker{
 
         return null;
     }
+
+    /**
+     * Activate the Bribe Disc with the given action die.
+     * <p/>
+     * <p>
+     * After this method is called:
+     * <ul>
+     * <li>the appropriate action die will have been used</li>
+     * <li>the correct amount of sestertii will have been removed from the
+     * player's Sestertii</li>
+     * <li>the card on the disc will be activated and
+     * </ul>
+     * </p>
+     * <p/>
+     * <p/>
+     * This will never be called if:
+     * <ul>
+     * <li>if the user does not have an unused action die of the given
+     * value</li>
+     * <li>the card cannot be activated at the current time</li>
+     * <li> there is no card on this disc </li>
+     * <li>the ActionData parameter does not match the activated
+     * card</li>
+     * </ul>
+     *
+     * @param diceToUse which value dice to activate the disc with
+     * @throws UnsupportedOperationException if the move is not yet
+     *                                       implemented
+     */
+    @Override
+    public CardActivator activateBribeDisc(int diceToUse) throws UnsupportedOperationException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    /**
+     * Place a card from the current player's hand on to the selected
+     * dice disc.
+     * <p/>
+     * <p>
+     * After this method is called:
+     * <ul>
+     * <li>the selected card is removed from the current player's hand
+     * </li>
+     * <li>the selected card will be present on the dice disc</li>
+     * <li>the required amount of Sestertii will have been deducted from
+     * the player's hand</li>
+     * <li>any extra changes specific to the placed card will be in
+     * effect</li>
+     * </ul>
+     * </p>
+     * <p/>
+     * <p>
+     * This will never be called if:
+     * <ul>
+     * <li>the player's hand doesn't contain a card of the given
+     * type</li>
+     * <li>the player has insufficient Sestertii to place the given
+     * card</li>
+     * <li>the dice disc is not valid for the current game</li>
+     * </ul>
+     * </p>
+     *
+     * @param toPlace       the type of card to be placed
+     * @param discToPlaceOn the disc on which the card will be placed
+     * @throws UnsupportedOperationException if the move is not yet
+     *                                       implemented
+     */
+    @Override
+    public void placeCard(Card toPlace, int discToPlaceOn) throws UnsupportedOperationException {
+        int currPlayer = gameState.getWhoseTurn();
+        Player player = playArea.getPlayer(currPlayer);
+        ActionData currentAction = new ActionData(currPlayer);
+
+        //TODO:         transferNextToThis();
+
+        int chosenCardIndex = handIndex(toPlace);
+
+        //Set action we are making
+        currentAction.setLayCard(true);
+
+        //Which card are we choosing?
+        currentAction.setCardIndex(chosenCardIndex);
+
+        //Which disc
+        currentAction.setTargetDisc(discToPlaceOn);
+
+        //
+        player.performActions(currentAction);
+
+        //TODO:clearEndActionWrappers();
+        //TODO: resetAllPlayable()
+
+
+    }
+
 
     /**
      * Activate the cards disc with the given action die, and choose
@@ -121,6 +217,11 @@ public class MoveMakerImplementer implements MoveMaker{
 
     }
 
+    private void lol(){
+        diceReqdIndex(3);
+
+    }
+
     /**
      * Activate the Money Disc with the given action die.
      * <p/>
@@ -177,38 +278,7 @@ public class MoveMakerImplementer implements MoveMaker{
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    /**
-     * Activate the Bribe Disc with the given action die.
-     * <p/>
-     * <p>
-     * After this method is called:
-     * <ul>
-     * <li>the appropriate action die will have been used</li>
-     * <li>the correct amount of sestertii will have been removed from the
-     * player's Sestertii</li>
-     * <li>the card on the disc will be activated and
-     * </ul>
-     * </p>
-     * <p/>
-     * <p/>
-     * This will never be called if:
-     * <ul>
-     * <li>if the user does not have an unused action die of the given
-     * value</li>
-     * <li>the card cannot be activated at the current time</li>
-     * <li> there is no card on this disc </li>
-     * <li>the ActionData parameter does not match the activated
-     * card</li>
-     * </ul>
-     *
-     * @param diceToUse which value dice to activate the disc with
-     * @throws UnsupportedOperationException if the move is not yet
-     *                                       implemented
-     */
-    @Override
-    public CardActivator activateBribeDisc(int diceToUse) throws UnsupportedOperationException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     /**
      * End the turn of the current player.
@@ -235,48 +305,16 @@ public class MoveMakerImplementer implements MoveMaker{
         //TODO: clearEndTurnWrappers();
 
         int nextPlayer = (gameState.getWhoseTurn()+1)%2;
+        gameState.setWhoseTurn(nextPlayer);
         playArea.startTurnPhase(playArea.getPlayer(nextPlayer));
 
 
     }
 
-    /**
-     * Place a card from the current player's hand on to the selected
-     * dice disc.
-     * <p/>
-     * <p>
-     * After this method is called:
-     * <ul>
-     * <li>the selected card is removed from the current player's hand
-     * </li>
-     * <li>the selected card will be present on the dice disc</li>
-     * <li>the required amount of Sestertii will have been deducted from
-     * the player's hand</li>
-     * <li>any extra changes specific to the placed card will be in
-     * effect</li>
-     * </ul>
-     * </p>
-     * <p/>
-     * <p>
-     * This will never be called if:
-     * <ul>
-     * <li>the player's hand doesn't contain a card of the given
-     * type</li>
-     * <li>the player has insufficient Sestertii to place the given
-     * card</li>
-     * <li>the dice disc is not valid for the current game</li>
-     * </ul>
-     * </p>
-     *
-     * @param toPlace       the type of card to be placed
-     * @param discToPlaceOn the disc on which the card will be placed
-     * @throws UnsupportedOperationException if the move is not yet
-     *                                       implemented
-     */
-    @Override
-    public void placeCard(Card toPlace, int discToPlaceOn) throws UnsupportedOperationException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    //TODO:Can i just throw unsupported operationException
+    //TODO: Opinion Andrew?
+    //TODO:
+    //TODO:
 
     //Get's the index required
     private int diceReqdIndex(int diceToUse)throws UnsupportedOperationException{
@@ -289,7 +327,7 @@ public class MoveMakerImplementer implements MoveMaker{
         throw new UnsupportedOperationException();
     }
 
-    private int cardIndex(Card chosen, int maxVal){
+    private int cardIndex(Card chosen, int maxVal) throws UnsupportedOperationException{
         List<Card> deck = gameState.getDeck();
         for (int i = 0; i<maxVal;i++){
             if (chosen.toString().equalsIgnoreCase(deck.get(i).toString())){
@@ -297,6 +335,25 @@ public class MoveMakerImplementer implements MoveMaker{
             }
         }
         //Not found
+        throw new UnsupportedOperationException();
+    }
+
+    private int handIndex(Card chosen) throws UnsupportedOperationException{
+        Collection<Card> hand = gameState.getPlayerHand(gameState.getWhoseTurn());
+        int i = 0;
+        for (Card card: hand){
+            if(card.toString().equalsIgnoreCase(chosen.toString())){
+                return i;
+            }
+            i++;
+        }
+        //haven't found the card
+        throw new UnsupportedOperationException();
+    }
+
+
+    //Should I use this instead?
+    private void invalidAction() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 }

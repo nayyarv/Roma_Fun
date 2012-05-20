@@ -151,9 +151,14 @@ public class GamePlayerInterface extends PlayerInterface {
         }
     }
 
-    private static int COLUMN_ONE_WIDTH = 30;
-    private static int COLUMN_TWO_WIDTH = 24;
-    private static int COLUMN_THREE_WIDTH = 30;
+    @Override
+    public void printFormatted(String centrePrompt, String ... toDisplay){
+        assert (toDisplay.length==2);
+        printOut(
+                padLeft(toDisplay[0], COLUMN_ONE_WIDTH) + " | "
+                + padCentre(centrePrompt, COLUMN_TWO_WIDTH) + " | "
+                + padRight(toDisplay[1], COLUMN_THREE_WIDTH), true);
+    }
 
     @Override
     public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,

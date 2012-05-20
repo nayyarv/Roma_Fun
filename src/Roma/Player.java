@@ -639,14 +639,26 @@ public class Player {
         Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
         Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
 
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
-            PlayerInterface.printOut(BREAK_LINE, true);
-            PlayerInterface.printOut("Player: " + players[player].getName(), true);
-            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
-                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
-            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
 
-        }
+        StringBuilder
+                playerNames,
+                victoryTokenAmount,
+                moneyAmount,
+                numCards;
+
+
+
+//        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+//            PlayerInterface.printOut(BREAK_LINE, true);
+//
+//            PlayerInterface.printOut("Player: " + players[player].getName(), true);
+//            PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +
+//                    "  \tMoney: " + moneyManager.getPlayerMoney(player), true);
+//            PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
+//
+//        }
+
+
         PlayerInterface.printOut("Top Card in Discard: "+ topDiscard.getName(), true);
         //Print's out a nice version of the dice lists
         while(option != CANCEL){

@@ -17,6 +17,11 @@ public abstract class PlayerInterface {
 
     public final static int CANCEL = -1;
 
+
+    public static int COLUMN_ONE_WIDTH = 30;
+    public static int COLUMN_TWO_WIDTH = 24;
+    public static int COLUMN_THREE_WIDTH = 30;
+
     abstract public int readInput(String title, boolean cancelOn, String... choices);
 
     abstract public int readIndex(String title, boolean cancelOn, String... choices);
@@ -59,4 +64,6 @@ public abstract class PlayerInterface {
 
     //Keeps reading till valid input is recieved
     public abstract int getIntegerInput(int... range);
+
+    public abstract void printFormatted(String centrePrompt, String... toDisplay);
 }

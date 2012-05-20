@@ -15,28 +15,31 @@ public class TestingGrimReaper {
 
     public static void main(String []args){
         ArrayList<Card> hand = new ArrayList<Card>();
-        hand.add(Card.ONAGER);
 
         GameStateImplementer gameStateImplementer = new GameStateImplementer("testing");
 
-        gameStateImplementer.setPlayerHand(0, hand);
-        int[] num = {1,1,1};
         gameStateImplementer.setWhoseTurn(0);
-        gameStateImplementer.setPlayerSestertii(0, 100);
-        //Set action dice not working
+
+        hand.add(Card.ONAGER);
+        hand.add(Card.TEMPLUM);
+        hand.add(Card.TEMPLUM);
+        hand.add(Card.TEMPLUM);
+        gameStateImplementer.setPlayerHand(0, hand);
+
+        int[] num = {1,1,1};
         gameStateImplementer.setActionDice(num);
-        Card[] diceDiscs1 = {Card.CENTURIO, Card.CONSUL, Card.CONSUL, Card.CONSUL,
-                Card.CONSUL, Card.CONSUL, Card.CENTURIO};
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.CONSUL,
-                Card.CONSUL, Card.CONSUL, Card.KAT};
+        gameStateImplementer.setPlayerSestertii(0, 1000);
+
+        Card[] diceDiscs1 = {Card.CENTURIO, Card.CENTURIO, Card.CENTURIO, Card.CENTURIO,
+                Card.CENTURIO, Card.CENTURIO, Card.CENTURIO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
+        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.GRIMREAPER,
+                Card.CONSUL, Card.CONSUL, Card.KAT};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
+
         gameStateImplementer.printStats();
-        System.err.println(gameStateImplementer.getDiscard());
         gameStateImplementer.runGame();
+
         System.err.println(gameStateImplementer.getDiscard());
-
     }
-
-
 }

@@ -66,6 +66,11 @@ public class Architectus extends CardBase {
         int handIndex = 0;
         int discIndex = 0;
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder[][] newActiveCards = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, Roma.MAX_PLAYERS);
+        }
 
         PlayerInterface.printOut("Play building cards from your hand for free", true);
         if (player.countType(hand, BUILDING) == 0) {
@@ -81,8 +86,9 @@ public class Architectus extends CardBase {
             try {
                 handIndex = player.getCardIndex(hand, Card.BUILDING, handIndices);
                 handIndices[i] = handIndex;
-                discIndex = player.getDiceDiscIndex(activeCards, false, false);
+                discIndex = player.getDiceDiscIndex(newActiveCards, false, false);
                 discIndices[i] = discIndex;
+                newActiveCards[player.getPlayerID()][discIndex] = hand.get(handIndex);
                 i++;
             } catch (CancelAction cancelAction) {
                 handIndex = CANCEL;

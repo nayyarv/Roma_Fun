@@ -5,6 +5,7 @@ import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
+import Roma.Roma;
 
 import java.util.ArrayList;
 
@@ -68,6 +69,11 @@ public class Senator extends CardBase {
         int handIndex = 0;
         int discIndex = 0;
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder[][] newActiveCards = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, Roma.MAX_PLAYERS);
+        }
 
         PlayerInterface.printOut("Play character cards from your hand for free", true);
         if (player.countType(hand, CHARACTER) == 0) {
@@ -90,6 +96,7 @@ public class Senator extends CardBase {
                 handIndices[i] = handIndex;
                 discIndex = player.getDiceDiscIndex(activeCards, false, false);
                 discIndices[i] = discIndex;
+                newActiveCards[player.getPlayerID()][discIndex] = hand.get(handIndex);
                 i++;
             } catch (CancelAction cancelAction) {
                 handIndex = CANCEL;

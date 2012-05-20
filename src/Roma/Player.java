@@ -595,11 +595,19 @@ public class Player {
         PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
 
         PlayerInterface.printOut(PlayerInterface.padRight("Turn: "+ playArea.getTurn(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft(getName()+"'s Turn", 45), true);
 
-        String name = (topDiscard==null)? "Empty":topDiscard.getName();
-        name = "Last Discard: " + name;
-        PlayerInterface.printOut(PlayerInterface.padLeft(name, 45), true);
+        PlayerInterface.printOut(PlayerInterface.padRight("Size of Playing Deck: "+
+                playArea.getCardManager().getPlayingSize(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft("Size of discard Pile: "+
+                playArea.getCardManager().getDiscardSize(), 45), true);
 
+        String topDiscardName = (topDiscard==null)? "Empty":topDiscard.getName();
+        topDiscardName = "Last Discard: " + topDiscardName;
+
+        PlayerInterface.printOut(PlayerInterface.padRight("Victory Tokens in Pool: "
+                + victoryTokens.getPoolTokens(), 45), false);
+        PlayerInterface.printOut(PlayerInterface.padLeft(topDiscardName, 45), true);
 
         PlayerInterface.printOut(PlayerInterface.BREAK_LINE, true);
 

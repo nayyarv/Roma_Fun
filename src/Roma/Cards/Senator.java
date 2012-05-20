@@ -72,7 +72,7 @@ public class Senator extends CardBase {
         CardHolder[][] newActiveCards = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
-            System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, Roma.MAX_PLAYERS);
+            System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, DiceDiscs.CARD_POSITIONS);
         }
 
         PlayerInterface.printOut("Play character cards from your hand for free", true);

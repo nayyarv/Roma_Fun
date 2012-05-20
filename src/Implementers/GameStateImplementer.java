@@ -422,7 +422,7 @@ public class GameStateImplementer implements GameState{
 
         Collections.addAll(currPlayer, diceDiscs.getPlayerActives(0));
         Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(1));
-        playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
     }
 
     public void printCardList(int playerID){

@@ -96,6 +96,7 @@ public class Senator extends CardBase {
                 discIndex = player.getDiceDiscIndex(activeCards, false, false);
                 discIndices[i] = discIndex;
                 newActiveCards[player.getPlayerID()][discIndex] = hand.get(handIndex);
+                player.printDiceDiscs(newActiveCards);
                 i++;
             } catch (CancelAction cancelAction) {
                 handIndex = CANCEL;

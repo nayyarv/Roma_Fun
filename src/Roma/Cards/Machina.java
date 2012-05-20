@@ -91,6 +91,7 @@ public class Machina extends CardBase {
                 toIndex = player.getDiceDiscIndex(activeCardsPrime, false, false);
                 toIndices[i] = toIndex;
                 activeCardsPrime[player.getPlayerID()][toIndex] = activeCards[player.getPlayerID()][fromIndex];
+                player.printDiceDiscs(activeCardsPrime);
                 i++;
             } catch (CancelAction cancelAction) {
                 endSelection = true;

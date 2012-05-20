@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-public class TestingGrimReaper {
+
+public class TestingConsul {
 
     public static void main(String []args){
         ArrayList<Card> hand = new ArrayList<Card>();
@@ -33,11 +34,11 @@ public class TestingGrimReaper {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.SICARIUS, Card.SICARIUS, Card.SICARIUS, Card.SICARIUS,
-                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
+        Card[] diceDiscs1 = {Card.CONSUL, Card.CONSUL, Card.CONSUL, Card.CONSUL,
+                Card.CONSUL, Card.CONSUL, Card.CONSUL};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.SICARIUS,
-                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
+        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
+                Card.CONSUL, Card.CONSUL, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
         gameStateImplementer.printStats();
@@ -45,4 +46,6 @@ public class TestingGrimReaper {
 
         System.err.println(gameStateImplementer.getDiscard());
     }
+
+
 }

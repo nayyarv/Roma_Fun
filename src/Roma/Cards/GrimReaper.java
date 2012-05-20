@@ -117,6 +117,7 @@ public class GrimReaper extends CardBase {
         @Override
         public Wrapper insertWrapper(CardHolder card) {
             Wrapper wrapper = new GrimWrapper(card);
+            wrapperList.add(wrapper);
             return wrapper;
         }
     }

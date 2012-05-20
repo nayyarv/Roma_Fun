@@ -404,6 +404,12 @@ public class Player {
         return choice;
     }
 
+    private void checkDesc(CardHolder[] cardArray){
+        ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
+        Collections.addAll(cardList, cardArray);
+        checkDesc(cardList);
+    }
+
     private void checkDesc(ArrayList<CardHolder> cardList){
         int cardIndex;
         CardHolder card;
@@ -447,7 +453,7 @@ public class Player {
 
         while(!validChoice){
             PlayerInterface.printOut(BREAK_LINE, true);
-            playerInterface.printFilteredDiceList(currPlayer, opposingPlayer,
+            playerInterface.printFilteredDiscList(currPlayer, opposingPlayer,
                     filterCurrent, filterOther);
             //Print's out a nice version of the dice lists
             option = playerInterface.readInput(strPrompt, true, strOption);
@@ -465,12 +471,12 @@ public class Player {
                 PlayerInterface.printOut("Invalid Input, please try again.", true);
             }
 
-            if(filterCurrent){//Choosing from your own cards
+            if(filterCurrent && choice != CANCEL){//Choosing from your own cards
                 validChoice = checkValid(currPlayer.get(choice));
                 if(!validChoice){
                     PlayerInterface.printOut("Not a valid choice!", true);
                 }
-            } else if (filterOther){
+            } else if (filterOther && choice != CANCEL){
                 validChoice = checkValid(opposingPlayer.get(choice));
                 if(!validChoice){
                     PlayerInterface.printOut("Not a valid choice!", true);
@@ -512,6 +518,7 @@ public class Player {
 
         moneyManager.loseMoney(playerID, chosenCard.getCost());
         diceDiscs.layCard(this, chosenPosition, chosenCard);
+        printDiceDiscs(diceDiscs.getActiveCards());
     }
 
     private void useDice(ActionData actionData) {
@@ -537,11 +544,6 @@ public class Player {
         }
     }
 
-
-
-    //input value
-    //
-
     //Or maybe just have a function that requests a number from the player?
     //With "autoResponse" values when in testing mode?
     public void drawCards(int value, int cardDrawIndex) {
@@ -557,15 +559,6 @@ public class Player {
         cardManager.discard(tempHand);
 
         hand.add(chosenCard);
-    }
-
-    public void checkPlayable() {
-        MoneyManager moneyManager = playArea.getMoneyManager();
-        for (CardHolder card : hand) {
-            if (card.getCost() < moneyManager.getPlayerMoney(playerID)) {
-                card.setPlayable(true);
-            }
-        }
     }
 
     public int countType(ArrayList<CardHolder> cardList, String type) {
@@ -589,23 +582,19 @@ public class Player {
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
         MoneyManager moneyManager = playArea.getMoneyManager();
         CardHolder topDiscard = playArea.getCardManager().getTopDiscard();
+        CardManager cardManager = playArea.getCardManager();
 
         final String
                 strPrompt = "Dice Discs:",
                 strOption[] = {"Check Description of your Cards",
                         "Check Description of your Opponent's Card"};
-
         final int
                 DESC_OWN = 1,
                 DESC_OPP = 2;
+
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
         int option = 0;
         int otherID = getOtherPlayerID();
-
-        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
-        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
-
-        Collections.addAll(currPlayer, diceDiscs.getPlayerActives(playerID));
-        Collections.addAll(opposingPlayer, diceDiscs.getPlayerActives(otherID));
 
         for(int player = 0; player < Roma.MAX_PLAYERS; player++){
             PlayerInterface.printOut(BREAK_LINE, true);
@@ -615,20 +604,34 @@ public class Player {
             PlayerInterface.printOut("Cards in hand: " + players[player].handSize(), true);
 
         }
+        PlayerInterface.printOut(BREAK_LINE, true);
+        PlayerInterface.printOut("Victory Tokens left in pool: " + victoryTokens.getPoolTokens(), true);
+        PlayerInterface.printOut("Cards in deck: " + cardManager.getPlayingSize()
+                + " \tCards in discard pile: " + cardManager.getDiscardSize(), true);
         PlayerInterface.printOut("Top Card in Discard: "+ topDiscard.getName(), true);
         //Print's out a nice version of the dice lists
         while(option != CANCEL){
-            playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+            printDiceDiscs(activeCards);
             option = playerInterface.readInput(strPrompt, true, strOption);
 
             if (option == DESC_OWN){
-                checkDesc(currPlayer);
+                checkDesc(activeCards[playerID]);
             } else if (option == DESC_OPP){
-                checkDesc(opposingPlayer);
+                checkDesc(activeCards[otherID]);
             } else if (option==CANCEL){
             } else {
                 PlayerInterface.printOut("Invalid Input, please try again.", true);
             }
         }
+    }
+
+    public void printDiceDiscs(CardHolder[][] activeCards){
+        int otherID = getOtherPlayerID();
+        ArrayList<CardHolder> currPlayer = new ArrayList<CardHolder>();
+        ArrayList<CardHolder> opposingPlayer = new ArrayList<CardHolder>();
+        Collections.addAll(currPlayer, activeCards[playerID]);
+        Collections.addAll(opposingPlayer, activeCards[otherID]);
+        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
+        PlayerInterface.printOut(BREAK_LINE, true);
     }
 }

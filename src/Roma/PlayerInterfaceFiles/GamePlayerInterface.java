@@ -156,8 +156,8 @@ public class GamePlayerInterface extends PlayerInterface {
     private static int COLUMN_THREE_WIDTH = 30;
 
     @Override
-    public void printFilteredDiceList (ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
-                                       boolean filterCurr, boolean filterOther){
+    public void printFilteredDiscList(ArrayList<CardHolder> currPlayer, ArrayList<CardHolder> opposingPlayer,
+                                      boolean filterCurr, boolean filterOther){
         String discNumber;
 
         PlayerInterface.printOut(BREAK_LINE, true);

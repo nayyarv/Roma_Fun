@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-public class TestingGrimReaper {
+
+public class TestingArchitectus {
 
     public static void main(String []args){
         ArrayList<Card> hand = new ArrayList<Card>();
@@ -26,23 +27,27 @@ public class TestingGrimReaper {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,3,6};
+        int[] num = {1,1,1};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.SICARIUS, Card.SICARIUS, Card.SICARIUS, Card.SICARIUS,
-                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
+        Card[] diceDiscs1 = {Card.ARCHITECTUS, Card.NERO, Card.NERO, Card.NERO,
+                Card.NERO, Card.NERO, Card.NERO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.GRIMREAPER, Card.SICARIUS,
-                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
+        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
+                Card.CONSUL, Card.CONSUL, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
+        System.err.println("Cards in deck: \n" + gameStateImplementer.getDeck());
+        System.err.println("Cards in discard: \n" + gameStateImplementer.getDiscard());
 
         gameStateImplementer.printStats();
         gameStateImplementer.runGame();
 
         System.err.println(gameStateImplementer.getDiscard());
     }
+
+
 }

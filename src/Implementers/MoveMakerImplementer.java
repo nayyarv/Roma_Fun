@@ -173,7 +173,6 @@ public class MoveMakerImplementer implements MoveMaker{
         //TODO:clearEndActionWrappers();
         //TODO: resetAllPlayable()
 
-
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

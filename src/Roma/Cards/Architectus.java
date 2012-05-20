@@ -63,16 +63,24 @@ public class Architectus extends CardBase {
         ArrayList<CardHolder> hand = player.getHand();
         int[] handIndices = new int[hand.size()];
         int[] discIndices = new int[hand.size()];
+        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+            handIndices[i] = CANCEL;
+            discIndices[i] = CANCEL;
+        }
         int handIndex = 0;
         int discIndex = 0;
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder[][] newActiveCards = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, DiceDiscs.CARD_POSITIONS);
+        }
 
         PlayerInterface.printOut("Play building cards from your hand for free", true);
         if (player.countType(hand, BUILDING) == 0) {
             PlayerInterface.printOut("No characters in hand!", true);
             player.cancel();
         }
-        player.commit();
 
         //get player input for which cards to lay
         //collect player input
@@ -81,8 +89,10 @@ public class Architectus extends CardBase {
             try {
                 handIndex = player.getCardIndex(hand, Card.BUILDING, handIndices);
                 handIndices[i] = handIndex;
-                discIndex = player.getDiceDiscIndex(activeCards, false, false);
+                discIndex = player.getDiceDiscIndex(newActiveCards, false, false);
                 discIndices[i] = discIndex;
+                newActiveCards[player.getPlayerID()][discIndex] = hand.get(handIndex);
+                player.printDiceDiscs(newActiveCards);
                 i++;
             } catch (CancelAction cancelAction) {
                 handIndex = CANCEL;
@@ -94,6 +104,7 @@ public class Architectus extends CardBase {
             activationData.add(handIndices[j]);
             activationData.add(discIndices[j]);
         }
+        player.commit();
     }
 
     //activationData: ([cardHandIndex][positionIndex])*repeated as desired

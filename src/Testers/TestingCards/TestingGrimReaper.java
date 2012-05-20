@@ -40,7 +40,6 @@ public class TestingGrimReaper {
                 Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
-        gameStateImplementer.printStats();
         gameStateImplementer.runGame();
 
         System.err.println(gameStateImplementer.getDiscard());

@@ -24,7 +24,6 @@ public class TestingKat {
         Card[] diceDiscs = {Card.KAT, Card.CONSUL, Card.NOT_A_CARD, Card.NOT_A_CARD,
                 Card.NOT_A_CARD, Card.NOT_A_CARD, Card.NOT_A_CARD};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs);
-        gameStateImplementer.printStats();
         System.err.println(gameStateImplementer.getDiscard());
         gameStateImplementer.runGame();
         System.err.println(gameStateImplementer.getDiscard());

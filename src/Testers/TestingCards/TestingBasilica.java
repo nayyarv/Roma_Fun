@@ -43,7 +43,7 @@ public class TestingBasilica {
         System.err.println("Cards in deck: \n" + gameStateImplementer.getDeck());
         System.err.println("Cards in discard: \n" + gameStateImplementer.getDiscard());
 
-        gameStateImplementer.printStats();
+        gameStateImplementer.isGameCompleted();
         gameStateImplementer.runGame();
 
         System.err.println(gameStateImplementer.getDiscard());

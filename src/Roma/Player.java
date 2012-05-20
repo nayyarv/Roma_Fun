@@ -619,7 +619,7 @@ public class Player {
 
         //Print's out a nice version of the dice lists
 
-        playerInterface.printFilteredDiceList(currPlayer, opposingPlayer, false, false);
+        playerInterface.printFilteredDiscList(currPlayer, opposingPlayer, false, false);
 
     }
 

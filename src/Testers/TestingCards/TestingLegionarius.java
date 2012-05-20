@@ -43,7 +43,7 @@ public class TestingLegionarius {
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
-        gameStateImplementer.printStats();
+        gameStateImplementer.isGameCompleted();
         gameStateImplementer.runGame();
 
         System.err.println(gameStateImplementer.getDiscard());

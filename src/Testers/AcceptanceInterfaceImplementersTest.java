@@ -112,9 +112,8 @@ public class AcceptanceInterfaceImplementersTest extends TestCase {
         gameState.isGameCompleted();
 
         System.out.println("Testing Card laying passed!!\n");
-
-
-
     }
+
+
 
 }

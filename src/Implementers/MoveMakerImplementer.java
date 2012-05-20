@@ -1,5 +1,6 @@
 package Implementers;
 
+import Implementers.ImplementedActivators.MercatorActivatorImpl;
 import Implementers.ImplementedActivators.dummyActivator;
 import Implementers.ImplementedActivators.simpleActivator;
 import Roma.Cards.CardHolder;
@@ -414,7 +415,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.MACHINA)){
 
         } else if (chosen.equals(Card.MERCATOR)){
-
+            correct = new MercatorActivatorImpl(player);
         } else if (chosen.equals(Card.MERCATUS)){
             correct = new simpleActivator(player);
         } else if (chosen.equals(Card.NERO)){

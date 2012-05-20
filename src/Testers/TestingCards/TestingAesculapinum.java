@@ -4,6 +4,7 @@ import Implementers.GameStateImplementer;
 import framework.cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * File Name:
@@ -11,8 +12,6 @@ import java.util.ArrayList;
  * Date: 19/05/12
  * Desc:
  */
-
-//TODO: implement test
 
 public class TestingAesculapinum {
 
@@ -28,6 +27,11 @@ public class TestingAesculapinum {
         hand.add(Card.TEMPLUM);
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
+        ArrayList<Card> newDiscardPile = new ArrayList<Card>();
+        newDiscardPile.add(Card.KAT);
+        newDiscardPile.add(Card.TURRIS);
+        newDiscardPile.add(Card.CONSUL);
+        gameStateImplementer.setDiscard(newDiscardPile);
 
         int[] num = {1,1,1};
         gameStateImplementer.setActionDice(num);
@@ -36,7 +40,7 @@ public class TestingAesculapinum {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
+        Card[] diceDiscs1 = {Card.AESCULAPINUM, Card.NERO, Card.NERO, Card.NERO,
                 Card.NERO, Card.NERO, Card.NERO};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,

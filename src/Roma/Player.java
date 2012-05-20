@@ -634,6 +634,13 @@ public class Player {
 
 
     public void printStats() {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        Player[] players = playArea.getAllPlayers();
+        VictoryTokens victoryTokens = playArea.getVictoryTokens();
+        MoneyManager moneyManager = playArea.getMoneyManager();
+        CardManager cardManager = playArea.getCardManager();
+        CardHolder topDiscard = cardManager.getTopDiscard();
+
         final String
                 strPrompt = "Dice Discs:",
                 strOption[] = {"Check Description of your Cards",

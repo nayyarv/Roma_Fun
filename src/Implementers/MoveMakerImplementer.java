@@ -11,7 +11,7 @@ import framework.cards.Card;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
 import framework.interfaces.activators.CardActivator;
-import framework.interfaces.activators.SicariusActivator;
+import Implementers.ImplementedActivators.SicariusActivatorImpl;
 
 import java.util.Collection;
 import java.util.List;
@@ -401,6 +401,7 @@ public class MoveMakerImplementer implements MoveMaker{
     private CardActivator getCorrectActivator(Card chosen, Player player){
         CardActivator activator = new dummyActivator();
         if (chosen.equals(Card.AESCULAPINUM)){
+            activator = new AesculapinumActivatorImpl(player);
 
         } else if (chosen.equals(Card.ARCHITECTUS)){
 
@@ -417,7 +418,7 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.GLADIATOR)){
 
         } else if (chosen.equals(Card.HARUSPEX)){
-
+            activator = new HaruspexActivatorImpl(player);
         } else if (chosen.equals(Card.LEGAT) ){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.LEGIONARIUS)){
@@ -433,13 +434,13 @@ public class MoveMakerImplementer implements MoveMaker{
         } else if (chosen.equals(Card.ONAGER)){
 
         } else if (chosen.equals(Card.PRAETORIANUS)){
-
+            activator = new PraetorianusActivatorImpl(player);
         } else if (chosen.equals(Card.SCAENICUS)){
 
         } else if (chosen.equals(Card.SENATOR)){
 
         } else if (chosen.equals(Card.SICARIUS)){
-
+            activator = new SicariusActivatorImpl(player);
         } else if (chosen.equals(Card.TELEPHONEBOX)){
 
         } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){

@@ -26,7 +26,7 @@ public class TestingNero {
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
 
-        int[] num = {1,3,51};
+        int[] num = {1,3,5};
         gameStateImplementer.setActionDice(num);
         gameStateImplementer.setPlayerSestertii(0, 1000);
         gameStateImplementer.setPlayerSestertii(1, 1000);

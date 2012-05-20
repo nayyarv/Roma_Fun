@@ -81,7 +81,7 @@ public class Kat extends CardBase {
 
     @Override
     public String getDescription() {
-        return DESCRIPTION + "(" + (countLives() + 1) + " lives left)";
+        return DESCRIPTION + " (" + (countLives() + 1) + " lives left)";
     }
 
     private int countLives() {

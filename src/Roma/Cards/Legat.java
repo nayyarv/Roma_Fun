@@ -58,8 +58,19 @@ public class Legat extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        int targetPlayerID = player.getOtherPlayerID();
+        CardHolder[] enemyCards = diceDiscs.getPlayerActives(targetPlayerID);
+        int emptySlotCount = 0;
+
+        for (CardHolder card : enemyCards) {
+            if (card == null) {
+                emptySlotCount++;
+            }
+        }
         PlayerInterface.printOut("Get 1 victory point from the stockpile for every dice " +
                 "disc not occupied by the opponent", true);
+        PlayerInterface.printOut("Opponent has " + emptySlotCount + " empty dice discs", true);
         player.commit();
     }
 

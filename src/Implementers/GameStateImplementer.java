@@ -1,10 +1,9 @@
 package Implementers;
 
+import Roma.Cards.CardFactory;
+import Roma.Cards.CardHolder;
 import Roma.*;
-import Roma.Cards.*;
-import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
-import Roma.VictoryTokens;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 
@@ -29,6 +28,7 @@ public class GameStateImplementer implements GameState{
     @Deprecated
     public GameStateImplementer(String testing){
         assert (testing.equalsIgnoreCase("testing"));
+        System.err.println("Testing GameStateImplementer");
         playArea = new PlayArea("testing");
     }
 

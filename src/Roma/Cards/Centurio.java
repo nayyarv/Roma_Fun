@@ -101,7 +101,6 @@ public class Centurio extends CardBase {
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
         int targetPlayer = player.getOtherPlayerID();
         int chosenDieIndex = CANCEL;
@@ -111,9 +110,7 @@ public class Centurio extends CardBase {
         int battleValue = player.getBattleValue();
 
         //if empty then battleVictory == true
-        if (activationData.isEmpty()) {
-            diceDiscs.discardTarget(targetPlayer, position);
-        } else {
+        if (!activationData.isEmpty()){
             chosenDieIndex = activationData.remove(0);
             //if chosenDieIndex isn't cancel then add die value to battle value and check defense again
             if (chosenDieIndex != CANCEL) {

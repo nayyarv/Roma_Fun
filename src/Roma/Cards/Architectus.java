@@ -102,7 +102,7 @@ public class Architectus extends CardBase {
     public void activate(Player player, int position) {
         CardHolder card;
         ArrayList<CardHolder> hand = player.getHand();
-        WrapperMaker wrapperMaker = new WrapperMaker();
+        WrapperMaker wrapperMaker = new WrapperMaker(player.getPlayerID());
         wrapperMaker.setCostScale(COST_SCALE);
         Wrapper wrapper = null;
         ArrayList<Integer> activationData = player.getActivationData();

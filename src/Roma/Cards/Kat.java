@@ -24,7 +24,7 @@ public class Kat extends CardBase {
     final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;
-    private static final int NUMBER_OF_LIVES = 9;
+    private static final int NUMBER_OF_LIVES = 8;
 
     public Kat(PlayArea playArea) {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
@@ -46,7 +46,7 @@ public class Kat extends CardBase {
 
     @Override
     public void enterPlay(Player player, int position) {
-        KatWrapperMaker katWrapperMaker = new KatWrapperMaker();
+        KatWrapperMaker katWrapperMaker = new KatWrapperMaker(player.getPlayerID());
 
         for (int i = 0; i < NUMBER_OF_LIVES; i++) {
             katWrapperMaker.insertWrapper(cardHolder);
@@ -81,7 +81,7 @@ public class Kat extends CardBase {
 
     @Override
     public String getDescription() {
-        return DESCRIPTION + "(" + countLives() + " lives left)";
+        return DESCRIPTION + "(" + (countLives() + 1) + " lives left)";
     }
 
     private int countLives() {
@@ -108,12 +108,16 @@ public class Kat extends CardBase {
         }
 
         @Override
-        public void discarded(CardHolder[] playerActiveCards, int position) {
+        public void discarded(int targetPlayerID, int position) {
             deleteThisWrapper();
         }
     }
 
     private class KatWrapperMaker extends WrapperMaker {
+        public KatWrapperMaker(int playerID) {
+            super(playerID);
+        }
+
         @Override
         public Wrapper insertWrapper(CardHolder card) {
             Wrapper wrapper = new KatWrapper(card);

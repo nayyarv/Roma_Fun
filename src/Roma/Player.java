@@ -10,7 +10,7 @@ import java.util.Collections;
 
 
 public class Player {
-    private boolean MANUAL_TESTING = false;
+    private boolean MANUAL_TESTING = true;
     public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
     public static final int CANCEL = PlayerInterface.CANCEL;
     private final String name;

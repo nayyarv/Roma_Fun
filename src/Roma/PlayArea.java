@@ -272,6 +272,7 @@ public class PlayArea {
         assert testing.equalsIgnoreCase("testing");
         this.testing = true;
         //System.err.println("In Testing phase");
+        turnHistory = new TurnHistory();
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();

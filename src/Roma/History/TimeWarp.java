@@ -99,8 +99,10 @@ public class TimeWarp {
 
             playerActives = diceDiscs.getPlayerActives(i);
             for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
-                while(playerActives[j].countLives() > lives[i][j]){
-                    playerActives[j].discarded(i, j);
+                if(playerActives[j] != null){
+                    while(playerActives[j].countLives() > lives[i][j]){
+                        playerActives[j].discarded(i, j);
+                    }
                 }
             }
 

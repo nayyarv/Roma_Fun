@@ -314,6 +314,7 @@ public class DiceDiscs {
         fromPastTime[timeIndex][playerID][position] = card;
         timeLives[timeIndex][playerID][position] = lives;
         card.leavePlay();
+        activeCards[playerID][position] = null;
     }
 
     public void setFromPastTime(CardHolder[][][] fromPastTime) {
@@ -332,6 +333,8 @@ public class DiceDiscs {
             player = playArea.getPlayer(i);
             for(int j = 0; j < CARD_POSITIONS; j++){
                 if(fromPastTime[0][i][j] != null){
+                    PlayerInterface.printOut(Player.BREAK_LINE, true);
+                    PlayerInterface.printOut(fromPastTime[0][i][j].getName() + " has arrived from the past!", true);
                     layCard(player, j, fromPastTime[0][i][j]);
                     card = getTargetCard(i, j);
                     while(card.countLives() > timeLives[0][i][j]){

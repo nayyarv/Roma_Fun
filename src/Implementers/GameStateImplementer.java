@@ -442,7 +442,7 @@ public class GameStateImplementer implements GameState{
         CardFactory cardFactory = new CardFactory(playArea);
         ArrayList<CardHolder> newList = new ArrayList<CardHolder>();
         for(Card card:cardList){
-            if (card.toString().equalsIgnoreCase(Card.NOT_A_CARD.toString())){
+            if (card == null || card.toString().equalsIgnoreCase(Card.NOT_A_CARD.toString())){
                 newList.add(null);
             } else {
                 //System.out.println(card.toString());

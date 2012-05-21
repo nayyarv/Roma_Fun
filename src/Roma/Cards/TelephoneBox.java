@@ -76,6 +76,8 @@ public class TelephoneBox extends CardBase {
         int targetIndex;
         int option;
         PlayerInterface playerInterface = player.getPlayerInterface();
+        CardHolder card;
+        int timeValue;
 
         freeDice.remove(dieIndex);
         PlayerInterface.printOut("Send an active friendly card backward or forward in time", true);
@@ -85,22 +87,33 @@ public class TelephoneBox extends CardBase {
         }
         PlayerInterface.printOut("Telephone Box requires a 2nd Action Die:", true);
         dieIndex = player.getDieIndex(freeDice);
-        freeDice.remove(dieIndex);
+        timeValue = freeDice.remove(dieIndex).getValue();
         activationData.add(dieIndex);
 
         PlayerInterface.printOut("Prevent which card shall be the time-traveller?", true);
-        targetIndex = player.getDiceDiscIndex(activeCards, false, false);
+        for (int i = 0; i < DiceDiscs.CARD_POSITIONS; i++) {
+            card = activeCards[player.getPlayerID()][i];
+            if (card != null) {
+                card.setPlayable(true);
+            }
+        }
+        targetIndex = player.getDiceDiscIndex(activeCards, true, false);
         activationData.add(targetIndex);
 
         option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
         if (option == CANCEL) {
             player.cancel();
         } else if (option == BACKWARD) {
-            option = 1;
-        } else if (option == FORWARD) {
+            if(timeValue > playArea.getTurn()){
+                PlayerInterface.printOut("Can't go back that far in time because not enought turns have passed!", true);
+                player.cancel();
+            }
             option = -1;
+        } else if (option == FORWARD) {
+            option = 1;
         }
         activationData.add(option);
+        player.commit();
     }
 
     //activationData: [actionDieIndex][activeCardIndex][+1/-1]
@@ -121,10 +134,11 @@ public class TelephoneBox extends CardBase {
 
         if(timeDirection < 0){
             TimeWarp timeWarp = new TimeWarp(turnHistory, timeValue, player.getPlayerID(),
-                    position, card.getName(), card.countLives(), playArea);
+                    activeCardIndex, card.getName(), card.countLives(), playArea);
+            PlayerInterface.printOut(card.getName() + " was sent to the past!", true);
             playArea.setTimeWarp(timeWarp);
         } else {
-
+            diceDiscs.setFromPast(timeValue, player.getPlayerID(), activeCardIndex);
         }
     }
 }

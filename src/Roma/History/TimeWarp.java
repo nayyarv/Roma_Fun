@@ -25,6 +25,7 @@ public class TimeWarp {
     private final int lives;
     private final PlayArea playArea;
     private final GameStateImplementer gameStateImplementer;
+    private CardFactory cardFactory;
 
     public TimeWarp(TurnHistory turnHistory, int timeReverse, int playerID, int position,
                     String cardName, int lives, PlayArea playArea){
@@ -37,6 +38,7 @@ public class TimeWarp {
         this.lives = lives;
         this.playArea = playArea;
         gameStateImplementer = new GameStateImplementer(playArea);
+        cardFactory = new CardFactory(playArea);
     }
 
     //three things to preserve:
@@ -63,6 +65,12 @@ public class TimeWarp {
         int[][] lives = jumpDestination.getLives();
         int[] money = jumpDestination.getMoney();
         int[] victory = jumpDestination.getVictory();
+        String[][][] oldFromPast = jumpDestination.getFromPast();
+        int[][][] oldPastLives = jumpDestination.getPastLives();
+        CardHolder[][][] newFromPast =
+                new CardHolder[Dice.MAX_DIE_VALUE][RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+        int[][][] newPastLives = new int[Dice.MAX_DIE_VALUE][RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+        CardHolder card;
 
         ArrayList<Card> cardList = new ArrayList<Card>();
         Card[] cardArray = new Card[DiceDiscs.CARD_POSITIONS];
@@ -110,6 +118,28 @@ public class TimeWarp {
             gameStateImplementer.setPlayerSestertii(i, money[i]);
             gameStateImplementer.setPlayerVictoryPoints(i, victory[i]);
         }
+
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
+                for(int k = 0; k < DiceDiscs.CARD_POSITIONS; k++){
+                    if(!oldFromPast[i][j][k].equalsIgnoreCase("")){
+                        card = cardFactory.getCard
+                                (Card.valueOf(oldFromPast[i][j][k].replaceAll(" ", "").toUpperCase()).toString());
+                    } else {
+                        card = null;
+                    }
+                    newFromPast[i][j][k] = card;
+                }
+            }
+        }
+        diceDiscs.setFromPastTime(newFromPast);
+
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
+                System.arraycopy(oldPastLives[i][j], 0, newPastLives[i][j], 0, DiceDiscs.CARD_POSITIONS);
+            }
+        }
+        diceDiscs.setTimeLives(newPastLives);
 
         for(int i = 0; i <= timeReverse ; i++){
             timeChunk.add(0, history.remove(history.size() - 1));
@@ -160,7 +190,6 @@ public class TimeWarp {
     private void insertTimeTraveller() {
         Player player = playArea.getPlayer(playerID);
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        CardFactory cardFactory = new CardFactory(playArea);
         CardHolder card = cardFactory.getCard
                 (Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()).toString());
         diceDiscs.layCard(player, position, card);

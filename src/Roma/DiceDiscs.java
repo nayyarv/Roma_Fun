@@ -367,6 +367,8 @@ public class DiceDiscs {
                 for(int k = 0; k < CARD_POSITIONS; k++){
                     if(fromPastTime[i][j][k] != null){
                         fromPast[i][j][k] = fromPastTime[i][j][k].getName();
+                    } else {
+                        fromPast[i][j][k] = "";
                     }
                 }
             }

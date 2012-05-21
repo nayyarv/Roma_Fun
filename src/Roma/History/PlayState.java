@@ -32,6 +32,7 @@ public class PlayState {
     private int victoryPool;
     private int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
     private String[][][] fromPast;
+    private int[][][] pastLives;
 
     private ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 
@@ -45,6 +46,7 @@ public class PlayState {
         ArrayList<CardHolder> cardList = null;
         CardHolder[] playerActiveCards = null;
         ArrayList<Dice> freeDice = null;
+        int[][][] currentPastLives = diceDiscs.getTimeLives();
 
         //turn number
         turn = playArea.getTurn();
@@ -100,6 +102,11 @@ public class PlayState {
 
         fromPast = diceDiscs.fromPastToString();
 
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
+                System.arraycopy(currentPastLives[i][j], 0, pastLives[i][j], 0, DiceDiscs.CARD_POSITIONS);
+            }
+        }
     }
 
     public void addActionHistory(ActionData actionData){
@@ -175,5 +182,9 @@ public class PlayState {
 
     public String[][][] getFromPast() {
         return fromPast;
+    }
+
+    public int[][][] getPastLives() {
+        return pastLives;
     }
 }

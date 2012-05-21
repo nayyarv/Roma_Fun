@@ -42,7 +42,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.ARCHITECTUS)){
             activator = new layerImpl(player);
         } else if (chosen.equals(Card.CENTURIO)){
-
+            activator = new CenturioActivatorImpl(player);
         } else if (chosen.equals(Card.CONSILIARIUS)){
             activator = new RearrangerImpl(player);
         } else if (chosen.equals(Card.CONSUL)){
@@ -50,7 +50,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.ESSEDUM)){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.FORUM)){
-            //TODO: Later
+
 
         } else if (chosen.equals(Card.GLADIATOR)){
             activator = new Assassin(player);

@@ -4,10 +4,7 @@ package Roma.History;
 import Implementers.GameStateImplementer;
 import Roma.Cards.CardFactory;
 import Roma.Cards.CardHolder;
-import Roma.DiceDiscs;
-import Roma.PlayArea;
-import Roma.Player;
-import Roma.Roma;
+import Roma.*;
 import framework.cards.Card;
 
 import java.util.ArrayList;
@@ -85,11 +82,11 @@ public class TimeWarp {
         }
         gameStateImplementer.setDiscard(cardList);
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             gameStateImplementer.setPlayerVictoryPoints(i, 1);
         }
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             for(String cardName : hand.get(i)){
                 cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
             }

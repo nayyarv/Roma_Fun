@@ -35,6 +35,32 @@ public class TelephoneBox extends CardBase {
     }
 
     @Override
+    public CardHolder makeOne(PlayArea playArea) {
+        CardBase card = new TelephoneBox(playArea);
+        CardHolder cardHolder = new CardHolder(card, playArea);
+        card.setContainer(cardHolder);
+        card.setCardHolder(cardHolder);
+
+        return cardHolder;
+    }
+
+    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
+        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
+        CardHolder cardHolder;
+        CardBase card;
+
+        for (int i = 0; i < OCCURENCES; i++) {
+            card = new TelephoneBox(playArea);
+            cardHolder = new CardHolder(card, playArea);
+            card.setContainer(cardHolder);
+            card.setCardHolder(cardHolder);
+            set.add(cardHolder);
+        }
+
+        return set;
+    }
+
+    @Override
     public void gatherData(Player player, int position) throws CancelAction {
         final int BACKWARD = 1;
         final int FORWARD = 2;
@@ -100,31 +126,5 @@ public class TelephoneBox extends CardBase {
         } else {
 
         }
-    }
-
-    @Override
-    public CardHolder makeOne(PlayArea playArea) {
-        CardBase card = new TelephoneBox(playArea);
-        CardHolder cardHolder = new CardHolder(card, playArea);
-        card.setContainer(cardHolder);
-        card.setCardHolder(cardHolder);
-
-        return cardHolder;
-    }
-
-    public static ArrayList<CardHolder> playSet(PlayArea playArea) {
-        ArrayList<CardHolder> set = new ArrayList<CardHolder>();
-        CardHolder cardHolder;
-        CardBase card;
-
-        for (int i = 0; i < OCCURENCES; i++) {
-            card = new TelephoneBox(playArea);
-            cardHolder = new CardHolder(card, playArea);
-            card.setContainer(cardHolder);
-            card.setCardHolder(cardHolder);
-            set.add(cardHolder);
-        }
-
-        return set;
     }
 }

@@ -317,14 +317,14 @@ public class PlayArea {
     }
 
     public PlayState autoTurnStart(){
-        Player player = players[turn % Roma.MAX_PLAYERS];
+        Player player = players[turn % RomaGame.MAX_PLAYERS];
         startTurnPhase(player);
         diceDiscs.arriveFromPast();
         return new PlayState(this, player);
     }
 
     public void autoAction(PlayState playState, ActionData action){
-        Player player = players[turn % Roma.MAX_PLAYERS];
+        Player player = players[turn % RomaGame.MAX_PLAYERS];
         player.performActions(action);
         clearEndActionWrappers();
         playState.addActionHistory(action);

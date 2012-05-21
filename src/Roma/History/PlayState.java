@@ -22,24 +22,23 @@ public class PlayState {
     */
 
     int turn;
-    ArrayList<String> deckData = new ArrayList<String>();
-    ArrayList<String> discardData = new ArrayList<String>();
-    ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
-    String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[][] lives = new int[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[] money = new int[Roma.MAX_PLAYERS];
-    int[] victory = new int[Roma.MAX_PLAYERS];
-    int victoryPool;
-    int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
+    private ArrayList<String> deckData = new ArrayList<String>();
+    private ArrayList<String> discardData = new ArrayList<String>();
+    private ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
+    private String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private int[][] lives = new int[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private int[] money = new int[Roma.MAX_PLAYERS];
+    private int[] victory = new int[Roma.MAX_PLAYERS];
+    private int victoryPool;
+    private int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
 
-    ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
+    private ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 
     public PlayState(PlayArea playArea, Player player){
         CardManager cardManager = playArea.getCardManager();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
         ArrayList<String> playerHand = null;
         ArrayList<CardHolder> cardList = null;
@@ -128,6 +127,14 @@ public class PlayState {
 
     public int getTurn() {
         return turn;
+    }
+
+    public ArrayList<String> getDeckData() {
+        return deckData;
+    }
+
+    public ArrayList<String> getDiscardData() {
+        return discardData;
     }
 
     public ArrayList<ArrayList<String>> getHand() {

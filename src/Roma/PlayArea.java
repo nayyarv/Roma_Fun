@@ -147,8 +147,9 @@ public class PlayArea {
         PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
-        player.rollActionDice();
-
+        if(timeWarp == null){
+            player.rollActionDice();
+        }
         transferNextToThis();
     }
 
@@ -304,15 +305,35 @@ public class PlayArea {
         this.turnHistory = turnHistory;
     }
 
+    //time machine stuff below
+    //HACK HACK HACK HACK HACK >:D
+
     public TimeWarp getTimeWarp(){
         return timeWarp;
     }
 
-    public void timeLapse(int currentTurn){
-        ActionData currentAction;
+    public PlayState autoTurnStart(){
+        Player player = players[turn % Roma.MAX_PLAYERS];
+        startTurnPhase(player);
+        return new PlayState(this, player);
+    }
 
-        while(turn != currentTurn){
+    public void autoAction(PlayState playState, ActionData action){
+        Player player = players[turn % Roma.MAX_PLAYERS];
+        player.performActions(action);
+        clearEndActionWrappers();
+        playState.addActionHistory(action);
+        resetAllPlayable();
+    }
 
-        }
+    public void autoTurnEnd(PlayState playState){
+        clearEndTurnWrappers();
+        turn++;
+        turnHistory.setCurrentTurnNumber(turn);
+        turnHistory.addPlayState(playState);
+    }
+
+    public void setTimeWarp(TimeWarp timeWarp) {
+        this.timeWarp = timeWarp;
     }
 }

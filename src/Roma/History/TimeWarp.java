@@ -2,7 +2,13 @@ package Roma.History;
 
 
 import Implementers.GameStateImplementer;
+import Roma.Cards.CardFactory;
+import Roma.Cards.CardHolder;
+import Roma.DiceDiscs;
 import Roma.PlayArea;
+import Roma.Player;
+import Roma.Roma;
+import framework.cards.Card;
 
 import java.util.ArrayList;
 
@@ -19,11 +25,12 @@ public class TimeWarp {
     private final int playerID;
     private final int position;
     private final String cardName;
-    private final int[][] lives;
+    private final int lives;
     private final PlayArea playArea;
+    private final GameStateImplementer gameStateImplementer;
 
     public TimeWarp(TurnHistory turnHistory, int timeReverse, int playerID, int position,
-                    String cardName, int[][] lives, PlayArea playArea){
+                    String cardName, int lives, PlayArea playArea){
 
         this.turnHistory = turnHistory;
         this.timeReverse = timeReverse;
@@ -32,6 +39,7 @@ public class TimeWarp {
         this.cardName = cardName;
         this.lives = lives;
         this.playArea = playArea;
+        gameStateImplementer = new GameStateImplementer(playArea);
     }
 
     //TODO: Kat must remember how many lives it has at the point of return
@@ -46,13 +54,118 @@ public class TimeWarp {
     //import framework.cards.Card;
 
     public void warpTime() throws TimeParadox {
-        GameStateImplementer gameStateImplementer = new GameStateImplementer(playArea);
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
         int currentTurn = turnHistory.getCurrentTurnNumber();
         int destinationTurn = currentTurn - timeReverse;
         ArrayList<PlayState> history = turnHistory.getHistory();
         PlayState jumpDestination = history.get(destinationTurn);
+        ArrayList<PlayState> timeChunk = new ArrayList<PlayState>();
+
+        ArrayList<String> deckData = jumpDestination.getDeckData();
+        ArrayList<String> discardData = jumpDestination.getDiscardData();
+        ArrayList<ArrayList<String>> hand = jumpDestination.getHand();
+        String[][] discs = jumpDestination.getDiscs();
+        int[][] lives = jumpDestination.getLives();
+        int[] money = jumpDestination.getMoney();
+        int[] victory = jumpDestination.getVictory();
+
+        ArrayList<Card> cardList = new ArrayList<Card>();
+        Card[] cardArray = new Card[DiceDiscs.CARD_POSITIONS];
+        CardHolder[] playerActives;
 
         playArea.setTurn(destinationTurn);
 
+        for(String cardName : deckData){
+            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
+        }
+        gameStateImplementer.setDeck(cardList);
+
+        for(String cardName : discardData){
+            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
+        }
+        gameStateImplementer.setDiscard(cardList);
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            gameStateImplementer.setPlayerVictoryPoints(i, 1);
+        }
+
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            for(String cardName : hand.get(i)){
+                cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
+            }
+            gameStateImplementer.setPlayerHand(i, cardList);
+
+            for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
+                cardList.add(Card.valueOf(discs[i][j].replaceAll(" ", "").toUpperCase()));
+            }
+            gameStateImplementer.setPlayerCardsOnDiscs(i, cardArray);
+
+            playerActives = diceDiscs.getPlayerActives(i);
+            for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
+                while(playerActives[j].countLives() > lives[i][j]){
+                    playerActives[j].discarded(i, j);
+                }
+            }
+
+            gameStateImplementer.setPlayerSestertii(i, money[i]);
+            gameStateImplementer.setPlayerVictoryPoints(i, victory[i]);
+        }
+
+        for(int i = 0; i <= timeReverse ; i++){
+            timeChunk.add(0, history.remove(history.size() - 1));
+        }
+
+        timeLapse(currentTurn, timeChunk);
+    }
+
+    public void timeLapse(int currentTurn, ArrayList<PlayState> timeChunk) throws TimeParadox{
+        PlayState theTurn;
+        ArrayList<ActionData> actionHistory;
+        ActionData currentAction;
+        int[] actionDiceValues;
+        PlayState newPlayState;
+
+        theTurn = timeChunk.remove(0);
+        actionDiceValues = theTurn.getActionDice();
+        gameStateImplementer.setActionDice(actionDiceValues);
+        actionHistory = theTurn.getActionHistory();
+        newPlayState = playArea.autoTurnStart();
+        insertTimeTraveller();
+        while(!actionHistory.isEmpty()){
+            currentAction = actionHistory.remove(0);
+            //TODO: check for time paradoxes
+            playArea.autoAction(newPlayState, currentAction);
+        }
+        playArea.autoTurnEnd(newPlayState);
+
+        while(playArea.getTurn() != currentTurn){
+            theTurn = timeChunk.remove(0);
+            actionDiceValues = theTurn.getActionDice();
+            gameStateImplementer.setActionDice(actionDiceValues);
+            actionHistory = theTurn.getActionHistory();
+            newPlayState = playArea.autoTurnStart();
+            while(!actionHistory.isEmpty()){
+                currentAction = actionHistory.remove(0);
+                //TODO: check for time paradoxes
+                playArea.autoAction(newPlayState, currentAction);
+            }
+            playArea.autoTurnEnd(newPlayState);
+        }
+
+        theTurn = timeChunk.remove(0);
+        actionDiceValues = theTurn.getActionDice();
+        gameStateImplementer.setActionDice(actionDiceValues);
+    }
+
+    private void insertTimeTraveller() {
+        Player player = playArea.getPlayer(playerID);
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardFactory cardFactory = new CardFactory(playArea);
+        CardHolder card = cardFactory.getCard
+                (Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()).toString());
+        diceDiscs.layCard(player, position, card);
+        while(card.countLives() > lives){
+            card.discarded(playerID, position);
+        }
     }
 }

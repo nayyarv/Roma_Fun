@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.Dice;
 import Roma.DiceDiscs;
+import Roma.History.TimeWarp;
+import Roma.History.TurnHistory;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -81,7 +83,23 @@ public class TelephoneBox extends CardBase {
 
     @Override
     public void activate(Player player, int position) {
-        //TODO: fill in
+        TurnHistory turnHistory = playArea.getTurnHistory();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int actionDieIndex = activationData.remove(0);
+        int activeCardIndex = activationData.remove(0);
+        int timeDirection = activationData.remove(0);
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        int timeReverse = freeDice.remove(actionDieIndex).getValue();
+        CardHolder card = diceDiscs.getTargetCard(player, activeCardIndex);
+
+        if(timeDirection < 0){
+            TimeWarp timeWarp = new TimeWarp(turnHistory, timeReverse, player.getPlayerID(),
+                    position, card.getName(), card.countLives(), playArea);
+            playArea.setTimeWarp(timeWarp);
+        } else {
+
+        }
     }
 
     @Override

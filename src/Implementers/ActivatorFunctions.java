@@ -24,16 +24,14 @@ public class ActivatorFunctions {
         int currActionIndex = player.getCurrentAction().getActionDiceIndex();
 
         freeDice.remove(currActionIndex);
-
-
-        Dice dice = freeDice.get(0);
+        Dice dice;
         int i;
-        for(i=0; i<freeDice.size()&&dice.getValue()!=diceReqd;i++){
+        for(i=0; i<freeDice.size();i++){
             dice = freeDice.get(i);
+            if (dice.getValue()== diceReqd) return i;
         }
         System.out.println("Found "+ diceReqd+" at "+ i);
-        return i;
-
+        return -1;
     }
 
     public static CardActivator getCorrectActivator(Card chosen, Player player){

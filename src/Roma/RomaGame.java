@@ -1,11 +1,13 @@
 package Roma;
 
-import Roma.PlayerInterfaceFiles.*;
+import Roma.PlayerInterfaceFiles.GamePlayerInterface;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
-import java.io.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
-public class Roma {
+public class RomaGame {
     //Constants
     public final static int MAX_PLAYERS = 2;
     public final static int PLAYER_ONE = 0;
@@ -25,14 +27,14 @@ public class Roma {
 
 
     public static void main(String[] arg){
-        Roma game = new Roma();
+        RomaGame game = new RomaGame();
         game.runRoma();
     }
 
     public void runRoma() {
 
         //Welcome message
-        System.out.printf("Welcome to Roma :)\n" +
+        System.out.printf("Welcome to RomaGame :)\n" +
                 "by Andrew Lem and Varun Nayyar\n");
 //        try {
 //          //  Thread.sleep(PAUSE_DURATION);
@@ -54,19 +56,19 @@ public class Roma {
             } else if (choice == 2) {  // open pdf of rules
                 //Code found online:
                 // http://stackoverflow.com/questions/2546968/open-pdf-file-on-fly-from-java-application
-                //Opens the pdf of Roma lol
+                //Opens the pdf of RomaGame lol
                 if (Desktop.isDesktopSupported()) {
                     try {
-                        File myFile = new File("Roma.pdf");
+                        File myFile = new File("RomaGame.pdf");
                         Desktop.getDesktop().open(myFile);
                     } catch (IOException ex) {
                         // no application registered for PDFs
-                        PlayerInterface.printOut("Roma.pdf not found!", true);
+                        PlayerInterface.printOut("RomaGame.pdf not found!", true);
                     }
                 }
             } else if (choice == 3) {  // quit game
                 exit = true;
-                PlayerInterface.printOut("Quitting Roma.\n" +
+                PlayerInterface.printOut("Quitting RomaGame.\n" +
                         "Good Bye~", true);
                 try {
                     Thread.sleep(PAUSE_DURATION);

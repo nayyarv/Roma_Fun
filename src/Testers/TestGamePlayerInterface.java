@@ -1,8 +1,8 @@
 package Testers;
 
-import Roma.*;
-import Roma.PlayerInterfaceFiles.*;
-import Roma.Cards.*;
+import Roma.GameRules;
+import Roma.PlayArea;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 /**
  * File Name:

@@ -15,7 +15,7 @@ public class VictoryTokens {
 
     final private PlayArea playArea;  // pointer to the main game to activate the gameOverMessage() function
 
-    private int[] playerTokens = new int[Roma.MAX_PLAYERS];
+    private int[] playerTokens = new int[RomaGame.MAX_PLAYERS];
     private int tokenPool;
 
 
@@ -25,10 +25,10 @@ public class VictoryTokens {
     }
 
     public void reset() {
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+        for (int i = 0; i < RomaGame.MAX_PLAYERS; i++) {
             playerTokens[i] = TOKEN_START_VALUE;
         }
-        tokenPool = MAX_TOKENS - (Roma.MAX_PLAYERS * TOKEN_START_VALUE);
+        tokenPool = MAX_TOKENS - (RomaGame.MAX_PLAYERS * TOKEN_START_VALUE);
     }
 
     public void playerFromPool(int playerID, int amount) {
@@ -56,13 +56,13 @@ public class VictoryTokens {
         if(tokenPool <= END_GAME_VALUE){
             shouldGameEnd = true;
         }
-        for (int i = 0; !shouldGameEnd && i < Roma.MAX_PLAYERS; i++){
+        for (int i = 0; !shouldGameEnd && i < RomaGame.MAX_PLAYERS; i++){
             if(playerTokens[i] <= END_GAME_VALUE){
                 shouldGameEnd = true;
             }
          } //checks each player isn't bankrupt of victory tokens
         if(shouldGameEnd){
-            for (int i=0; i<Roma.MAX_PLAYERS;i++){
+            for (int i=0; i< RomaGame.MAX_PLAYERS;i++){
                 PlayerInterface.printOut("Player"+(i+1)+": "+playerTokens[i], true);
             }
 
@@ -93,7 +93,7 @@ public class VictoryTokens {
     }
 
     public String toString() {
-        return "Player One has: " + playerTokens[Roma.PLAYER_ONE] + " tokens, and Player Two has: " +
-                playerTokens[Roma.PLAYER_TWO] + " Tokens";
+        return "Player One has: " + playerTokens[RomaGame.PLAYER_ONE] + " tokens, and Player Two has: " +
+                playerTokens[RomaGame.PLAYER_TWO] + " Tokens";
     }
 }

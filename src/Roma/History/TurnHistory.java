@@ -1,7 +1,5 @@
 package Roma.History;
 
-import Roma.Roma;
-
 import java.util.ArrayList;
 
 /**

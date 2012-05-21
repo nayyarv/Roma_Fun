@@ -1,6 +1,6 @@
 package Roma;
 
-import Roma.Cards.*;
+import Roma.Cards.CardHolder;
 import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
@@ -99,7 +99,7 @@ public class Player {
     }
 
     public int getOtherPlayerID(){
-        return (getPlayerID() + 1) % Roma.MAX_PLAYERS;
+        return (getPlayerID() + 1) % RomaGame.MAX_PLAYERS;
     }
 
 
@@ -435,8 +435,8 @@ public class Player {
 
     public int getDiceDiscIndex(CardHolder[][] diceDiscs, boolean filterCurrent, boolean filterOther)
             throws CancelAction{
-        assert (diceDiscs[Roma.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);
-        assert (diceDiscs[Roma.PLAYER_ONE].length == diceDiscs[Roma.PLAYER_TWO].length);
+        assert (diceDiscs[RomaGame.PLAYER_ONE].length == DiceDiscs.CARD_POSITIONS);
+        assert (diceDiscs[RomaGame.PLAYER_ONE].length == diceDiscs[RomaGame.PLAYER_TWO].length);
 
         int other = getOtherPlayerID();
 
@@ -666,7 +666,7 @@ public class Player {
         int option = 0;
         int otherID = getOtherPlayerID();
 
-        for(int player = 0; player < Roma.MAX_PLAYERS; player++){
+        for(int player = 0; player < RomaGame.MAX_PLAYERS; player++){
             PlayerInterface.printOut(BREAK_LINE, true);
             PlayerInterface.printOut("Player: " + players[player].getName(), true);
             PlayerInterface.printOut("Victory Tokens: " + victoryTokens.getPlayerTokens(player) +

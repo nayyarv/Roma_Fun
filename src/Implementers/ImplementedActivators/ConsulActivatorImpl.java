@@ -1,11 +1,8 @@
 package Implementers.ImplementedActivators;
 
 import Implementers.ActivatorFunctions;
-import Roma.Dice;
 import Roma.Player;
 import framework.interfaces.activators.ConsulActivator;
-
-import java.util.ArrayList;
 
 /**
  * File Name:

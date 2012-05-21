@@ -5,7 +5,10 @@ import framework.Rules;
 import framework.cards.Card;
 import junit.framework.TestCase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * File Name:

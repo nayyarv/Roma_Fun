@@ -1,11 +1,7 @@
 package Implementers.ImplementedActivators;
 
-import Roma.Cards.CardHolder;
 import Roma.Player;
 import framework.interfaces.activators.CardActivator;
-import framework.interfaces.activators.EssedumActivator;
-import framework.interfaces.activators.LegatActivator;
-import framework.interfaces.activators.TribunusPlebisActivator;
 
 /**
  * File Name:

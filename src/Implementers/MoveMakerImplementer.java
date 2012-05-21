@@ -1,12 +1,11 @@
 package Implementers;
 
-import Implementers.ImplementedActivators.*;
+import Implementers.ImplementedActivators.dummyActivator;
 import Roma.Cards.CardHolder;
 import Roma.DiceDiscs;
 import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
-
 import framework.Rules;
 import framework.cards.Card;
 import framework.interfaces.GameState;

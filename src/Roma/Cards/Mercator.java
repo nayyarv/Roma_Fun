@@ -7,9 +7,12 @@ package Roma.Cards;
  * Desc:
  */
 
-import Roma.*;
+import Roma.MoneyManager;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
+import Roma.VictoryTokens;
 
 import java.util.ArrayList;
 

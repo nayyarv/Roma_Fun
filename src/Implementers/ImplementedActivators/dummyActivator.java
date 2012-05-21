@@ -1,7 +1,6 @@
 package Implementers.ImplementedActivators;
 
-import Roma.Cards.Consiliarius;
-import framework.interfaces.activators.*;
+import framework.interfaces.activators.CardActivator;
 
 /**
  * File Name:

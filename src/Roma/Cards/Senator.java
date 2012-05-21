@@ -5,7 +5,7 @@ import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
-import Roma.Roma;
+import Roma.RomaGame;
 
 import java.util.ArrayList;
 
@@ -73,9 +73,9 @@ public class Senator extends CardBase {
         int handIndex = 0;
         int discIndex = 0;
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
-        CardHolder[][] newActiveCards = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+        CardHolder[][] newActiveCards = new CardHolder[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             System.arraycopy(activeCards[i], 0, newActiveCards[i], 0, DiceDiscs.CARD_POSITIONS);
         }
 

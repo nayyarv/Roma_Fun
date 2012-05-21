@@ -1,7 +1,8 @@
 package Testers;
 
-import Roma.*;
-import Roma.Cards.*;
+import Roma.CardManager;
+import Roma.Cards.CardHolder;
+import Roma.PlayArea;
 
 /**
  * File name:

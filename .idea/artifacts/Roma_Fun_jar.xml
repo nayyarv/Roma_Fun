@@ -1,9 +1,10 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="Roma_Fun:jar">
-    <output-path>$PROJECT_DIR$/../../bwright-acceptance-41af95c/testee</output-path>
+    <output-path>$PROJECT_DIR$/../../Acceptance/testee</output-path>
     <root id="archive" name="Roma_Fun.jar">
       <element id="module-output" name="Roma_Fun" />
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
     </root>
   </artifact>
 </component>

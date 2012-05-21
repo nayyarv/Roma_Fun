@@ -1,7 +1,8 @@
 package Roma.History;
 
 import Roma.*;
-import Roma.Cards.*;
+import Roma.Cards.Card;
+import Roma.Cards.CardHolder;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,9 @@ public class PlayState {
     ArrayList<String> deckData = new ArrayList<String>();
     ArrayList<String> discardData = new ArrayList<String>();
     ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
-    String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[] money = new int[Roma.MAX_PLAYERS];
-    int[] victory = new int[Roma.MAX_PLAYERS];
+    String[][] discs = new String[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    int[] money = new int[RomaGame.MAX_PLAYERS];
+    int[] victory = new int[RomaGame.MAX_PLAYERS];
     int victoryPool;
     int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
 
@@ -59,7 +60,7 @@ public class PlayState {
             discardData.add(card.getName());
         }
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
 
             //store hand data
             cardList = playArea.getPlayer(i).getHand();
@@ -105,7 +106,7 @@ public class PlayState {
                 + "\ndeckData: " + deckData
                 + "\ndiscardData: " + discardData
                 + "\n";
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             output += "playerID: " + i
                     + "\nhand: " + hand.get(i)
                     + "\ndiscs: " + discs[i]

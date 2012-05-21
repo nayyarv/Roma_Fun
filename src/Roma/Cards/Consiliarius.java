@@ -58,7 +58,7 @@ public class Consiliarius extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
-        CardHolder[][] activeCardsPrime = new CardHolder[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+        CardHolder[][] activeCardsPrime = new CardHolder[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
         CardHolder card;
         int[] fromIndices = new int[DiceDiscs.CARD_POSITIONS];
         int[] toIndices = new int[DiceDiscs.CARD_POSITIONS];
@@ -71,7 +71,7 @@ public class Consiliarius extends CardBase {
         boolean endSelection = false;
         boolean checkNewPlacement = false;
 
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+        for (int i = 0; i < RomaGame.MAX_PLAYERS; i++) {
             System.arraycopy(activeCards[i], 0, activeCardsPrime[i], 0, DiceDiscs.CARD_POSITIONS);
         }
 

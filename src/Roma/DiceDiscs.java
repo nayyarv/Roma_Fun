@@ -102,7 +102,7 @@ public class DiceDiscs {
         activeCards[playerID][position] = newCard;
     }
 
-    private void goingToDiscard(int targetPlayerID, int position) {
+    public void goingToDiscard(int targetPlayerID, int position) {
         if(activeCards[targetPlayerID][position] != null){
             activeCards[targetPlayerID][position].goingToDiscard(targetPlayerID, position);
         }

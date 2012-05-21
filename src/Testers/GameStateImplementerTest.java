@@ -145,6 +145,18 @@ public class GameStateImplementerTest extends TestCase {
 
         assert (Arrays.equals(discs, recievedDiscs));
 
+        discs[6] = Card.NOT_A_CARD;
+
+
+        gameStateImplementer.setPlayerCardsOnDiscs(0, discs);
+        //gameStateImplementer.printStats();
+
+        recievedDiscs = gameStateImplementer.getPlayerCardsOnDiscs(0);
+        gameStateImplementer.isGameCompleted();
+        assert (Arrays.equals(discs, recievedDiscs));
+        gameStateImplementer.isGameCompleted();
+
+
         System.out.println("DiceDiscs functions passed!!!\n");
 
     }

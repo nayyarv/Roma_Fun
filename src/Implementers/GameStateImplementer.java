@@ -304,7 +304,11 @@ public class GameStateImplementer implements GameState{
         Player player = playArea.getPlayer(playerNum);
         ArrayList<CardHolder> discCardsList = convertToCardHolderList(discCards);
         for(int i=0; i<discCardsList.size();i++){
-            if(discCardsList.get(i)!=null) diceDiscs.layCard(player, i, discCardsList.get(i));
+            if(discCardsList.get(i)!=null) {
+                diceDiscs.layCard(player, i, discCardsList.get(i));
+            } else {
+                diceDiscs.goingToDiscard(playerNum, i);
+            }
         }
     }
 

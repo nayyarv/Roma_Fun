@@ -18,8 +18,8 @@ public class Basilica extends CardBase {
     final static String TYPE = Card.BUILDING;
     final static String DESCRIPTION = "If a Forum is activated (it must lie directly next to the basilica)," +
             " the player gets 2 more victory points. The Basilica itself is not activiated.";
-    final static int COST = 5;
-    final static int DEFENCE = 2;
+    final static int COST = 6;
+    final static int DEFENCE = 5;
     final static boolean ACTIVATE_ENABLED = false;
 
     public final static int OCCURENCES = 2;

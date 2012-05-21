@@ -49,7 +49,7 @@ public class RearrangerImpl extends simpleActivator implements Rearranger,
             }
             i++;
         }
-        discsList.remove(i);
+
 
         player.getActivationData().add(i);
         player.getActivationData().add(diceDisc-1);

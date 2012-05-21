@@ -27,6 +27,7 @@ public class PlayState {
     ArrayList<String> discardData = new ArrayList<String>();
     ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
     String[][] discs = new String[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    int[][] lives = new int[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
     int[] money = new int[RomaGame.MAX_PLAYERS];
     int[] victory = new int[RomaGame.MAX_PLAYERS];
     int victoryPool;
@@ -61,7 +62,7 @@ public class PlayState {
             discardData.add(card.getName());
         }
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
 
             //store hand data
             cardList = playArea.getPlayer(i).getHand();
@@ -109,7 +110,7 @@ public class PlayState {
                 + "\ndeckData: " + deckData
                 + "\ndiscardData: " + discardData
                 + "\n";
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             cardList = hand.get(i);
             output += "playerID: " + i
                     + "\nhand: " + cardList

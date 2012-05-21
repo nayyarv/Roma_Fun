@@ -43,7 +43,7 @@ public class PlayArea {
     private ArrayList<PlayState> playStateHistory = new ArrayList<PlayState>();
     private TurnHistory turnHistory;
 
-    public PlayArea(Roma mainProgram) {
+    public PlayArea(RomaGame mainProgram) {
         this.mainProgram = mainProgram;
         turnHistory = new TurnHistory();
         cardManager = new CardManager(this);
@@ -63,6 +63,9 @@ public class PlayArea {
         gameRules.layAllCardsInHand();
     }
 
+    public void resetGameOverFlag(){
+        gameOver = false;
+    }
 
     public void endGame(){
         gameOver = true;

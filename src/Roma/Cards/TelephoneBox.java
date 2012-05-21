@@ -90,11 +90,11 @@ public class TelephoneBox extends CardBase {
         int activeCardIndex = activationData.remove(0);
         int timeDirection = activationData.remove(0);
         ArrayList<Dice> freeDice = player.getFreeDice();
-        int timeReverse = freeDice.remove(actionDieIndex).getValue();
+        int timeValue = freeDice.remove(actionDieIndex).getValue();
         CardHolder card = diceDiscs.getTargetCard(player, activeCardIndex);
 
         if(timeDirection < 0){
-            TimeWarp timeWarp = new TimeWarp(turnHistory, timeReverse, player.getPlayerID(),
+            TimeWarp timeWarp = new TimeWarp(turnHistory, timeValue, player.getPlayerID(),
                     position, card.getName(), card.countLives(), playArea);
             playArea.setTimeWarp(timeWarp);
         } else {

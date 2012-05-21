@@ -36,6 +36,11 @@ public class DiceDiscs {
     private ArrayList<Dice> cardDisc = new ArrayList<Dice>();
     //Holds the dice placed on the cardDisc
 
+    private CardHolder[][][] fromPastTime =
+            new CardHolder[Dice.MAX_DIE_VALUE][Roma.MAX_PLAYERS][CARD_POSITIONS];
+    private int[][][] timeLives =
+            new int[Dice.MAX_DIE_VALUE][Roma.MAX_PLAYERS][CARD_POSITIONS];
+
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
@@ -90,9 +95,9 @@ public class DiceDiscs {
         ArrayList<WrapperMaker> enterPlayList = playArea.getEnterPlayList();
         int playerID = player.getPlayerID();
 
-        goingToDiscard(player.getPlayerID(), position);
+        goingToDiscard(playerID, position);
         for(WrapperMaker wrapperMaker : enterPlayList){
-            if(wrapperMaker.getOwnerID() == player.getPlayerID()){
+            if(wrapperMaker.getOwnerID() == playerID){
                 wrapperMaker.insertWrapper(newCard);
             }
         }
@@ -291,5 +296,54 @@ public class DiceDiscs {
         }
 
         return kill;
+    }
+
+    //TODO:Need to save to PlayState
+
+    public void setFromPast(int timeValue, int playerID, int position){
+        CardHolder card = activeCards[playerID][position];
+        int lives = card.countLives();
+        int timeIndex = timeValue - 1;
+
+        if(fromPastTime[timeIndex][playerID][position] != null){
+            PlayerInterface.printOut(fromPastTime[timeIndex][playerID][position].getName()
+                    + " has been knocked out of the time stream!", true);
+        }
+        PlayerInterface.printOut(card.getName() + " has gone to the future!", true);
+        fromPastTime[timeIndex][playerID][position] = card;
+        timeLives[timeIndex][playerID][position] = lives;
+        card.leavePlay();
+    }
+
+    //TODO: add to beginning of turn
+    public void arriveFromPast(){
+        Player player;
+        CardHolder card;
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            player = playArea.getPlayer(i);
+            for(int j = 0; j < CARD_POSITIONS; j++){
+                if(fromPastTime[0][i][j] != null){
+                    layCard(player, j, fromPastTime[0][i][j]);
+                    card = getTargetCard(i, j);
+                    while(card.countLives() > timeLives[0][i][j]){
+                        card.discarded(i, j);
+                    }
+                }
+            }
+        }
+        for(int i = 0; i + 1 < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+                System.arraycopy(fromPastTime[i + 1][j], 0,
+                        fromPastTime[i][j], 0, CARD_POSITIONS);
+                System.arraycopy(timeLives[i + 1][j], 0,
+                        timeLives[i][j], 0, CARD_POSITIONS);
+            }
+        }
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            for(int j = 0; j < CARD_POSITIONS; j++){
+                fromPastTime[Dice.MAX_DIE_VALUE - 1][i][j] = null;
+                timeLives[Dice.MAX_DIE_VALUE - 1][i][j] = 0;
+            }
+        }
     }
 }

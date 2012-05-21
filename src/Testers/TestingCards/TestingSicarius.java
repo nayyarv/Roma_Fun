@@ -34,8 +34,8 @@ public class TestingSicarius {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.NERO, Card.NERO, Card.NERO, Card.NERO,
-                Card.NERO, Card.NERO, Card.NERO};
+        Card[] diceDiscs1 = {Card.SICARIUS, Card.SICARIUS, Card.SICARIUS, Card.SICARIUS,
+                Card.SICARIUS, Card.SICARIUS, Card.SICARIUS};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
                 Card.CONSUL, Card.CONSUL, Card.SICARIUS};
@@ -44,7 +44,7 @@ public class TestingSicarius {
         gameStateImplementer.isGameCompleted();
         gameStateImplementer.runGame();
 
-        System.err.println(gameStateImplementer.getDiscard());
+        System.err.println(gameStateImplementer.getPlayStateHistory());
     }
 
 

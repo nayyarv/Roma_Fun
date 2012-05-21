@@ -121,4 +121,8 @@ public abstract class CardBase implements Card {
     public void leavePlay() {
         //no leave play action by default
     }
+
+    public int countLives() {
+        return 1;
+    }
 }

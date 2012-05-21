@@ -81,10 +81,11 @@ public class Kat extends CardBase {
 
     @Override
     public String getDescription() {
-        return DESCRIPTION + " (" + (countLives() + 1) + " lives left)";
+        return DESCRIPTION + " (" + countLives()+ " lives left)";
     }
 
-    private int countLives() {
+    @Override
+    public int countLives() {
         int count = 0;
         Card container = getContainer();
         Wrapper wrapper;
@@ -96,6 +97,8 @@ public class Kat extends CardBase {
             }
             container = container.getContainer();
         }
+
+        count++; // one base life
         return count;
     }
 

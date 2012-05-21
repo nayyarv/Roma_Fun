@@ -1,7 +1,5 @@
 package Roma.History;
 
-import Roma.Roma;
-
 import java.util.ArrayList;
 
 /**
@@ -18,15 +16,29 @@ public class TurnHistory {
    * turnNumber: which turn we are at - starting at 0
    */
 
-    private ArrayList<ActionData> history; // Stores all the actions taken during this turn
-    private PlayState playState; // Stores the game state at the beginning of turn
-    private int turnNumber;
-
-
-
+    private ArrayList<PlayState> history = new ArrayList<PlayState>(); // Stores all the actions taken during this turn
+    private int currentTurnNumber = 0;
 
     public TurnHistory(){
-
     }
 
+    public ArrayList<PlayState> getHistory() {
+        return history;
+    }
+
+    public void setHistory(ArrayList<PlayState> history) {
+        this.history = history;
+    }
+
+    public void addPlayState(PlayState playState){
+        history.add(playState);
+    }
+
+    public int getCurrentTurnNumber() {
+        return currentTurnNumber;
+    }
+
+    public void setCurrentTurnNumber(int currentTurnNumber) {
+        this.currentTurnNumber = currentTurnNumber;
+    }
 }

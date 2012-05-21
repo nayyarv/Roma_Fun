@@ -4,6 +4,7 @@ import Roma.*;
 import Roma.Cards.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * File Name:
@@ -25,6 +26,7 @@ public class PlayState {
     ArrayList<String> discardData = new ArrayList<String>();
     ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
     String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    int[][] lives = new int[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
     int[] money = new int[Roma.MAX_PLAYERS];
     int[] victory = new int[Roma.MAX_PLAYERS];
     int victoryPool;
@@ -74,6 +76,7 @@ public class PlayState {
             for(int j = 0; j < playerActiveCards.length; j++){
                 if(playerActiveCards[j] != null){
                     discs[i][j] = playerActiveCards[j].getName();
+                    lives[i][j] = playerActiveCards[j].countLives();
                 } else {
                     discs[i][j] = "";
                 }
@@ -101,20 +104,23 @@ public class PlayState {
     }
 
     public String toString(){
+        ArrayList<String> cardList;
         String output = "turn: " + turn
                 + "\ndeckData: " + deckData
                 + "\ndiscardData: " + discardData
                 + "\n";
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            cardList = hand.get(i);
             output += "playerID: " + i
-                    + "\nhand: " + hand.get(i)
-                    + "\ndiscs: " + discs[i]
+                    + "\nhand: " + cardList
+                    + "\ndiscs: " + Arrays.toString(discs[i])
+                    + "\nlives: " + Arrays.toString(lives[i])
                     + "\nmoney: " + money[i]
                     + "\nvictory: " + victory[i]
                     + "\n";
         }
         output += "victoryPool: " + victoryPool
-                + " \nactionDice: " + actionDice
+                + " \nactionDice: " + Arrays.toString(actionDice)
                 + "\n";
         output += actionHistory.toString();
         return output;

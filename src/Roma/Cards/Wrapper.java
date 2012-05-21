@@ -165,4 +165,9 @@ public class Wrapper implements Card {
     public void leavePlay() {
         contents.leavePlay();
     }
+
+    @Override
+    public int countLives() {
+        return contents.countLives();
+    }
 }

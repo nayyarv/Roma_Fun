@@ -3,7 +3,7 @@ package Implementers;
 import Roma.Cards.CardFactory;
 import Roma.Cards.CardHolder;
 import Roma.*;
-import Roma.PlayerInterfaceFiles.PlayerInterface;
+import Roma.History.PlayState;
 import framework.cards.Card;
 import framework.interfaces.GameState;
 
@@ -32,7 +32,9 @@ public class GameStateImplementer implements GameState{
         playArea = new PlayArea("testing");
     }
 
-
+    public ArrayList<PlayState> getPlayStateHistory(){
+        return playArea.getPlayStateHistory();
+    }
 
     /**
      * Get the current turn's player number

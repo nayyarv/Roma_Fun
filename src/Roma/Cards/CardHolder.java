@@ -117,6 +117,11 @@ public class CardHolder implements Card {
         deleteAllWrappers();
     }
 
+    @Override
+    public int countLives() {
+        return contents.countLives();
+    }
+
     public void deleteAllWrappers() {
         Wrapper wrapper;
         //remove all wrappers

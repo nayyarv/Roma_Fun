@@ -5,6 +5,7 @@ import Roma.Cards.Wrapper;
 import Roma.Cards.WrapperMaker;
 import Roma.History.ActionData;
 import Roma.History.PlayState;
+import Roma.History.TurnHistory;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.GamePlayerInterface;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
@@ -40,16 +41,17 @@ public class PlayArea {
     private boolean gameOver = false;
 
     private ArrayList<PlayState> playStateHistory = new ArrayList<PlayState>();
-
+    private TurnHistory turnHistory;
 
     public PlayArea(Roma mainProgram) {
+        this.mainProgram = mainProgram;
+        turnHistory = new TurnHistory();
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
         players = new Player[Roma.MAX_PLAYERS];
-        this.mainProgram = mainProgram;
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
@@ -280,4 +282,7 @@ public class PlayArea {
         players[playerID].addCardListToHand(cardManager.drawNCards(Roma.NUM_INIT_CARDS));
     }
 
+    public ArrayList<PlayState> getPlayStateHistory(){
+        return playStateHistory;
+    }
 }

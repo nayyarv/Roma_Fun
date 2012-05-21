@@ -817,6 +817,68 @@ public class TestCardActivators extends TestCase {
 
     }
 
+    public void testScane() throws Exception {
+        System.out.println("Testing Scane\n");
+
+        // Set up the player stats
+        gameState.setPlayerVictoryPoints(0, 10);
+        gameState.setPlayerVictoryPoints(1, 10);
+        gameState.setPlayerSestertii(0, 50);
+        gameState.setPlayerSestertii(1, 50);
+
+        //the opponent's field would have 3 building cards
+        Card[] field = new Card[Rules.NUM_DICE_DISCS];
+        for(int i = 0; i < field.length; i++) {
+            field[i] = Card.NOT_A_CARD;
+        }
+        field[0] = Card.FORUM;
+        field[1] = Card.NERO;
+        field[3] = Card.ONAGER;
+
+        gameState.setPlayerCardsOnDiscs(1, field);
+
+        // Set up the game state for the test
+        gameState.setWhoseTurn(0);
+        gameState.setActionDice(new int [] {2, 2, 4});
+        Collection<Card> hand = new ArrayList<Card> ();
+        Collections.addAll(hand, Card.MERCATOR,
+                Card.LEGAT,
+                Card.SCAENICUS,
+                Card.ESSEDUM,
+                Card.NERO,
+                Card.TRIBUNUSPLEBIS,
+                Card.ARCHITECTUS);
+        gameState.setPlayerHand(0, hand);
+
+        move.placeCard(Card.MERCATOR, 1);
+        move.placeCard(Card.SCAENICUS,2);
+        move.placeCard(Card.TRIBUNUSPLEBIS, 3);
+        move.placeCard(Card.NERO, 4);
+        gameState.isGameCompleted();
+
+        ScaenicusActivator activator = (ScaenicusActivator) move.chooseCardToActivate(2);
+
+        TribunusPlebisActivator imitated = (TribunusPlebisActivator) activator.getScaenicusMimicTarget(3);
+
+        imitated.complete();
+        activator.complete();
+
+
+        gameState.isGameCompleted();
+
+        activator = (ScaenicusActivator) move.chooseCardToActivate(2);
+        NeroActivator imitated1 = (NeroActivator) activator.getScaenicusMimicTarget(4);
+
+        imitated1.chooseDiceDisc(1);
+        imitated1.complete();
+        activator.complete();
+
+        gameState.isGameCompleted();
+
+        System.out.println("Testing Scaneicus passed!!\n");
+
+    }
+
     public void testXXX() throws Exception {
         System.out.println("Testing x\n");
 

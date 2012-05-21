@@ -34,7 +34,7 @@ public class TestingScaenicus {
         gameStateImplementer.setPlayerVictoryPoints(0, 17);
         gameStateImplementer.setPlayerVictoryPoints(1, 17);
 
-        Card[] diceDiscs1 = {Card.SCAENICUS, Card.SICARIUS, Card.NERO, Card.VELITES,
+        Card[] diceDiscs1 = {Card.SCAENICUS, Card.CONSILIARIUS, Card.NERO, Card.VELITES,
                 Card.LEGIONARIUS, Card.LEGAT, Card.GRIMREAPER};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,

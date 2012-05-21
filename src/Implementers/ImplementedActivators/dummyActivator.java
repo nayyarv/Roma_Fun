@@ -1,6 +1,6 @@
 package Implementers.ImplementedActivators;
 
-import framework.interfaces.activators.CardActivator;
+import framework.interfaces.activators.*;
 
 /**
  * File Name:
@@ -8,14 +8,16 @@ import framework.interfaces.activators.CardActivator;
  * Date: 20/05/12
  * Desc:
  */
-public class dummyActivator implements CardActivator
-       /*, AesculapinumActivator, ArchitectusActivator, CenturioActivator,
+public class dummyActivator implements CardActivator,
+        TribunusPlebisActivator, MercatusActivator,
+        EssedumActivator, LegatActivator
+   /*     AesculapinumActivator, ArchitectusActivator, CenturioActivator,
         ConsiliariusActivator, ConsulActivator, EssedumActivator,
         ForumActivator, GladiatorActivator, HaruspexActivator,
         LegatActivator, LegionariusActivator, MachinaActivator,
         MercatorActivator, MercatusActivator, NeroActivator, NeroActivator, OnagerActivator,
         PraetorianusActivator, ScaenicusActivator, SenatorActivator, SicariusActivator,
-        TelephoneBoxActivator, TribunusPlebisActivator, VelitesActivator */
+        TelephoneBoxActivator, TribunusPlebisActivator, VelitesActivator*/
 
 {
     /**

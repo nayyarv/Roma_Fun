@@ -2,6 +2,7 @@ package Implementers;
 
 
 import Implementers.ImplementedActivators.*;
+import Implementers.ImplementedActivators.ScaenicusExtensions.*;
 import Roma.Dice;
 import Roma.Player;
 import framework.cards.Card;
@@ -88,5 +89,42 @@ public class ActivatorFunctions {
         return activator;
     }
 
+    public static CardActivator getCorrectActivatorforScaenicus(Card chosen, Player player){
+        CardActivator activator = new dummyActivator();
+        if (chosen.equals(Card.ARCHITECTUS)){
+            activator = new layerImplScanExten(player);
+        } else if (chosen.equals(Card.CENTURIO)){
+            activator = new CenturioActivatorScanExten(player);
+        } else if (chosen.equals(Card.CONSILIARIUS)){
+            activator = new RearrangerImplScanExten(player);
+        } else if (chosen.equals(Card.CONSUL)){
+            activator = new ConsulActivatorImpl(player);
+        } else if (chosen.equals(Card.FORUM)){
+            activator = new ForumActivatorImpl(player);
+        } else if (chosen.equals(Card.GLADIATOR)){
+            activator = new AssassinScanExtension(player);
+        } else if (chosen.equals(Card.HARUSPEX)){
+            activator = new SelectorImplScanExten(player);
+
+        } else if (chosen.equals(Card.LEGIONARIUS)){
+            activator = new LegionariusActivatorImplScanExten(player);
+        } else if (chosen.equals(Card.MERCATOR)){
+            activator = new MercatorActivatorImpl(player);
+
+        } else if (chosen.equals(Card.NERO)){
+            activator = new AssassinScanExtension(player);
+        } else if (chosen.equals(Card.PRAETORIANUS)){
+            activator = new AssassinScanExtension(player);
+        } else if (chosen.equals(Card.SENATOR)){
+            activator = new layerImplScanExten(player);
+        } else if (chosen.equals(Card.SICARIUS)){
+            activator = new AssassinScanExtension(player);
+        } else if (chosen.equals(Card.VELITES)){
+            activator = new FighterImplScanExten(player);
+        }
+
+
+        return activator;
+    }
 
 }

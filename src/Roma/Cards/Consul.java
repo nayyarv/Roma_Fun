@@ -84,10 +84,10 @@ public class Consul extends CardBase {
             option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
             if (option == CANCEL) {
                 player.cancel();
-            } else if (option == INCREASE && chosenDieValue < 6) {
+            } else if (option == INCREASE && chosenDieValue < Dice.MAX_DIE_VALUE) {
                 option = 1;
                 validInput = true;
-            } else if (option == DECREASE && chosenDieValue > 1) {
+            } else if (option == DECREASE && chosenDieValue > Dice.MIN_DIE_VALUE) {
                 option = -1;
                 validInput = true;
             } else {

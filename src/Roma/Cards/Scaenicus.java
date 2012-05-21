@@ -74,18 +74,25 @@ public class Scaenicus extends CardBase {
         }
         PlayerInterface.printOut("Imitate which other character card of yours in play?", true);
         targetIndex = player.getDiceDiscIndex(activeCards, true, false);
+
         activationData.add(targetIndex);
         activeCards[playerID][targetIndex].gatherData(player, position);
+
+        //System.out.println("\n\n "+ activationData.toString() + "\n\n");
+
     }
 
-    //activationData: [targetIndex] + extra activation data for copied card
+    //activationData:  extra activation data for copied card +[targetIndex]
 
     @Override
     public void activate(Player player, int position) {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[] friendlyCards = diceDiscs.getPlayerActives(player.getPlayerID());
         ArrayList<Integer> activationData = player.getActivationData();
+        System.out.println("\n\n "+ activationData.toString() + "\n\n");
+
         int targetIndex = activationData.remove(0);
+
 
         friendlyCards[targetIndex].activate(player, position);
     }

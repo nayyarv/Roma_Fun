@@ -1,8 +1,11 @@
 package Roma.Cards;
 
+import Roma.Dice;
+import Roma.DiceDiscs;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
 
@@ -29,11 +32,52 @@ public class TelephoneBox extends CardBase {
         super(NAME, TYPE, DESCRIPTION, COST, DEFENCE, playArea, ACTIVATE_ENABLED);
     }
 
-
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
-        //TODO: fill in
+        final int BACKWARD = 1;
+        final int FORWARD = 2;
+        final String strPrompt = "Send card back or forward in time?";
+        final String strOption1 = "Back in time";
+        final String strOption2 = "Forward in time";
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
+        int dieIndex = player.getCurrentAction().getActionDiceIndex();
+        int targetIndex;
+        int option;
+        PlayerInterface playerInterface = player.getPlayerInterface();
+
+        freeDice.remove(dieIndex);
+        PlayerInterface.printOut("Send an active friendly card backward or forward in time", true);
+        if (freeDice.isEmpty()) {
+            PlayerInterface.printOut("Not enough free action dice!", true);
+            player.cancel();
+        }
+        PlayerInterface.printOut("Telephone Box requires a 2nd Action Die:", true);
+        dieIndex = player.getDieIndex(freeDice);
+        freeDice.remove(dieIndex);
+        activationData.add(dieIndex);
+
+        PlayerInterface.printOut("Prevent which card shall be the time-traveller?", true);
+        targetIndex = player.getDiceDiscIndex(activeCards, false, false);
+        activationData.add(targetIndex);
+
+        option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
+        if (option == CANCEL) {
+            player.cancel();
+        } else if (option == BACKWARD) {
+            option = 1;
+        } else if (option == FORWARD) {
+            option = -1;
+        }
+        activationData.add(option);
     }
+
+    //activationData: [actionDieIndex][activeCardIndex][+1/-1]
+    //+1 for forwards
+    //-1 for backwards
 
     @Override
     public void activate(Player player, int position) {

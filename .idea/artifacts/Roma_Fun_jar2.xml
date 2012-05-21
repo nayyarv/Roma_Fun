@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Roma_Fun_jar2</output-path>
     <root id="archive" name="Roma_Fun.jar">
       <element id="module-output" name="Roma_Fun" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

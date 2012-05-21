@@ -1,6 +1,9 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.Dice;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -113,7 +116,7 @@ public class Centurio extends CardBase {
         int battleValue = player.getBattleValue();
         boolean battleVictory = diceDiscs.battle(targetPlayerID, position, battleValue);;
 
-        freeDice.remove(chosenDieIndex);
+//        freeDice.remove(chosenDieIndex);
         //if empty then battleVictory == true
         if (!battleVictory){
             chosenDieIndex = activationData.remove(0);

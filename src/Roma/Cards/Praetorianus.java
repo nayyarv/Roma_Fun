@@ -1,6 +1,8 @@
 package Roma.Cards;
 
-import Roma.*;
+import Roma.DiceDiscs;
+import Roma.PlayArea;
+import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 

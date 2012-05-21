@@ -1,7 +1,7 @@
 package framework;
 
 /**
- * Contains constants relating to the rules of Roma.
+ * Contains constants relating to the rules of RomaGame.
  *
  * @author Matthew Moss (matthew.moss)
  * @author Lasath Fernando (lasath.fernando)

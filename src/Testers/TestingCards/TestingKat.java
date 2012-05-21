@@ -3,8 +3,6 @@ package Testers.TestingCards;
 import Implementers.GameStateImplementer;
 import framework.cards.Card;
 
-import java.util.ArrayList;
-
 /**
  * File Name:
  * Creator: Varun Nayyar

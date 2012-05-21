@@ -8,7 +8,7 @@ import java.util.Random;
  * Date: 19/03/12
  * Desc: This object creates a Dice object
  *       which is simply a random number generator,
- *       It has other useful functions too - which are specific to Roma
+ *       It has other useful functions too - which are specific to RomaGame
  */
 
 public class Dice {

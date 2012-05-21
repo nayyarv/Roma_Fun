@@ -1,6 +1,8 @@
 package Roma;
 
-import Roma.Cards.*;
+import Roma.Cards.Card;
+import Roma.Cards.CardHolder;
+import Roma.Cards.WrapperMaker;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -24,7 +26,7 @@ public class DiceDiscs {
 
     private final PlayArea playArea;
 
-    private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
+    private CardHolder[][] activeCards = new CardHolder[RomaGame.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
 
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
@@ -39,7 +41,7 @@ public class DiceDiscs {
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
-                for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+                for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
                     activeCards[j][i] = null;
                 }
             discs.add(new ArrayList<Dice>());
@@ -58,7 +60,7 @@ public class DiceDiscs {
     public ArrayList<CardHolder> listActiveCards(){
         ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             cardList.addAll(Arrays.asList(activeCards[i]));
         }
 
@@ -100,7 +102,7 @@ public class DiceDiscs {
         activeCards[playerID][position] = newCard;
     }
 
-    private void goingToDiscard(int targetPlayerID, int position) {
+    public void goingToDiscard(int targetPlayerID, int position) {
         if(activeCards[targetPlayerID][position] != null){
             activeCards[targetPlayerID][position].goingToDiscard(targetPlayerID, position);
         }

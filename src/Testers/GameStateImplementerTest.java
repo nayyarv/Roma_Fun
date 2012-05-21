@@ -5,7 +5,10 @@ import framework.Rules;
 import framework.cards.Card;
 import junit.framework.TestCase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * File Name:
@@ -141,6 +144,18 @@ public class GameStateImplementerTest extends TestCase {
         System.out.println(Arrays.toString(recievedDiscs));
 
         assert (Arrays.equals(discs, recievedDiscs));
+
+        discs[6] = Card.NOT_A_CARD;
+
+
+        gameStateImplementer.setPlayerCardsOnDiscs(0, discs);
+        //gameStateImplementer.printStats();
+
+        recievedDiscs = gameStateImplementer.getPlayerCardsOnDiscs(0);
+        gameStateImplementer.isGameCompleted();
+        assert (Arrays.equals(discs, recievedDiscs));
+        gameStateImplementer.isGameCompleted();
+
 
         System.out.println("DiceDiscs functions passed!!!\n");
 

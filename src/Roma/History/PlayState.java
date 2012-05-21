@@ -1,7 +1,8 @@
 package Roma.History;
 
 import Roma.*;
-import Roma.Cards.*;
+import Roma.Cards.Card;
+import Roma.Cards.CardHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +26,9 @@ public class PlayState {
     ArrayList<String> deckData = new ArrayList<String>();
     ArrayList<String> discardData = new ArrayList<String>();
     ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
-    String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[][] lives = new int[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[] money = new int[Roma.MAX_PLAYERS];
-    int[] victory = new int[Roma.MAX_PLAYERS];
+    String[][] discs = new String[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    int[] money = new int[RomaGame.MAX_PLAYERS];
+    int[] victory = new int[RomaGame.MAX_PLAYERS];
     int victoryPool;
     int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
 

@@ -50,8 +50,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.ESSEDUM)){
             activator = new simpleActivator(player);
         } else if (chosen.equals(Card.FORUM)){
-
-
+            activator = new ForumActivatorImpl(player);
         } else if (chosen.equals(Card.GLADIATOR)){
             activator = new Assassin(player);
         } else if (chosen.equals(Card.HARUSPEX)){

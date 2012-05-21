@@ -1,6 +1,7 @@
 package Implementers.ImplementedActivators;
 
-import framework.interfaces.activators.CardActivator;
+import Roma.Cards.Consiliarius;
+import framework.interfaces.activators.*;
 
 /**
  * File Name:
@@ -8,7 +9,16 @@ import framework.interfaces.activators.CardActivator;
  * Date: 20/05/12
  * Desc:
  */
-public class dummyActivator implements CardActivator {
+public class dummyActivator implements CardActivator
+       /*, AesculapinumActivator, ArchitectusActivator, CenturioActivator,
+        ConsiliariusActivator, ConsulActivator, EssedumActivator,
+        ForumActivator, GladiatorActivator, HaruspexActivator,
+        LegatActivator, LegionariusActivator, MachinaActivator,
+        MercatorActivator, MercatusActivator, NeroActivator, NeroActivator, OnagerActivator,
+        PraetorianusActivator, ScaenicusActivator, SenatorActivator, SicariusActivator,
+        TelephoneBoxActivator, TribunusPlebisActivator, VelitesActivator */
+
+{
     /**
      * Mark the pending activation as complete.
      * <p/>

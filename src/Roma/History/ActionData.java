@@ -1,7 +1,6 @@
 package Roma.History;
 
 import Roma.CardManager;
-import Roma.Cards.Card;
 import Roma.Cards.CardHolder;
 import Roma.PlayArea;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
@@ -55,28 +54,13 @@ public class ActionData {
     //For activating a card
     private ArrayList<Integer> activationData;
 
-    //deck/discard data
-    ArrayList<String> deckData = new ArrayList<String>();
-    ArrayList<String> discardData = new ArrayList<String>();
 
     //Called from playerInterface
     public ActionData(PlayArea playArea){
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> cardList = null;
         activationData = new ArrayList<Integer>();
-
-        //store deck data
-        cardList = cardManager.getPlayingDeck();
-        for(Card card : cardList){
-            deckData.add(card.getName());
         }
-
-        //store discard data
-        cardList = cardManager.getDiscardPile();
-        for (Card card : cardList){
-            discardData.add(card.getName());
-        }
-    }
 
     public boolean isLayCard() {
         return layCard;
@@ -182,14 +166,6 @@ public class ActionData {
         this.activationData.addAll(activationData);
     }
 
-    public ArrayList<String> getDeckData() {
-        return deckData;
-    }
-
-    public ArrayList<String> getDiscardData() {
-        return discardData;
-    }
-
     public String toString(){
         return "New action:"
                 + "\nlayCard: " + layCard
@@ -205,8 +181,6 @@ public class ActionData {
                 + "\ncardIndex:" + cardIndex
                 + "\ntargetDisc:" + targetDisc
                 + "\nactivationData:" + activationData
-                + "\ndeckData: " + deckData
-                + "\ndiscardData: " + discardData
                 + "\n";
     }
 }

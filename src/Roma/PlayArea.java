@@ -108,6 +108,8 @@ public class PlayArea {
         // reset temporary defense modifiers
         clearEndTurnWrappers();
         turn++;
+        turnHistory.setCurrentTurnNumber(turn);
+        turnHistory.addPlayState(playState);
         if(timeWarp != null){
             try {
                 timeWarp.warpTime();
@@ -116,8 +118,6 @@ public class PlayArea {
             }
             timeWarp = null;
         }
-        turnHistory.addPlayState(playState);
-        turnHistory.setCurrentTurnNumber(turn);
     }
 
     public void resetAllPlayable() {
@@ -157,8 +157,8 @@ public class PlayArea {
         return turn;
     }
 
-    public void setTurn(int playerID) {
-        this.turn = playerID;
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
     public boolean isGameOver() {
@@ -302,5 +302,17 @@ public class PlayArea {
 
     public void setTurnHistory(TurnHistory turnHistory) {
         this.turnHistory = turnHistory;
+    }
+
+    public TimeWarp getTimeWarp(){
+        return timeWarp;
+    }
+
+    public void timeLapse(int currentTurn){
+        ActionData currentAction;
+
+        while(turn != currentTurn){
+
+        }
     }
 }

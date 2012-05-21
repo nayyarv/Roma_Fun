@@ -89,6 +89,8 @@ public class Haruspex extends CardBase {
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = activationData.remove(0);
         player.addCardToHand(deck.remove(cardIndex));
-        cardManager.shuffle();
+        if(playArea.getTimeWarp() == null){
+            cardManager.shuffle();
+        }
     }
 }

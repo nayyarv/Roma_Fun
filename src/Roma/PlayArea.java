@@ -151,6 +151,7 @@ public class PlayArea {
             player.rollActionDice();
         }
         transferNextToThis();
+        diceDiscs.arriveFromPast();
     }
 
     //All the getters
@@ -315,6 +316,7 @@ public class PlayArea {
     public PlayState autoTurnStart(){
         Player player = players[turn % Roma.MAX_PLAYERS];
         startTurnPhase(player);
+        diceDiscs.arriveFromPast();
         return new PlayState(this, player);
     }
 

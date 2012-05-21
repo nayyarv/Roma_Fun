@@ -3,6 +3,7 @@ package Roma;
 import Roma.Cards.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
+import sun.rmi.runtime.NewThreadAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -315,6 +316,14 @@ public class DiceDiscs {
         card.leavePlay();
     }
 
+    public void setFromPastTime(CardHolder[][][] fromPastTime) {
+        this.fromPastTime = fromPastTime;
+    }
+
+    public void setTimeLives(int[][][] timeLives) {
+        this.timeLives = timeLives;
+    }
+
     //TODO: add to beginning of turn
     public void arriveFromPast(){
         Player player;
@@ -345,5 +354,23 @@ public class DiceDiscs {
                 timeLives[Dice.MAX_DIE_VALUE - 1][i][j] = 0;
             }
         }
+    }
+
+    public String[][][] fromPastToString(){
+        String[][][] fromPast = new String[Dice.MAX_DIE_VALUE][Roma.MAX_PLAYERS][CARD_POSITIONS];
+
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+                for(int k = 0; k < CARD_POSITIONS; k++){
+                    fromPast[i][j][k] = fromPastTime[i][j][k].getName();
+                }
+            }
+        }
+
+        return fromPast;
+    }
+
+    public int[][][] getTimeLives() {
+        return timeLives;
     }
 }

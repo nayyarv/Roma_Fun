@@ -31,6 +31,7 @@ public class PlayState {
     private int[] victory = new int[Roma.MAX_PLAYERS];
     private int victoryPool;
     private int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
+    private String[][][] fromPast;
 
     private ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 
@@ -96,6 +97,9 @@ public class PlayState {
         for(int i = 0; i < freeDice.size(); i++){
             actionDice[i] = freeDice.get(i).getValue();
         }
+
+        fromPast = diceDiscs.fromPastToString();
+
     }
 
     public void addActionHistory(ActionData actionData){
@@ -167,5 +171,9 @@ public class PlayState {
 
     public ArrayList<ActionData> getActionHistory() {
         return actionHistory;
+    }
+
+    public String[][][] getFromPast() {
+        return fromPast;
     }
 }

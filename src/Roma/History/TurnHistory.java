@@ -19,15 +19,8 @@ public class TurnHistory {
     private ArrayList<PlayState> history = new ArrayList<PlayState>(); // Stores all the actions taken during this turn
     private int currentTurnNumber = 0;
 
-    public TurnHistory(){
-    }
-
     public ArrayList<PlayState> getHistory() {
         return history;
-    }
-
-    public void setHistory(ArrayList<PlayState> history) {
-        this.history = history;
     }
 
     public void addPlayState(PlayState playState){

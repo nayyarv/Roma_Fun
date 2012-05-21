@@ -3,9 +3,7 @@ package Roma;
 import Roma.Cards.CardHolder;
 import Roma.Cards.Wrapper;
 import Roma.Cards.WrapperMaker;
-import Roma.History.ActionData;
-import Roma.History.PlayState;
-import Roma.History.TurnHistory;
+import Roma.History.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.GamePlayerInterface;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
@@ -41,6 +39,7 @@ public class PlayArea {
     private boolean gameOver = false;
 
     private TurnHistory turnHistory;
+    private TimeWarp timeWarp = null;
 
     public PlayArea(Roma mainProgram) {
         this.mainProgram = mainProgram;
@@ -101,12 +100,24 @@ public class PlayArea {
                 clearEndActionWrappers();
                 playState.addActionHistory(action);
             }
+            if(timeWarp != null){
+                endTurn = true;
+            }
             resetAllPlayable();
         }
         // reset temporary defense modifiers
         clearEndTurnWrappers();
-        turnHistory.addPlayState(playState);
         turn++;
+        if(timeWarp != null){
+            try {
+                timeWarp.warpTime();
+            } catch (TimeParadox timeParadox) {
+                endGame(); //TODO
+            }
+            timeWarp = null;
+        }
+        turnHistory.addPlayState(playState);
+        turnHistory.setCurrentTurnNumber(turn);
     }
 
     public void resetAllPlayable() {
@@ -283,5 +294,13 @@ public class PlayArea {
 
     public ArrayList<PlayState> getPlayStateHistory(){
         return turnHistory.getHistory();
+    }
+
+    public TurnHistory getTurnHistory() {
+        return turnHistory;
+    }
+
+    public void setTurnHistory(TurnHistory turnHistory) {
+        this.turnHistory = turnHistory;
     }
 }

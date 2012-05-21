@@ -1,5 +1,6 @@
 package Roma.History;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: Andrew
@@ -7,13 +8,14 @@ package Roma.History;
  * Time: 11:17 AM
  * To change this template use File | Settings | File Templates.
  */
-public class TimeWarp extends Exception {
+public class TimeWarp {
     private final TurnHistory turnHistory;
     private final int timeReverse;
     private final int playerID;
     private final int position;
     private final String cardName;
     private final int[][] lives;
+
     public TimeWarp(TurnHistory turnHistory, int timeReverse, int playerID, int position,
                     String cardName, int[][] lives){
 
@@ -31,4 +33,13 @@ public class TimeWarp extends Exception {
     //1)action dice
     //2)battle die
     //3)deck order
+    //TODO: card will duplicate itself but will merge with itself during the replay
+    //need to use a boolean to check for merge
+
+    //import Implementers.GameStateImplementer;
+    //import framework.cards.Card;
+
+    public void warpTime() throws TimeParadox {
+
+    }
 }

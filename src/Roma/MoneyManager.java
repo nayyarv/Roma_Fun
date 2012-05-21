@@ -5,14 +5,14 @@ import Roma.PlayerInterfaceFiles.PlayerInterface;
 public class MoneyManager {
     public final static int STARTING_MONEY = 0;
 
-    private int[] playerMoney = new int[Roma.MAX_PLAYERS];
+    private int[] playerMoney = new int[RomaGame.MAX_PLAYERS];
 
     public MoneyManager() {
 
     }
 
     public void setStartingMoney(int player, int amount){
-        assert (player==Roma.PLAYER_ONE||player==Roma.PLAYER_TWO);
+        assert (player== RomaGame.PLAYER_ONE||player== RomaGame.PLAYER_TWO);
         playerMoney[player] = amount;
     }
 
@@ -46,7 +46,7 @@ public class MoneyManager {
     }
 
     public String toString() {
-        return "Player One has: $" + playerMoney[Roma.PLAYER_ONE] + ", and Player Two has: $" +
-                playerMoney[Roma.PLAYER_TWO];
+        return "Player One has: $" + playerMoney[RomaGame.PLAYER_ONE] + ", and Player Two has: $" +
+                playerMoney[RomaGame.PLAYER_TWO];
     }
 }

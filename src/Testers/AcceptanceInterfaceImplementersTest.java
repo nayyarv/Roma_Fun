@@ -1,12 +1,10 @@
 package Testers;
 
 import Implementers.AcceptanceInterfaceImplementers;
-
 import framework.cards.Card;
 import framework.interfaces.AcceptanceInterface;
 import framework.interfaces.GameState;
 import framework.interfaces.MoveMaker;
-
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

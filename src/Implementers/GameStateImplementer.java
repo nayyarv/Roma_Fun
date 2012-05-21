@@ -49,7 +49,7 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public int getWhoseTurn() {
-        return playArea.getTurn()%Roma.MAX_PLAYERS;
+        return playArea.getTurn()% RomaGame.MAX_PLAYERS;
     }
 
     /**
@@ -72,6 +72,7 @@ public class GameStateImplementer implements GameState{
         if(getWhoseTurn()!=player){
             playArea.setTurn(player);
         }
+        playArea.resetGameOverFlag();
     }
 
     /**
@@ -307,7 +308,11 @@ public class GameStateImplementer implements GameState{
         Player player = playArea.getPlayer(playerNum);
         ArrayList<CardHolder> discCardsList = convertToCardHolderList(discCards);
         for(int i=0; i<discCardsList.size();i++){
-            if(discCardsList.get(i)!=null) diceDiscs.layCard(player, i, discCardsList.get(i));
+            if(discCardsList.get(i)!=null) {
+                diceDiscs.layCard(player, i, discCardsList.get(i));
+            } else {
+                diceDiscs.goingToDiscard(playerNum, i);
+            }
         }
     }
 

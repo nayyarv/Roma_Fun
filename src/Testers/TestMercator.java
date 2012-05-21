@@ -1,8 +1,8 @@
 //package Testers;
 //
 //
-//import Roma.Cards.*;
-//import Roma.*;
+//import RomaGame.Cards.*;
+//import RomaGame.*;
 //
 ///**
 //* File Name:
@@ -13,12 +13,12 @@
 //public class TestMercator {
 //
 //    public static void main(String[] args) {
-//        Roma game = new Roma();
+//        RomaGame game = new RomaGame();
 //        PlayArea haha = new PlayArea(game);
 //        Card merc = new Mercator(haha);
-//        haha.getMoneyManager().gainMoney(Roma.PLAYER_ONE, 10);
-//        haha.getMoneyManager().gainMoney(Roma.PLAYER_TWO, 10);
-//        //merc.activate(Roma.PLAYER_ONE);
+//        haha.getMoneyManager().gainMoney(RomaGame.PLAYER_ONE, 10);
+//        haha.getMoneyManager().gainMoney(RomaGame.PLAYER_TWO, 10);
+//        //merc.activate(RomaGame.PLAYER_ONE);
 //
 //        System.out.println(haha.getMoneyManager());
 //        System.out.println(haha.getVictoryTokens());

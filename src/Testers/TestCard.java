@@ -1,10 +1,10 @@
 //package Testers;
 //
 //
-//import Roma.Cards.Card;
-//import Roma.Cards.Sicarius;
-//import Roma.PlayArea;
-//import Roma.Roma;
+//import RomaGame.Cards.Card;
+//import RomaGame.Cards.Sicarius;
+//import RomaGame.PlayArea;
+//import RomaGame.RomaGame;
 //
 ///**
 // * File Name:
@@ -15,7 +15,7 @@
 //public class TestCard {
 //
 //    public static void main(String[] args) {
-//        Roma game = new Roma();
+//        RomaGame game = new RomaGame();
 //        PlayArea haha = new PlayArea(game);
 //        Card sic = new Sicarius(haha);
 //        System.out.println(sic.toString());

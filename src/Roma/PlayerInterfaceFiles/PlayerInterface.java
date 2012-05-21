@@ -1,7 +1,7 @@
 package Roma.PlayerInterfaceFiles;
 
-import Roma.Cards.*;
-import Roma.*;
+import Roma.Cards.CardHolder;
+import Roma.Dice;
 
 import java.util.ArrayList;
 

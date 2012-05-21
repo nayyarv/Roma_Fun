@@ -25,7 +25,7 @@ public class DiceDiscs {
 
     private final PlayArea playArea;
 
-    private CardHolder[][] activeCards = new CardHolder[Roma.MAX_PLAYERS][CARD_POSITIONS];
+    private CardHolder[][] activeCards = new CardHolder[RomaGame.MAX_PLAYERS][CARD_POSITIONS];
     //Has the card placed on each disc
 
     private ArrayList<ArrayList<Dice>> discs = new ArrayList<ArrayList<Dice>>();
@@ -45,7 +45,7 @@ public class DiceDiscs {
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
-                for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+                for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
                     activeCards[j][i] = null;
                 }
             discs.add(new ArrayList<Dice>());
@@ -64,7 +64,7 @@ public class DiceDiscs {
     public ArrayList<CardHolder> listActiveCards(){
         ArrayList<CardHolder> cardList = new ArrayList<CardHolder>();
 
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             cardList.addAll(Arrays.asList(activeCards[i]));
         }
 
@@ -106,7 +106,7 @@ public class DiceDiscs {
         activeCards[playerID][position] = newCard;
     }
 
-    private void goingToDiscard(int targetPlayerID, int position) {
+    public void goingToDiscard(int targetPlayerID, int position) {
         if(activeCards[targetPlayerID][position] != null){
             activeCards[targetPlayerID][position].goingToDiscard(targetPlayerID, position);
         }
@@ -328,7 +328,7 @@ public class DiceDiscs {
     public void arriveFromPast(){
         Player player;
         CardHolder card;
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             player = playArea.getPlayer(i);
             for(int j = 0; j < CARD_POSITIONS; j++){
                 if(fromPastTime[0][i][j] != null){
@@ -341,14 +341,14 @@ public class DiceDiscs {
             }
         }
         for(int i = 0; i + 1 < Dice.MAX_DIE_VALUE; i++){
-            for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
                 System.arraycopy(fromPastTime[i + 1][j], 0,
                         fromPastTime[i][j], 0, CARD_POSITIONS);
                 System.arraycopy(timeLives[i + 1][j], 0,
                         timeLives[i][j], 0, CARD_POSITIONS);
             }
         }
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             for(int j = 0; j < CARD_POSITIONS; j++){
                 fromPastTime[Dice.MAX_DIE_VALUE - 1][i][j] = null;
                 timeLives[Dice.MAX_DIE_VALUE - 1][i][j] = 0;
@@ -360,7 +360,7 @@ public class DiceDiscs {
         String[][][] fromPast = new String[Dice.MAX_DIE_VALUE][Roma.MAX_PLAYERS][CARD_POSITIONS];
 
         for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
-            for(int j = 0; j < Roma.MAX_PLAYERS; j++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
                 for(int k = 0; k < CARD_POSITIONS; k++){
                     fromPast[i][j][k] = fromPastTime[i][j][k].getName();
                 }

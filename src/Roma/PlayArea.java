@@ -17,7 +17,7 @@ public class PlayArea {
     private final int PAD_LENGTH = 20;
 
     //Object pointers
-    private Roma mainProgram;
+    private RomaGame mainProgram;
     private CardManager cardManager;
     private DiceHolder diceHolder;
     private MoneyManager moneyManager;
@@ -41,7 +41,7 @@ public class PlayArea {
     private TurnHistory turnHistory;
     private TimeWarp timeWarp = null;
 
-    public PlayArea(Roma mainProgram) {
+    public PlayArea(RomaGame mainProgram) {
         this.mainProgram = mainProgram;
         turnHistory = new TurnHistory();
         cardManager = new CardManager(this);
@@ -49,17 +49,20 @@ public class PlayArea {
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
-        players = new Player[Roma.MAX_PLAYERS];
+        players = new Player[RomaGame.MAX_PLAYERS];
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+        for (int i = 0; i < RomaGame.MAX_PLAYERS; i++) {
             players[i] = Player.makeRealPlayer(i, this);
         }
         gameRules.getAndSwapCards();
         gameRules.layAllCardsInHand();
     }
 
+    public void resetGameOverFlag(){
+        gameOver = false;
+    }
 
     public void endGame(){
         gameOver = true;
@@ -68,7 +71,7 @@ public class PlayArea {
 
     public void runGame() {
         while (!gameOver) {
-            Player player = players[turn % Roma.MAX_PLAYERS];
+            Player player = players[turn % RomaGame.MAX_PLAYERS];
             playerTurn(player);
         }
     }
@@ -127,7 +130,7 @@ public class PlayArea {
         resetPlayable(cardList);
         cardList = cardManager.getDiscardPile();
         resetPlayable(cardList);
-        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+        for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             cardList = players[i].getHand();
             resetPlayable(cardList);
         }
@@ -274,11 +277,11 @@ public class PlayArea {
         moneyManager = new MoneyManager();
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
-        players = new Player[Roma.MAX_PLAYERS];
+        players = new Player[RomaGame.MAX_PLAYERS];
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
-        for (int i = 0; i < Roma.MAX_PLAYERS; i++) {
+        for (int i = 0; i < RomaGame.MAX_PLAYERS; i++) {
             players[i] = Player.makeDummyPlayer(i, this);
         }
     }
@@ -291,7 +294,7 @@ public class PlayArea {
     }
 
     public void testFillHand(int playerID){
-        players[playerID].addCardListToHand(cardManager.drawNCards(Roma.NUM_INIT_CARDS));
+        players[playerID].addCardListToHand(cardManager.drawNCards(RomaGame.NUM_INIT_CARDS));
     }
 
     public ArrayList<PlayState> getPlayStateHistory(){

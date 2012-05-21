@@ -1,5 +1,5 @@
 /**
- * Defines each of the unique cards within the Roma game
+ * Defines each of the unique cards within the RomaGame game
  * @author Benjamin James Wright (@ben.wright)
  * @author Damon Stacey (@damon.stacey)
  * @version 0.0.1

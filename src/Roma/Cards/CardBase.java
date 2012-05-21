@@ -4,7 +4,7 @@ import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
-import Roma.Roma;
+import Roma.RomaGame;
 
 import java.util.ArrayList;
 
@@ -115,7 +115,7 @@ public abstract class CardBase implements Card {
     public abstract CardHolder makeOne(PlayArea playArea);
 
     public int otherPlayer(int player) {
-        return ((player == Roma.PLAYER_ONE) ? Roma.PLAYER_TWO : Roma.PLAYER_ONE);
+        return ((player == RomaGame.PLAYER_ONE) ? RomaGame.PLAYER_TWO : RomaGame.PLAYER_ONE);
     }
 
     public void leavePlay() {

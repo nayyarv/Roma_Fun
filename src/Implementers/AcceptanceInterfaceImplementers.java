@@ -13,6 +13,12 @@ import framework.interfaces.MoveMaker;
  */
 public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
 
+    PlayArea playArea = new PlayArea("testing");
+
+
+    public AcceptanceInterfaceImplementers() {
+    }
+
     /**
      * Return a {@link framework.interfaces.MoveMaker} that will modify the given GameState.
      * <p/>
@@ -26,7 +32,7 @@ public class AcceptanceInterfaceImplementers implements AcceptanceInterface {
      * @param state the GameState that the mover will apply changes to
      * @return a MoveMaker that will modify the given GameState
      */
-    PlayArea playArea = new PlayArea("testing");
+
     @Override
     public MoveMaker getMover(GameState state) {
         return new MoveMakerImplementer(state, playArea);

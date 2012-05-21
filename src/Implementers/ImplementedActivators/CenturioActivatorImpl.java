@@ -2,6 +2,7 @@ package Implementers.ImplementedActivators;
 
 import Implementers.ActivatorFunctions;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import framework.interfaces.activators.CenturioActivator;
 
 /**
@@ -23,11 +24,14 @@ public class CenturioActivatorImpl extends simpleActivator implements CenturioAc
      * @param attackAgain whether to attack again
      */
 
-    boolean attackAgain;
+    boolean attackAgain = false;
 
     @Override
     public void chooseCenturioAddActionDie(boolean attackAgain) {
-        attackAgain = true;
+        this.attackAgain = attackAgain;
+        if(!attackAgain){
+            player.getActivationData().add(PlayerInterface.CANCEL);
+        }
     }
 
     /**

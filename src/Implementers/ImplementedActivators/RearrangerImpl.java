@@ -2,6 +2,7 @@ package Implementers.ImplementedActivators;
 
 import Roma.Cards.CardHolder;
 import Roma.Player;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import framework.cards.Card;
 import framework.interfaces.activators.ConsiliariusActivator;
 import framework.interfaces.activators.MachinaActivator;
@@ -41,18 +42,32 @@ public class RearrangerImpl extends simpleActivator implements Rearranger,
     @Override
     public void placeCard(Card card, int diceDisc) {
 
-        int i = 0;
-        for (CardHolder cardHolder:discsList){
-            if(cardHolder!=null){
-                String name = cardHolder.getName().replaceAll("\\s", "");
-                if (name.equalsIgnoreCase(card.toString())) break;
-            }
-            i++;
+        int cardIndex = getCardIndex(card);
+        player.getActivationData().add(cardIndex); //from indices
+        player.getActivationData().add(diceDisc-1); //to indices
+
+    }
+
+    private int getCardIndex(Card card){
+
+        ArrayList<Integer> activation = player.getActivationData();
+        ArrayList<Integer> cardIndices = new ArrayList<Integer>();
+
+        //get all the 0,2,4,6 etc indices
+        for (int j =0;j<activation.size();j+=2){
+            cardIndices.add(activation.get(j));
         }
-        discsList.remove(i);
 
-        player.getActivationData().add(i);
-        player.getActivationData().add(diceDisc-1);
+        int i;
+        for (i =0; i<discsList.size();i++){
+            if (!cardIndices.contains(i)){ //i,.e. not already chosen
+                if(discsList.get(i)!=null){
+                    String name = discsList.get(i).getName().replaceAll("\\s", "");
+                    if (name.equalsIgnoreCase(card.toString())) return i;
+                }
+            }
+        }
 
+        return PlayerInterface.CANCEL;
     }
 }

@@ -22,8 +22,6 @@ public class PlayState {
     */
 
     int turn;
-    ArrayList<String> deckData = new ArrayList<String>();
-    ArrayList<String> discardData = new ArrayList<String>();
     ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
     String[][] discs = new String[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
     int[][] lives = new int[Roma.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
@@ -35,11 +33,9 @@ public class PlayState {
     ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 
     public PlayState(PlayArea playArea, Player player){
-        CardManager cardManager = playArea.getCardManager();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
         ArrayList<String> playerHand = null;
         ArrayList<CardHolder> cardList = null;
@@ -48,18 +44,6 @@ public class PlayState {
 
         //turn number
         turn = playArea.getTurn();
-
-        //store deck data
-        cardList = cardManager.getPlayingDeck();
-        for(Card card : cardList){
-            deckData.add(card.getName());
-        }
-
-        //store discard data
-        cardList = cardManager.getDiscardPile();
-        for (Card card : cardList){
-            discardData.add(card.getName());
-        }
 
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
 
@@ -106,8 +90,6 @@ public class PlayState {
     public String toString(){
         ArrayList<String> cardList;
         String output = "turn: " + turn
-                + "\ndeckData: " + deckData
-                + "\ndiscardData: " + discardData
                 + "\n";
         for(int i = 0; i < Roma.MAX_PLAYERS; i++){
             cardList = hand.get(i);
@@ -124,5 +106,41 @@ public class PlayState {
                 + "\n";
         output += actionHistory.toString();
         return output;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public ArrayList<ArrayList<String>> getHand() {
+        return hand;
+    }
+
+    public String[][] getDiscs() {
+        return discs;
+    }
+
+    public int[][] getLives() {
+        return lives;
+    }
+
+    public int[] getMoney() {
+        return money;
+    }
+
+    public int[] getVictory() {
+        return victory;
+    }
+
+    public int getVictoryPool() {
+        return victoryPool;
+    }
+
+    public int[] getActionDice() {
+        return actionDice;
+    }
+
+    public ArrayList<ActionData> getActionHistory() {
+        return actionHistory;
     }
 }

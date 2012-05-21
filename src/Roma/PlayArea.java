@@ -82,7 +82,7 @@ public class PlayArea {
         PlayState playState = new PlayState(this, player);
 
         while (!gameOver && !endTurn) {
-            ActionData action = new ActionData(player.getPlayerID());
+            ActionData action = new ActionData(this);
             diceHolder.rollBattleDice();
             action.setBattleDice(diceHolder.getBattleValue()[0]);
             //read player input through player interface and and store into action data

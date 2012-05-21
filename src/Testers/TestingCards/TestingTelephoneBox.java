@@ -26,6 +26,7 @@ public class TestingTelephoneBox {
         hand.add(Card.TEMPLUM);
         hand.add(Card.TEMPLUM);
         gameStateImplementer.setPlayerHand(0, hand);
+        gameStateImplementer.setPlayerHand(1, hand);
 
         int[] num = {1,3,5};
         gameStateImplementer.setActionDice(num);
@@ -38,11 +39,12 @@ public class TestingTelephoneBox {
                 Card.FORUM, Card.NERO, Card.TELEPHONEBOX};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
-                Card.CONSUL, Card.CONSUL, Card.SICARIUS};
+                Card.CONSUL, Card.CONSUL, Card.TELEPHONEBOX};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
         gameStateImplementer.isGameCompleted();
         gameStateImplementer.runGame();
+        gameStateImplementer.isGameCompleted();
 
         System.err.println(gameStateImplementer.getDiscard());
     }

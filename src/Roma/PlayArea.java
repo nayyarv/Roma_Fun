@@ -111,7 +111,6 @@ public class PlayArea {
         // reset temporary defense modifiers
         clearEndTurnWrappers();
         turn++;
-        turnHistory.setCurrentTurnNumber(turn);
         turnHistory.addPlayState(playState);
         if(timeWarp != null){
             try {
@@ -121,6 +120,7 @@ public class PlayArea {
             }
             timeWarp = null;
         }
+        turnHistory.setCurrentTurnNumber(turn);
     }
 
     public void resetAllPlayable() {
@@ -147,7 +147,7 @@ public class PlayArea {
 
     public void startTurnPhase(Player player) {
         PlayerInterface.printOut(BREAK_LINE, true);
-        PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
+        PlayerInterface.printOut("Turn: " + turn + " \tIt's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
         if(timeWarp == null){

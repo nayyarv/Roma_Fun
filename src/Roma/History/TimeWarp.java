@@ -76,11 +76,13 @@ public class TimeWarp {
             cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
         }
         gameStateImplementer.setDeck(cardList);
+        cardList.clear();
 
         for(String cardName : discardData){
             cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
         }
         gameStateImplementer.setDiscard(cardList);
+        cardList.clear();
 
         for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             gameStateImplementer.setPlayerVictoryPoints(i, 1);
@@ -91,9 +93,10 @@ public class TimeWarp {
                 cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
             }
             gameStateImplementer.setPlayerHand(i, cardList);
+            cardList.clear();
 
             for(int j = 0; j < DiceDiscs.CARD_POSITIONS; j++){
-                cardList.add(Card.valueOf(discs[i][j].replaceAll(" ", "").toUpperCase()));
+                cardArray[j] = Card.valueOf(discs[i][j].replaceAll("\\s", "").toUpperCase());
             }
             gameStateImplementer.setPlayerCardsOnDiscs(i, cardArray);
 

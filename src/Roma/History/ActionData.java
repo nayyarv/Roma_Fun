@@ -1,5 +1,7 @@
 package Roma.History;
 
+import Roma.PlayerInterfaceFiles.PlayerInterface;
+
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,8 @@ public class ActionData {
      *      - TargetDiscindex (0-6)
      */
 
+    public static final int CANCEL = PlayerInterface.CANCEL;
+
     //#defines for action dice
     public static final String DICE = "Dice"; //0-5     //used
     public static final String BRIBERY = "Bribery";     //used
@@ -34,17 +38,17 @@ public class ActionData {
     private boolean commit = false;     //used
 
     //For using action dice
-    private int actionDiceIndex;    //used
-    private String discType;        //used 1 2 3 4
-    private int position;
-    private int diceValue;          //used
-    private int battleDice;         //used
-    private String cardName;        //used
-    private int drawCardIndex;
+    private int actionDiceIndex = CANCEL;    //used
+    private String discType = "";        //used 1 2 3 4
+    private int position = CANCEL;
+    private int diceValue = CANCEL;          //used
+    private int battleDice = CANCEL;         //used
+    private String cardName = "";        //used
+    private int drawCardIndex = CANCEL;
 
     //For laying a card
-    private int cardIndex;          //used
-    private int targetDisc;         //used
+    private int cardIndex = CANCEL;          //used
+    private int targetDisc = CANCEL;         //used
 
     //For activating a card
     private ArrayList<Integer> activationData;
@@ -158,5 +162,23 @@ public class ActionData {
 
     public void setActivationData(ArrayList<Integer> activationData) {
         this.activationData.addAll(activationData);
+    }
+
+    public String toString(){
+        return "PlayerID: " + playerID
+                + "\nlayCard: " + layCard
+                + "\nuseDice: " + useDice
+                + "\ncommit: " + commit
+                + "\nactionDieIndex: " + actionDiceIndex
+                + "\ndiscType: " + discType
+                + "\nposition: " + position
+                + "\ndiceValue: " + diceValue
+                + "\nbattleDice: " + battleDice
+                + "\ncardName: " + cardName
+                + "\ndrawCardIndex: " + drawCardIndex
+                + "\ncardIndex:" + cardIndex
+                + "\ntargetDisc:" + targetDisc
+                + "\nactivationData:" + activationData
+                + "\n";
     }
 }

@@ -86,7 +86,7 @@ public class PlayState {
             victory[i] = victoryTokens.getPlayerTokens(i);
         }
 
-        //store victory toekn pool value
+        //store victory token pool value
         victoryPool = victoryTokens.getPoolTokens();
 
         //store action dice of current player
@@ -98,5 +98,25 @@ public class PlayState {
 
     public void addActionHistory(ActionData actionData){
         actionHistory.add(actionData);
+    }
+
+    public String toString(){
+        String output = "turn: " + turn
+                + "\ndeckData: " + deckData
+                + "\ndiscardData: " + discardData
+                + "\n";
+        for(int i = 0; i < Roma.MAX_PLAYERS; i++){
+            output += "playerID: " + i
+                    + "\nhand: " + hand.get(i)
+                    + "\ndiscs: " + discs[i]
+                    + "\nmoney: " + money[i]
+                    + "\nvictory: " + victory[i]
+                    + "\n";
+        }
+        output += "victoryPool: " + victoryPool
+                + " \nactionDice: " + actionDice
+                + "\n";
+        output += actionHistory.toString();
+        return output;
     }
 }

@@ -39,8 +39,6 @@ public class TimeWarp {
         gameStateImplementer = new GameStateImplementer(playArea);
     }
 
-    //TODO: Kat must remember how many lives it has at the point of return
-    //maybe just replay all the moves again?
     //three things to preserve:
     //1)action dice
     //2)battle die

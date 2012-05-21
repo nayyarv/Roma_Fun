@@ -39,7 +39,7 @@ public class PlayArea {
     private int turn = 0;
     private boolean gameOver = false;
 
-
+    private ArrayList<PlayState> playStateHistory = new ArrayList<PlayState>();
 
 
     public PlayArea(Roma mainProgram) {
@@ -98,12 +98,13 @@ public class PlayArea {
                 //end action phase
                 //add actionData to turnHistory
                 clearEndActionWrappers();
+                playState.addActionHistory(action);
             }
             resetAllPlayable();
         }
-
+        // reset temporary defense modifiers
         clearEndTurnWrappers();
-        //battleManager.clearDefenseModActive(); // reset temporary defense modifiers
+        playStateHistory.add(playState);
         turn++;
     }
 

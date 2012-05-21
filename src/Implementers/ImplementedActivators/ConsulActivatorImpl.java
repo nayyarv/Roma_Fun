@@ -1,5 +1,6 @@
 package Implementers.ImplementedActivators;
 
+import Implementers.ActivatorFunctions;
 import Roma.Dice;
 import Roma.Player;
 import framework.interfaces.activators.ConsulActivator;
@@ -39,20 +40,7 @@ public class ConsulActivatorImpl  implements ConsulActivator {
     @Override
     public void chooseWhichDiceChanges(int originalRoll) {
         //get the die index
-        ArrayList<Dice> freeDice = new ArrayList<Dice>();
-        freeDice.addAll(player.getFreeDice());
-        int currActionIndex = player.getCurrentAction().getActionDiceIndex();
-
-        freeDice.remove(currActionIndex);
-
-
-        Dice dice = freeDice.get(0);
-        int i;
-        for(i=0; i<freeDice.size()&&dice.getValue()!=originalRoll;i++){
-            dice = freeDice.get(i);
-        }
-        System.out.println("Found "+ originalRoll+" at "+ i);
-        dieIndex = i;
+        dieIndex = ActivatorFunctions.getDieindex(player, originalRoll);
 
     }
 

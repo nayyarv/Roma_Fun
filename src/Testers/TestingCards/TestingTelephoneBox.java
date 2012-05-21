@@ -21,10 +21,12 @@ public class TestingTelephoneBox {
 
         gameStateImplementer.setWhoseTurn(0);
 
-        hand.add(Card.ONAGER);
-        hand.add(Card.TEMPLUM);
-        hand.add(Card.TEMPLUM);
-        hand.add(Card.TEMPLUM);
+        hand.add(Card.TURRIS);
+        hand.add(Card.TURRIS);
+        hand.add(Card.TURRIS);
+        hand.add(Card.TURRIS);
+        hand.add(Card.TURRIS);
+        hand.add(Card.TURRIS);
         gameStateImplementer.setPlayerHand(0, hand);
         gameStateImplementer.setPlayerHand(1, hand);
 
@@ -35,11 +37,11 @@ public class TestingTelephoneBox {
         gameStateImplementer.setPlayerVictoryPoints(0, 10);
         gameStateImplementer.setPlayerVictoryPoints(1, 10);
 
-        Card[] diceDiscs1 = {Card.KAT, Card.BASILICA, Card.FORUM, Card.TEMPLUM,
-                Card.FORUM, Card.NERO, Card.TELEPHONEBOX};
+        Card[] diceDiscs1 = {Card.LEGIONARIUS, Card.LEGIONARIUS, Card.LEGIONARIUS, Card.LEGIONARIUS,
+                Card.LEGIONARIUS, Card.LEGIONARIUS, Card.TELEPHONEBOX};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
-        Card[] diceDiscs2 = {Card.KAT, Card.CONSUL, Card.TURRIS, Card.TURRIS,
-                Card.CONSUL, Card.CONSUL, Card.TELEPHONEBOX};
+        Card[] diceDiscs2 = {Card.SICARIUS, Card.SICARIUS, Card.SICARIUS, Card.SICARIUS,
+                Card.SICARIUS, Card.SICARIUS, Card.TELEPHONEBOX};
         gameStateImplementer.setPlayerCardsOnDiscs(1, diceDiscs2);
 
         gameStateImplementer.isGameCompleted();

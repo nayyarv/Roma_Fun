@@ -1,9 +1,12 @@
 package Implementers;
 
 import Implementers.ImplementedActivators.*;
+import Roma.Dice;
 import Roma.Player;
 import framework.cards.Card;
 import framework.interfaces.activators.CardActivator;
+
+import java.util.ArrayList;
 
 /**
  * File Name:
@@ -12,6 +15,25 @@ import framework.interfaces.activators.CardActivator;
  * Desc:
  */
 public class ActivatorFunctions {
+
+    public static int getDieindex(Player player, int diceReqd){
+
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
+        int currActionIndex = player.getCurrentAction().getActionDiceIndex();
+
+        freeDice.remove(currActionIndex);
+
+
+        Dice dice = freeDice.get(0);
+        int i;
+        for(i=0; i<freeDice.size()&&dice.getValue()!=diceReqd;i++){
+            dice = freeDice.get(i);
+        }
+        System.out.println("Found "+ diceReqd+" at "+ i);
+        return i;
+
+    }
 
     public static CardActivator getCorrectActivator(Card chosen, Player player){
         CardActivator activator = new dummyActivator();

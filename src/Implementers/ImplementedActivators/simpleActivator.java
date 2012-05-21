@@ -1,7 +1,7 @@
 package Implementers.ImplementedActivators;
 
 import Roma.Player;
-import framework.interfaces.activators.CardActivator;
+import framework.interfaces.activators.*;
 
 /**
  * File Name:
@@ -10,7 +10,9 @@ import framework.interfaces.activators.CardActivator;
  * Desc:
  */
 public class simpleActivator implements
-        CardActivator
+        CardActivator,
+        EssedumActivator, TribunusPlebisActivator,
+        LegatActivator, MercatusActivator
 {
     /**
      * Mark the pending activation as complete.

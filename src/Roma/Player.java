@@ -10,6 +10,7 @@ import java.util.Collections;
 
 
 public class Player {
+    private boolean MANUAL_TESTING = false;
     public static final String BREAK_LINE = PlayerInterface.BREAK_LINE;
     public static final int CANCEL = PlayerInterface.CANCEL;
     private final String name;
@@ -22,6 +23,7 @@ public class Player {
     private ActionData currentAction;
 
     private boolean presets;
+
 
 
     //static constructors
@@ -145,7 +147,7 @@ public class Player {
         boolean validChoice = false;
         int option = CANCEL;
 
-        if (!presets) {
+        if (!presets && MANUAL_TESTING) {
             freeDice = playArea.getDiceHolder().rollPlayerDice(playerID);
             playerInterface.printDiceList(freeDice);
 

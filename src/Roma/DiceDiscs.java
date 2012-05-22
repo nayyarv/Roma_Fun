@@ -43,6 +43,7 @@ public class DiceDiscs {
     private int[][][] timeLives =
             new int[Dice.MAX_DIE_VALUE][RomaGame.MAX_PLAYERS][CARD_POSITIONS];
 
+
     public DiceDiscs(PlayArea playArea) {
         this.playArea = playArea;
         for(int i = 0; i < CARD_POSITIONS; i++){
@@ -50,6 +51,13 @@ public class DiceDiscs {
                     activeCards[j][i] = null;
                 }
             discs.add(new ArrayList<Dice>());
+        }
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
+                for(int k = 0; k < CARD_POSITIONS; k++){
+                    timeLives[i][j][k] = 0;
+                }
+            }
         }
     }
 

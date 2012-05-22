@@ -77,7 +77,6 @@ public class TelephoneBox extends CardBase {
         int option;
         PlayerInterface playerInterface = player.getPlayerInterface();
         CardHolder card;
-        int timeValue;
 
         freeDice.remove(dieIndex);
         PlayerInterface.printOut("Send an active friendly card backward or forward in time", true);
@@ -87,7 +86,6 @@ public class TelephoneBox extends CardBase {
         }
         PlayerInterface.printOut("Telephone Box requires a 2nd Action Die:", true);
         dieIndex = player.getDieIndex(freeDice);
-        timeValue = freeDice.remove(dieIndex).getValue();
         activationData.add(dieIndex);
 
         PlayerInterface.printOut("Prevent which card shall be the time-traveller?", true);
@@ -104,10 +102,6 @@ public class TelephoneBox extends CardBase {
         if (option == CANCEL) {
             player.cancel();
         } else if (option == BACKWARD) {
-            if(timeValue > playArea.getTurn()){
-                PlayerInterface.printOut("Can't go back that far in time because not enought turns have passed!", true);
-                player.cancel();
-            }
             option = -1;
         } else if (option == FORWARD) {
             option = 1;
@@ -133,6 +127,9 @@ public class TelephoneBox extends CardBase {
         CardHolder card = diceDiscs.getTargetCard(player, activeCardIndex);
 
         if(timeDirection < 0){
+            if(timeValue > playArea.getTurn()){
+                timeValue = playArea.getTurn();
+            }
             TimeWarp timeWarp = new TimeWarp(turnHistory, timeValue, player.getPlayerID(),
                     activeCardIndex, card.getName(), card.countLives(), playArea);
             PlayerInterface.printOut(card.getName() + " was sent to the past!", true);

@@ -193,7 +193,9 @@ public class TimeWarp {
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder card = cardFactory.getCard
                 (Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()).toString());
-        diceDiscs.layCard(player, position, card);
+        if(!diceDiscs.getTargetCard(player, position).getName().equalsIgnoreCase(card.getName())){
+            diceDiscs.layCard(player, position, card);
+        }
         while(card.countLives() > lives){
             card.discarded(playerID, position);
         }

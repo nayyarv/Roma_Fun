@@ -32,7 +32,8 @@ public class PlayState {
     private int victoryPool;
     private int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
     private String[][][] fromPast;
-    private int[][][] pastLives;
+    private int[][][] pastLives =
+            new int[Dice.MAX_DIE_VALUE][RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
 
     private ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 

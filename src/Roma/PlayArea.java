@@ -257,6 +257,10 @@ public class PlayArea {
         endActionList.clear();
     }
 
+    public void clearEnterPlayList(){
+        enterPlayList.clear();
+    }
+
     public GameRules getGameRules() {
         return gameRules;
     }

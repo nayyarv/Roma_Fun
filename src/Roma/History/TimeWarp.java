@@ -173,7 +173,7 @@ public class TimeWarp {
         insertTimeTraveller();
         while(!actionHistory.isEmpty()){
             currentAction = actionHistory.remove(0);
-            //TODO: check for time paradoxes
+            timeParadoxCheck(playArea, currentAction);
             playArea.autoAction(newPlayState, currentAction);
         }
         playArea.autoTurnEnd(newPlayState);
@@ -195,6 +195,10 @@ public class TimeWarp {
         theTurn = timeChunk.remove(0);
         actionDiceValues = theTurn.getActionDice();
         gameStateImplementer.setActionDice(actionDiceValues);
+    }
+
+    private void timeParadoxCheck(PlayArea playArea, ActionData currentAction) {
+        //To change body of created methods use File | Settings | File Templates.
     }
 
     private void insertTimeTraveller() {

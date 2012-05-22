@@ -389,6 +389,8 @@ public class DiceDiscs {
     }
 
     public void leavePlay(int playerNum, int i) {
-        activeCards[playerNum][i].leavePlay(playerNum, i);
+        if(activeCards[playerNum][i] != null){
+            activeCards[playerNum][i].leavePlay(playerNum, i);
+        }
     }
 }

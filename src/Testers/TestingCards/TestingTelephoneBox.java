@@ -37,7 +37,7 @@ public class TestingTelephoneBox {
         gameStateImplementer.setPlayerVictoryPoints(0, 10);
         gameStateImplementer.setPlayerVictoryPoints(1, 10);
 
-        Card[] diceDiscs1 = {Card.LEGIONARIUS, Card.LEGIONARIUS, Card.LEGIONARIUS, Card.LEGIONARIUS,
+        Card[] diceDiscs1 = {Card.KAT, Card.LEGIONARIUS, Card.LEGIONARIUS, Card.LEGIONARIUS,
                 Card.LEGIONARIUS, Card.LEGIONARIUS, Card.TELEPHONEBOX};
         gameStateImplementer.setPlayerCardsOnDiscs(0, diceDiscs1);
         Card[] diceDiscs2 = {Card.SICARIUS, Card.FORUM, Card.TEMPLUM, Card.SICARIUS,

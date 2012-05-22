@@ -116,6 +116,7 @@ public class PlayArea {
             try {
                 timeWarp.warpTime();
             } catch (TimeParadox timeParadox) {
+                PlayerInterface.printOut(timeParadox.message(), true);
                 endGame(); //TODO
             }
             timeWarp = null;

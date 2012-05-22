@@ -99,8 +99,6 @@ public class ActivatorFunctions {
             activator = new RearrangerImplScanExten(player);
         } else if (chosen.equals(Card.CONSUL)){
             activator = new ConsulActivatorImplScanExten(player);
-        } else if (chosen.equals(Card.FORUM)){
-            activator = new ForumActivatorImpl(player);
         } else if (chosen.equals(Card.GLADIATOR)){
             activator = new AssassinScanExtension(player);
         } else if (chosen.equals(Card.HARUSPEX)){

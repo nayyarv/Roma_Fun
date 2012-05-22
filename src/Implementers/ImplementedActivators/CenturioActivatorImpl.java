@@ -24,7 +24,7 @@ public class CenturioActivatorImpl extends simpleActivator implements CenturioAc
      * @param attackAgain whether to attack again
      */
 
-    boolean attackAgain = false;
+    boolean attackAgain = true;
 
     @Override
     public void chooseCenturioAddActionDie(boolean attackAgain) {

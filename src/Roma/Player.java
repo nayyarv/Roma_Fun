@@ -552,7 +552,7 @@ public class Player {
 
         } else if(actionData.getDiscType().equalsIgnoreCase(ActionData.CARD)){
             diceDiscs.useDrawDisc(playerID, chosenDie);
-            drawCards(chosenDie.getValue(), actionData.getDrawCardIndex());
+            drawCards(actionData, chosenDie.getValue(), actionData.getDrawCardIndex());
 
         } else {
             System.err.println("WTF action data error!");
@@ -562,7 +562,7 @@ public class Player {
 
     //Or maybe just have a function that requests a number from the player?
     //With "autoResponse" values when in testing mode?
-    public void drawCards(int value, int cardDrawIndex) {
+    public void drawCards(ActionData actionData, int value, int cardDrawIndex) {
         ArrayList<CardHolder> tempHand = new ArrayList<CardHolder>();
         CardManager cardManager = playArea.getCardManager();
         CardHolder chosenCard = null;
@@ -573,6 +573,8 @@ public class Player {
 
         chosenCard = tempHand.remove(cardDrawIndex);
         cardManager.discard(tempHand);
+
+        actionData.setCardName(chosenCard.getName());
 
         hand.add(chosenCard);
     }

@@ -8,4 +8,12 @@ package Roma.History;
  * To change this template use File | Settings | File Templates.
  */
 public class TimeParadox extends Exception {
+    private String message;
+    public TimeParadox(String message){
+        this.message = message;
+    }
+
+    public String message(){
+        return message;
+    }
 }

@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.DiceDiscs;
+import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -59,6 +60,7 @@ public class Scaenicus extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        ActionData actionData = player.getCurrentAction();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         ArrayList<Integer> activationData = player.getActivationData();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
@@ -68,7 +70,7 @@ public class Scaenicus extends CardBase {
 
         for (int i = 0; i < DiceDiscs.CARD_POSITIONS; i++) {
             card = activeCards[playerID][i];
-            if (card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)) {
+            if (card != null && i != position && card.getType().equalsIgnoreCase(Card.CHARACTER)) {
                 card.setPlayable(true);
             }
         }
@@ -76,6 +78,7 @@ public class Scaenicus extends CardBase {
         targetIndex = player.getDiceDiscIndex(activeCards, true, false);
 
         activationData.add(targetIndex);
+        actionData.setTargetCardName(activeCards[playerID][targetIndex].getName());
         activeCards[playerID][targetIndex].gatherData(player, position);
 
         //System.out.println("\n\n "+ activationData.toString() + "\n\n");

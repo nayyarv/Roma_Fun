@@ -21,20 +21,20 @@ public class TimeWarp {
     private final int timeReverse;
     private final int playerID;
     private final int position;
-    private final String cardName;
+    private final String timeTraveller;
     private final int lives;
     private final PlayArea playArea;
     private final GameStateImplementer gameStateImplementer;
     private CardFactory cardFactory;
 
     public TimeWarp(TurnHistory turnHistory, int timeReverse, int playerID, int position,
-                    String cardName, int lives, PlayArea playArea){
+                    String timeTraveller, int lives, PlayArea playArea){
 
         this.turnHistory = turnHistory;
         this.timeReverse = timeReverse;
         this.playerID = playerID;
         this.position = position;
-        this.cardName = cardName;
+        this.timeTraveller = timeTraveller;
         this.lives = lives;
         this.playArea = playArea;
         gameStateImplementer = new GameStateImplementer(playArea);
@@ -151,12 +151,8 @@ public class TimeWarp {
     }
 
 // TODO: Time paradoxes
-//    EMPTY DISC activating an Empty disc during replay causes a time paradox (TP).
-//    AESCULAPINUM/HARUSPEX if the previously chosen card from the discard pile in the replay is no longer in the discard pile then that is a TP
 //    CONSILIARIUS/MACHINA if the set of discs containing a character/building card previously is not the same as the set of discs containing character/building cards in the replay then that is a TP.
-//    SCAENICUS if the disc previously selected does not contain the same card on replay then that is a TP
 //    TEMPLUM if on replay there is a templum next to a forum, and that templum was not activated prior to the time travel, then it is likewise not activated in the replay, and there is no TP.  On the other hand if previously a templum was on a disc next to an activated forum and was used to obtain victory points with an action die, but in the replay a templum is no longer on that disc then that is a TP.
-//    KAT kats are activated every turn, so you can't land on them when time travelling (except with another KAT).
 
     public void timeLapse(int currentTurn, ArrayList<PlayState> timeChunk) throws TimeParadox{
         PlayState theTurn;
@@ -197,16 +193,88 @@ public class TimeWarp {
         gameStateImplementer.setActionDice(actionDiceValues);
     }
 
-    private void timeParadoxCheck(PlayArea playArea, ActionData currentAction) {
-        //To change body of created methods use File | Settings | File Templates.
+    private void timeParadoxCheck(PlayArea playArea, ActionData currentAction) throws TimeParadox {
+        CardManager cardManager = playArea.getCardManager();
+        ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
+        ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
+        int playerID = playArea.getTurn() % RomaGame.MAX_PLAYERS;
+        int position;
+        String cardName;
+        String targetCardName = currentAction.getTargetCardName();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder card;
+        ArrayList<Integer> activationData = currentAction.getActivationData();
+        int cardIndex;
+        boolean cardFound = true;
+        int discIndex;
+
+        if(currentAction.isUseDice()){
+            if(currentAction.getDiscType().equalsIgnoreCase(ActionData.DICE) ||
+                    currentAction.getDiscType().equalsIgnoreCase(ActionData.BRIBERY)){
+                position = currentAction.getPosition();
+                cardName = currentAction.getCardName();
+                card = activeCards[playerID][position];
+//    EMPTY DISC activating an Empty disc during replay causes a time paradox (TP).
+                if(card == null || !activeCards[playerID][position].getName().equalsIgnoreCase(cardName)){
+                    throw new TimeParadox("Activating wrong card");
+                }
+//    AESCULAPINUM/HARUSPEX if the previously chosen card from the discard pile in the replay is no longer in the discard pile then that is a TP
+//    SCAENICUS if the disc previously selected does not contain the same card on replay then that is a TP
+                if(cardName.equalsIgnoreCase("Aesculapinum")){
+                    cardIndex = activationData.get(0);
+                    if(!discardPile.get(cardIndex).getName().equalsIgnoreCase(targetCardName)){
+                        cardFound = false;
+                        for(int i = 0; i < discardPile.size(); i++){
+                            if(discardPile.get(i).getName().equalsIgnoreCase(targetCardName)){
+                                activationData.remove(0);
+                                activationData.add(i);
+                                cardFound = true;
+                            }
+                        }
+                    }
+                }
+                if(cardName.equalsIgnoreCase("Haruspex")){
+                    cardIndex = activationData.get(0);
+                    if(!deck.get(cardIndex).getName().equalsIgnoreCase(targetCardName)){
+                        cardFound = false;
+                        for(int i = 0; i < deck.size(); i++){
+                            if(discardPile.get(i).getName().equalsIgnoreCase(targetCardName)){
+                                activationData.remove(0);
+                                activationData.add(i);
+                                cardFound = true;
+                            }
+                        }
+                    }
+                }
+                if(!cardFound){
+                    throw new TimeParadox("Card not found");
+                }
+                if(cardName.equalsIgnoreCase("Scaenicus")){
+                    discIndex = activationData.get(0);
+                    if(!activeCards[playerID][discIndex].getName().equalsIgnoreCase(targetCardName)){
+                        throw new TimeParadox("Scaenicus copied something different");
+                    }
+                }
+            } else if(currentAction.getDiscType().equalsIgnoreCase(ActionData.CARD)){
+
+            }
+        }
     }
 
-    private void insertTimeTraveller() {
+    private void insertTimeTraveller() throws TimeParadox {
         Player player = playArea.getPlayer(playerID);
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder card = cardFactory.getCard
-                (Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()).toString());
-        if(!diceDiscs.getTargetCard(player, position).getName().equalsIgnoreCase(card.getName())){
+                (Card.valueOf(timeTraveller.replaceAll(" ", "").toUpperCase()).toString());
+        CardHolder presentCard = diceDiscs.getTargetCard(player, position);
+//    KAT kats are activated every turn, so you can't land on them when time travelling (except with another KAT).
+        if(presentCard != null && presentCard.getName().equalsIgnoreCase("Kat")){
+            if(!card.getName().equalsIgnoreCase("Kat")){
+                throw new TimeParadox("You squashed a cat!");
+            }
+        }
+        if(presentCard == null || !presentCard.getName().equalsIgnoreCase(card.getName())){
             diceDiscs.layCard(player, position, card);
         }
         while(card.countLives() > lives){

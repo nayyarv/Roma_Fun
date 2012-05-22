@@ -186,4 +186,13 @@ public class CardManager {
 
         return temp;
     }
+
+    public void checkDeck() {
+        if(playingDeck.isEmpty()){
+            if(!discardPile.isEmpty()){
+                playingDeck.addAll(discardPile);
+                discardPile.clear();
+            }
+        }
+    }
 }

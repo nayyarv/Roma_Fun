@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.CardManager;
+import Roma.History.ActionData;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -57,6 +58,7 @@ public class Aesculapinum extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        ActionData actionData = player.getCurrentAction();
         ArrayList<Integer> activationData = player.getActivationData();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<CardHolder> discardPile = cardManager.getDiscardPile();
@@ -76,6 +78,7 @@ public class Aesculapinum extends CardBase {
                 PlayerInterface.printOut("Must chose a card", true);
             }
         }
+        actionData.setTargetCardName(discardPile.get(cardIndex).getName());
         activationData.add(cardIndex);
     }
 

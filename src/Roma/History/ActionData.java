@@ -46,6 +46,8 @@ public class ActionData {
     private int battleDice = CANCEL;         //used
     private String cardName = "";        //used
     private int drawCardIndex = CANCEL;
+    private String targetCardName = "";
+    private ArrayList<String> cardSet = null;
 
     //For laying a card
     private int cardIndex = CANCEL;          //used
@@ -164,6 +166,22 @@ public class ActionData {
 
     public void setActivationData(ArrayList<Integer> activationData) {
         this.activationData.addAll(activationData);
+    }
+
+    public void setTargetCardName(String cardName){
+        targetCardName = cardName;
+    }
+
+    public String getTargetCardName(){
+        return targetCardName;
+    }
+
+    public void setCardSet(ArrayList<String> cardSet){
+        this.cardSet = cardSet;
+    }
+
+    public ArrayList<String> getCardSet(){
+        return cardSet;
     }
 
     public String toString(){

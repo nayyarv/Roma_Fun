@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -57,6 +58,7 @@ public class Haruspex extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        ActionData actionData = player.getCurrentAction();
         CardManager cardManager = playArea.getCardManager();
         ArrayList<Integer> activationData = player.getActivationData();
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
@@ -77,6 +79,7 @@ public class Haruspex extends CardBase {
                 PlayerInterface.printOut("Have to choose a card", true);
             }
         }
+        actionData.setTargetCardName(deck.get(cardIndex).getName());
         activationData.add(cardIndex);
     }
 
@@ -89,6 +92,7 @@ public class Haruspex extends CardBase {
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = activationData.remove(0);
         player.addCardToHand(deck.remove(cardIndex));
+        cardManager.checkDeck();
         if(playArea.getTimeWarp() == null){
             cardManager.shuffle();
         }

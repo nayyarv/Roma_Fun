@@ -98,7 +98,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.CONSILIARIUS)){
             activator = new RearrangerImplScanExten(player);
         } else if (chosen.equals(Card.CONSUL)){
-            activator = new ConsulActivatorImpl(player);
+            activator = new ConsulActivatorImplScanExten(player);
         } else if (chosen.equals(Card.FORUM)){
             activator = new ForumActivatorImpl(player);
         } else if (chosen.equals(Card.GLADIATOR)){

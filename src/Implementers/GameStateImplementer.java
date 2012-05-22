@@ -72,6 +72,7 @@ public class GameStateImplementer implements GameState{
         if(getWhoseTurn()!=player){
             playArea.setTurn(player);
         }
+
         playArea.resetGameOverFlag();
         playArea.clearEndActionWrappers();
         playArea.resetAllPlayable();

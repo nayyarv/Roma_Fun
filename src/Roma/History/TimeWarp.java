@@ -2,9 +2,9 @@ package Roma.History;
 
 
 import Implementers.GameStateImplementer;
+import Roma.*;
 import Roma.Cards.CardFactory;
 import Roma.Cards.CardHolder;
-import Roma.*;
 import framework.cards.Card;
 
 import java.util.ArrayList;
@@ -151,7 +151,6 @@ public class TimeWarp {
     }
 
 // TODO: Time paradoxes
-//    CONSILIARIUS/MACHINA if the set of discs containing a character/building card previously is not the same as the set of discs containing character/building cards in the replay then that is a TP.
 //    TEMPLUM if on replay there is a templum next to a forum, and that templum was not activated prior to the time travel, then it is likewise not activated in the replay, and there is no TP.  On the other hand if previously a templum was on a disc next to an activated forum and was used to obtain victory points with an action die, but in the replay a templum is no longer on that disc then that is a TP.
 
     public void timeLapse(int currentTurn, ArrayList<PlayState> timeChunk) throws TimeParadox{
@@ -208,6 +207,9 @@ public class TimeWarp {
         int cardIndex;
         boolean cardFound = true;
         int discIndex;
+        ArrayList<String> oldCardSet = currentAction.getCardSet();
+        ArrayList<String> newCardSet = currentAction.getCardSet();
+        String newCardName;
 
         if(currentAction.isUseDice()){
             if(currentAction.getDiscType().equalsIgnoreCase(ActionData.DICE) ||
@@ -254,6 +256,30 @@ public class TimeWarp {
                     discIndex = activationData.get(0);
                     if(!activeCards[playerID][discIndex].getName().equalsIgnoreCase(targetCardName)){
                         throw new TimeParadox("Scaenicus copied something different");
+                    }
+                }
+//    CONSILIARIUS/MACHINA if the set of discs containing a character/building card previously is not the same as the set of discs containing character/building cards in the replay then that is a TP.
+                if(cardName.equalsIgnoreCase("Consiliarius") || cardName.equalsIgnoreCase("Machina")){
+                    while(!oldCardSet.isEmpty()){
+                        targetCardName = oldCardSet.remove(0);
+                        for(int i = 0; i < DiceDiscs.CARD_POSITIONS; i++){
+                            if(activeCards[playerID][i] != null){
+                                newCardSet.add(activeCards[playerID][i].getName());
+                            } else {
+                                newCardSet.add("");
+                            }
+                        }
+                        int z = 0;
+                        while(!targetCardName.equalsIgnoreCase("") && z < newCardSet.size()){
+                            newCardName = newCardSet.get(z);
+                            if(targetCardName.equalsIgnoreCase(newCardName)){
+                                newCardSet.remove(z);
+                                targetCardName = "";
+                            }
+                        }
+                        if(!targetCardName.equalsIgnoreCase("")){
+                            throw new TimeParadox("Consiliarius/Machina not working with same set");
+                        }
                     }
                 }
             } else if(currentAction.getDiscType().equalsIgnoreCase(ActionData.CARD)){

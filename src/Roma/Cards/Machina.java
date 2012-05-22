@@ -1,6 +1,7 @@
 package Roma.Cards;
 
 import Roma.*;
+import Roma.History.ActionData;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -57,6 +58,8 @@ public class Machina extends CardBase {
 
     @Override
     public void gatherData(Player player, int position) throws CancelAction {
+        ActionData actionData = player.getCurrentAction();
+        ArrayList<String> cardSet = actionData.getCardSet();
         ArrayList<Integer> activationData = player.getActivationData();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         CardHolder[][] activeCards = diceDiscs.getActiveCards();
@@ -81,6 +84,7 @@ public class Machina extends CardBase {
             card = activeCards[player.getPlayerID()][i];
             if (card != null && card.getType().equalsIgnoreCase(Card.BUILDING)) {
                 card.setPlayable(true);
+                cardSet.add(card.getName());
             }
         }
 

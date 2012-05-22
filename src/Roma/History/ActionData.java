@@ -47,7 +47,7 @@ public class ActionData {
     private String cardName = "";        //used
     private int drawCardIndex = CANCEL;
     private String targetCardName = "";
-    private ArrayList<String> cardSet = null;
+    private ArrayList<String> cardSet = new ArrayList<String>();
 
     //For laying a card
     private int cardIndex = CANCEL;          //used

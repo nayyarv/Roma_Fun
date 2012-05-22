@@ -387,4 +387,8 @@ public class DiceDiscs {
     public int[][][] getTimeLives() {
         return timeLives;
     }
+
+    public void leavePlay(int playerNum, int i) {
+        activeCards[playerNum][i].leavePlay(playerNum, i);
+    }
 }

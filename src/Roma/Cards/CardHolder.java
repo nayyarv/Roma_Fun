@@ -109,11 +109,11 @@ public class CardHolder implements Card {
         CardHolder[] playerActives = diceDiscs.getPlayerActives(targetPlayerID);
         cardManager.discard(playerActives[position]);
         playerActives[position] = null;
-        leavePlay();
+        leavePlay(targetPlayerID, position);
     }
 
-    public void leavePlay() {
-        contents.leavePlay();
+    public void leavePlay(int targetPlayerID, int position) {
+        contents.leavePlay(targetPlayerID, position);
         deleteAllWrappers();
     }
 

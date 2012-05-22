@@ -82,7 +82,7 @@ public class Turris extends CardBase {
     }
 
     @Override
-    public void leavePlay() {
+    public void leavePlay(int targetPlayerID, int position) {
         ArrayList<Wrapper> wrapperList = wrapperMaker.getWrapperList();
 
         for (Wrapper wrapper : wrapperList) {

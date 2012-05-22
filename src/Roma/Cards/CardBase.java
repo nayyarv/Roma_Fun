@@ -118,7 +118,7 @@ public abstract class CardBase implements Card {
         return ((player == RomaGame.PLAYER_ONE) ? RomaGame.PLAYER_TWO : RomaGame.PLAYER_ONE);
     }
 
-    public void leavePlay() {
+    public void leavePlay(int targetPlayerID, int position) {
         //no leave play action by default
     }
 

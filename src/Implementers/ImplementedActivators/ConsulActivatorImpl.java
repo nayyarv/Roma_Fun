@@ -12,9 +12,9 @@ import framework.interfaces.activators.ConsulActivator;
  */
 public class ConsulActivatorImpl  implements ConsulActivator {
 
-    private Player player;
-    private int dieIndex;
-    private int changeAmount;
+     protected Player player;
+    protected int dieIndex;
+    protected int changeAmount;
 
     public ConsulActivatorImpl(Player player) {
         this.player = player;

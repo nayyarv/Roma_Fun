@@ -16,6 +16,8 @@ public class ConsulActivatorImplScanExten extends ConsulActivatorImpl{
 
     @Override
     public void complete(){
+        player.getActivationData().add(dieIndex);
+        player.getActivationData().add(changeAmount);
 
     }
 }

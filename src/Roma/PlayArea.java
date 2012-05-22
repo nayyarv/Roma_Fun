@@ -33,6 +33,8 @@ public class PlayArea {
     private ArrayList<Wrapper> endNextTurnList = new ArrayList<Wrapper>();
     private ArrayList<Wrapper> endActionList = new ArrayList<Wrapper>();
 
+
+
     //Variables
     private boolean testing = false;
     private int turn = 0;

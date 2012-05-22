@@ -78,7 +78,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.SICARIUS)){
             activator = new Assassin(player);
         } else if (chosen.equals(Card.TELEPHONEBOX)){
-
+            activator = new TelephoneBoxActivatorImpl(player);
         } else if(chosen.equals(Card.TRIBUNUSPLEBIS)){
             activator =  new simpleActivator(player);
         } else if (chosen.equals(Card.VELITES)){

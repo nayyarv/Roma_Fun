@@ -72,7 +72,7 @@ public class GameStateImplementer implements GameState{
         if(getWhoseTurn()!=player){
             playArea.setTurn(player);
         }
-
+        playArea.clearEnterPlayList();
         playArea.resetGameOverFlag();
         playArea.clearEndActionWrappers();
         playArea.resetAllPlayable();
@@ -405,11 +405,11 @@ public class GameStateImplementer implements GameState{
      */
     @Override
     public boolean isGameCompleted() {
-
         //Adding some statistics in the printing
         Player curr = playArea.getPlayer(getWhoseTurn());
         curr.printStats("testing");
         curr.printHand();
+        //playArea.clearEnterPlayList();
         return playArea.isGameOver();
 
     }

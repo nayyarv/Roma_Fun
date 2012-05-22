@@ -43,13 +43,11 @@ public class ScaenicusActivatorImpl  implements ScaenicusActivator {
     public CardActivator getScaenicusMimicTarget(int diceDisc) {
         int targetIndex =diceDisc-1;
         ArrayList<Integer> activationData = player.getActivationData();
-        activationData.add(targetIndex);
+        this.targetIndex = targetIndex;
         CardHolder toImitate = player.getDiceDiscsList().get(targetIndex);
         try {
             Card imitated = Card.valueOf(toImitate.getName().toUpperCase().replaceAll(" ", ""));
             if(imitated.equals(Card.SCAENICUS)){
-                activationData.remove(activationData.size()-1); // remove the target index
-                //essentially reset this scaenicus
                 return this;
             } else {
                 CardActivator imitator = ActivatorFunctions.getCorrectActivatorforScaenicus(imitated, player) ;
@@ -75,6 +73,7 @@ public class ScaenicusActivatorImpl  implements ScaenicusActivator {
      */
     @Override
     public void complete() {
+        player.getActivationData().add(0, targetIndex);
         if (!completed) {
             player.performActions();
         }

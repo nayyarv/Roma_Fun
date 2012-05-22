@@ -306,7 +306,6 @@ public class DiceDiscs {
                 PlayerInterface.printOut("Defeat!", true);
             }
         } else {
-            kill = true;
             PlayerInterface.printOut("Target is gone! No battle!", true);
         }
         return kill;

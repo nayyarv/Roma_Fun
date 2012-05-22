@@ -19,7 +19,7 @@ public class Velites extends CardBase {
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks any opposing character card " +
             "(does not have to be directly opposite). The battle die is thrown once.";
-    final static int COST = 8;
+    final static int COST = 5;
     final static int DEFENCE = 3;
     final static boolean ACTIVATE_ENABLED = true;
 

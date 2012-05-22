@@ -5,6 +5,8 @@ import Implementers.GameStateImplementer;
 import Roma.*;
 import Roma.Cards.CardFactory;
 import Roma.Cards.CardHolder;
+import Roma.Cards.Templum;
+import Roma.PlayerInterfaceFiles.PlayerInterface;
 import framework.cards.Card;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class TimeWarp {
+    public static final int CANCEL = PlayerInterface.CANCEL;
+
     private final TurnHistory turnHistory;
     private final int timeReverse;
     private final int playerID;
@@ -150,9 +154,6 @@ public class TimeWarp {
         timeLapse(currentTurn, timeChunk);
     }
 
-// TODO: Time paradoxes
-//    TEMPLUM if on replay there is a templum next to a forum, and that templum was not activated prior to the time travel, then it is likewise not activated in the replay, and there is no TP.  On the other hand if previously a templum was on a disc next to an activated forum and was used to obtain victory points with an action die, but in the replay a templum is no longer on that disc then that is a TP.
-
     public void timeLapse(int currentTurn, ArrayList<PlayState> timeChunk) throws TimeParadox{
         PlayState theTurn;
         ArrayList<ActionData> actionHistory;
@@ -279,6 +280,14 @@ public class TimeWarp {
                         }
                         if(!targetCardName.equalsIgnoreCase("")){
                             throw new TimeParadox("Consiliarius/Machina not working with same set");
+                        }
+                    }
+                }
+//    TEMPLUM if on replay there is a templum next to a forum, and that templum was not activated prior to the time travel, then it is likewise not activated in the replay, and there is no TP.  On the other hand if previously a templum was on a disc next to an activated forum and was used to obtain victory points with an action die, but in the replay a templum is no longer on that disc then that is a TP.
+                if(cardName.equalsIgnoreCase("Forum")){
+                    if(activationData.size() > 1){
+                        if (!diceDiscs.checkAdjacent(playerID, position, Templum.NAME)){
+                            throw new TimeParadox("Templum next to an activating Forum has disappeared!");
                         }
                     }
                 }

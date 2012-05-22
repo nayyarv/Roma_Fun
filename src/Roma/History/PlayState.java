@@ -1,8 +1,7 @@
 package Roma.History;
 
 import Roma.*;
-import Roma.Cards.Card;
-import Roma.Cards.CardHolder;
+import Roma.Cards.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,29 +22,32 @@ public class PlayState {
     */
 
     int turn;
-    ArrayList<String> deckData = new ArrayList<String>();
-    ArrayList<String> discardData = new ArrayList<String>();
-    ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
-    String[][] discs = new String[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[][] lives = new int[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
-    int[] money = new int[RomaGame.MAX_PLAYERS];
-    int[] victory = new int[RomaGame.MAX_PLAYERS];
-    int victoryPool;
-    int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
+    private ArrayList<String> deckData = new ArrayList<String>();
+    private ArrayList<String> discardData = new ArrayList<String>();
+    private ArrayList<ArrayList<String>> hand = new ArrayList<ArrayList<String>>();
+    private String[][] discs = new String[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private int[][] lives = new int[RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
+    private int[] money = new int[RomaGame.MAX_PLAYERS];
+    private int[] victory = new int[RomaGame.MAX_PLAYERS];
+    private int victoryPool;
+    private int[] actionDice = new int[DiceHolder.DICE_PER_PLAYER];
+    private String[][][] fromPast;
+    private int[][][] pastLives =
+            new int[Dice.MAX_DIE_VALUE][RomaGame.MAX_PLAYERS][DiceDiscs.CARD_POSITIONS];
 
-    ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
+    private ArrayList<ActionData> actionHistory = new ArrayList<ActionData>();
 
     public PlayState(PlayArea playArea, Player player){
         CardManager cardManager = playArea.getCardManager();
         DiceDiscs diceDiscs = playArea.getDiceDiscs();
         MoneyManager moneyManager = playArea.getMoneyManager();
         VictoryTokens victoryTokens = playArea.getVictoryTokens();
-        DiceHolder diceHolder = playArea.getDiceHolder();
 
         ArrayList<String> playerHand = null;
         ArrayList<CardHolder> cardList = null;
         CardHolder[] playerActiveCards = null;
         ArrayList<Dice> freeDice = null;
+        int[][][] currentPastLives = diceDiscs.getTimeLives();
 
         //turn number
         turn = playArea.getTurn();
@@ -98,6 +100,14 @@ public class PlayState {
         for(int i = 0; i < freeDice.size(); i++){
             actionDice[i] = freeDice.get(i).getValue();
         }
+
+        fromPast = diceDiscs.fromPastToString();
+
+        for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
+            for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
+                System.arraycopy(currentPastLives[i][j], 0, pastLives[i][j], 0, DiceDiscs.CARD_POSITIONS);
+            }
+        }
     }
 
     public void addActionHistory(ActionData actionData){
@@ -125,5 +135,57 @@ public class PlayState {
                 + "\n";
         output += actionHistory.toString();
         return output;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public ArrayList<String> getDeckData() {
+        return deckData;
+    }
+
+    public ArrayList<String> getDiscardData() {
+        return discardData;
+    }
+
+    public ArrayList<ArrayList<String>> getHand() {
+        return hand;
+    }
+
+    public String[][] getDiscs() {
+        return discs;
+    }
+
+    public int[][] getLives() {
+        return lives;
+    }
+
+    public int[] getMoney() {
+        return money;
+    }
+
+    public int[] getVictory() {
+        return victory;
+    }
+
+    public int getVictoryPool() {
+        return victoryPool;
+    }
+
+    public int[] getActionDice() {
+        return actionDice;
+    }
+
+    public ArrayList<ActionData> getActionHistory() {
+        return actionHistory;
+    }
+
+    public String[][][] getFromPast() {
+        return fromPast;
+    }
+
+    public int[][][] getPastLives() {
+        return pastLives;
     }
 }

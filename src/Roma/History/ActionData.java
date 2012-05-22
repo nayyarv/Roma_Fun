@@ -1,5 +1,8 @@
 package Roma.History;
 
+import Roma.CardManager;
+import Roma.Cards.CardHolder;
+import Roma.PlayArea;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
 import java.util.ArrayList;
@@ -30,8 +33,6 @@ public class ActionData {
     public static final String MONEY = "Money";         //used
     public static final String CARD = "Card";
 
-    public final int playerID;
-
     //action types
     private boolean layCard = false;    //used
     private boolean useDice = false;    //used
@@ -55,10 +56,11 @@ public class ActionData {
 
 
     //Called from playerInterface
-    public ActionData(int playerID){
-        this.playerID = playerID;
+    public ActionData(PlayArea playArea){
+        CardManager cardManager = playArea.getCardManager();
+        ArrayList<CardHolder> cardList = null;
         activationData = new ArrayList<Integer>();
-    }
+        }
 
     public boolean isLayCard() {
         return layCard;
@@ -165,7 +167,7 @@ public class ActionData {
     }
 
     public String toString(){
-        return "PlayerID: " + playerID
+        return "New action:"
                 + "\nlayCard: " + layCard
                 + "\nuseDice: " + useDice
                 + "\ncommit: " + commit

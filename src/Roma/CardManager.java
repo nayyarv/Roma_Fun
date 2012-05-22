@@ -77,7 +77,10 @@ public class CardManager {
     }
 
     public CardHolder drawACard() {
-        CardHolder temp = playingDeck.remove(0);
+        CardHolder temp = null;
+        if(!playingDeck.isEmpty()){
+            temp = playingDeck.remove(0);
+        }
         if (playingDeck.isEmpty() && !discardPile.isEmpty()) {
             playingDeck.addAll(discardPile);
             discardPile.clear();
@@ -90,8 +93,11 @@ public class CardManager {
 
     public ArrayList<CardHolder> drawNCards(int number){
         ArrayList<CardHolder> drawHand = new ArrayList<CardHolder>();
+        CardHolder card;
         for (int i=0; i<number;i++){
-            drawHand.add(drawACard());
+            if(!noMoreCards){
+                drawHand.add(drawACard());
+            }
         }
         return drawHand;
     }

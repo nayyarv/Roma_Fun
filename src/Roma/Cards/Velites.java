@@ -19,7 +19,7 @@ public class Velites extends CardBase {
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Attacks any opposing character card " +
             "(does not have to be directly opposite). The battle die is thrown once.";
-    final static int COST = 8;
+    final static int COST = 5;
     final static int DEFENCE = 3;
     final static boolean ACTIVATE_ENABLED = true;
 
@@ -87,7 +87,10 @@ public class Velites extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         int targetIndex = activationData.remove(0);
         int battleValue = player.getBattleValue();
+        CardHolder card = diceDiscs.getTargetCard(targetPlayerID, targetIndex);
 
-        diceDiscs.battle(targetPlayerID, targetIndex, battleValue);
+        if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            diceDiscs.battle(targetPlayerID, targetIndex, battleValue);
+        }
     }
 }

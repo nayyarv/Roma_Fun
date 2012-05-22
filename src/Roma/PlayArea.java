@@ -3,9 +3,7 @@ package Roma;
 import Roma.Cards.CardHolder;
 import Roma.Cards.Wrapper;
 import Roma.Cards.WrapperMaker;
-import Roma.History.ActionData;
-import Roma.History.PlayState;
-import Roma.History.TurnHistory;
+import Roma.History.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.GamePlayerInterface;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
@@ -40,8 +38,8 @@ public class PlayArea {
     private int turn = 0;
     private boolean gameOver = false;
 
-    private ArrayList<PlayState> playStateHistory = new ArrayList<PlayState>();
     private TurnHistory turnHistory;
+    private TimeWarp timeWarp = null;
 
     public PlayArea(RomaGame mainProgram) {
         this.mainProgram = mainProgram;
@@ -52,7 +50,6 @@ public class PlayArea {
         victoryTokens = new VictoryTokens(this);
         diceDiscs = new DiceDiscs(this);
         players = new Player[RomaGame.MAX_PLAYERS];
-        this.mainProgram = mainProgram;
         playerInterface = new GamePlayerInterface();
         gameRules = new GameRules(this);
 
@@ -86,7 +83,7 @@ public class PlayArea {
         PlayState playState = new PlayState(this, player);
 
         while (!gameOver && !endTurn) {
-            ActionData action = new ActionData(player.getPlayerID());
+            ActionData action = new ActionData(this);
             diceHolder.rollBattleDice();
             action.setBattleDice(diceHolder.getBattleValue()[0]);
             //read player input through player interface and and store into action data
@@ -106,12 +103,24 @@ public class PlayArea {
                 clearEndActionWrappers();
                 playState.addActionHistory(action);
             }
+            if(timeWarp != null){
+                endTurn = true;
+            }
             resetAllPlayable();
         }
         // reset temporary defense modifiers
         clearEndTurnWrappers();
-        playStateHistory.add(playState);
         turn++;
+        turnHistory.addPlayState(playState);
+        if(timeWarp != null){
+            try {
+                timeWarp.warpTime();
+            } catch (TimeParadox timeParadox) {
+                endGame(); //TODO
+            }
+            timeWarp = null;
+        }
+        turnHistory.setCurrentTurnNumber(turn);
     }
 
     public void resetAllPlayable() {
@@ -138,12 +147,14 @@ public class PlayArea {
 
     public void startTurnPhase(Player player) {
         PlayerInterface.printOut(BREAK_LINE, true);
-        PlayerInterface.printOut("It's " + player.getName() + "'s turn", true);
+        PlayerInterface.printOut("Turn: " + turn + " \tIt's " + player.getName() + "'s turn", true);
         gameRules.deductVictoryTokens(player.getPlayerID());
         diceDiscs.clearPlayerDice(player.getPlayerID());
-        player.rollActionDice();
-
+        if(timeWarp == null){
+            player.rollActionDice();
+        }
         transferNextToThis();
+        diceDiscs.arriveFromPast();
     }
 
     //All the getters
@@ -151,8 +162,8 @@ public class PlayArea {
         return turn;
     }
 
-    public void setTurn(int playerID) {
-        this.turn = playerID;
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 
     public boolean isGameOver() {
@@ -261,6 +272,7 @@ public class PlayArea {
         assert testing.equalsIgnoreCase("testing");
         this.testing = true;
         //System.err.println("In Testing phase");
+        turnHistory = new TurnHistory();
         cardManager = new CardManager(this);
         diceHolder = new DiceHolder();
         moneyManager = new MoneyManager();
@@ -287,6 +299,47 @@ public class PlayArea {
     }
 
     public ArrayList<PlayState> getPlayStateHistory(){
-        return playStateHistory;
+        return turnHistory.getHistory();
+    }
+
+    public TurnHistory getTurnHistory() {
+        return turnHistory;
+    }
+
+    public void setTurnHistory(TurnHistory turnHistory) {
+        this.turnHistory = turnHistory;
+    }
+
+    //time machine stuff below
+    //HACK HACK HACK HACK HACK >:D
+
+    public TimeWarp getTimeWarp(){
+        return timeWarp;
+    }
+
+    public PlayState autoTurnStart(){
+        Player player = players[turn % RomaGame.MAX_PLAYERS];
+        startTurnPhase(player);
+        diceDiscs.arriveFromPast();
+        return new PlayState(this, player);
+    }
+
+    public void autoAction(PlayState playState, ActionData action){
+        Player player = players[turn % RomaGame.MAX_PLAYERS];
+        player.performActions(action);
+        clearEndActionWrappers();
+        playState.addActionHistory(action);
+        resetAllPlayable();
+    }
+
+    public void autoTurnEnd(PlayState playState){
+        clearEndTurnWrappers();
+        turn++;
+        turnHistory.setCurrentTurnNumber(turn);
+        turnHistory.addPlayState(playState);
+    }
+
+    public void setTimeWarp(TimeWarp timeWarp) {
+        this.timeWarp = timeWarp;
     }
 }

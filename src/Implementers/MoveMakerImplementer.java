@@ -1,6 +1,6 @@
 package Implementers;
 
-import Implementers.ImplementedActivators.dummyActivator;
+import Implementers.ImplementedActivators.*;
 import Roma.Cards.CardHolder;
 import Roma.DiceDiscs;
 import Roma.History.ActionData;
@@ -70,7 +70,7 @@ public class MoveMakerImplementer implements MoveMaker{
 
         setUp();
 
-        ActionData currentAction = new ActionData(currPlayer);
+        ActionData currentAction = new ActionData(playArea);
 
         int chosenDieIndex = diceReqdIndex(disc);
 
@@ -136,7 +136,7 @@ public class MoveMakerImplementer implements MoveMaker{
 
         setUp();
 
-        ActionData currentAction = new ActionData(currPlayer);
+        ActionData currentAction = new ActionData(playArea);
 
         currentAction.setUseDice(true);
         currentAction.setActionDiceIndex(chosenDieIndex);
@@ -200,7 +200,7 @@ public class MoveMakerImplementer implements MoveMaker{
     public void placeCard(Card toPlace, int discToPlaceOn) throws UnsupportedOperationException {
         int currPlayer = gameState.getWhoseTurn();
         Player player = playArea.getPlayer(currPlayer);
-        ActionData currentAction = new ActionData(currPlayer);
+        ActionData currentAction = new ActionData(playArea);
 
         setUp();
 
@@ -263,7 +263,7 @@ public class MoveMakerImplementer implements MoveMaker{
     public void activateCardsDisc(int diceToUse, Card chosen) throws UnsupportedOperationException {
         int chosenDieIndex = diceReqdIndex(diceToUse);
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
-        ActionData currentAction = new ActionData(currPlayer.getPlayerID());
+        ActionData currentAction = new ActionData(playArea);
 
         setUp();
 
@@ -319,7 +319,7 @@ public class MoveMakerImplementer implements MoveMaker{
     public void activateMoneyDisc(int diceToUse) throws UnsupportedOperationException {
         int chosenDieIndex = diceReqdIndex(diceToUse);
         Player currPlayer = playArea.getPlayer(gameState.getWhoseTurn());
-        ActionData currentAction = new ActionData(gameState.getWhoseTurn());
+        ActionData currentAction = new ActionData(playArea);
         //as the creation is not done in PlayArea - i have to create my own
 
         setUp();

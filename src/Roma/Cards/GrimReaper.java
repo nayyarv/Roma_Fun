@@ -73,7 +73,8 @@ public class GrimReaper extends CardBase {
         grimWrapperMaker = new GrimWrapperMaker(player.getPlayerID());
 
         for (int i = 0; i < friendlyCards.length; i++) {
-            if (i != position && friendlyCards[i] != null) {
+            if (i != position && friendlyCards[i] != null
+                    && friendlyCards[i].getType().equalsIgnoreCase(Card.CHARACTER)) {
                 grimWrapperMaker.insertWrapper(friendlyCards[i]);
             }
         }

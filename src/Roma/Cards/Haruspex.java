@@ -1,8 +1,6 @@
 package Roma.Cards;
 
-import Roma.CardManager;
-import Roma.PlayArea;
-import Roma.Player;
+import Roma.*;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
 
@@ -91,6 +89,8 @@ public class Haruspex extends CardBase {
         ArrayList<CardHolder> deck = cardManager.getPlayingDeck();
         int cardIndex = activationData.remove(0);
         player.addCardToHand(deck.remove(cardIndex));
-        cardManager.shuffle();
+        if(playArea.getTimeWarp() == null){
+            cardManager.shuffle();
+        }
     }
 }

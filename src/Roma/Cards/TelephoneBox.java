@@ -2,6 +2,8 @@ package Roma.Cards;
 
 import Roma.Dice;
 import Roma.DiceDiscs;
+import Roma.History.TimeWarp;
+import Roma.History.TurnHistory;
 import Roma.PlayArea;
 import Roma.Player;
 import Roma.PlayerInterfaceFiles.CancelAction;
@@ -33,58 +35,6 @@ public class TelephoneBox extends CardBase {
     }
 
     @Override
-    public void gatherData(Player player, int position) throws CancelAction {
-        final int BACKWARD = 1;
-        final int FORWARD = 2;
-        final String strPrompt = "Send card back or forward in time?";
-        final String strOption1 = "Back in time";
-        final String strOption2 = "Forward in time";
-        DiceDiscs diceDiscs = playArea.getDiceDiscs();
-        CardHolder[][] activeCards = diceDiscs.getActiveCards();
-        ArrayList<Integer> activationData = player.getActivationData();
-        ArrayList<Dice> freeDice = new ArrayList<Dice>();
-        freeDice.addAll(player.getFreeDice());
-        int dieIndex = player.getCurrentAction().getActionDiceIndex();
-        int targetIndex;
-        int option;
-        PlayerInterface playerInterface = player.getPlayerInterface();
-
-        freeDice.remove(dieIndex);
-        PlayerInterface.printOut("Send an active friendly card backward or forward in time", true);
-        if (freeDice.isEmpty()) {
-            PlayerInterface.printOut("Not enough free action dice!", true);
-            player.cancel();
-        }
-        PlayerInterface.printOut("Telephone Box requires a 2nd Action Die:", true);
-        dieIndex = player.getDieIndex(freeDice);
-        freeDice.remove(dieIndex);
-        activationData.add(dieIndex);
-
-        PlayerInterface.printOut("Prevent which card shall be the time-traveller?", true);
-        targetIndex = player.getDiceDiscIndex(activeCards, false, false);
-        activationData.add(targetIndex);
-
-        option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
-        if (option == CANCEL) {
-            player.cancel();
-        } else if (option == BACKWARD) {
-            option = 1;
-        } else if (option == FORWARD) {
-            option = -1;
-        }
-        activationData.add(option);
-    }
-
-    //activationData: [actionDieIndex][activeCardIndex][+1/-1]
-    //+1 for forwards
-    //-1 for backwards
-
-    @Override
-    public void activate(Player player, int position) {
-        //TODO: fill in
-    }
-
-    @Override
     public CardHolder makeOne(PlayArea playArea) {
         CardBase card = new TelephoneBox(playArea);
         CardHolder cardHolder = new CardHolder(card, playArea);
@@ -108,5 +58,84 @@ public class TelephoneBox extends CardBase {
         }
 
         return set;
+    }
+
+    @Override
+    public void gatherData(Player player, int position) throws CancelAction {
+        final int BACKWARD = 1;
+        final int FORWARD = 2;
+        final String strPrompt = "Send card back or forward in time?";
+        final String strOption1 = "Back in time";
+        final String strOption2 = "Forward in time";
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        ArrayList<Integer> activationData = player.getActivationData();
+        ArrayList<Dice> freeDice = new ArrayList<Dice>();
+        freeDice.addAll(player.getFreeDice());
+        int dieIndex = player.getCurrentAction().getActionDiceIndex();
+        int targetIndex;
+        int option;
+        PlayerInterface playerInterface = player.getPlayerInterface();
+        CardHolder card;
+
+        freeDice.remove(dieIndex);
+        PlayerInterface.printOut("Send an active friendly card backward or forward in time", true);
+        if (freeDice.isEmpty()) {
+            PlayerInterface.printOut("Not enough free action dice!", true);
+            player.cancel();
+        }
+        PlayerInterface.printOut("Telephone Box requires a 2nd Action Die:", true);
+        dieIndex = player.getDieIndex(freeDice);
+        activationData.add(dieIndex);
+
+        PlayerInterface.printOut("Prevent which card shall be the time-traveller?", true);
+        for (int i = 0; i < DiceDiscs.CARD_POSITIONS; i++) {
+            card = activeCards[player.getPlayerID()][i];
+            if (card != null) {
+                card.setPlayable(true);
+            }
+        }
+        targetIndex = player.getDiceDiscIndex(activeCards, true, false);
+        activationData.add(targetIndex);
+
+        option = playerInterface.readInput(strPrompt, true, strOption1, strOption2);
+        if (option == CANCEL) {
+            player.cancel();
+        } else if (option == BACKWARD) {
+            option = -1;
+        } else if (option == FORWARD) {
+            option = 1;
+        }
+        activationData.add(option);
+        player.commit();
+    }
+
+    //activationData: [actionDieIndex][activeCardIndex][+1/-1]
+    //+1 for forwards
+    //-1 for backwards
+
+    @Override
+    public void activate(Player player, int position) {
+        TurnHistory turnHistory = playArea.getTurnHistory();
+        DiceDiscs diceDiscs = playArea.getDiceDiscs();
+        ArrayList<Integer> activationData = player.getActivationData();
+        int actionDieIndex = activationData.remove(0);
+        int activeCardIndex = activationData.remove(0);
+        int timeDirection = activationData.remove(0);
+        ArrayList<Dice> freeDice = player.getFreeDice();
+        int timeValue = freeDice.remove(actionDieIndex).getValue();
+        CardHolder card = diceDiscs.getTargetCard(player, activeCardIndex);
+
+        if(timeDirection < 0){
+            if(timeValue > playArea.getTurn()){
+                timeValue = playArea.getTurn();
+            }
+            TimeWarp timeWarp = new TimeWarp(turnHistory, timeValue, player.getPlayerID(),
+                    activeCardIndex, card.getName(), card.countLives(), playArea);
+            PlayerInterface.printOut(card.getName() + " was sent to the past!", true);
+            playArea.setTimeWarp(timeWarp);
+        } else {
+            diceDiscs.setFromPast(timeValue, player.getPlayerID(), activeCardIndex);
+        }
     }
 }

@@ -291,20 +291,24 @@ public class DiceDiscs {
     public boolean battle(int targetPlayerID, int target, int battleValue){
         boolean kill = false;
         CardHolder targetCard = getTargetCard(targetPlayerID, target);
-        int defense = targetCard.getDefense();
+        if(targetCard != null){
+            int defense = targetCard.getDefense();
 
-        PlayerInterface.printOut("BATTLE!", true);
-        PlayerInterface.printOut("Defense to beat: " + defense, true);
-        PlayerInterface.printOut("You rolled a: " + battleValue, true);
+            PlayerInterface.printOut("BATTLE!", true);
+            PlayerInterface.printOut("Defense to beat: " + defense, true);
+            PlayerInterface.printOut("You rolled a: " + battleValue, true);
 
-        if(battleValue >= defense){
-            discardTarget(targetPlayerID, target);
-            kill = true;
-            PlayerInterface.printOut("Victory!", true);
+            if(battleValue >= defense){
+                discardTarget(targetPlayerID, target);
+                kill = true;
+                PlayerInterface.printOut("Victory!", true);
+            } else {
+                PlayerInterface.printOut("Defeat!", true);
+            }
         } else {
-            PlayerInterface.printOut("Defeat!", true);
+            kill = true;
+            PlayerInterface.printOut("Target is gone! No battle!", true);
         }
-
         return kill;
     }
 

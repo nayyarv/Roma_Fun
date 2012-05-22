@@ -86,9 +86,9 @@ public class Sicarius extends CardBase {
         int targetPlayerID = player.getOtherPlayerID();
         ArrayList<Integer> activationData = player.getActivationData();
         int targetIndex = activationData.remove(0);
-        CardHolder[][] activeCards = diceDiscs.getActiveCards();
+        CardHolder card = diceDiscs.getTargetCard(targetPlayerID, targetIndex);
 
-        if(activeCards[targetPlayerID][targetIndex].getType().equalsIgnoreCase(Card.CHARACTER)){
+        if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
             diceDiscs.discardTarget(targetPlayerID, targetIndex);
         }
         diceDiscs.discardTarget(player.getPlayerID(), position);

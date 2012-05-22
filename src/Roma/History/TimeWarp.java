@@ -79,18 +79,6 @@ public class TimeWarp {
 
         playArea.setTurn(destinationTurn);
 
-        for(String cardName : deckData){
-            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
-        }
-        gameStateImplementer.setDeck(cardList);
-        cardList.clear();
-
-        for(String cardName : discardData){
-            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
-        }
-        gameStateImplementer.setDiscard(cardList);
-        cardList.clear();
-
         for(int i = 0; i < RomaGame.MAX_PLAYERS; i++){
             gameStateImplementer.setPlayerVictoryPoints(i, 1);
         }
@@ -120,6 +108,18 @@ public class TimeWarp {
             gameStateImplementer.setPlayerVictoryPoints(i, victory[i]);
         }
 
+        for(String cardName : deckData){
+            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
+        }
+        gameStateImplementer.setDeck(cardList);
+        cardList.clear();
+
+        for(String cardName : discardData){
+            cardList.add(Card.valueOf(cardName.replaceAll(" ", "").toUpperCase()));
+        }
+        gameStateImplementer.setDiscard(cardList);
+        cardList.clear();
+
         for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
             for(int j = 0; j < RomaGame.MAX_PLAYERS; j++){
                 for(int k = 0; k < DiceDiscs.CARD_POSITIONS; k++){
@@ -133,6 +133,7 @@ public class TimeWarp {
                 }
             }
         }
+
         diceDiscs.setFromPastTime(newFromPast);
 
         for(int i = 0; i < Dice.MAX_DIE_VALUE; i++){
@@ -148,6 +149,14 @@ public class TimeWarp {
 
         timeLapse(currentTurn, timeChunk);
     }
+
+// TODO: Time paradoxes
+//    EMPTY DISC activating an Empty disc during replay causes a time paradox (TP).
+//    AESCULAPINUM/HARUSPEX if the previously chosen card from the discard pile in the replay is no longer in the discard pile then that is a TP
+//    CONSILIARIUS/MACHINA if the set of discs containing a character/building card previously is not the same as the set of discs containing character/building cards in the replay then that is a TP.
+//    SCAENICUS if the disc previously selected does not contain the same card on replay then that is a TP
+//    TEMPLUM if on replay there is a templum next to a forum, and that templum was not activated prior to the time travel, then it is likewise not activated in the replay, and there is no TP.  On the other hand if previously a templum was on a disc next to an activated forum and was used to obtain victory points with an action die, but in the replay a templum is no longer on that disc then that is a TP.
+//    KAT kats are activated every turn, so you can't land on them when time travelling (except with another KAT).
 
     public void timeLapse(int currentTurn, ArrayList<PlayState> timeChunk) throws TimeParadox{
         PlayState theTurn;

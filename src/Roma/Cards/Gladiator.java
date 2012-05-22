@@ -87,7 +87,10 @@ public class Gladiator extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         int targetPlayerID = player.getOtherPlayerID();
         int targetIndex = activationData.remove(0);
+        CardHolder card = diceDiscs.getTargetCard(targetPlayerID, targetIndex);
 
-        diceDiscs.returnTarget(targetPlayerID, targetIndex);
+        if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            diceDiscs.returnTarget(targetPlayerID, targetIndex);
+        }
     }
 }

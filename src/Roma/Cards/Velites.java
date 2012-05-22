@@ -87,7 +87,10 @@ public class Velites extends CardBase {
         ArrayList<Integer> activationData = player.getActivationData();
         int targetIndex = activationData.remove(0);
         int battleValue = player.getBattleValue();
+        CardHolder card = diceDiscs.getTargetCard(targetPlayerID, targetIndex);
 
-        diceDiscs.battle(targetPlayerID, targetIndex, battleValue);
+        if(card != null && card.getType().equalsIgnoreCase(Card.CHARACTER)){
+            diceDiscs.battle(targetPlayerID, targetIndex, battleValue);
+        }
     }
 }

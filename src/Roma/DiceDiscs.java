@@ -1,9 +1,10 @@
 package Roma;
 
-import Roma.Cards.*;
+import Roma.Cards.Card;
+import Roma.Cards.CardHolder;
+import Roma.Cards.WrapperMaker;
 import Roma.PlayerInterfaceFiles.CancelAction;
 import Roma.PlayerInterfaceFiles.PlayerInterface;
-import sun.rmi.runtime.NewThreadAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -299,8 +300,6 @@ public class DiceDiscs {
         return kill;
     }
 
-    //TODO:Need to save to PlayState
-
     public void setFromPast(int timeValue, int playerID, int position){
         CardHolder card = activeCards[playerID][position];
         int lives = card.countLives();
@@ -325,7 +324,6 @@ public class DiceDiscs {
         this.timeLives = timeLives;
     }
 
-    //TODO: add to beginning of turn
     public void arriveFromPast(){
         Player player;
         CardHolder card;

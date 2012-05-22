@@ -45,7 +45,8 @@ public class TimeWarp {
     //1)action dice
     //2)battle die
     //3)deck order
-    //TODO: card will duplicate itself
+    //card will duplicate itself
+    //save number of lives the Kats have
 
     //import Implementers.GameStateImplementer;
     //import framework.cards.Card;

@@ -83,7 +83,7 @@ public class GrimReaper extends CardBase {
     }
 
     @Override
-    public void leavePlay() {
+    public void leavePlay(int targetPlayerID, int position) {
         ArrayList<Wrapper> wrapperList = grimWrapperMaker.getWrapperList();
 
         for (Wrapper wrapper : wrapperList) {

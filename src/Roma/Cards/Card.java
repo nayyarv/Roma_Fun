@@ -48,7 +48,7 @@ public interface Card {
 
     public void goingToDiscard(int targetPlayerID, int position);
 
-    public void leavePlay();
+    public void leavePlay(int targetPlayerID, int position);
 
     public int countLives();
 }

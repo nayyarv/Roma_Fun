@@ -262,9 +262,8 @@ public class DiceDiscs {
         Player targetPlayer = playArea.getPlayer(targetPlayerID);
         CardHolder targetCard = activeCards[targetPlayerID][position];
 
-        targetCard.leavePlay();
+        targetCard.leavePlay(targetPlayerID, position);
         targetPlayer.addCardToHand(targetCard);
-        activeCards[targetPlayerID][position] = null;
     }
 
     public void clearPlayerDice(int playerID){
@@ -323,8 +322,7 @@ public class DiceDiscs {
         PlayerInterface.printOut(card.getName() + " has gone to the future!", true);
         fromPastTime[timeIndex][playerID][position] = card;
         timeLives[timeIndex][playerID][position] = lives;
-        card.leavePlay();
-        activeCards[playerID][position] = null;
+        card.leavePlay(playerID, position);
     }
 
     public void setFromPastTime(CardHolder[][][] fromPastTime) {
@@ -388,5 +386,9 @@ public class DiceDiscs {
 
     public int[][][] getTimeLives() {
         return timeLives;
+    }
+
+    public void leavePlay(int playerNum, int i) {
+        activeCards[playerNum][i].leavePlay(playerNum, i);
     }
 }

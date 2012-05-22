@@ -314,7 +314,7 @@ public class GameStateImplementer implements GameState{
             if(discCardsList.get(i)!=null) {
                 diceDiscs.layCard(player, i, discCardsList.get(i));
             } else {
-                diceDiscs.goingToDiscard(playerNum, i);
+                diceDiscs.leavePlay(playerNum, i);
             }
         }
     }

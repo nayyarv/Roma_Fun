@@ -162,8 +162,8 @@ public class Wrapper implements Card {
         contents.discarded(targetPlayerID, position);
     }
 
-    public void leavePlay() {
-        contents.leavePlay();
+    public void leavePlay(int targetPlayerID, int position) {
+        contents.leavePlay(targetPlayerID, position);
     }
 
     @Override

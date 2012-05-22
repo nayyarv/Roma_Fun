@@ -182,7 +182,7 @@ public class TimeWarp {
             newPlayState = playArea.autoTurnStart();
             while(!actionHistory.isEmpty()){
                 currentAction = actionHistory.remove(0);
-                //TODO: check for time paradoxes
+                timeParadoxCheck(playArea, currentAction);
                 playArea.autoAction(newPlayState, currentAction);
             }
             playArea.autoTurnEnd(newPlayState);

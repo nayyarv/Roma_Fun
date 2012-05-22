@@ -8,6 +8,8 @@ import framework.cards.Card;
 import framework.interfaces.activators.CardActivator;
 import framework.interfaces.activators.ScaenicusActivator;
 
+import java.util.ArrayList;
+
 /**
  * File Name:
  * Creator: Varun Nayyar
@@ -19,6 +21,7 @@ public class ScaenicusActivatorImpl  implements ScaenicusActivator {
     private static final int CANCEL = PlayerInterface.CANCEL;
     private int targetIndex;
     private Player player;
+    boolean completed = false;
 
     public ScaenicusActivatorImpl(Player player) {
         this.player = player;
@@ -39,14 +42,19 @@ public class ScaenicusActivatorImpl  implements ScaenicusActivator {
     @Override
     public CardActivator getScaenicusMimicTarget(int diceDisc) {
         int targetIndex =diceDisc-1;
-        player.getActivationData().add(targetIndex);
+        ArrayList<Integer> activationData = player.getActivationData();
+        activationData.add(targetIndex);
         CardHolder toImitate = player.getDiceDiscsList().get(targetIndex);
         try {
             Card imitated = Card.valueOf(toImitate.getName().toUpperCase().replaceAll(" ", ""));
-
-            CardActivator imitator = ActivatorFunctions.getCorrectActivatorforScaenicus(imitated, player) ;
-
-            return imitator;
+            if(imitated.equals(Card.SCAENICUS)){
+                activationData.remove(activationData.size()-1); // remove the target index
+                //essentially reset this scaenicus
+                return this;
+            } else {
+                CardActivator imitator = ActivatorFunctions.getCorrectActivatorforScaenicus(imitated, player) ;
+                return imitator;
+            }
 
         } catch (IllegalArgumentException iae){
             iae.printStackTrace();
@@ -67,6 +75,10 @@ public class ScaenicusActivatorImpl  implements ScaenicusActivator {
      */
     @Override
     public void complete() {
-        player.performActions();
+        if (!completed) {
+            player.performActions();
+        }
+        completed = true;
+
     }
 }

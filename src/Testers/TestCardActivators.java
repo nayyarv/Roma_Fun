@@ -862,7 +862,10 @@ public class TestCardActivators extends TestCase {
 
         imitated.complete();
         activator.complete();
-
+        assert (gameState.getPlayerVictoryPoints(0)==11);
+        assert (gameState.getPlayerVictoryPoints(1)==9);
+        assert gameState.getPlayerCardsOnDiscs(0)[0].equals(Card.MERCATOR);
+        assert gameState.getPlayerCardsOnDiscs(0)[1].equals(Card.SCAENICUS);
 
         gameState.isGameCompleted();
 
@@ -872,6 +875,11 @@ public class TestCardActivators extends TestCase {
         imitated1.chooseDiceDisc(1);
         imitated1.complete();
         activator.complete();
+
+        assert gameState.getPlayerCardsOnDiscs(0)[0].equals(Card.MERCATOR);
+        assert gameState.getPlayerCardsOnDiscs(0)[1].equals(Card.NOT_A_CARD);
+
+        assert gameState.getPlayerCardsOnDiscs(1)[0].equals(Card.NOT_A_CARD);
 
         gameState.isGameCompleted();
 

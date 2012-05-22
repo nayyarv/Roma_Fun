@@ -119,10 +119,11 @@ public class ActivatorFunctions {
             activator = new layerImplScanExten(player);
         } else if (chosen.equals(Card.SICARIUS)){
             activator = new AssassinScanExtension(player);
+        }else if (chosen.equals(Card.SCAENICUS)){
+            activator = new ScaenicusActivatorImpl(player);
         } else if (chosen.equals(Card.VELITES)){
             activator = new FighterImplScanExten(player);
         }
-
 
         return activator;
     }

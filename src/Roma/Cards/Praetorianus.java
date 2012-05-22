@@ -20,8 +20,8 @@ public class Praetorianus extends CardBase {
     final static String TYPE = Card.CHARACTER;
     final static String DESCRIPTION = "Any of the opponent's dice discs can be blocked" +
             " for one go.";
-    final static int COST = 8;
-    final static int DEFENCE = 9;
+    final static int COST = 4;
+    final static int DEFENCE = 4;
     final static boolean ACTIVATE_ENABLED = true;
 
     public final static int OCCURENCES = 2;

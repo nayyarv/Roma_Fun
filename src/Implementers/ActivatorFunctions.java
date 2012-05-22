@@ -71,7 +71,7 @@ public class ActivatorFunctions {
         } else if (chosen.equals(Card.PRAETORIANUS)){
             activator = new Assassin(player);
         } else if (chosen.equals(Card.SCAENICUS)){
-
+            activator = new ScaenicusActivatorImpl(player);
         } else if (chosen.equals(Card.SENATOR)){
             activator = new layerImpl(player);
         } else if (chosen.equals(Card.SICARIUS)){
